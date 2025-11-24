@@ -1,0 +1,2941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imp Hub | X Version</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #020202;
+            --bg-panel: #08080a;
+            
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --primary-glow: rgba(139, 92, 246, 0.5);
+            
+            --text-main: #ffffff;
+            --text-muted: #8a8a9b;
+            
+            --status-working: #00ff9d;
+            --status-outdated: #ffb84d;
+            --status-offline: #ff4d4d;
+            
+            --linkvertise: #ffc800;
+            --rinkupro: #4d9fff; 
+
+            --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        [data-theme="light"] {
+            --bg-deep: #f5f5f7;
+            --bg-panel: #ffffff;
+            --text-main: #1d1d1f;
+            --text-muted: #6e6e73;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        .ambient-glow {
+            position: fixed; width: 900px; height: 900px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
+            top: -400px; left: 50%; transform: translateX(-50%); z-index: -1; pointer-events: none;
+        }
+        .grid-overlay {
+            position: fixed; inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px; mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+            z-index: -1; pointer-events: none;
+        }
+
+        .nav-trigger {
+            position: fixed; top: 2rem; right: 2rem; z-index: 1000;
+            width: 55px; height: 55px;
+            background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(15px);
+            border-radius: 50%; border: 1px solid rgba(255,255,255,0.08);
+            cursor: pointer; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px;
+            transition: all 0.4s var(--ease-elastic); box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        [data-theme="light"] .nav-trigger { background: rgba(255, 255, 255, 0.9); border-color: rgba(0,0,0,0.1); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .nav-trigger:hover { transform: scale(1.1); border-color: var(--primary); box-shadow: 0 0 30px rgba(139, 92, 246, 0.3); }
+        .nav-line { width: 24px; height: 2px; background-color: var(--text-main); border-radius: 4px; transition: all 0.4s var(--ease-out); position: absolute; }
+        .nav-line:nth-child(1) { transform: translateY(-8px); }
+        .nav-line:nth-child(2) { transform: translateY(0); width: 16px; margin-left: 8px; }
+        .nav-line:nth-child(3) { transform: translateY(8px); }
+        .nav-trigger:hover .nav-line:nth-child(2) { width: 24px; margin-left: 0; }
+        .nav-trigger.active .nav-line:nth-child(1) { transform: translateY(0) rotate(45deg); background-color: var(--primary); }
+        .nav-trigger.active .nav-line:nth-child(2) { opacity: 0; transform: translateX(-20px); }
+        .nav-trigger.active .nav-line:nth-child(3) { transform: translateY(0) rotate(-45deg); background-color: var(--primary); }
+
+        .theme-toggle {
+            position: fixed; top: 2rem; right: 7rem; z-index: 1000;
+            width: 70px; height: 34px;
+            background: rgba(30, 30, 35, 0.8); backdrop-filter: blur(15px);
+            border-radius: 50px; border: 1px solid rgba(255,255,255,0.15);
+            cursor: pointer; display: flex; align-items: center; padding: 3px;
+            transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        [data-theme="light"] .theme-toggle { background: rgba(240, 240, 245, 0.95); border-color: rgba(0,0,0,0.15); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .theme-toggle:hover { border-color: var(--primary); transform: scale(1.05); }
+        .theme-slider {
+            position: absolute;
+            width: 28px; height: 28px;
+            background: linear-gradient(135deg, var(--primary), #7c3aed);
+            border-radius: 50%;
+            left: 3px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 2px 10px rgba(139, 92, 246, 0.5);
+        }
+        [data-theme="light"] .theme-slider { left: calc(100% - 31px); background: linear-gradient(135deg, #fbbf24, #f59e0b); box-shadow: 0 2px 10px rgba(251, 191, 36, 0.5); }
+        .theme-icon { width: 16px; height: 16px; color: #fff; transition: all 0.3s ease; }
+        .theme-icon.hidden { opacity: 0; transform: scale(0.5) rotate(90deg); position: absolute; }
+        .theme-icon:not(.hidden) { opacity: 1; transform: scale(1) rotate(0deg); }
+
+        .sidebar {
+            position: fixed; top: 0; right: -380px; width: 350px; height: 100vh;
+            background: #030303; border-left: 1px solid rgba(255,255,255,0.05); padding: 5rem 2.5rem;
+            transition: right 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 999; box-shadow: -50px 0 150px rgba(0,0,0,0.9);
+            display: flex; flex-direction: column;
+        }
+        [data-theme="light"] .sidebar { background: #ffffff; border-left-color: rgba(0,0,0,0.1); box-shadow: -50px 0 150px rgba(0,0,0,0.2); }
+        .sidebar.active { right: 0; }
+        .sidebar-header { margin-bottom: 4rem; position: relative; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.03); display: flex; flex-direction: column; align-items: flex-start; }
+        [data-theme="light"] .sidebar-header { border-bottom-color: rgba(0,0,0,0.05); }
+        .brand-container { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+        .brand-logo-mark { width: 40px; height: 40px; background: linear-gradient(135deg, var(--primary), #4c1d95); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.2rem; color: #fff; box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); }
+        .brand-title { font-size: 2rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; line-height: 1; }
+        .version-badge { display: inline-block; padding: 5px 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 1px; margin-left: 55px; }
+        [data-theme="light"] .version-badge { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.1); }
+        
+        .nav-links-container { display: flex; flex-direction: column; gap: 0.5rem; }
+        .nav-link { display: flex; align-items: center; gap: 15px; padding: 1.1rem 1.2rem; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; border-radius: 12px; transition: all 0.3s ease; border: 1px solid transparent; opacity: 0; transform: translateX(30px); background: transparent; }
+        .sidebar.active .nav-link { opacity: 1; transform: translateX(0); }
+        .sidebar.active .nav-link:nth-child(1) { transition-delay: 0.1s; }
+        .sidebar.active .nav-link:nth-child(2) { transition-delay: 0.15s; }
+        .sidebar.active .nav-link:nth-child(3) { transition-delay: 0.2s; }
+        .sidebar.active .nav-link:nth-child(4) { transition-delay: 0.25s; }
+        .sidebar.active .nav-link:nth-child(5) { transition-delay: 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--text-main); background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08); box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+        [data-theme="light"] .nav-link:hover, [data-theme="light"] .nav-link.active { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); }
+        .nav-link svg { width: 18px; height: 18px; opacity: 0.5; transition: 0.3s; }
+        .nav-link:hover svg { color: var(--primary); opacity: 1; }
+
+        .page { display: none; padding-top: 7rem; padding-bottom: 4rem; max-width: 1200px; margin: 0 auto; padding-left: 20px; padding-right: 20px; animation: pageFade 0.6s var(--ease-out); }
+        .page.active { display: block; }
+        @keyframes pageFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        h1 { font-size: 4rem; text-align: center; margin-bottom: 1rem; }
+        h1 span { background: linear-gradient(135deg, var(--text-main) 0%, #a78bfa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { text-align: center; color: var(--text-muted); font-family: 'JetBrains Mono'; letter-spacing: 2px; margin-bottom: 4rem; }
+
+        .editor-container {
+            max-width: 800px; margin: 0 auto 3rem;
+            background: linear-gradient(145deg, #0e0e11 0%, #1a1a1d 100%);
+            border-radius: 20px; 
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            box-shadow: 
+                0 25px 50px -12px rgba(0,0,0,0.8),
+                0 0 0 1px rgba(139, 92, 246, 0.1),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+            overflow: hidden; 
+            position: relative; 
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        [data-theme="light"] .editor-container { 
+            background: linear-gradient(145deg, #2d2d30 0%, #3a3a3d 100%); 
+            box-shadow: 
+                0 25px 50px -12px rgba(0,0,0,0.2),
+                0 0 0 1px rgba(139, 92, 246, 0.15),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+        }
+        .editor-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.8), transparent);
+            transition: left 0.5s;
+        }
+        .editor-container:hover::before {
+            left: 100%;
+        }
+        .editor-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), transparent, rgba(139, 92, 246, 0.3));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .editor-container:hover::after {
+            opacity: 1;
+        }
+        .editor-container:hover { 
+            transform: translateY(-4px); 
+            border-color: rgba(139, 92, 246, 0.4); 
+            box-shadow: 
+                0 30px 60px -12px rgba(0,0,0,0.9),
+                0 0 0 1px rgba(139, 92, 246, 0.3),
+                0 0 40px rgba(139, 92, 246, 0.2),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+        }
+        .editor-header { 
+            background: linear-gradient(180deg, #1a1a1d 0%, #16161a 100%);
+            padding: 14px 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+            backdrop-filter: blur(10px);
+        }
+        [data-theme="light"] .editor-header { background: linear-gradient(180deg, #2d2d30 0%, #252526 100%); }
+        .window-controls { display: flex; gap: 8px; }
+        .win-btn { 
+            width: 12px; 
+            height: 12px; 
+            border-radius: 50%; 
+            opacity: 0.8; 
+            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: pointer;
+            position: relative;
+        }
+        .win-btn::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .win-btn:hover { 
+            opacity: 1; 
+            transform: scale(1.15);
+        }
+        .win-close { 
+            background: linear-gradient(135deg, #ff5f57, #ff3b30); 
+            box-shadow: 0 2px 8px rgba(255, 95, 87, 0.3);
+        }
+        .win-close:hover::after { 
+            background: rgba(255, 95, 87, 0.3); 
+            opacity: 1; 
+        }
+        .win-min { 
+            background: linear-gradient(135deg, #febc2e, #ffcc00); 
+            box-shadow: 0 2px 8px rgba(254, 188, 46, 0.3);
+        }
+        .win-min:hover::after { 
+            background: rgba(254, 188, 46, 0.3); 
+            opacity: 1; 
+        }
+        .win-max { 
+            background: linear-gradient(135deg, #28c840, #20c997); 
+            box-shadow: 0 2px 8px rgba(40, 200, 64, 0.3);
+        }
+        .win-max:hover::after { 
+            background: rgba(40, 200, 64, 0.3); 
+            opacity: 1; 
+        }
+        .editor-title { 
+            font-family: 'JetBrains Mono'; 
+            font-size: 0.85rem; 
+            color: #888; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px;
+            font-weight: 500;
+        }
+        .editor-title svg { width: 16px; color: var(--primary); }
+        .editor-content { 
+            padding: 28px; 
+            position: relative; 
+            background: 
+                radial-gradient(circle at top right, rgba(139, 92, 246, 0.06), transparent 50%),
+                radial-gradient(circle at bottom left, rgba(124, 58, 237, 0.04), transparent 50%);
+            cursor: pointer;
+        }
+        .editor-content:hover {
+            background: 
+                radial-gradient(circle at top right, rgba(139, 92, 246, 0.08), transparent 50%),
+                radial-gradient(circle at bottom left, rgba(124, 58, 237, 0.06), transparent 50%);
+        }
+        .code-block { 
+            font-family: 'JetBrains Mono', monospace; 
+            font-size: 0.95rem; 
+            color: #e0e0e0; 
+            display: flex; 
+            gap: 20px;
+            line-height: 1.6;
+        }
+        .line-nums { 
+            color: #555; 
+            text-align: right; 
+            user-select: none; 
+            border-right: 2px solid rgba(139, 92, 246, 0.2); 
+            padding-right: 18px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 4px;
+            font-weight: 500;
+        }
+        .code-text { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 4px;
+        }
+        .s-func { color: #c678dd; font-weight: 600; } 
+        .s-str { color: #98c379; } 
+        .s-var { color: #e5c07b; font-weight: 500; } 
+        .s-key { color: #d19a66; font-weight: 600; } 
+        .s-com { color: #5c6370; font-style: italic; opacity: 0.8; }
+        .editor-actions { position: absolute; top: 24px; right: 24px; }
+        .copy-icon-btn { 
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3); 
+            border-radius: 8px; 
+            padding: 8px 14px; 
+            color: var(--primary); 
+            cursor: pointer; 
+            font-size: 0.8rem; 
+            font-family: 'JetBrains Mono'; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+        .copy-icon-btn:hover { 
+            background: var(--primary); 
+            color: #fff; 
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+        .copy-icon-btn svg {
+            transition: transform 0.3s;
+        }
+        .copy-icon-btn:hover svg {
+            transform: scale(1.1);
+        }
+
+        .btn-group { display: flex; justify-content: center; gap: 1rem; margin-bottom: 5rem; flex-wrap: wrap; }
+        .cyber-btn { position: relative; padding: 14px 28px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); color: var(--text-main); font-family: 'Outfit'; font-weight: 600; border-radius: 8px; cursor: pointer; overflow: hidden; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); z-index: 1; display: flex; align-items: center; gap: 10px; }
+        [data-theme="light"] .cyber-btn { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.1); }
+        .cyber-btn:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-3px); background: rgba(255,255,255,0.05); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5); }
+        [data-theme="light"] .cyber-btn:hover { border-color: rgba(0,0,0,0.2); background: rgba(0,0,0,0.05); }
+        .cyber-btn.primary { background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3); color: #d8b4fe; }
+        .cyber-btn.primary:hover { border-color: var(--primary); box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); color: #fff; }
+
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 5rem; }
+        .feature-card { background: linear-gradient(160deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.005) 100%); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 2.5rem 2rem; transition: all 0.3s var(--ease-out); }
+        [data-theme="light"] .feature-card { background: linear-gradient(160deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.005) 100%); border-color: rgba(0,0,0,0.08); }
+        .feature-card:hover { transform: translateY(-5px); border-color: rgba(139, 92, 246, 0.3); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5); }
+        .feature-icon { width: 50px; height: 50px; background: rgba(139, 92, 246, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--primary); border: 1px solid rgba(139, 92, 246, 0.2); }
+
+        .faq-section { max-width: 800px; margin: 0 auto; }
+        .faq-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 3rem; text-align: center; color: var(--text-main); }
+        .faq-item { 
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.03) 0%, rgba(124, 58, 237, 0.01) 100%); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 20px; 
+            margin-bottom: 1.5rem; 
+            overflow: hidden; 
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        [data-theme="light"] .faq-item { 
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(124, 58, 237, 0.02) 100%); 
+            border-color: rgba(139, 92, 246, 0.15); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .faq-item:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15); 
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+        .faq-item.active { 
+            border-color: rgba(139, 92, 246, 0.4); 
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(124, 58, 237, 0.03) 100%);
+        }
+        .faq-question { 
+            padding: 1.8rem 2rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            cursor: pointer; 
+            user-select: none; 
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .faq-question::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .faq-item.active .faq-question::before {
+            opacity: 1;
+        }
+        .faq-question:hover { 
+            padding-left: 2.5rem;
+        }
+        .faq-q-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+        }
+        .faq-icon-circle {
+            width: 40px;
+            height: 40px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 2px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover .faq-icon-circle {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: rgba(139, 92, 246, 0.4);
+            transform: scale(1.05);
+        }
+        .faq-item.active .faq-icon-circle {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        .faq-icon-circle svg {
+            width: 20px;
+            height: 20px;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+        .faq-item.active .faq-icon-circle svg {
+            color: #fff;
+        }
+        .faq-q-text { 
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+        .faq-arrow { 
+            width: 24px; 
+            height: 24px; 
+            color: var(--primary); 
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            flex-shrink: 0;
+        }
+        .faq-item.active .faq-arrow { 
+            transform: rotate(180deg); 
+        }
+        .faq-answer { 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: max-height 0.4s cubic-bezier(0.23, 1, 0.32, 1), padding 0.4s; 
+        }
+        .faq-answer-content { 
+            padding: 0 2rem 2rem 5rem; 
+            color: var(--text-muted); 
+            line-height: 1.8; 
+            font-size: 0.95rem;
+        }
+        .faq-answer-content ol { 
+            margin-left: 1.2rem; 
+            margin-top: 0.8rem; 
+        }
+        .faq-answer-content li { 
+            margin-bottom: 0.8rem;
+            padding-left: 0.5rem;
+        }
+        .faq-answer-content li::marker {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .faq-item.active .faq-answer { 
+            max-height: 600px; 
+        }
+
+        .filter-container { position: relative; z-index: 50; margin-bottom: 3rem; display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .search-wrapper { 
+            flex: 2; 
+            position: relative; 
+            min-width: 300px;
+        }
+        .search-input { 
+            width: 100%; 
+            background: linear-gradient(135deg, rgba(15, 15, 18, 0.8), rgba(20, 20, 25, 0.6));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.2); 
+            padding: 16px 24px 16px 56px; 
+            border-radius: 16px; 
+            color: var(--text-main); 
+            font-family: 'Outfit'; 
+            font-size: 1rem; 
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 
+                0 4px 15px rgba(0,0,0,0.3),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+            font-weight: 500;
+        }
+        [data-theme="light"] .search-input { 
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(250,250,252,0.9)); 
+            border-color: rgba(139, 92, 246, 0.25); 
+            box-shadow: 
+                0 4px 15px rgba(0,0,0,0.08),
+                inset 0 1px 0 0 rgba(139, 92, 246, 0.05);
+        }
+        .search-input::placeholder {
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+        .search-input:focus { 
+            border-color: var(--primary); 
+            box-shadow: 
+                0 0 0 3px rgba(139,92,246,0.15),
+                0 8px 25px rgba(139, 92, 246, 0.2),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, rgba(15, 15, 18, 0.95), rgba(20, 20, 25, 0.8));
+            transform: translateY(-1px);
+        }
+        [data-theme="light"] .search-input:focus { 
+            background: linear-gradient(135deg, rgba(255,255,255,1), rgba(250,250,252,0.98)); 
+            box-shadow: 
+                0 0 0 3px rgba(139,92,246,0.15),
+                0 8px 25px rgba(139, 92, 246, 0.15),
+                inset 0 1px 0 0 rgba(139, 92, 246, 0.1);
+        }
+        .search-icon { 
+            position: absolute; 
+            left: 20px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            color: var(--text-muted); 
+            width: 20px; 
+            height: 20px;
+            pointer-events: none; 
+            transition: all 0.3s;
+        }
+        .search-input:focus + .search-icon { 
+            color: var(--primary); 
+            transform: translateY(-50%) scale(1.1);
+        }
+        .search-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, var(--primary), transparent, var(--primary));
+            border-radius: 18px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+            filter: blur(8px);
+        }
+        .search-input:focus ~ .search-wrapper::before {
+            opacity: 0.5;
+        }
+
+        .autocomplete-box { 
+            position: absolute; 
+            top: calc(100% + 12px); 
+            left: 0; 
+            width: 100%; 
+            background: linear-gradient(135deg, rgba(18, 18, 20, 0.98), rgba(15, 15, 18, 0.95));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.2); 
+            border-radius: 16px; 
+            z-index: 100; 
+            max-height: 320px; 
+            overflow-y: auto; 
+            opacity: 0; 
+            visibility: hidden; 
+            transform: translateY(-10px); 
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); 
+            box-shadow: 
+                0 20px 50px rgba(0,0,0,0.7),
+                0 0 0 1px rgba(139, 92, 246, 0.1),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+        }
+        [data-theme="light"] .autocomplete-box { 
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(250, 250, 252, 0.95)); 
+            border-color: rgba(139, 92, 246, 0.25); 
+            box-shadow: 
+                0 20px 50px rgba(0,0,0,0.15),
+                0 0 0 1px rgba(139, 92, 246, 0.1),
+                inset 0 1px 0 0 rgba(139, 92, 246, 0.05);
+        }
+        .autocomplete-box.active { 
+            opacity: 1; 
+            visibility: visible; 
+            transform: translateY(0); 
+        }
+        .ac-item { 
+            padding: 14px 18px; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            gap: 14px; 
+            border-bottom: 1px solid rgba(255,255,255,0.03); 
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        [data-theme="light"] .ac-item { 
+            border-bottom-color: rgba(0,0,0,0.05); 
+        }
+        .ac-item:last-child { 
+            border-bottom: none; 
+        }
+        .ac-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .ac-item:hover { 
+            background: rgba(139, 92, 246, 0.1);
+            padding-left: 24px;
+        }
+        .ac-item:hover::before {
+            opacity: 1;
+        }
+        .ac-icon { 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 8px; 
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 0.9rem; 
+            color: var(--primary);
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        [data-theme="light"] .ac-icon { 
+            background: rgba(139, 92, 246, 0.08); 
+            border-color: rgba(139, 92, 246, 0.25); 
+        }
+        .ac-item:hover .ac-icon {
+            background: var(--primary);
+            color: #fff;
+            transform: scale(1.1);
+        }
+        .ac-text { 
+            font-size: 0.95rem; 
+            color: var(--text-main);
+            font-weight: 500;
+        }
+        .match-highlight { color: var(--primary); font-weight: 700; }
+
+        .filter-pills { display: flex; gap: 10px; flex-wrap: wrap; position: relative; }
+        .filter-dropdown-btn {
+            padding: 12px 24px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.05));
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px; font-size: 0.9rem; color: var(--text-main); cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 10px; font-family: 'Outfit'; font-weight: 600;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.1);
+        }
+        [data-theme="light"] .filter-dropdown-btn { background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(124, 58, 237, 0.03)); border-color: rgba(139, 92, 246, 0.25); }
+        .filter-dropdown-btn:hover { 
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(124, 58, 237, 0.08)); 
+            border-color: var(--primary); 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.2);
+        }
+        .filter-dropdown-btn.active {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(124, 58, 237, 0.1));
+            border-color: var(--primary);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.25);
+        }
+        .filter-dropdown-btn svg { width: 18px; height: 18px; transition: 0.3s; color: var(--primary); }
+        .filter-dropdown-btn.active svg { transform: rotate(180deg); }
+        .filter-badge { 
+            background: var(--primary); color: #fff; padding: 3px 9px; border-radius: 12px; 
+            font-size: 0.7rem; font-weight: 800; min-width: 20px; text-align: center;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+        }
+        
+        .filter-dropdown-menu {
+            position: absolute; top: calc(100% + 10px); left: 0; width: 320px;
+            background: #0f0f11; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7); z-index: 100; padding: 1rem;
+            opacity: 0; visibility: hidden; transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        [data-theme="light"] .filter-dropdown-menu { background: #ffffff; border-color: rgba(0,0,0,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
+        .filter-dropdown-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        
+        .filter-section { margin-bottom: 1.5rem; }
+        .filter-section:last-child { margin-bottom: 0; }
+        .filter-section-title { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; }
+        
+        .filter-option {
+            display: flex; align-items: center; gap: 10px; padding: 0.6rem 0.75rem; border-radius: 8px;
+            cursor: pointer; transition: 0.2s; margin-bottom: 0.4rem;
+        }
+        .filter-option:hover { background: rgba(139, 92, 246, 0.08); }
+        .filter-checkbox {
+            width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.2); border-radius: 4px;
+            display: flex; align-items: center; justify-content: center; transition: 0.2s;
+        }
+        [data-theme="light"] .filter-checkbox { border-color: rgba(0,0,0,0.2); }
+        .filter-option.active .filter-checkbox { background: var(--primary); border-color: var(--primary); }
+        .filter-checkbox svg { width: 12px; height: 12px; color: #fff; opacity: 0; transition: 0.2s; }
+        .filter-option.active .filter-checkbox svg { opacity: 1; }
+        .filter-label { font-size: 0.9rem; color: var(--text-main); font-weight: 500; }
+        
+        .filter-actions {
+            display: flex; gap: 8px; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        [data-theme="light"] .filter-actions { border-top-color: rgba(0,0,0,0.05); }
+        .filter-clear {
+            flex: 1; padding: 8px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px; font-size: 0.85rem; color: var(--text-muted); cursor: pointer; transition: 0.2s;
+            font-family: 'Outfit'; font-weight: 600;
+        }
+        [data-theme="light"] .filter-clear { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); }
+        .filter-clear:hover { background: rgba(255,77,77,0.1); color: #ff4d4d; border-color: rgba(255,77,77,0.3); }
+        .filter-apply {
+            flex: 1; padding: 8px; background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3);
+            border-radius: 8px; font-size: 0.85rem; color: var(--primary); cursor: pointer; transition: 0.2s;
+            font-family: 'Outfit'; font-weight: 600;
+        }
+        .filter-apply:hover { background: var(--primary); color: #fff; }
+
+        .sort-toggle-btn {
+            padding: 12px 24px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.05));
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px; font-size: 0.9rem; color: var(--text-main); cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 10px; font-family: 'Outfit'; font-weight: 600;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.1);
+        }
+        [data-theme="light"] .sort-toggle-btn { background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(124, 58, 237, 0.03)); border-color: rgba(139, 92, 246, 0.25); }
+        .sort-toggle-btn:hover { 
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(124, 58, 237, 0.08)); 
+            border-color: var(--primary); 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.2);
+        }
+        .sort-toggle-btn.active {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(124, 58, 237, 0.1));
+            border-color: var(--primary);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.25);
+        }
+        .sort-toggle-btn svg { width: 18px; height: 18px; transition: 0.3s; color: var(--primary); }
+
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2.5rem; }
+        
+        .upcoming-section {
+            margin-top: 8rem;
+            padding: 4rem 0;
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+            position: relative;
+        }
+        .upcoming-section::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+        .upcoming-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .upcoming-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .upcoming-title svg {
+            color: var(--primary);
+            animation: rotate 4s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .upcoming-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .upcoming-slider-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+        .upcoming-slider {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            overflow: hidden;
+        }
+        @media (max-width: 1024px) {
+            .upcoming-slider {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .upcoming-slider {
+                grid-template-columns: 1fr;
+            }
+        }
+        .upcoming-card {
+            position: relative;
+            height: 320px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #0a0a0c;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        [data-theme="light"] .upcoming-card {
+            background: #ffffff;
+            border-color: rgba(139, 92, 246, 0.25);
+        }
+        .upcoming-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+        }
+        .upcoming-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s;
+        }
+        .upcoming-card:hover .upcoming-bg {
+            transform: scale(1.1);
+        }
+        .upcoming-bg.loading {
+            animation: shimmer 1.5s infinite;
+            background: linear-gradient(90deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+            background-size: 200% 100%;
+        }
+        .upcoming-bg.mystery-bg {
+            background: linear-gradient(135deg, #0a0a0c, #1a1a1c);
+        }
+        .upcoming-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+        }
+        .upcoming-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            z-index: 2;
+        }
+        .upcoming-badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .upcoming-status {
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .upcoming-status.confirmed {
+            background: rgba(0, 255, 157, 0.15);
+            color: #00ff9d;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+        }
+        .upcoming-date {
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .upcoming-game-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .upcoming-game-desc {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        .mystery-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 6rem;
+            font-weight: 900;
+            color: rgba(139, 92, 246, 0.3);
+            z-index: 1;
+            animation: pulse 2s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.1); }
+        }
+        .upcoming-card.mystery .upcoming-game-title,
+        .upcoming-card.mystery .upcoming-game-desc {
+            opacity: 0.6;
+        }
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+        .slider-nav:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .slider-nav svg {
+            width: 20px;
+            height: 20px;
+            color: var(--primary);
+            transition: color 0.3s;
+        }
+        .slider-nav:hover svg {
+            color: #fff;
+        }
+        .slider-prev {
+            left: 0;
+        }
+        .slider-next {
+            right: 0;
+        }
+        .game-card { position: relative; height: 420px; border-radius: 24px; overflow: hidden; background: #0a0a0c; border: 1px solid rgba(255,255,255,0.06); transition: all 0.5s var(--ease-out); cursor: default; box-shadow: 0 15px 40px -10px rgba(0,0,0,0.6); }
+        [data-theme="light"] .game-card { background: #ffffff; border-color: rgba(0,0,0,0.1); box-shadow: 0 15px 40px -10px rgba(0,0,0,0.15); }
+        .game-card:hover { transform: translateY(-12px) scale(1.02); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 30px 60px -10px rgba(0,0,0,0.8), 0 0 0 1px rgba(139, 92, 246, 0.2); }
+        .game-bg { position: absolute; inset: 0; z-index: 0; transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1); background-size: cover; background-position: center; background-color: #1a1a1a; }
+        .game-card:hover .game-bg { transform: scale(1.15); }
+        .game-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 40%, transparent 100%); z-index: 1; }
+        .game-bg.loading { animation: shimmer 1.5s infinite; background: linear-gradient(90deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%); background-size: 200% 100%; }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .game-content { position: absolute; inset: 0; z-index: 2; padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(to top, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.7) 40%, transparent 100%); }
+        .game-header { display: flex; justify-content: flex-end; align-items: flex-start; }
+        .status-badge { padding: 8px 14px; background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+        .s-dot { width: 7px; height: 7px; border-radius: 50%; }
+        .game-card[data-status="working"] .s-dot { background: var(--status-working); box-shadow: 0 0 10px var(--status-working); animation: pulse 2s infinite; }
+        .game-card[data-status="outdated"] .s-dot { background: var(--status-outdated); }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .game-footer { }
+        .g-title { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 12px; line-height: 1.1; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .g-tags { display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .g-tag { font-size: 0.75rem; background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.3); padding: 5px 12px; border-radius: 8px; color: #c4b5fd; font-weight: 600; }
+        .g-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), #7c3aed); color: #fff; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; opacity: 0; transform: translateY(30px); transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); font-family: 'Outfit'; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 30px -5px rgba(139, 92, 246, 0.4); text-decoration: none; }
+        .game-card:hover .g-btn { opacity: 1; transform: translateY(0); }
+        .g-btn:hover { background: linear-gradient(135deg, #7c3aed, var(--primary)); box-shadow: 0 15px 40px -5px rgba(139, 92, 246, 0.6); transform: scale(1.02); }
+        .g-btn:disabled { cursor: not-allowed; opacity: 0.5 !important; background: #555; }
+
+        .status-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; }
+        @media (max-width: 900px) { .status-layout { grid-template-columns: 1fr; } }
+        .most-executed-card { background: #0f0f11; border-radius: 24px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; position: relative; height: 300px; display: flex; align-items: flex-end; box-shadow: 0 20px 60px -20px rgba(0,0,0,0.8); }
+        [data-theme="light"] .most-executed-card { background: #ffffff; border-color: rgba(0,0,0,0.1); box-shadow: 0 20px 60px -20px rgba(0,0,0,0.15); }
+        .me-bg { position: absolute; inset: 0; background-image: url('https://tr.rbxcdn.com/180DAY-bcd3f3225eb5c550df10310c7713e357/768/432/Image/Webp/noFilter'); background-size: cover; background-position: center; transition: transform 5s ease; }
+        .most-executed-card:hover .me-bg { transform: scale(1.05); }
+        .me-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #050507 0%, transparent 80%); }
+        .me-content { position: relative; z-index: 2; padding: 2.5rem; width: 100%; }
+        .me-badge { background: var(--primary); color: #fff; padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; display: inline-block; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(139,92,246,0.4); }
+        .me-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 5px; line-height: 1; color: #fff; }
+        .me-stat { color: #ccc; font-size: 1rem; display: flex; align-items: center; gap: 10px; }
+        .me-trend { color: #00ff9d; font-size: 0.8rem; background: rgba(0,255,157,0.1); padding: 2px 6px; border-radius: 4px; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .metric-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 1.5rem; }
+        [data-theme="light"] .metric-card { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.08); }
+        .metric-lbl { color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 5px; }
+        .metric-val { font-size: 1.8rem; font-weight: 700; color: var(--text-main); }
+        .metric-x-version {
+            position: relative;
+            font-size: 4.5rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #c084fc 50%, #e9d5ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6));
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        @keyframes glowPulse {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6)); }
+            50% { filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.9)) drop-shadow(0 0 50px rgba(139, 92, 246, 0.5)); }
+        }
+        .metric-x-version::before {
+            content: 'X';
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: blur(15px);
+            opacity: 0.7;
+            z-index: -1;
+        }
+        .metric-sub { font-size: 0.8rem; color: #00ff9d; margin-top: 5px; }
+        .changelog { background: rgba(15,15,18,0.6); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 2rem; margin-top: 0; height: 100%; }
+        [data-theme="light"] .changelog { background: rgba(255,255,255,0.9); border-color: rgba(0,0,0,0.08); }
+        .cl-item { padding-left: 20px; border-left: 2px solid rgba(255,255,255,0.1); position: relative; padding-bottom: 2rem; }
+        [data-theme="light"] .cl-item { border-left-color: rgba(0,0,0,0.1); }
+        .cl-item:last-child { padding-bottom: 0; }
+        .cl-dot { position: absolute; left: -6px; top: 0; width: 10px; height: 10px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
+        .cl-date { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 5px; font-family: 'JetBrains Mono'; }
+        .cl-ver { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
+        .cl-list { list-style: none; }
+        .cl-list li { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 6px; display: flex; gap: 8px; }
+        .cl-list li::before { content: '-'; color: var(--primary); }
+
+        .key-page-container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            width: 100%; 
+            position: relative;
+        }
+        .key-page-container::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            animation: floatGlow 8s ease-in-out infinite;
+        }
+        @keyframes floatGlow {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-30px); }
+        }
+        .key-page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        .key-page-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, #c084fc 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            position: relative;
+            display: inline-block;
+        }
+        .key-page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            border-radius: 2px;
+        }
+        .key-page-subtitle {
+            font-family: 'JetBrains Mono';
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .ultra-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
+            gap: 3rem; 
+            width: 100%; 
+            max-width: 900px;
+            margin-top: 2rem; 
+            perspective: 1000px;
+            position: relative;
+            z-index: 1;
+        }
+        .recommended-badge {
+    position: absolute;
+    /* --- Posicionamiento --- */
+    /* 3rem (padding card) + mitad altura aprox del badge 24H */
+    top: 66px; 
+    /* 2rem (padding right card) + ancho aprox del badge 24H + espacio extra */
+    right: 135px; 
+    transform: translateY(-50%); /* Para centrarlo verticalmente exacto */
+    
+    /* --- Estilo Visual --- */
+    background: linear-gradient(135deg, #00ff9d, #00d4aa);
+    color: #000;
+    padding: 6px 12px; /* Un poco más compacto */
+    border-radius: 8px; /* Bordes menos redondos para que parezca una etiqueta lateral */
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    
+    box-shadow: 
+        0 4px 15px rgba(0, 255, 157, 0.3),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+    z-index: 10;
+    
+    /* Animación: Cambiada a un pulso suave en lugar de flotar para que no se desalinee */
+    animation: badgePulse 2s infinite;
+    pointer-events: none;
+    white-space: nowrap; /* Asegura que no se rompa el texto */
+}
+
+/* Nueva animación más sutil para esta posición */
+@keyframes badgePulse {
+    0%, 100% { transform: translateY(-50%) scale(1); filter: brightness(1); }
+    50% { transform: translateY(-50%) scale(1.05); filter: brightness(1.1); }
+}
+
+.recommended-badge svg {
+    width: 12px;
+    height: 12px;
+    fill: #000;
+    stroke: none;
+}
+
+/* --- AJUSTE PARA MÓVILES --- */
+/* En pantallas pequeñas, lo subimos un poco para que no choque con el texto */
+@media (max-width: 600px) {
+    .recommended-badge {
+        top: 35px; /* Lo sube arriba del badge de 24H */
+        right: 20px; /* Lo alinea a la derecha */
+        padding: 4px 10px;
+        font-size: 0.6rem;
+    }
+}
+
+        .ultra-card { 
+            background: linear-gradient(135deg, rgba(15, 15, 20, 0.8), rgba(10, 10, 15, 0.9)); 
+            backdrop-filter: blur(20px); border-radius: 28px; padding: 3rem 2rem; position: relative; overflow: hidden; 
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); 
+            border: 1px solid rgba(255,255,255,0.05); 
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            box-shadow: 0 20px 60px -20px rgba(0,0,0,0.8);
+        }
+        [data-theme="light"] .ultra-card { background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(250, 250, 252, 0.98)); border-color: rgba(0,0,0,0.08); }
+        .ultra-card::before { 
+            content: ''; position: absolute; inset: -2px; z-index: -1; 
+            border-radius: 28px; 
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent 50%); 
+            opacity: 0; transition: 0.5s;
+        }
+        .ultra-card:hover::before { opacity: 1; }
+        .ultra-card:hover { 
+            transform: translateY(-12px) scale(1.03); 
+            box-shadow: 0 30px 70px -20px rgba(0,0,0,0.9); 
+        }
+        .ultra-card.linkvertise:hover { border-color: rgba(255, 200, 0, 0.5); box-shadow: 0 0 50px rgba(255, 200, 0, 0.2); }
+        .ultra-card.rinkupro:hover { border-color: rgba(77, 159, 255, 0.5); box-shadow: 0 0 50px rgba(77, 159, 255, 0.2); }
+        .u-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+            position: relative;
+        }
+        .u-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 30%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            transition: width 0.5s;
+        }
+        .ultra-card:hover .u-header::after {
+            width: 100%;
+        }
+        .u-duration-badge {
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.75rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 
+                0 4px 15px rgba(0,0,0,0.3),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+        .u-header:hover .u-duration-badge {
+            transform: scale(1.05);
+        }
+        .ultra-card.linkvertise .u-duration-badge {
+            background: linear-gradient(135deg, rgba(255, 200, 0, 0.25), rgba(255, 180, 0, 0.15));
+            color: #ffc800;
+            border: 1px solid rgba(255, 200, 0, 0.4);
+        }
+        .ultra-card.rinkupro .u-duration-badge {
+            background: linear-gradient(135deg, rgba(77, 159, 255, 0.25), rgba(60, 140, 240, 0.15));
+            color: #4d9fff;
+            border: 1px solid rgba(77, 159, 255, 0.4);
+        }
+        .u-duration-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+        .u-icon-wrapper { 
+            width: 100px; 
+            height: 100px; 
+            margin-bottom: 2rem; 
+            position: relative; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            animation: floatIcon 4s ease-in-out infinite;
+        }
+        @keyframes floatIcon { 
+            0%, 100% { transform: translateY(0) rotate(0deg); } 
+            50% { transform: translateY(-15px) rotate(5deg); } 
+        }
+        .u-glow { 
+            position: absolute; 
+            inset: -15px; 
+            border-radius: 50%; 
+            filter: blur(40px); 
+            opacity: 0.3; 
+            transition: all 0.5s;
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.1); }
+        }
+        .ultra-card.linkvertise .u-glow { background: var(--linkvertise); }
+        .ultra-card.rinkupro .u-glow { background: var(--rinkupro); }
+        .ultra-card:hover .u-glow { 
+            opacity: 0.8; 
+            filter: blur(50px); 
+            transform: scale(1.4); 
+        }
+        .u-svg { 
+            width: 60px; 
+            height: 60px; 
+            z-index: 2; 
+            transition: all 0.5s;
+            filter: drop-shadow(0 8px 25px rgba(0,0,0,0.5));
+        }
+        .ultra-card:hover .u-svg { 
+            transform: scale(1.2) rotate(10deg); 
+        }
+        .u-title { 
+            font-size: 2.2rem; 
+            font-weight: 900; 
+            color: var(--text-main); 
+            margin-bottom: 1rem; 
+            letter-spacing: -1px;
+            position: relative;
+        }
+        .u-desc { 
+            font-size: 1rem; 
+            color: var(--text-muted); 
+            line-height: 1.8; 
+            margin-bottom: 2.5rem; 
+            max-width: 320px;
+        }
+        .u-features {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background: rgba(0,0,0,0.25);
+            border-radius: 16px;
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .u-features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+        [data-theme="light"] .u-features { 
+            background: rgba(0,0,0,0.04); 
+            border-color: rgba(139, 92, 246, 0.15); 
+        }
+        .u-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .u-feature-item:last-child { 
+            margin-bottom: 0; 
+        }
+        .u-feature-item:hover {
+            background: rgba(139, 92, 246, 0.08);
+            padding-left: 1rem;
+        }
+        .u-feature-item svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+        .u-feature-item:hover svg {
+            transform: scale(1.2);
+        }
+        .ultra-card.linkvertise .u-feature-item svg { color: #ffc800; }
+        .ultra-card.rinkupro .u-feature-item svg { color: #4d9fff; }
+        .u-btn { 
+            width: 100%; 
+            padding: 20px; 
+            border-radius: 18px; 
+            font-weight: 900; 
+            font-size: 1rem; 
+            letter-spacing: 1px; 
+            text-transform: uppercase; 
+            cursor: pointer; 
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 12px; 
+            position: relative; 
+            overflow: hidden; 
+            border: none; 
+            box-shadow: 0 10px 30px -5px rgba(0,0,0,0.4);
+        }
+        .u-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+        .u-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        .u-btn svg {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s;
+        }
+        .u-btn:hover svg {
+            transform: translateX(5px);
+        }
+        .ultra-card.linkvertise .u-btn { 
+            background: linear-gradient(135deg, #ffc800, #ffb000); 
+            color: #000; 
+        }
+        .ultra-card.rinkupro .u-btn { 
+            background: linear-gradient(135deg, #4d9fff, #3c8cf0); 
+            color: #fff; 
+        }
+        .ultra-card.linkvertise:hover .u-btn { 
+            box-shadow: 
+                0 0 40px rgba(255, 200, 0, 0.6),
+                0 15px 40px -5px rgba(255, 200, 0, 0.4); 
+            transform: translateY(-3px) scale(1.02); 
+        }
+        .ultra-card.rinkupro:hover .u-btn { 
+            box-shadow: 
+                0 0 40px rgba(77, 159, 255, 0.6),
+                0 15px 40px -5px rgba(77, 159, 255, 0.4); 
+            transform: translateY(-3px) scale(1.02); 
+        }
+        .luarmor-footer { 
+            margin-top: 6rem; 
+            margin-bottom: 2rem; 
+            text-align: center; 
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        .luarmor-credit { 
+            font-family: 'Outfit', sans-serif; 
+            font-weight: 800; 
+            font-size: 0.9rem; 
+            letter-spacing: 4px; 
+            background: linear-gradient(90deg, #ff8a00, #ffc800, #ffef00, #ffc800, #ff8a00); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            text-transform: uppercase; 
+            position: relative; 
+            display: inline-block; 
+            padding: 12px 30px; 
+            animation: shimmerText 4s infinite linear; 
+            background-size: 200% auto;
+        }
+        @keyframes shimmerText { 
+            to { background-position: 200% center; } 
+        }
+        .luarmor-credit::before { 
+            content: ''; 
+            position: absolute; 
+            inset: -3px; 
+            background: linear-gradient(90deg, rgba(255, 138, 0, 0.3), rgba(255, 200, 0, 0.3)); 
+            opacity: 0.2; 
+            filter: blur(20px); 
+            z-index: -1; 
+            border-radius: 50px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.05); }
+        }
+
+        .copy-overlay-toast {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-20px);
+            background: rgba(10, 10, 12, 0.8); backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            border-radius: 50px; padding: 10px 24px;
+            display: flex; align-items: center; gap: 12px;
+            box-shadow: 0 15px 40px -10px rgba(0,0,0,0.5), 0 0 20px rgba(0, 255, 157, 0.1);
+            z-index: 3000; opacity: 0; pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        [data-theme="light"] .copy-overlay-toast { background: rgba(255,255,255,0.95); border-color: rgba(0,255,157,0.4); box-shadow: 0 15px 40px -10px rgba(0,0,0,0.15); }
+        .copy-overlay-toast.show { opacity: 1; transform: translateX(-50%) translateY(20px); }
+        .toast-icon {
+            width: 20px; height: 20px; background: #00ff9d; color: #000;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        }
+        .toast-text { font-family: 'Outfit'; font-weight: 600; font-size: 0.9rem; color: var(--text-main); }
+
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.4s; }
+        .modal.active { opacity: 1; pointer-events: all; }
+        
+        .modal-box {
+            background: #0a0a0c;
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 3rem; border-radius: 28px;
+            width: 90%; max-width: 460px; text-align: center;
+            transform: scale(0.9) translateY(20px); transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 40px 80px -20px rgba(0,0,0,0.8);
+            position: relative; overflow: hidden;
+        }
+        [data-theme="light"] .modal-box { background: #ffffff; border-color: rgba(0,0,0,0.1); }
+        .modal.active .modal-box { transform: scale(1) translateY(0); }
+
+        .modal-box::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--primary), #c084fc, var(--primary));
+        }
+        .modal-glow {
+            position: absolute; width: 200px; height: 200px; background: var(--primary);
+            filter: blur(100px); opacity: 0.15; top: -100px; left: 50%; transform: translateX(-50%); pointer-events: none;
+        }
+
+        .modal-icon-wrap {
+            width: 70px; height: 70px; background: rgba(255, 77, 77, 0.1);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.5rem; position: relative;
+        }
+        .modal-icon-wrap svg { color: #ff4d4d; width: 32px; height: 32px; z-index: 2; }
+        .modal-icon-glow {
+            position: absolute; inset: 0; border-radius: 50%; background: #ff4d4d; filter: blur(20px); opacity: 0.3; animation: pulseWarn 2s infinite;
+        }
+        @keyframes pulseWarn { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.2); } }
+
+        .modal-title { font-size: 1.8rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem; }
+        .modal-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 2.5rem; }
+        
+        .modal-actions { display: flex; flex-direction: column; gap: 12px; }
+        
+        .btn-continue {
+            background: linear-gradient(135deg, #ff4d4d, #d93030);
+            color: #fff; border: none; padding: 16px; border-radius: 12px;
+            font-weight: 700; font-size: 1rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: 0.3s; box-shadow: 0 10px 25px -5px rgba(255, 77, 77, 0.4);
+        }
+        .btn-continue:hover { transform: translateY(-2px); box-shadow: 0 15px 35px -5px rgba(255, 77, 77, 0.6); }
+        
+        .btn-cancel {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+            color: var(--text-muted); padding: 16px; border-radius: 12px; font-weight: 600;
+            cursor: pointer; transition: 0.2s;
+        }
+        [data-theme="light"] .btn-cancel { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); }
+        .btn-cancel:hover { background: rgba(255,255,255,0.08); color: var(--text-main); }
+        [data-theme="light"] .btn-cancel:hover { background: rgba(0,0,0,0.05); }
+
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+    <div class="grid-overlay"></div>
+    
+    <div class="copy-overlay-toast" id="toast">
+        <div class="toast-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <span class="toast-text">Copied to clipboard</span>
+    </div>
+
+    <div class="theme-toggle" id="themeToggle">
+        <div class="theme-slider">
+            <svg class="theme-icon" id="moonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <svg class="theme-icon hidden" id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </div>
+    </div>
+
+    <div class="nav-trigger" id="navTrigger">
+        <div class="nav-line"></div>
+        <div class="nav-line"></div>
+        <div class="nav-line"></div>
+    </div>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="brand-container">
+                <div class="brand-logo-mark">I</div>
+                <div class="brand-title">Imp Hub</div>
+            </div>
+            <div class="version-badge">X VERSION</div>
+        </div>
+        
+        <div class="nav-links-container">
+            <button class="nav-link active" onclick="showPage('home'); return false;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                Home Dashboard
+            </button>
+            <button class="nav-link" onclick="showPage('games'); return false;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4"></path><path d="M14 12h4"></path></svg>
+                Supported Games
+            </button>
+            <button class="nav-link" onclick="showPage('status'); return false;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                Status
+            </button>
+            <button class="nav-link" onclick="showPage('getkey'); return false;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                Get Access Key
+            </button>
+            <button class="nav-link" onclick="window.open('https://discord.gg/imphub'); return false;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                Join Discord
+            </button>
+        </div>
+    </nav>
+
+    <div id="home" class="page active">
+        <header>
+            <h1><span>IMP</span> HUB</h1>
+            <p class="subtitle">PREMIUM SCRIPTING SOLUTION</p>
+        </header>
+
+        <div class="editor-container">
+            <div class="editor-header">
+                <div class="window-controls">
+                    <div class="win-btn win-close"></div>
+                    <div class="win-btn win-min"></div>
+                    <div class="win-btn win-max"></div>
+                </div>
+                <div class="editor-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    loader.lua
+                </div>
+                <button class="copy-icon-btn" onclick="copyScript(event)">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    Copy
+                </button>
+            </div>
+            <div class="editor-content" onclick="copyScript(event)">
+                <div class="code-block">
+                    <div class="line-nums">1<br>2</div>
+                    <div class="code-text">
+                        <div><span class="s-var">script_key</span> = <span class="s-str">""</span>;</div>
+                        <div><span class="s-func">loadstring</span>(<span class="s-key">game</span>:<span class="s-func">HttpGet</span>(<span class="s-str">"https://api.luarmor.net/files/v3/loaders/34824c86db1eba5e5e39c7c2d6d7fdfe.lua"</span>))()</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="cyber-btn" onclick="copyScript(event)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                COPY SCRIPT
+            </button>
+            
+            <button class="cyber-btn primary" onclick="showPage('getkey')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
+                GET KEY
+            </button>
+
+            <button class="cyber-btn" onclick="window.open('https://discord.gg/imphub')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                JOIN DISCORD
+            </button>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                <h3>Undetected & Safe</h3>
+                <p style="color:var(--text-muted);">Our advanced obfuscation technology ensures your account remains safe from anti-cheat systems.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+                <h3>Optimized Performance</h3>
+                <p style="color:var(--text-muted);">Engineered for speed. Experience zero FPS drops while executing complex auto-farm logic.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></div>
+                <h3>Constant Updates</h3>
+                <p style="color:var(--text-muted);">We update our scripts within hours of game patches to ensure 99% uptime reliability.</p>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <div class="faq-q-left">
+                        <div class="faq-icon-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+                            </svg>
+                        </div>
+                        <span class="faq-q-text">How to get a key?</span>
+                    </div>
+                    <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <ol>
+                            <li>Click the "Get Key" button in the navigation or home page</li>
+                            <li>Choose your preferred provider (Linkvertise or Rinku Pro)</li>
+                            <li>Complete the Luarmor checkpoints as instructed</li>
+                            <li>Click the blue button called "Get A New Key"</li>
+                            <li>Copy your generated key and paste it in the script</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <div class="faq-q-left">
+                        <div class="faq-icon-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <span class="faq-q-text">How long does a key last?</span>
+                    </div>
+                    <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Each key is valid for 24 hours from the moment of generation. After expiration, you'll need to obtain a new key following the same process. This system helps us maintain security and manage server resources effectively.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <div class="faq-q-left">
+                        <div class="faq-icon-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <span class="faq-q-text">Is Imp Hub safe to use?</span>
+                    </div>
+                    <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Yes! Imp Hub uses advanced obfuscation and anti-detection methods to keep your account secure. We continuously update our scripts to stay ahead of anti-cheat systems. However, always use scripts responsibly and at your own risk.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <div class="faq-q-left">
+                        <div class="faq-icon-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                        </div>
+                        <span class="faq-q-text">Which executors are supported?</span>
+                    </div>
+                    <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Imp Hub works with most modern executors including Solara, Wave, Electron, Fluxus, and more. We recommend using executors with full Luau support for the best experience. Some features may require specific executor capabilities.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <div class="faq-q-left">
+                        <div class="faq-icon-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
+                            </svg>
+                        </div>
+                        <span class="faq-q-text">What if a game script is outdated?</span>
+                    </div>
+                    <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        We typically update scripts within 24-48 hours after a game update. Check our Discord server or the Status page for real-time update notifications. You can also report issues directly to our support team for faster resolution.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="upcoming-section">
+            <div class="upcoming-header">
+                <h2 class="upcoming-title">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    Upcoming Games
+                </h2>
+                <p class="upcoming-subtitle">Next supported games in development</p>
+            </div>
+
+            <div class="upcoming-slider-container">
+                <button class="slider-nav slider-prev" id="sliderPrev">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+
+                <div class="upcoming-slider" id="upcomingSlider">
+                    <div class="upcoming-card confirmed" data-universe-id="4568630521">
+                        <div class="upcoming-bg loading"></div>
+                        <div class="upcoming-overlay"></div>
+                        <div class="upcoming-content">
+                            <div class="upcoming-badges">
+                                <span class="upcoming-status confirmed">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    CONFIRMED
+                                </span>
+                                <span class="upcoming-date">Date Unknown</span>
+                            </div>
+                            <h3 class="upcoming-game-title">Heroes Battlegrounds</h3>
+                            <p class="upcoming-game-desc">Full script support coming soon</p>
+                        </div>
+                    </div>
+
+                    <div class="upcoming-card mystery">
+                        <div class="upcoming-bg mystery-bg"></div>
+                        <div class="mystery-icon">?</div>
+                        <div class="upcoming-content">
+                            <h3 class="upcoming-game-title">Unknown</h3>
+                            <p class="upcoming-game-desc">Coming Soon</p>
+                        </div>
+                    </div>
+
+                    <div class="upcoming-card mystery">
+                        <div class="upcoming-bg mystery-bg"></div>
+                        <div class="mystery-icon">?</div>
+                        <div class="upcoming-content">
+                            <h3 class="upcoming-game-title">Unknown</h3>
+                            <p class="upcoming-game-desc">Coming Soon</p>
+                        </div>
+                    </div>
+
+                    <div class="upcoming-card mystery">
+                        <div class="upcoming-bg mystery-bg"></div>
+                        <div class="mystery-icon">?</div>
+                        <div class="upcoming-content">
+                            <h3 class="upcoming-game-title">Unknown</h3>
+                            <p class="upcoming-game-desc">Coming Soon</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="slider-nav slider-next" id="sliderNext">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="games" class="page">
+        <h1 style="font-size: 2.5rem; margin-bottom: 2rem; text-align: left;">Supported Games</h1>
+        
+        <div class="filter-container">
+            <div class="search-wrapper">
+                <input type="text" class="search-input" id="gameSearch" placeholder="Search for a game..." autocomplete="off">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <div id="autocomplete-list" class="autocomplete-box"></div>
+            </div>
+            <div class="filter-pills">
+                <button class="sort-toggle-btn" id="sortToggleBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" y1="6" x2="20" y2="6"></line>
+                        <line x1="4" y1="12" x2="20" y2="12"></line>
+                        <line x1="4" y1="18" x2="16" y2="18"></line>
+                    </svg>
+                    A-Z Sort
+                </button>
+                
+                <button class="filter-dropdown-btn" id="filterDropdownBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                    </svg>
+                    Filters
+                    <span class="filter-badge" id="filterBadge" style="display: none;">0</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+                
+                <div class="filter-dropdown-menu" id="filterDropdownMenu">
+                    <div class="filter-section">
+                        <div class="filter-section-title">Status</div>
+                        <div class="filter-option" data-category="status" data-value="working">
+                            <div class="filter-checkbox">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <span class="filter-label">Working</span>
+                        </div>
+                        <div class="filter-option" data-category="status" data-value="outdated">
+                            <div class="filter-checkbox">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <span class="filter-label">Outdated</span>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <div class="filter-section-title">Categories</div>
+                        <div class="filter-option" data-category="tags" data-value="rpg">
+                            <div class="filter-checkbox">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <span class="filter-label">RPG</span>
+                        </div>
+                        <div class="filter-option" data-category="tags" data-value="pvp">
+                            <div class="filter-checkbox">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <span class="filter-label">PvP</span>
+                        </div>
+                        <div class="filter-option" data-category="tags" data-value="farming">
+                            <div class="filter-checkbox">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <span class="filter-label">Farming</span>
+                        </div>
+                        <div class="filter-option" data-category="tags" data-value="simulator">
+                            <div class="filter-checkbox">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <span class="filter-label">Simulator</span>
+                        </div>
+                        <div class="filter-option" data-category="tags" data-value="anime">
+                            <div class="filter-checkbox">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <span class="filter-label">Anime</span>
+                        </div>
+                        <div class="filter-option" data-category="tags" data-value="parkour">
+                            <div class="filter-checkbox">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <span class="filter-label">Parkour</span>
+                        </div>
+                        <div class="filter-option" data-category="tags" data-value="afk">
+                            <div class="filter-checkbox">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <span class="filter-label">AFK Friendly</span>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-actions">
+                        <button class="filter-clear" id="filterClearBtn">Clear All</button>
+                        <button class="filter-apply" id="filterApplyBtn">Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="games-grid" id="gamesGrid">
+            <div class="game-card" data-status="working" data-name="Anime Eternal" data-tags="rpg anime farming" data-universe-id="7882829745">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Anime Eternal</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Farm</span>
+                            <span class="g-tag">Auto Quest</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/90462358603255/Anime-Eternal" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card" data-status="working" data-name="Anime Last Stand" data-tags="tower defense anime strategy" data-universe-id="4509896324">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Anime Last Stand</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Farm</span>
+                            <span class="g-tag">Auto Place</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/12886143095/QOL-Godly-EXB-Anime-Last-Stand" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card" data-status="working" data-name="Arise Crossover" data-tags="rpg anime farming" data-universe-id="7074860883">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Arise Crossover</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Farm</span>
+                            <span class="g-tag">Auto Quest</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/87039211657390/ONLINE-Arise-Crossover" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card" data-status="working" data-name="Dragon Adventures" data-tags="rpg simulator pets" data-universe-id="1235188606">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Dragon Adventures</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Farm</span>
+                            <span class="g-tag">Teleport</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/3475397644/Dragon-Adventures" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card" data-status="working" data-name="Dragon Ball Rage" data-tags="pvp anime fighting" data-universe-id="98929893">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Dragon Ball Rage</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Train</span>
+                            <span class="g-tag">ESP</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/71315343/EGO-Dragon-Ball-Rage" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card" data-status="working" data-name="Dragon Soul" data-tags="rpg farming anime" data-universe-id="3164075108">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Dragon Soul</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Farm</span>
+                            <span class="g-tag">ESP</span>
+                            <span class="g-tag">Quest</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/8246874626/Dragon-Soul-Anime-MMO" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card" data-status="working" data-name="Fruit Battlegrounds" data-tags="pvp fighting anime" data-universe-id="3457700596">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Fruit Battlegrounds</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Farm</span>
+                            <span class="g-tag">ESP</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/9224601490/FLAME-V2-Fruit-Battlegrounds" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card" data-status="working" data-name="Prospecting" data-tags="simulator mining afk" data-universe-id="7629331599">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Prospecting</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Mine</span>
+                            <span class="g-tag">Auto Sell</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/129827112113663/Prospecting" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card" data-status="working" data-name="Slasher Blade Loot" data-tags="simulator rpg anime" data-universe-id="9126204352">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Slasher Blade Loot</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Farm</span>
+                            <span class="g-tag">Auto Spin</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/79940517734440/Slasher-Blade-Loot-W8" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card" data-status="working" data-name="Sonic Speed Simulator" data-tags="racing simulator afk" data-universe-id="3405618667">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Sonic Speed Simulator</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Farm</span>
+                            <span class="g-tag">Speed</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/6602390314/Sonic-Speed-Simulator" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card" data-status="working" data-name="Spongebob TD" data-tags="tower defense casual" data-universe-id="6594435384">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Spongebob TD</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Place</span>
+                            <span class="g-tag">Auto Farm</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/123662243100680/SpongeBob-Tower-Defense" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card" data-status="working" data-name="Tower Of Zombies" data-tags="parkour adventure" data-universe-id="8238863102">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Tower Of Zombies</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Farm</span>
+                            <span class="g-tag">Parkour</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/99122501338948/Tower-of-Zombies" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="status" class="page">
+        <div class="status-layout">
+            <div class="main-col">
+                <div class="most-executed-card">
+                    <div class="me-bg"></div>
+                    <div class="me-overlay"></div>
+                    <div class="me-content">
+                        <span class="me-badge">#1 MOST EXECUTED</span>
+                        <h2 class="me-title">Dragon Soul</h2>
+                        <div class="me-stat">
+                            <span>12,402 executions today</span>
+                            <span class="me-trend">+15%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-lbl">Active Users</div>
+                        <div class="metric-val">1.5K+</div>
+                        <div class="metric-sub">Live connecting</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-lbl">Uptime</div>
+                        <div class="metric-val" style="color:var(--status-working)">99.9%</div>
+                        <div class="metric-sub">Last 30 Days</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-lbl">Version</div>
+                        <div class="metric-val metric-x-version">X</div>
+                        <div class="metric-sub">Version</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-col">
+                <div class="changelog">
+                    <h3 style="margin-bottom: 2rem;">Recent Updates</h3>
+                    <div class="cl-item">
+                        <div class="cl-dot"></div>
+                        <div class="cl-date">Nov 23, 2024</div>
+                        <div class="cl-ver">v1.0.1 Key System Update</div>
+                        <ul class="cl-list">
+                            <li>Migrated all scripts to unified web-based key system</li>
+                            <li>Integrated Luarmor authentication gateway</li>
+                            <li>Added dual-provider key generation (Linkvertise & Rinku Pro)</li>
+                            <li>Improved key validation and security protocols</li>
+                        </ul>
+                    </div>
+                    <div class="cl-item">
+                        <div class="cl-dot" style="background: #00ff9d; box-shadow: 0 0 10px #00ff9d;"></div>
+                        <div class="cl-date">Nov 23, 2024</div>
+                        <div class="cl-ver">v1.0.0 Official Launch</div>
+                        <ul class="cl-list">
+                            <li>Official website launch with modern UI design</li>
+                            <li>12 supported games with active script maintenance</li>
+                            <li>Advanced filtering and search functionality</li>
+                            <li>Real-time status monitoring system</li>
+                            <li>Responsive dark/light theme implementation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="getkey" class="page">
+        <div class="key-page-container">
+            <div class="key-page-header">
+                <h1 class="key-page-title">ACCESS GATEWAY</h1>
+                <p class="key-page-subtitle">Secure Encrypted Connection</p>
+            </div>
+            
+            <div class="ultra-grid">
+                <div class="ultra-card linkvertise" onclick="openModal('linkvertise')">
+                    <div class="u-header">
+                        <div></div>
+                        <div class="u-duration-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            12H KEY
+                        </div>
+                    </div>
+                    <div class="u-icon-wrapper">
+                        <div class="u-glow"></div>
+                        <svg class="u-svg" viewBox="0 0 122.88 122.88" fill="#ffc800"><path d="M59.3,27.06c-8.91,0-16.14,7.23-16.14,16.14s7.23,16.14,16.14,16.14s16.14-7.23,16.14-16.14 S68.21,27.06,59.3,27.06L59.3,27.06z M62.26,16.48h22.68c1.61,0,3.09,0.73,4.06,2.02l28.62,38.07c1.47,1.95,1.13,4.72-0.78,6.23 l-26.6,20.94c-1.39,1.1-3.32,1.21-4.83,0.29l-37.5-22.95c-1.12-0.69-1.8-1.9-1.8-3.21v-35.3C46.1,19.2,49.25,16.48,53,16.48 L62.26,16.48L62.26,16.48z M4.77,63.15L32.48,41.9c1.37-1.05,3.26-1.14,4.72-0.22l22.61,14.16c1.1,0.69,1.76,1.89,1.76,3.19 v20.21c0,2.15-1.74,3.89-3.89,3.89H35.31c-1.38,0-2.67-0.72-3.38-1.89l-28.52-47.1C2.3,52.3,2.94,49.82,4.86,48.65 C4.83,48.67,4.8,48.68,4.77,63.15L4.77,63.15z M96.94,83.13v20.21c0,2.15-1.74,3.89-3.89,3.89H71.18c-2.15,0-3.89-1.74-3.89-3.89V83.13 c0-2.15,1.74-3.89,3.89-3.89h21.87C95.2,79.24,96.94,80.98,96.94,83.13L96.94,83.13z"/></svg>
+                    </div>
+                    <h2 class="u-title">Linkvertise</h2>
+                    <p class="u-desc">Standard gateway with quick verification tasks. Reliable key generation with 12-hour access duration.</p>
+                    
+                    <div class="u-features">
+                        <div class="u-feature-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Fast verification process
+                        </div>
+                        <div class="u-feature-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            12-hour validity period
+                        </div>
+                        <div class="u-feature-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Worldwide availability
+                        </div>
+                    </div>
+                    
+                    <button class="u-btn">
+                        <span style="position: relative; z-index: 1;">Start Verification</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+                
+                <div class="ultra-card rinkupro" onclick="openModal('rinkupro')">
+                    <div class="recommended-badge">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        RECOMMENDED
+                    </div>
+                    <div class="u-header">
+                        <div></div>
+                        <div class="u-duration-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            24H KEY
+                        </div>
+                    </div>
+                    <div class="u-icon-wrapper">
+                        <div class="u-glow"></div>
+                        <div class="u-svg" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 2.8rem; font-weight: 900; color: #4d9fff; filter: drop-shadow(0 8px 25px rgba(77, 159, 255, 0.5)); font-family: 'Outfit';">R</div>
+                    </div>
+                    <h2 class="u-title">Rinku Pro</h2>
+                    <p class="u-desc">Premium gateway with lightning-fast verification and minimal steps. Extended 24-hour key for seamless access.</p>
+                    
+                    <div class="u-features">
+                        <div class="u-feature-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Lightning-fast verification
+                        </div>
+                        <div class="u-feature-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            24-hour validity period
+                        </div>
+                        <div class="u-feature-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Streamlined experience
+                        </div>
+                    </div>
+                    
+                    <button class="u-btn">
+                        <span style="position: relative; z-index: 1;">Start Verification</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="luarmor-footer">
+                <span class="luarmor-credit">Powered by luarmor.net</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="leaveModal">
+        <div class="modal-box">
+            <div class="modal-glow"></div>
+            <div class="modal-icon-wrap">
+                <div class="modal-icon-glow"></div>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            <h3 class="modal-title">Continue Get Key</h3>
+            <p class="modal-desc">You are about to be redirected to a third-party gateway. Please complete the steps to obtain your access key.</p>
+            
+            <div class="modal-actions">
+                <button class="btn-continue" id="confirmRedirect">
+                    Proceed to Gateway
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+                <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+        const html = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            html.setAttribute('data-theme', 'light');
+            moonIcon.classList.add('hidden');
+            sunIcon.classList.remove('hidden');
+        } else {
+            moonIcon.classList.remove('hidden');
+            sunIcon.classList.add('hidden');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            if (newTheme === 'light') {
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+            } else {
+                moonIcon.classList.remove('hidden');
+                sunIcon.classList.add('hidden');
+            }
+        });
+
+        const navTrigger = document.getElementById('navTrigger');
+        const sidebar = document.getElementById('sidebar');
+        const pageElements = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        navTrigger.addEventListener('click', (e) => { e.stopPropagation(); sidebar.classList.toggle('active'); navTrigger.classList.toggle('active'); });
+        document.addEventListener('click', (e) => { if (!sidebar.contains(e.target) && !navTrigger.contains(e.target)) { sidebar.classList.remove('active'); navTrigger.classList.remove('active'); } });
+
+        const pageRoutes = {
+            'home': '/',
+            'games': '/SupportedGames',
+            'status': '/Status',
+            'getkey': '/GetKeyAccess'
+        };
+
+        function showPage(pageId, updateHistory = true) {
+            pageElements.forEach(p => p.classList.remove('active'));
+            navLinks.forEach(l => l.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            const activeLink = Array.from(navLinks).find(l => l.getAttribute('onclick') && l.getAttribute('onclick').includes(pageId));
+            if(activeLink) activeLink.classList.add('active');
+            sidebar.classList.remove('active'); navTrigger.classList.remove('active');
+
+            if (updateHistory && pageRoutes[pageId]) {
+                const newUrl = window.location.origin + pageRoutes[pageId];
+                history.pushState({ page: pageId }, '', newUrl);
+            }
+
+            document.title = pageId === 'home' ? 'Imp Hub | X Version' : 
+                           pageId === 'games' ? 'Supported Games | Imp Hub' :
+                           pageId === 'status' ? 'Status | Imp Hub' :
+                           pageId === 'getkey' ? 'Get Access Key | Imp Hub' : 'Imp Hub | X Version';
+        }
+
+        function getPageFromPath(path) {
+            for (const [pageId, route] of Object.entries(pageRoutes)) {
+                if (route === path) return pageId;
+            }
+            return 'home';
+        }
+
+        window.addEventListener('popstate', (event) => {
+            if (event.state && event.state.page) {
+                showPage(event.state.page, false);
+            } else {
+                const pageId = getPageFromPath(window.location.pathname);
+                showPage(pageId, false);
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const currentPath = window.location.pathname;
+            const pageId = getPageFromPath(currentPath);
+            if (pageId !== 'home') {
+                showPage(pageId, false);
+            } else {
+                history.replaceState({ page: 'home' }, '', window.location.origin + '/');
+            }
+        });
+
+        function copyScript(e) {
+            if(e) e.stopPropagation();
+            const script = 'script_key = "";\nloadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba5e5e39c7c2d6d7fdfe.lua"))()';
+            navigator.clipboard.writeText(script);
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const wasActive = faqItem.classList.contains('active');
+            
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            if (!wasActive) {
+                faqItem.classList.add('active');
+            }
+        }
+
+        let activeFilters = { status: [], tags: [] };
+        let isAlphabeticalSort = false;
+        const searchInput = document.getElementById('gameSearch');
+        const autocompleteList = document.getElementById('autocomplete-list');
+        const filterDropdownBtn = document.getElementById('filterDropdownBtn');
+        const filterDropdownMenu = document.getElementById('filterDropdownMenu');
+        const filterBadge = document.getElementById('filterBadge');
+        const filterOptions = document.querySelectorAll('.filter-option');
+        const filterClearBtn = document.getElementById('filterClearBtn');
+        const filterApplyBtn = document.getElementById('filterApplyBtn');
+        const sortToggleBtn = document.getElementById('sortToggleBtn');
+        
+        sortToggleBtn.addEventListener('click', () => {
+            isAlphabeticalSort = !isAlphabeticalSort;
+            sortToggleBtn.classList.toggle('active');
+            applyFilters();
+        });
+
+        filterDropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            filterDropdownBtn.classList.toggle('active');
+            filterDropdownMenu.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!filterDropdownMenu.contains(e.target) && !filterDropdownBtn.contains(e.target)) {
+                filterDropdownBtn.classList.remove('active');
+                filterDropdownMenu.classList.remove('active');
+            }
+        });
+
+        filterOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                option.classList.toggle('active');
+                updateFilterBadge();
+            });
+        });
+
+        filterClearBtn.addEventListener('click', () => {
+            filterOptions.forEach(opt => opt.classList.remove('active'));
+            activeFilters = { status: [], tags: [] };
+            updateFilterBadge();
+            applyFilters();
+        });
+
+        filterApplyBtn.addEventListener('click', () => {
+            activeFilters = { status: [], tags: [] };
+            filterOptions.forEach(opt => {
+                if (opt.classList.contains('active')) {
+                    const category = opt.dataset.category;
+                    const value = opt.dataset.value;
+                    activeFilters[category].push(value);
+                }
+            });
+            applyFilters();
+            filterDropdownBtn.classList.remove('active');
+            filterDropdownMenu.classList.remove('active');
+        });
+
+        function updateFilterBadge() {
+            const count = document.querySelectorAll('.filter-option.active').length;
+            if (count > 0) {
+                filterBadge.textContent = count;
+                filterBadge.style.display = 'block';
+            } else {
+                filterBadge.style.display = 'none';
+            }
+        }
+        
+        function getAvailableGamesData() { 
+            return Array.from(document.querySelectorAll('.game-card')).map(card => ({
+                name: card.dataset.name,
+                element: card
+            })); 
+        }
+        
+        searchInput.addEventListener('input', function() {
+            const val = this.value;
+            const gamesData = getAvailableGamesData();
+            applyFilters(); 
+            if (!val) { autocompleteList.classList.remove('active'); return; }
+
+            const matches = gamesData.filter(g => g.name.toLowerCase().includes(val.toLowerCase()));
+            autocompleteList.innerHTML = '';
+            if (matches.length > 0) {
+                autocompleteList.classList.add('active');
+                matches.forEach(match => {
+                    const item = document.createElement('div'); item.className = 'ac-item';
+                    const regex = new RegExp(`(${val})`, 'gi');
+                    const highlighted = match.name.replace(regex, '<span class="match-highlight">$1</span>');
+                    item.innerHTML = `
+                        <div class="ac-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                                <path d="M6 12h4"></path>
+                                <path d="M14 12h4"></path>
+                            </svg>
+                        </div>
+                        <div class="ac-text">${highlighted}</div>
+                    `;
+                    item.addEventListener('click', (e) => {
+                        e.stopPropagation(); searchInput.value = match.name;
+                        autocompleteList.classList.remove('active'); applyFilters();
+                    });
+                    autocompleteList.appendChild(item);
+                });
+            } else { autocompleteList.classList.remove('active'); }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (e.target !== searchInput && !autocompleteList.contains(e.target)) {
+                autocompleteList.classList.remove('active');
+            }
+        });
+
+        function applyFilters() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const gamesGrid = document.getElementById('gamesGrid');
+            const cards = Array.from(document.querySelectorAll('.game-card'));
+            
+            const filteredCards = cards.filter(card => {
+                const name = card.dataset.name.toLowerCase();
+                const status = card.dataset.status;
+                const tags = card.dataset.tags.toLowerCase().split(' ');
+                const matchesSearch = name.includes(searchTerm);
+                const matchesStatus = activeFilters.status.length === 0 || activeFilters.status.includes(status);
+                const matchesTags = activeFilters.tags.length === 0 || activeFilters.tags.some(filterTag => {
+                    return tags.some(cardTag => cardTag.includes(filterTag.toLowerCase()) || filterTag.toLowerCase().includes(cardTag));
+                });
+                
+                return matchesSearch && matchesStatus && matchesTags;
+            });
+
+            if (isAlphabeticalSort) {
+                filteredCards.sort((a, b) => {
+                    const nameA = a.dataset.name.toLowerCase();
+                    const nameB = b.dataset.name.toLowerCase();
+                    return nameA.localeCompare(nameB);
+                });
+            }
+
+            cards.forEach(card => card.style.display = 'none');
+            
+            gamesGrid.innerHTML = '';
+            filteredCards.forEach(card => {
+                card.style.display = 'block';
+                gamesGrid.appendChild(card);
+            });
+
+            setTimeout(() => initThumbnailLoading(), 100);
+        }
+
+        const leaveModal = document.getElementById('leaveModal');
+        const confirmBtn = document.getElementById('confirmRedirect');
+        let targetUrl = '';
+        function openModal(type) {
+            leaveModal.classList.add('active');
+            if(type === 'linkvertise') targetUrl = 'https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU'; 
+            else if (type === 'rinkupro') targetUrl = 'https://ads.luarmor.net/get_key?for=Rinku_Pro-usjtvfvsONpS';
+        }
+        function closeModal() { leaveModal.classList.remove('active'); targetUrl = ''; }
+        confirmBtn.addEventListener('click', () => { if(targetUrl) window.open(targetUrl, '_blank'); closeModal(); });
+        leaveModal.addEventListener('click', (e) => { if(e.target === leaveModal) closeModal(); });
+
+    const PROXY_URL = url => `https://corsproxy.io/?${encodeURIComponent(url)}`;
+    const thumbnailCache = new Map();
+    
+    // 1. Función para buscar la imagen
+    async function fetchThumbnail(universeId) {
+        if (thumbnailCache.has(universeId)) return thumbnailCache.get(universeId);
+        
+        // Usamos el proxy para evitar bloqueos de CORS
+        const url = PROXY_URL(`https://thumbnails.roblox.com/v1/games/icons?universeIds=${universeId}&size=512x512&format=Png&isCircular=false`);
+        
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Err');
+            const data = await response.json();
+            if (data?.data?.[0]?.imageUrl) {
+                const img = data.data[0].imageUrl;
+                thumbnailCache.set(universeId, img);
+                return img;
+            }
+        } catch (e) { return null; }
+    }
+
+    // 2. El Observador (detecta cuando la tarjeta es visible)
+    const thumbnailObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const card = entry.target;
+                const uid = card.dataset.universeId;
+                const bg = card.querySelector('.game-bg, .upcoming-bg'); // Busca en ambos tipos de tarjeta
+
+                if (uid && bg && !bg.dataset.loaded) {
+                    bg.dataset.loaded = 'true'; // Marcar como procesado
+                    fetchThumbnail(uid).then(imgUrl => {
+                        if (imgUrl) {
+                            const i = new Image();
+                            i.onload = () => {
+                                bg.style.backgroundImage = `url(${imgUrl})`;
+                                bg.classList.remove('loading');
+                                bg.style.opacity = '0';
+                                setTimeout(() => {
+                                    bg.style.transition = 'opacity 0.6s ease';
+                                    bg.style.opacity = '1';
+                                }, 50);
+                            };
+                            i.src = imgUrl;
+                        }
+                    });
+                }
+                thumbnailObserver.unobserve(card);
+            }
+        });
+    }, { rootMargin: '200px', threshold: 0.01 });
+
+    // 3. Función Iniciadora
+    function initThumbnailLoading() {
+        // IMPORTANTE: Selecciona tarjetas normales Y tarjetas "upcoming"
+        const targets = document.querySelectorAll('.game-card[data-universe-id], .upcoming-card[data-universe-id]');
+        targets.forEach(t => {
+            const bg = t.querySelector('.game-bg, .upcoming-bg');
+            if (bg && !bg.dataset.loaded) thumbnailObserver.observe(t);
+        });
+    }
+
+    // 4. Ejecutar al inicio (Para que Home/Upcoming cargue sin clicks)
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(initThumbnailLoading, 100);
+        
+        // Mantener tu lógica de historial
+        const currentPath = window.location.pathname;
+        const pageId = getPageFromPath(currentPath);
+        if (pageId !== 'home') showPage(pageId, false);
+        else history.replaceState({ page: 'home' }, '', window.location.origin + '/');
+    });
+
+    // 5. Sobrescribir showPage para recargar imágenes al cambiar de pestaña
+    const _originalShowPage = showPage; // Guardar referencia por seguridad
+    showPage = function(pageId, updateHistory = true) {
+        // Lógica original de cambio de clase
+        pageElements.forEach(p => p.classList.remove('active'));
+        navLinks.forEach(l => l.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        
+        const activeLink = Array.from(navLinks).find(l => l.getAttribute('onclick')?.includes(pageId));
+        if(activeLink) activeLink.classList.add('active');
+        
+        sidebar.classList.remove('active'); 
+        navTrigger.classList.remove('active');
+
+        if (updateHistory && pageRoutes[pageId]) {
+            history.pushState({ page: pageId }, '', window.location.origin + pageRoutes[pageId]);
+        }
+        
+        // Títulos
+        const titles = {
+            'home': 'Imp Hub | X Version',
+            'games': 'Supported Games | Imp Hub',
+            'status': 'Status | Imp Hub',
+            'getkey': 'Get Access Key | Imp Hub'
+        };
+        document.title = titles[pageId] || 'Imp Hub';
+
+        // LO IMPORTANTE: Volver a buscar imágenes nuevas
+        setTimeout(initThumbnailLoading, 100);
+    };
+
+        const sliderNext = document.getElementById('sliderNext');
+        const upcomingSlider = document.getElementById('upcomingSlider');
+
+        function updateSlider() {
+            const cards = upcomingSlider.querySelectorAll('.upcoming-card');
+            const isMobile = window.innerWidth <= 768;
+            const isTablet = window.innerWidth <= 1024 && window.innerWidth > 768;
+            
+            let cardsPerView = 3;
+            if (isMobile) cardsPerView = 1;
+            else if (isTablet) cardsPerView = 2;
+
+            const maxSlide = Math.max(0, cards.length - cardsPerView);
+            currentSlide = Math.min(currentSlide, maxSlide);
+
+            const cardWidth = cards[0] ? cards[0].offsetWidth : 0;
+            const gap = 32;
+            const offset = currentSlide * (cardWidth + gap);
+
+            cards.forEach((card, index) => {
+                card.style.transition = 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+                card.style.transform = `translateX(-${offset}px)`;
+            });
+
+            sliderPrev.style.opacity = currentSlide === 0 ? '0.3' : '1';
+            sliderPrev.style.pointerEvents = currentSlide === 0 ? 'none' : 'all';
+            sliderNext.style.opacity = currentSlide >= maxSlide ? '0.3' : '1';
+            sliderNext.style.pointerEvents = currentSlide >= maxSlide ? 'none' : 'all';
+        }
+
+        sliderPrev.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlider();
+            }
+        });
+
+        sliderNext.addEventListener('click', () => {
+            const cards = upcomingSlider.querySelectorAll('.upcoming-card');
+            const isMobile = window.innerWidth <= 768;
+            const isTablet = window.innerWidth <= 1024 && window.innerWidth > 768;
+            
+            let cardsPerView = 3;
+            if (isMobile) cardsPerView = 1;
+            else if (isTablet) cardsPerView = 2;
+
+            const maxSlide = Math.max(0, cards.length - cardsPerView);
+            
+            if (currentSlide < maxSlide) {
+                currentSlide++;
+                updateSlider();
+            }
+        });
+
+        window.addEventListener('resize', updateSlider);
+        updateSlider();
+
+    </script>
+</body>
+</html>
