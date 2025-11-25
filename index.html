@@ -1911,54 +1911,111 @@
             font-size: 0.95rem;
             text-align: center;
             line-height: 1.6;
-            margin-bottom: 2rem;
             position: relative;
             z-index: 1;
         }
-        .executor-download-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, var(--primary), #a78bfa);
-            color: #fff;
-            border: none;
-            border-radius: 16px;
+
+        /* Recommended Badge for Delta */
+        .executor-recommended-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 193, 7, 0.15));
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            color: #ffd700;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.65rem;
             font-weight: 800;
-            font-size: 1rem;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            box-shadow: 0 10px 30px -5px rgba(139, 92, 246, 0.4);
+            gap: 6px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            z-index: 10;
+            animation: badgePulse 3s ease-in-out infinite;
         }
-        .executor-download-btn::before {
+        .executor-recommended-badge svg {
+            fill: #ffd700;
+            stroke: none;
+            animation: starRotate 4s linear infinite;
+        }
+        @keyframes badgePulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+                transform: scale(1.05);
+            }
+        }
+        @keyframes starRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Ultra Design for Delta */
+        .executor-ultra {
+            background: linear-gradient(135deg, rgba(25, 20, 35, 0.98), rgba(20, 15, 30, 1));
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow:
+                0 20px 60px -20px rgba(0,0,0,0.95),
+                0 0 40px rgba(255, 215, 0, 0.15),
+                inset 0 1px 0 0 rgba(255, 215, 0, 0.15);
+        }
+        [data-theme="light"] .executor-ultra {
+            background: linear-gradient(135deg, rgba(255, 250, 240, 1), rgba(255, 248, 230, 1));
+            border-color: rgba(255, 215, 0, 0.4);
+        }
+        .executor-ultra::before {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), transparent 50%);
+        }
+        .executor-ultra::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+            border-radius: 28px;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 215, 0, 0.12) 0%, transparent 60%);
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.4s;
+            pointer-events: none;
         }
-        .executor-download-btn:hover::before {
+        .executor-ultra:hover::after {
             opacity: 1;
         }
-        .executor-download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px -5px rgba(139, 92, 246, 0.6);
+        .executor-ultra:hover {
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow:
+                0 30px 80px -20px rgba(0,0,0,1),
+                0 0 60px rgba(255, 215, 0, 0.3),
+                inset 0 1px 0 0 rgba(255, 215, 0, 0.3);
+            transform: translateY(-14px) scale(1.03);
         }
-        .executor-download-btn svg {
-            width: 18px;
-            height: 18px;
-            transition: transform 0.3s;
+        .executor-ultra .executor-icon {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 193, 7, 0.15));
+            color: #ffd700;
+            box-shadow: 0 10px 35px rgba(255, 215, 0, 0.4);
+            border: 2px solid rgba(255, 215, 0, 0.3);
         }
-        .executor-download-btn:hover svg {
-            transform: translateX(3px);
+        .executor-ultra:hover .executor-icon {
+            box-shadow: 0 15px 45px rgba(255, 215, 0, 0.6);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+        .executor-ultra .executor-name {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.4));
+        }
+        .executor-ultra .executor-desc {
+            color: rgba(255, 215, 0, 0.8);
+        }
+        [data-theme="light"] .executor-ultra .executor-desc {
+            color: rgba(180, 140, 0, 0.9);
         }
 
         /* Skeleton Loading */
@@ -3374,6 +3431,13 @@
 
     const executorsData = [
         {
+            name: "Delta",
+            status: "updated",
+            description: "The ultimate premium executor with lightning-fast performance, advanced features, and unmatched stability. Industry-leading script execution.",
+            url: "https://wearedevs.net/d/Delta",
+            special: "ultra"
+        },
+        {
             name: "Solara",
             status: "updated",
             description: "A powerful and modern Roblox executor with premium features and regular updates.",
@@ -3398,12 +3462,6 @@
             url: "https://wearedevs.net/d/Arceus%20X%20Neo"
         },
         {
-            name: "Delta",
-            status: "updated",
-            description: "Lightweight executor optimized for speed and stability with minimal resource usage.",
-            url: "https://wearedevs.net/d/Delta"
-        },
-        {
             name: "Codex",
             status: "updated",
             description: "Advanced executor with powerful debugging tools and script optimization.",
@@ -3426,6 +3484,24 @@
             status: "updated",
             description: "Premium executor with cutting-edge features and professional support.",
             url: "https://wearedevs.net/d/Synapse%20Z"
+        },
+        {
+            name: "Hydrogen",
+            status: "outdated",
+            description: "Classic executor that needs updates. May have compatibility issues with recent Roblox updates.",
+            url: "https://wearedevs.net/d/Hydrogen"
+        },
+        {
+            name: "KRNL",
+            status: "discontinued",
+            description: "Legacy executor that is no longer maintained. Not recommended for current use.",
+            url: "https://wearedevs.net/d/KRNL"
+        },
+        {
+            name: "Oxygen U",
+            status: "outdated",
+            description: "Previously popular executor that hasn't received recent updates. Limited functionality.",
+            url: "https://wearedevs.net/d/Oxygen%20U"
         }
     ];
 
@@ -3445,8 +3521,18 @@
             setTimeout(() => {
                 const card = document.createElement('div');
                 card.className = 'executor-card';
+
+                // Add special class for Delta
+                if (executor.special === 'ultra') {
+                    card.classList.add('executor-ultra');
+                }
+
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
+                card.style.cursor = 'pointer';
+
+                // Make entire card clickable
+                card.onclick = () => window.open(executor.url, '_blank');
 
                 const statusClass = executor.status;
                 const statusText = executor.status === 'updated' ? 'Updated' :
@@ -3454,7 +3540,18 @@
 
                 const firstLetter = executor.name.charAt(0).toUpperCase();
 
+                // Add recommended badge for Delta
+                const recommendedBadge = executor.special === 'ultra' ? `
+                    <div class="executor-recommended-badge">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        RECOMMENDED
+                    </div>
+                ` : '';
+
                 card.innerHTML = `
+                    ${recommendedBadge}
                     <div class="executor-header">
                         <div></div>
                         <div class="executor-status ${statusClass}">
@@ -3467,14 +3564,6 @@
                     </div>
                     <h3 class="executor-name">${executor.name}</h3>
                     <p class="executor-desc">${executor.description}</p>
-                    <button class="executor-download-btn" onclick="window.open('${executor.url}', '_blank')">
-                        Visit Page
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                            <polyline points="15 3 21 3 21 9"></polyline>
-                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                        </svg>
-                    </button>
                 `;
 
                 grid.appendChild(card);
