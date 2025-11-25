@@ -3370,6 +3370,8 @@
         leaveModal.addEventListener('click', (e) => { if(e.target === leaveModal) closeModal(); });
 
     // === EXECUTORS FUNCTIONALITY ===
+    let executorsLoaded = false; // Flag to prevent duplicate loading
+
     const executorsData = [
         {
             name: "Solara",
@@ -3428,6 +3430,10 @@
     ];
 
     function loadExecutors() {
+        // Prevent duplicate loading
+        if (executorsLoaded) return;
+        executorsLoaded = true;
+
         const grid = document.getElementById('executorsGrid');
         if (!grid) return;
 
