@@ -895,6 +895,16 @@
                 0 0 40px rgba(0, 255, 157, 0.2),
                 0 0 0 1px rgba(0, 255, 157, 0.2) inset;
         }
+        .upcoming-card.added {
+            border-color: rgba(124, 58, 237, 0.4);
+        }
+        .upcoming-card.added:hover {
+            border-color: rgba(124, 58, 237, 0.6);
+            box-shadow:
+                0 25px 60px rgba(0,0,0,0.8),
+                0 0 40px rgba(124, 58, 237, 0.3),
+                0 0 0 1px rgba(124, 58, 237, 0.3) inset;
+        }
         .upcoming-bg {
             position: absolute;
             inset: 0;
@@ -984,6 +994,20 @@
             box-shadow:
                 0 0 30px rgba(0, 255, 157, 0.3),
                 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+        .upcoming-status.added {
+            background: rgba(124, 58, 237, 0.25);
+            color: #a78bfa;
+            border: 1px solid rgba(124, 58, 237, 0.5);
+            box-shadow:
+                0 0 25px rgba(124, 58, 237, 0.3),
+                0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        .upcoming-status.added:hover {
+            background: rgba(124, 58, 237, 0.35);
+            box-shadow:
+                0 0 35px rgba(124, 58, 237, 0.4),
+                0 4px 18px rgba(0, 0, 0, 0.4);
         }
         .upcoming-date {
             padding: 8px 14px;
@@ -2540,7 +2564,25 @@
                 </button>
 
                 <div class="upcoming-slider" id="upcomingSlider">
-                    <div class="upcoming-card confirmed" data-universe-id="4568630521">
+                    <div class="upcoming-card added" data-universe-id="4568630521">
+                        <div class="upcoming-bg loading"></div>
+                        <div class="upcoming-overlay"></div>
+                        <div class="upcoming-content">
+                            <div class="upcoming-badges">
+                                <span class="upcoming-status added">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    ADDED
+                                </span>
+                                <span class="upcoming-date">Now Live</span>
+                            </div>
+                            <h3 class="upcoming-game-title">Heroes Battlegrounds</h3>
+                            <p class="upcoming-game-desc">Full script support now available</p>
+                        </div>
+                    </div>
+
+                    <div class="upcoming-card confirmed" data-universe-id="6161049307">
                         <div class="upcoming-bg loading"></div>
                         <div class="upcoming-overlay"></div>
                         <div class="upcoming-content">
@@ -2553,17 +2595,8 @@
                                 </span>
                                 <span class="upcoming-date">Date Unknown</span>
                             </div>
-                            <h3 class="upcoming-game-title">Heroes Battlegrounds</h3>
+                            <h3 class="upcoming-game-title">Pixel Blade</h3>
                             <p class="upcoming-game-desc">Full script support coming soon</p>
-                        </div>
-                    </div>
-
-                    <div class="upcoming-card mystery">
-                        <div class="upcoming-bg mystery-bg"></div>
-                        <div class="mystery-icon">?</div>
-                        <div class="upcoming-content">
-                            <h3 class="upcoming-game-title">Unknown</h3>
-                            <p class="upcoming-game-desc">Coming Soon</p>
                         </div>
                     </div>
 
@@ -3003,6 +3036,30 @@
                     </div>
                 </div>
             </div>
+
+            <div class="game-card" data-status="working" data-name="Heroes Battlegrounds" data-tags="pvp fighting anime" data-universe-id="4568630521">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Heroes Battlegrounds</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Farm</span>
+                            <span class="g-tag">Combat</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/17351132640/Heroes-Battlegrounds" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -3061,7 +3118,7 @@
                         <div class="cl-ver">v1.0.0 Official Launch</div>
                         <ul class="cl-list">
                             <li>Official website launch with modern UI design</li>
-                            <li>12 supported games with active script maintenance</li>
+                            <li>13 supported games with active script maintenance</li>
                             <li>Advanced filtering and search functionality</li>
                             <li>Real-time status monitoring system</li>
                             <li>Responsive dark/light theme implementation</li>
