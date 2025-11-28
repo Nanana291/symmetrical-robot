@@ -3028,241 +3028,187 @@
         /* Recommended Label for Delta - Modern Design */
         .executor-recommended-label {
             position: absolute;
-            top: -8px;
+            top: -10px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg,
-                rgba(255, 215, 0, 0.95),
-                rgba(255, 193, 7, 0.95),
-                rgba(255, 215, 0, 0.95));
-            background-size: 200% 200%;
-            color: #1a1520;
-            padding: 12px 40px;
-            font-size: 0.7rem;
-            font-weight: 900;
-            letter-spacing: 2.5px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            padding: 8px 24px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 2px;
             text-transform: uppercase;
             z-index: 10;
-            clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+            border-radius: 20px;
             box-shadow:
-                0 8px 32px rgba(255, 215, 0, 0.6),
-                0 0 60px rgba(255, 215, 0, 0.4),
-                inset 0 2px 0 rgba(255, 255, 255, 0.5),
-                inset 0 -2px 0 rgba(0, 0, 0, 0.2);
-            animation: recommendedShine 3s ease-in-out infinite, recommendedFloat 4s ease-in-out infinite;
-            position: relative;
-            overflow: hidden;
+                0 4px 16px rgba(255, 215, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            animation: recommendedFloat 3s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         .executor-recommended-label::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg,
-                transparent,
-                rgba(255, 255, 255, 0.6) 50%,
-                transparent);
-            animation: labelShimmer 2.5s ease-in-out infinite;
-        }
-        .executor-recommended-label::after {
             content: '★';
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.1rem;
-            animation: starPulse 2s ease-in-out infinite;
-        }
-        @keyframes recommendedShine {
-            0%, 100% {
-                background-position: 0% 50%;
-                filter: brightness(1);
-            }
-            50% {
-                background-position: 100% 50%;
-                filter: brightness(1.2);
-            }
+            font-size: 0.85rem;
+            animation: starSpin 4s linear infinite;
+            display: inline-block;
         }
         @keyframes recommendedFloat {
             0%, 100% {
-                transform: translateX(-50%) translateY(0px);
+                transform: translateX(-50%) translateY(0);
             }
             50% {
-                transform: translateX(-50%) translateY(-4px);
+                transform: translateX(-50%) translateY(-3px);
             }
         }
-        @keyframes labelShimmer {
-            0% {
-                left: -150%;
-            }
-            50%, 100% {
-                left: 150%;
-            }
-        }
-        @keyframes starPulse {
-            0%, 100% {
-                transform: translateY(-50%) scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: translateY(-50%) scale(1.3);
-                opacity: 0.7;
-            }
+        @keyframes starSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        /* Ultra Design for Delta */
+        /* Ultra Clean Design for Delta - Complete Redesign */
         .executor-ultra {
             background:
-                linear-gradient(135deg,
-                    rgba(28, 22, 38, 0.98) 0%,
-                    rgba(32, 24, 42, 1) 50%,
-                    rgba(24, 18, 34, 1) 100%),
-                url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="goldgrid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,215,0,0.08)" stroke-width="0.7"/></pattern></defs><rect width="100" height="100" fill="url(%23goldgrid)"/></svg>');
-            border: 3px solid rgba(255, 215, 0, 0.5);
+                linear-gradient(145deg,
+                    rgba(20, 15, 25, 0.98) 0%,
+                    rgba(15, 12, 20, 1) 100%);
+            border: 2px solid transparent;
+            background-clip: padding-box;
             box-shadow:
-                0 30px 90px -20px rgba(0,0,0,1),
-                0 0 100px rgba(255, 215, 0, 0.35),
-                0 0 0 1px rgba(255, 215, 0, 0.3) inset,
-                inset 0 2px 0 0 rgba(255, 215, 0, 0.25),
-                inset 0 -2px 0 0 rgba(255, 215, 0, 0.15);
+                0 8px 32px rgba(0,0,0,0.6),
+                inset 0 0 0 2px rgba(255, 215, 0, 0.15);
             position: relative;
             overflow: visible;
         }
         [data-theme="light"] .executor-ultra {
-            background:
-                linear-gradient(135deg,
-                    rgba(255, 250, 240, 1) 0%,
-                    rgba(255, 248, 230, 1) 100%),
-                url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="goldgrid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,215,0,0.12)" stroke-width="0.7"/></pattern></defs><rect width="100" height="100" fill="url(%23goldgrid)"/></svg>');
-            border-color: rgba(255, 215, 0, 0.6);
+            background: linear-gradient(145deg, rgba(255, 252, 245, 1), rgba(255, 250, 240, 1));
         }
         .executor-ultra::before {
             content: '';
             position: absolute;
-            inset: -4px;
+            inset: -2px;
             border-radius: 32px;
-            background: conic-gradient(
-                from 0deg at 50% 50%,
-                rgba(255, 215, 0, 0.8) 0deg,
-                rgba(255, 193, 7, 0.5) 90deg,
-                rgba(255, 235, 59, 0.3) 180deg,
-                rgba(255, 193, 7, 0.5) 270deg,
-                rgba(255, 215, 0, 0.8) 360deg);
+            padding: 2px;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 215, 0, 0.6),
+                rgba(255, 193, 7, 0.4),
+                rgba(255, 235, 59, 0.6),
+                rgba(255, 215, 0, 0.6));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
             opacity: 0;
-            animation: ultraBorderRotate 8s linear infinite;
+            transition: opacity 0.5s ease;
             z-index: -1;
-            filter: blur(20px);
-        }
-        @keyframes ultraBorderRotate {
-            0% { transform: rotate(0deg); opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { transform: rotate(360deg); opacity: 0.6; }
         }
         .executor-ultra:hover::before {
             opacity: 1;
-            filter: blur(25px);
         }
         .executor-ultra::after {
             content: '';
             position: absolute;
-            inset: 0;
-            border-radius: 32px;
-            background: radial-gradient(
-                circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                rgba(255, 215, 0, 0.25) 0%,
-                rgba(255, 193, 7, 0.15) 30%,
-                rgba(255, 235, 59, 0.05) 50%,
-                transparent 70%);
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg 340deg,
+                rgba(255, 215, 0, 0.4) 340deg 360deg);
+            animation: deltaRotate 4s linear infinite;
             opacity: 0;
-            transition: opacity 0.6s;
-            pointer-events: none;
-            z-index: 0;
-            mix-blend-mode: screen;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+        @keyframes deltaRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         .executor-ultra:hover::after {
             opacity: 1;
         }
         .executor-ultra:hover {
-            border-color: rgba(255, 215, 0, 0.8);
             box-shadow:
-                0 50px 120px -20px rgba(0,0,0,1),
-                0 0 130px rgba(255, 215, 0, 0.6),
-                0 0 0 1px rgba(255, 215, 0, 0.6) inset,
-                inset 0 3px 0 0 rgba(255, 215, 0, 0.4),
-                inset 0 -3px 0 0 rgba(255, 215, 0, 0.25);
-            transform: translateY(-20px) scale(1.05) rotateX(3deg);
+                0 16px 48px rgba(0,0,0,0.8),
+                0 0 60px rgba(255, 215, 0, 0.3),
+                inset 0 0 0 2px rgba(255, 215, 0, 0.3);
+            transform: translateY(-16px) scale(1.03);
         }
         .executor-ultra .executor-icon-glow {
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, transparent 70%) !important;
+            background: radial-gradient(
+                circle,
+                rgba(255, 215, 0, 0.4) 0%,
+                rgba(255, 215, 0, 0.2) 50%,
+                transparent 80%) !important;
+            animation: deltaGlowBreath 3s ease-in-out infinite;
+        }
+        @keyframes deltaGlowBreath {
+            0%, 100% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(1.2);
+            }
         }
         .executor-ultra .executor-icon-img,
         .executor-ultra .executor-icon-fallback {
-            background: linear-gradient(135deg,
-                rgba(255, 215, 0, 0.25) 0%,
-                rgba(255, 193, 7, 0.15) 100%);
-            color: #ffd700;
+            background: linear-gradient(145deg,
+                rgba(255, 215, 0, 0.12) 0%,
+                rgba(255, 193, 7, 0.08) 100%);
+            border: 2px solid rgba(255, 215, 0, 0.3);
             box-shadow:
-                0 18px 55px rgba(255, 215, 0, 0.6),
-                0 0 80px rgba(255, 215, 0, 0.4),
-                inset 0 2px 0 rgba(255, 255, 255, 0.35);
-            border: 2.5px solid rgba(255, 215, 0, 0.5);
-            animation: ultraIconPulse 4s ease-in-out infinite;
-        }
-        @keyframes ultraIconPulse {
-            0%, 100% {
-                filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.5));
-            }
-            50% {
-                filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8));
-            }
+                0 8px 24px rgba(255, 215, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            animation: none;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .executor-ultra:hover .executor-icon-img,
         .executor-ultra:hover .executor-icon-fallback {
+            border-color: rgba(255, 215, 0, 0.6);
             box-shadow:
-                0 25px 70px rgba(255, 215, 0, 0.8),
-                0 0 110px rgba(255, 215, 0, 0.6),
-                inset 0 2px 0 rgba(255, 255, 255, 0.45);
-            border-color: rgba(255, 215, 0, 0.8);
-            transform: scale(1.2) rotate(10deg) translateY(-8px);
+                0 12px 36px rgba(255, 215, 0, 0.4),
+                0 0 48px rgba(255, 215, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transform: scale(1.1) translateY(-4px);
         }
         .executor-ultra .executor-name {
-            background: linear-gradient(135deg,
-                #ffd700 0%,
-                #ffed4e 25%,
-                #fff9c4 50%,
-                #ffed4e 75%,
-                #ffd700 100%);
-            background-size: 300% 300%;
+            background: linear-gradient(
+                90deg,
+                #FFD700 0%,
+                #FFED4E 50%,
+                #FFD700 100%);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6));
-            animation: ultraNameShine 5s ease-in-out infinite;
             font-size: 2.1rem;
             font-weight: 900;
             letter-spacing: -0.5px;
+            animation: deltaNameSlide 3s linear infinite;
+            filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.3));
         }
-        @keyframes ultraNameShine {
-            0%, 100% {
-                background-position: 0% 50%;
-                filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6));
-            }
-            50% {
-                background-position: 100% 50%;
-                filter: drop-shadow(0 0 45px rgba(255, 215, 0, 0.9));
-            }
+        @keyframes deltaNameSlide {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
         .executor-ultra .executor-desc {
-            color: rgba(255, 225, 120, 0.95);
-            font-weight: 500;
-            text-shadow:
-                0 0 25px rgba(255, 215, 0, 0.3),
-                0 2px 15px rgba(0,0,0,0.5);
+            color: rgba(255, 235, 150, 0.9);
+            font-weight: 400;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
         [data-theme="light"] .executor-ultra .executor-desc {
-            color: rgba(180, 140, 0, 0.95);
+            color: rgba(180, 140, 0, 0.9);
+        }
+        .executor-ultra .executor-header {
+            animation: deltaHeaderFloat 2.5s ease-in-out infinite;
+        }
+        @keyframes deltaHeaderFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
         }
 
         /* Skeleton Loading */
@@ -4731,7 +4677,8 @@
             description: "The ultimate premium executor with lightning-fast performance, advanced features, and unmatched stability. Industry-leading script execution.",
             url: "https://wearedevs.net/d/Delta",
             special: "ultra",
-            icon: "https://raw.githubusercontent.com/Delta-Executor/deltaexecutor.github.io/main/images/logo.png",
+            icon: "https://i.imgur.com/delta-icon.png",
+            iconFallback: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='deltaGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FFD700'/%3E%3Cstop offset='100%25' style='stop-color:%23FFA500'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon points='50,10 90,85 10,85' fill='url(%23deltaGrad)' stroke='%23FFD700' stroke-width='3'/%3E%3Ctext x='50' y='68' font-family='Arial' font-size='32' font-weight='bold' fill='%23000' text-anchor='middle'%3EΔ%3C/text%3E%3C/svg%3E",
             color: "#FFD700"
         },
         {
@@ -4866,6 +4813,11 @@
                     </div>
                 ` : '';
 
+                const iconSrc = executor.iconFallback || executor.icon;
+                const iconOnError = executor.iconFallback
+                    ? `this.style.display='flex';`
+                    : `this.style.display='none'; this.nextElementSibling.style.display='flex';`;
+
                 card.innerHTML = `
                     ${recommendedBadge}
                     <div class="executor-header">
@@ -4877,12 +4829,12 @@
                     </div>
                     <div class="executor-icon-wrapper">
                         <div class="executor-icon-glow" style="background: radial-gradient(circle, ${executor.color}40 0%, transparent 70%);"></div>
-                        <img src="${executor.icon}"
+                        <img src="${iconSrc}"
                              alt="${executor.name}"
                              class="executor-icon-img"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                             onerror="${iconOnError}"
                         />
-                        <div class="executor-icon-fallback" style="display: none; color: ${executor.color};">${firstLetter}</div>
+                        ${!executor.iconFallback ? `<div class="executor-icon-fallback" style="display: none; color: ${executor.color};">${firstLetter}</div>` : ''}
                     </div>
                     <h3 class="executor-name">${executor.name}</h3>
                     <p class="executor-desc">${executor.description}</p>
