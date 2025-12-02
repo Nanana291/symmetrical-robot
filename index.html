@@ -147,22 +147,27 @@
         .subtitle { text-align: center; color: var(--text-muted); font-family: 'JetBrains Mono'; letter-spacing: 2px; margin-bottom: 4rem; }
 
         .editor-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto 3rem;
             background:
-                linear-gradient(145deg, rgba(14, 14, 17, 0.95) 0%, rgba(26, 26, 29, 0.98) 100%),
-                url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(139,92,246,0.03)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            border-radius: 24px;
-            border: 1px solid rgba(139, 92, 246, 0.25);
+                linear-gradient(145deg, rgba(8, 8, 12, 0.98) 0%, rgba(18, 18, 24, 1) 50%, rgba(10, 10, 15, 0.98) 100%),
+                url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="codegrid" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M 25 0 L 0 0 0 25" fill="none" stroke="rgba(139,92,246,0.05)" stroke-width="0.8"/><circle cx="0" cy="0" r="1" fill="rgba(139,92,246,0.15)"/></pattern></defs><rect width="100" height="100" fill="url(%23codegrid)"/></svg>');
+            border-radius: 32px;
+            border: 2.5px solid transparent;
+            background-clip: padding-box;
             box-shadow:
-                0 30px 70px -15px rgba(0,0,0,0.9),
-                0 0 0 1px rgba(139, 92, 246, 0.15),
-                0 0 60px rgba(139, 92, 246, 0.08),
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+                0 40px 100px -20px rgba(0,0,0,0.95),
+                0 0 0 1px rgba(139, 92, 246, 0.3) inset,
+                0 0 100px rgba(139, 92, 246, 0.15),
+                0 20px 60px rgba(139, 92, 246, 0.1),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+                inset 0 -1px 40px rgba(139, 92, 246, 0.08);
             overflow: hidden;
             position: relative;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            backdrop-filter: blur(20px);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            backdrop-filter: blur(30px);
+            transform-style: preserve-3d;
+            perspective: 1500px;
         }
         [data-theme="light"] .editor-container {
             background:
@@ -177,86 +182,101 @@
         .editor-container::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg,
-                transparent,
-                rgba(139, 92, 246, 0.6) 20%,
-                rgba(167, 139, 250, 0.8) 50%,
-                rgba(139, 92, 246, 0.6) 80%,
-                transparent);
-            animation: shimmerSweep 3s ease-in-out infinite;
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+            inset: -3px;
+            border-radius: 32px;
+            z-index: -1;
+            background: conic-gradient(
+                from 0deg at 50% 50%,
+                rgba(139, 92, 246, 0.6) 0deg,
+                rgba(167, 139, 250, 0.5) 90deg,
+                rgba(196, 181, 253, 0.4) 180deg,
+                rgba(167, 139, 250, 0.5) 270deg,
+                rgba(139, 92, 246, 0.6) 360deg);
+            animation: editorBorderSpin 8s linear infinite;
+            filter: blur(12px);
+            opacity: 0.8;
         }
-        @keyframes shimmerSweep {
-            0% { left: -100%; }
-            50%, 100% { left: 100%; }
+        @keyframes editorBorderSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         .editor-container::after {
             content: '';
             position: absolute;
-            inset: -2px;
-            border-radius: 24px;
-            padding: 2px;
-            background: linear-gradient(135deg,
-                rgba(139, 92, 246, 0.4) 0%,
-                transparent 30%,
-                transparent 70%,
-                rgba(139, 92, 246, 0.4) 100%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.4s;
-            pointer-events: none;
-            animation: rotateBorder 8s linear infinite;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 4px;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(139, 92, 246, 0.4) 20%,
+                rgba(167, 139, 250, 0.8) 40%,
+                rgba(196, 181, 253, 1) 50%,
+                rgba(167, 139, 250, 0.8) 60%,
+                rgba(139, 92, 246, 0.4) 80%,
+                transparent);
+            animation: editorScanline 4s ease-in-out infinite;
+            box-shadow:
+                0 0 30px rgba(139, 92, 246, 0.8),
+                0 0 60px rgba(167, 139, 250, 0.4);
+            z-index: 10;
         }
-        @keyframes rotateBorder {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .editor-container:hover::after {
-            opacity: 1;
+        @keyframes editorScanline {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
         .editor-container:hover {
-            transform: translateY(-6px) scale(1.01);
-            border-color: rgba(139, 92, 246, 0.5);
+            transform: translateY(-10px) scale(1.02) rotateX(1deg);
             box-shadow:
-                0 40px 90px -15px rgba(0,0,0,0.95),
-                0 0 0 1px rgba(139, 92, 246, 0.4),
-                0 0 80px rgba(139, 92, 246, 0.25),
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+                0 50px 120px -20px rgba(0,0,0,1),
+                0 0 0 1px rgba(139, 92, 246, 0.5) inset,
+                0 0 120px rgba(139, 92, 246, 0.3),
+                0 30px 80px rgba(139, 92, 246, 0.2),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
+                inset 0 -1px 60px rgba(139, 92, 246, 0.15);
+        }
+        .editor-container:hover::before {
+            opacity: 1;
+            filter: blur(15px);
         }
         .editor-header {
             background: linear-gradient(180deg,
-                rgba(26, 26, 29, 0.98) 0%,
-                rgba(22, 22, 26, 0.95) 100%);
-            padding: 16px 22px;
+                rgba(18, 18, 24, 0.98) 0%,
+                rgba(14, 14, 20, 0.95) 100%);
+            padding: 20px 28px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
-            backdrop-filter: blur(15px);
+            border-bottom: 2px solid rgba(139, 92, 246, 0.25);
+            backdrop-filter: blur(20px);
             position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .editor-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.08), transparent 60%);
+            pointer-events: none;
         }
         .editor-header::after {
             content: '';
             position: absolute;
-            bottom: -1px;
+            bottom: -2px;
             left: 0;
-            right: 0;
-            height: 1px;
+            width: 0;
+            height: 2px;
             background: linear-gradient(90deg,
-                transparent,
-                rgba(139, 92, 246, 0.4) 50%,
-                transparent);
-            opacity: 0;
-            transition: opacity 0.3s;
+                rgba(139, 92, 246, 0.8),
+                rgba(167, 139, 250, 0.9),
+                rgba(196, 181, 253, 1),
+                rgba(167, 139, 250, 0.9),
+                rgba(139, 92, 246, 0.8));
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+            transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
         .editor-container:hover .editor-header::after {
-            opacity: 1;
+            width: 100%;
         }
         [data-theme="light"] .editor-header {
             background: linear-gradient(180deg,
@@ -265,215 +285,382 @@
         }
         .window-controls {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            z-index: 1;
         }
         .win-btn {
-            width: 13px;
-            height: 13px;
+            width: 15px;
+            height: 15px;
             border-radius: 50%;
-            opacity: 0.85;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            opacity: 0.9;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             cursor: pointer;
             position: relative;
-            border: 1px solid rgba(0, 0, 0, 0.2);
+            border: 1.5px solid rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 900;
+            color: transparent;
+        }
+        .win-btn::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            background: inherit;
+            opacity: 0;
+            filter: blur(8px);
+            transition: all 0.4s;
         }
         .win-btn::after {
             content: '';
             position: absolute;
-            inset: -4px;
+            inset: 0;
             border-radius: 50%;
-            opacity: 0;
-            transition: all 0.3s;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent);
+            opacity: 0.4;
         }
         .win-btn:hover {
             opacity: 1;
-            transform: scale(1.2);
+            transform: scale(1.3);
+        }
+        .win-btn:hover::before {
+            opacity: 0.6;
+        }
+        .win-btn:active {
+            transform: scale(1.15);
         }
         .win-close {
-            background: radial-gradient(circle at 30% 30%,
-                #ff6b6b,
+            background: radial-gradient(circle at 35% 35%,
+                #ff7b7b,
                 #ff5f57);
             box-shadow:
-                0 3px 10px rgba(255, 95, 87, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+                0 4px 15px rgba(255, 95, 87, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.35),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+            animation: winPulse 3s ease-in-out infinite;
         }
-        .win-close:hover::after {
-            background: rgba(255, 95, 87, 0.4);
-            opacity: 1;
+        .win-close:hover {
+            color: rgba(0, 0, 0, 0.6);
+            box-shadow:
+                0 6px 20px rgba(255, 95, 87, 0.7),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
         .win-min {
-            background: radial-gradient(circle at 30% 30%,
-                #ffd93d,
+            background: radial-gradient(circle at 35% 35%,
+                #ffe94d,
                 #febc2e);
             box-shadow:
-                0 3px 10px rgba(254, 188, 46, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+                0 4px 15px rgba(254, 188, 46, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.35),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+            animation: winPulse 3s ease-in-out 0.3s infinite;
         }
-        .win-min:hover::after {
-            background: rgba(254, 188, 46, 0.4);
-            opacity: 1;
+        .win-min:hover {
+            color: rgba(0, 0, 0, 0.6);
+            box-shadow:
+                0 6px 20px rgba(254, 188, 46, 0.7),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
         .win-max {
-            background: radial-gradient(circle at 30% 30%,
-                #6bcf7f,
+            background: radial-gradient(circle at 35% 35%,
+                #7bdf8f,
                 #28c840);
             box-shadow:
-                0 3px 10px rgba(40, 200, 64, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+                0 4px 15px rgba(40, 200, 64, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.35),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+            animation: winPulse 3s ease-in-out 0.6s infinite;
         }
-        .win-max:hover::after {
-            background: rgba(40, 200, 64, 0.4);
-            opacity: 1;
+        .win-max:hover {
+            color: rgba(0, 0, 0, 0.6);
+            box-shadow:
+                0 6px 20px rgba(40, 200, 64, 0.7),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
-        .editor-title { 
-            font-family: 'JetBrains Mono'; 
-            font-size: 0.85rem; 
-            color: #888; 
-            display: flex; 
-            align-items: center; 
-            gap: 8px;
-            font-weight: 500;
+        @keyframes winPulse {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1; }
         }
-        .editor-title svg { width: 16px; color: var(--primary); }
+        .editor-title {
+            font-family: 'JetBrains Mono';
+            font-size: 0.9rem;
+            background: linear-gradient(135deg, #a0a0a0, #d0d0d0, #a0a0a0);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            animation: titleShimmer 3s linear infinite;
+            z-index: 1;
+        }
+        @keyframes titleShimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+        .editor-title svg {
+            width: 18px;
+            height: 18px;
+            color: var(--primary);
+            filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.6));
+            animation: iconFloat 2s ease-in-out infinite;
+        }
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-2px) rotate(5deg); }
+        }
         .editor-content {
-            padding: 32px;
+            padding: 40px;
             position: relative;
             background:
-                radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.08), transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.06), transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.03), transparent 60%);
+                radial-gradient(circle at 15% 25%, rgba(139, 92, 246, 0.12), transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(124, 58, 237, 0.09), transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.06), transparent 65%),
+                radial-gradient(ellipse at 35% 60%, rgba(196, 181, 253, 0.04), transparent 50%);
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            overflow: hidden;
+        }
+        .editor-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15), transparent 70%);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.6s;
+            pointer-events: none;
+            animation: contentPulse 4s ease-in-out infinite;
+        }
+        @keyframes contentPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
         }
         .editor-content:hover {
             background:
-                radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.12), transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.09), transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.05), transparent 60%);
+                radial-gradient(circle at 15% 25%, rgba(139, 92, 246, 0.18), transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(124, 58, 237, 0.14), transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.1), transparent 65%),
+                radial-gradient(ellipse at 35% 60%, rgba(196, 181, 253, 0.08), transparent 50%);
+        }
+        .editor-content:hover::before {
+            opacity: 0.5;
         }
         .code-block {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.98rem;
-            color: #e8e8e8;
+            font-size: 1.05rem;
+            color: #f0f0f0;
             display: flex;
-            gap: 24px;
-            line-height: 1.8;
+            gap: 28px;
+            line-height: 1.9;
             position: relative;
+            z-index: 1;
         }
         .line-nums {
             color: #666;
             text-align: right;
             user-select: none;
-            border-right: 2px solid rgba(139, 92, 246, 0.25);
-            padding-right: 20px;
+            border-right: 2.5px solid rgba(139, 92, 246, 0.3);
+            padding-right: 24px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            font-weight: 600;
-            min-width: 30px;
+            gap: 5px;
+            font-weight: 700;
+            min-width: 35px;
             background: linear-gradient(90deg,
                 transparent,
-                rgba(139, 92, 246, 0.03) 80%);
-            transition: all 0.3s;
+                rgba(139, 92, 246, 0.05) 70%,
+                rgba(139, 92, 246, 0.08) 100%);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+        }
+        .line-nums::before {
+            content: '';
+            position: absolute;
+            right: -2.5px;
+            top: 0;
+            bottom: 0;
+            width: 2.5px;
+            background: linear-gradient(180deg,
+                rgba(139, 92, 246, 0.8),
+                rgba(167, 139, 250, 0.6),
+                rgba(139, 92, 246, 0.8));
+            opacity: 0;
+            transition: opacity 0.4s;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
         }
         .editor-content:hover .line-nums {
-            color: #888;
-            border-right-color: rgba(139, 92, 246, 0.4);
+            color: #999;
+            background: linear-gradient(90deg,
+                rgba(139, 92, 246, 0.03),
+                rgba(139, 92, 246, 0.08) 70%,
+                rgba(139, 92, 246, 0.12) 100%);
+        }
+        .editor-content:hover .line-nums::before {
+            opacity: 1;
         }
         .code-text {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 5px;
         }
         .s-func {
-            color: #d19aff;
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(209, 154, 255, 0.3);
+            color: #d8a8ff;
+            font-weight: 800;
+            text-shadow:
+                0 0 15px rgba(216, 168, 255, 0.5),
+                0 0 30px rgba(216, 168, 255, 0.2);
+            transition: all 0.3s;
+        }
+        .editor-content:hover .s-func {
+            text-shadow:
+                0 0 20px rgba(216, 168, 255, 0.7),
+                0 0 40px rgba(216, 168, 255, 0.3);
         }
         .s-str {
-            color: #a6f0a6;
-            font-weight: 500;
-            text-shadow: 0 0 8px rgba(166, 240, 166, 0.2);
+            color: #b4ffb4;
+            font-weight: 600;
+            text-shadow:
+                0 0 12px rgba(180, 255, 180, 0.4),
+                0 0 25px rgba(180, 255, 180, 0.2);
+            transition: all 0.3s;
+        }
+        .editor-content:hover .s-str {
+            text-shadow:
+                0 0 18px rgba(180, 255, 180, 0.6),
+                0 0 35px rgba(180, 255, 180, 0.3);
         }
         .s-var {
-            color: #ffd976;
-            font-weight: 600;
-            text-shadow: 0 0 8px rgba(255, 217, 118, 0.2);
+            color: #ffe488;
+            font-weight: 700;
+            text-shadow:
+                0 0 12px rgba(255, 228, 136, 0.4),
+                0 0 25px rgba(255, 228, 136, 0.2);
+            transition: all 0.3s;
+        }
+        .editor-content:hover .s-var {
+            text-shadow:
+                0 0 18px rgba(255, 228, 136, 0.6),
+                0 0 35px rgba(255, 228, 136, 0.3);
         }
         .s-key {
-            color: #ff9b76;
-            font-weight: 700;
-            text-shadow: 0 0 8px rgba(255, 155, 118, 0.2);
+            color: #ffaa88;
+            font-weight: 800;
+            text-shadow:
+                0 0 12px rgba(255, 170, 136, 0.4),
+                0 0 25px rgba(255, 170, 136, 0.2);
+            transition: all 0.3s;
+        }
+        .editor-content:hover .s-key {
+            text-shadow:
+                0 0 18px rgba(255, 170, 136, 0.6),
+                0 0 35px rgba(255, 170, 136, 0.3);
         }
         .s-com {
-            color: #6c7a89;
+            color: #7a8a9a;
             font-style: italic;
-            opacity: 0.75;
+            opacity: 0.8;
+            text-shadow: 0 0 8px rgba(122, 138, 154, 0.2);
         }
         .editor-actions {
             position: absolute;
-            top: 26px;
-            right: 26px;
+            top: 32px;
+            right: 32px;
+            z-index: 5;
         }
         .copy-icon-btn {
             background: linear-gradient(135deg,
-                rgba(139, 92, 246, 0.15),
-                rgba(124, 58, 237, 0.12));
-            border: 1px solid rgba(139, 92, 246, 0.4);
-            border-radius: 10px;
-            padding: 10px 16px;
-            color: #a78bfa;
+                rgba(139, 92, 246, 0.2),
+                rgba(124, 58, 237, 0.15));
+            border: 2px solid rgba(139, 92, 246, 0.5);
+            border-radius: 14px;
+            padding: 12px 20px;
+            color: #c4b5fd;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-family: 'JetBrains Mono';
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            font-weight: 700;
-            backdrop-filter: blur(15px);
+            gap: 10px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            font-weight: 800;
+            backdrop-filter: blur(20px);
             box-shadow:
-                0 4px 15px rgba(139, 92, 246, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                0 6px 20px rgba(139, 92, 246, 0.3),
+                0 0 0 1px rgba(139, 92, 246, 0.2) inset,
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
             position: relative;
             overflow: hidden;
+            letter-spacing: 0.5px;
+            transform-style: preserve-3d;
         }
         .copy-icon-btn::before {
             content: '';
             position: absolute;
             inset: 0;
             background: linear-gradient(135deg,
-                rgba(139, 92, 246, 0.3),
-                rgba(167, 139, 250, 0.2));
+                rgba(139, 92, 246, 0.4),
+                rgba(167, 139, 250, 0.3));
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.4s;
+        }
+        .copy-icon-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
         .copy-icon-btn:hover::before {
             opacity: 1;
         }
+        .copy-icon-btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
         .copy-icon-btn:hover {
             background: linear-gradient(135deg,
-                rgba(139, 92, 246, 0.95),
+                rgba(139, 92, 246, 1),
                 rgba(124, 58, 237, 0.95));
             color: #fff;
-            border-color: rgba(167, 139, 250, 0.6);
-            transform: translateY(-3px) scale(1.05);
+            border-color: rgba(196, 181, 253, 0.8);
+            transform: translateY(-6px) scale(1.08) rotateX(5deg);
             box-shadow:
-                0 12px 30px rgba(139, 92, 246, 0.5),
-                0 0 40px rgba(139, 92, 246, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                0 20px 50px rgba(139, 92, 246, 0.6),
+                0 0 60px rgba(139, 92, 246, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.3) inset,
+                inset 0 2px 0 rgba(255, 255, 255, 0.25);
         }
         .copy-icon-btn svg {
-            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             z-index: 1;
+            filter: drop-shadow(0 0 4px rgba(139, 92, 246, 0.3));
         }
         .copy-icon-btn:hover svg {
-            transform: scale(1.15) rotate(5deg);
+            transform: scale(1.2) rotate(8deg);
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
         }
         .copy-icon-btn:active {
-            transform: translateY(-1px) scale(1.02);
+            transform: translateY(-3px) scale(1.04) rotateX(3deg);
+            box-shadow:
+                0 12px 30px rgba(139, 92, 246, 0.5),
+                0 0 40px rgba(139, 92, 246, 0.3);
         }
 
         .btn-group { display: flex; justify-content: center; gap: 1rem; margin-bottom: 5rem; flex-wrap: wrap; }
@@ -3647,21 +3834,21 @@
                         </div>
                     </div>
 
-                    <div class="upcoming-card confirmed" data-universe-id="6161049307">
+                    <div class="upcoming-card added" data-universe-id="6161049307">
                         <div class="upcoming-bg loading"></div>
                         <div class="upcoming-overlay"></div>
                         <div class="upcoming-content">
                             <div class="upcoming-badges">
-                                <span class="upcoming-status confirmed">
+                                <span class="upcoming-status added">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg>
-                                    CONFIRMED
+                                    ADDED
                                 </span>
-                                <span class="upcoming-date">Date Unknown</span>
+                                <span class="upcoming-date">Available Now</span>
                             </div>
                             <h3 class="upcoming-game-title">Pixel Blade</h3>
-                            <p class="upcoming-game-desc">Full script support coming soon</p>
+                            <p class="upcoming-game-desc">Full script support now available</p>
                         </div>
                     </div>
 
@@ -4115,6 +4302,30 @@
                             <span class="g-tag">Combat</span>
                         </div>
                         <a href="https://www.roblox.com/games/17351132640/Heroes-Battlegrounds" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card" data-status="working" data-name="Pixel Blade" data-tags="rpg anime" data-universe-id="6161049307">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Pixel Blade</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Farm</span>
+                            <span class="g-tag">Auto Quest</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/16550815768/Pixel-Blade" target="_blank" class="g-btn">
                             Go Play
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
