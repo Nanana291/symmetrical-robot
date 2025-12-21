@@ -457,6 +457,355 @@
             opacity: 1;
             filter: blur(15px);
         }
+
+        /* Ultra-Modern Code Lock Overlay with Neon Red Borders */
+        .code-lock-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at center, rgba(255, 0, 0, 0.08) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(10, 5, 8, 0.98) 0%, rgba(18, 8, 12, 0.99) 100%);
+            backdrop-filter: blur(40px) saturate(1.2);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 32px;
+            opacity: 1;
+            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+        .code-lock-overlay.unlocked {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .code-lock-overlay::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            z-index: -1;
+            border-radius: 35px;
+            background: conic-gradient(
+                from 0deg at 50% 50%,
+                #ff0000 0deg,
+                #ff4444 60deg,
+                #ff6666 120deg,
+                #ff8888 180deg,
+                #ff6666 240deg,
+                #ff4444 300deg,
+                #ff0000 360deg);
+            animation: lockBorderPulse 4s linear infinite;
+            filter: blur(25px) saturate(2);
+            opacity: 1;
+        }
+        @keyframes lockBorderPulse {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+                filter: blur(25px) saturate(2);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.05);
+                filter: blur(30px) saturate(2.5);
+            }
+        }
+        .code-lock-overlay::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 32px;
+            box-shadow:
+                inset 0 0 80px rgba(255, 0, 0, 0.2),
+                inset 0 0 40px rgba(255, 0, 0, 0.15),
+                0 0 100px rgba(255, 0, 0, 0.3),
+                0 0 50px rgba(255, 0, 0, 0.2);
+            pointer-events: none;
+        }
+        .lock-content {
+            text-align: center;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .lock-icon-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lock-icon {
+            color: #ff4444;
+            filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.8)) drop-shadow(0 0 60px rgba(255, 0, 0, 0.5));
+            animation: lockIconFloat 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+        @keyframes lockIconFloat {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+                filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.8)) drop-shadow(0 0 60px rgba(255, 0, 0, 0.5));
+            }
+            50% {
+                transform: translateY(-10px) scale(1.05);
+                filter: drop-shadow(0 0 40px rgba(255, 0, 0, 1)) drop-shadow(0 0 80px rgba(255, 0, 0, 0.7));
+            }
+        }
+        .lock-glow {
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.4) 0%, transparent 70%);
+            filter: blur(30px);
+            animation: lockGlowPulse 2s ease-in-out infinite;
+            z-index: 1;
+        }
+        @keyframes lockGlowPulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        .lock-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg,
+                #ffffff 0%,
+                #ffcccc 20%,
+                #ff6666 40%,
+                #ff4444 60%,
+                #ff0000 80%,
+                #ff4444 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: lockTitleShimmer 4s ease-in-out infinite;
+            letter-spacing: 2px;
+            margin: 0;
+            filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5));
+        }
+        @keyframes lockTitleShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .lock-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+            font-weight: 500;
+        }
+        .lock-action-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            background: linear-gradient(135deg,
+                #ff0000 0%,
+                #ff3333 50%,
+                #ff0000 100%);
+            border: none;
+            border-radius: 16px;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            overflow: hidden;
+            box-shadow:
+                0 10px 40px rgba(255, 0, 0, 0.4),
+                0 5px 20px rgba(255, 0, 0, 0.3),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+            font-family: 'Outfit', sans-serif;
+        }
+        .lock-action-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow:
+                0 20px 60px rgba(255, 0, 0, 0.6),
+                0 10px 30px rgba(255, 0, 0, 0.4),
+                inset 0 2px 0 0 rgba(255, 255, 255, 0.4);
+            background: linear-gradient(135deg,
+                #ff1a1a 0%,
+                #ff4444 50%,
+                #ff1a1a 100%);
+        }
+        .lock-action-btn svg {
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+        }
+        .btn-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent);
+            animation: btnShine 3s ease-in-out infinite;
+        }
+        @keyframes btnShine {
+            0%, 100% { left: -100%; }
+            50% { left: 100%; }
+        }
+        .unlock-timer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            width: 100%;
+            max-width: 400px;
+        }
+        .timer-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            box-shadow:
+                inset 0 2px 8px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(255, 0, 0, 0.2);
+        }
+        .timer-progress {
+            height: 100%;
+            background: linear-gradient(90deg,
+                #ff0000 0%,
+                #ff4444 50%,
+                #ff6666 100%);
+            border-radius: 10px;
+            width: 0%;
+            animation: timerFill 5s linear forwards;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+        }
+        @keyframes timerFill {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Lock Overlay Unlocked State */
+        .code-lock-overlay.unlocked {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.95);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Unlock Toast Notification */
+        .unlock-toast {
+            background:
+                linear-gradient(135deg, rgba(0, 20, 10, 0.98) 0%, rgba(0, 30, 15, 1) 100%),
+                url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="unlockgrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,255,157,0.08)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23unlockgrid)"/></svg>');
+            backdrop-filter: blur(40px);
+            border-radius: 24px;
+            padding: 1.5rem 2rem;
+            min-width: 400px;
+            max-width: 500px;
+            border: 2px solid rgba(0, 255, 157, 0.5);
+            box-shadow:
+                0 25px 80px rgba(0, 0, 0, 0.8),
+                0 0 60px rgba(0, 255, 157, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            pointer-events: all;
+            position: relative;
+            overflow: hidden;
+            transform: translateX(600px);
+            animation: toastSlideIn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        .unlock-toast::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(0, 255, 157, 0.15),
+                transparent);
+            animation: unlockShine 2s ease-in-out infinite;
+        }
+
+        @keyframes unlockShine {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+
+        .unlock-toast-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .unlock-toast-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(0, 255, 157, 0.2) 0%, rgba(0, 200, 125, 0.15) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid rgba(0, 255, 157, 0.4);
+            box-shadow: 0 0 30px rgba(0, 255, 157, 0.3);
+            flex-shrink: 0;
+        }
+
+        .unlock-toast-icon svg {
+            width: 28px;
+            height: 28px;
+            color: #00ff9d;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 157, 0.8));
+            animation: unlockIconPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes unlockIconPop {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2) rotate(10deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .unlock-toast-text {
+            flex: 1;
+        }
+
+        .unlock-toast-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #00ff9d;
+            margin: 0 0 0.25rem 0;
+            text-shadow: 0 0 20px rgba(0, 255, 157, 0.5);
+        }
+
+        .unlock-toast-message {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+        .timer-text {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        #timerSeconds {
+            color: #ff4444;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
         .editor-header {
             background: linear-gradient(180deg,
                 rgba(18, 18, 24, 0.98) 0%,
@@ -2723,6 +3072,282 @@
         .game-card:hover .game-bg {
             transform: scale(1.25) rotate(3deg);
             filter: brightness(1.15) saturate(1.4) contrast(1.2);
+        }
+
+        /* Ultra-Premium Floating Particles Effect */
+        .game-card .floating-particles {
+            position: absolute;
+            inset: 0;
+            z-index: 15;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.6s;
+            overflow: hidden;
+            border-radius: 40px;
+        }
+
+        .game-card:hover .floating-particles {
+            opacity: 1;
+        }
+
+        .game-card .floating-particles::before,
+        .game-card .floating-particles::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.9) 0%, transparent 70%);
+            border-radius: 50%;
+            box-shadow:
+                0 0 20px rgba(139, 92, 246, 0.8),
+                0 0 40px rgba(167, 139, 250, 0.5);
+            animation: floatParticle1 4s ease-in-out infinite;
+        }
+
+        .game-card .floating-particles::after {
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.9) 0%, transparent 70%);
+            animation: floatParticle2 5s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes floatParticle1 {
+            0%, 100% {
+                transform: translate(10%, 90%) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            50% {
+                transform: translate(85%, 20%) scale(1.5);
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(90%, 10%) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatParticle2 {
+            0%, 100% {
+                transform: translate(80%, 85%) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            50% {
+                transform: translate(15%, 25%) scale(1.3);
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(10%, 15%) scale(0.7);
+                opacity: 0;
+            }
+        }
+
+        /* Prismatic Refraction Edge Glow */
+        .game-card .prismatic-edge {
+            position: absolute;
+            inset: 0;
+            z-index: 12;
+            border-radius: 40px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.8s;
+            background:
+                linear-gradient(90deg,
+                    rgba(139, 92, 246, 0.3) 0%,
+                    transparent 5%,
+                    transparent 95%,
+                    rgba(167, 139, 250, 0.3) 100%),
+                linear-gradient(0deg,
+                    rgba(196, 181, 253, 0.25) 0%,
+                    transparent 5%,
+                    transparent 95%,
+                    rgba(139, 92, 246, 0.25) 100%);
+            filter: blur(15px);
+        }
+
+        .game-card:hover .prismatic-edge {
+            opacity: 1;
+            animation: prismPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes prismPulse {
+            0%, 100% {
+                filter: blur(15px) brightness(1);
+                transform: scale(1);
+            }
+            50% {
+                filter: blur(20px) brightness(1.5);
+                transform: scale(1.02);
+            }
+        }
+
+        /* Advanced 3D Depth Shadow Layers */
+        .game-card .depth-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 11;
+            border-radius: 40px;
+            pointer-events: none;
+            box-shadow:
+                inset 0 -80px 120px -40px rgba(139, 92, 246, 0.15),
+                inset 0 80px 120px -40px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: opacity 0.9s, box-shadow 0.9s;
+        }
+
+        .game-card:hover .depth-layer {
+            opacity: 1;
+            box-shadow:
+                inset 0 -100px 150px -30px rgba(139, 92, 246, 0.35),
+                inset 0 100px 150px -30px rgba(0, 0, 0, 0.5),
+                inset 0 0 80px rgba(167, 139, 250, 0.2);
+        }
+
+        /* Animated Geometric Pattern Overlay */
+        .game-card .geometric-pattern {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            border-radius: 40px;
+            pointer-events: none;
+            background-image:
+                repeating-linear-gradient(45deg,
+                    transparent,
+                    transparent 35px,
+                    rgba(139, 92, 246, 0.03) 35px,
+                    rgba(139, 92, 246, 0.03) 70px),
+                repeating-linear-gradient(-45deg,
+                    transparent,
+                    transparent 35px,
+                    rgba(167, 139, 250, 0.02) 35px,
+                    rgba(167, 139, 250, 0.02) 70px);
+            background-size: 100% 100%;
+            opacity: 0;
+            transition: opacity 0.9s, background-position 1.2s;
+            animation: geometricShift 20s linear infinite;
+        }
+
+        .game-card:hover .geometric-pattern {
+            opacity: 1;
+        }
+
+        @keyframes geometricShift {
+            0% {
+                background-position: 0% 0%, 100% 100%;
+            }
+            100% {
+                background-position: 100% 100%, 0% 0%;
+            }
+        }
+
+        /* Chromatic Aberration Effect */
+        .game-card .chromatic-layer {
+            position: absolute;
+            inset: -2px;
+            z-index: 5;
+            border-radius: 40px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+            mix-blend-mode: screen;
+        }
+
+        .game-card:hover .chromatic-layer {
+            opacity: 0.4;
+            animation: chromaticShift 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes chromaticShift {
+            0% {
+                box-shadow:
+                    -3px 0 0 rgba(139, 92, 246, 0.5),
+                    3px 0 0 rgba(196, 181, 253, 0.4);
+            }
+            100% {
+                box-shadow:
+                    3px 0 0 rgba(139, 92, 246, 0.5),
+                    -3px 0 0 rgba(196, 181, 253, 0.4);
+            }
+        }
+
+        /* Radial Glow Pulse on Hover */
+        .game-card .radial-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200%;
+            height: 200%;
+            z-index: 3;
+            pointer-events: none;
+            opacity: 0;
+            background: radial-gradient(
+                circle at center,
+                rgba(139, 92, 246, 0.2) 0%,
+                rgba(167, 139, 250, 0.1) 20%,
+                transparent 50%);
+            transition: opacity 0.8s;
+        }
+
+        .game-card:hover .radial-glow {
+            opacity: 1;
+            animation: radialPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes radialPulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 1;
+            }
+        }
+
+        /* Holographic Sparkle Spots */
+        .game-card .sparkle-spots {
+            position: absolute;
+            inset: 0;
+            z-index: 13;
+            border-radius: 40px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.6s;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.8) 0%, transparent 3%),
+                radial-gradient(circle at 75% 50%, rgba(167, 139, 250, 0.7) 0%, transparent 2%),
+                radial-gradient(circle at 50% 75%, rgba(196, 181, 253, 0.6) 0%, transparent 2.5%),
+                radial-gradient(circle at 85% 25%, rgba(233, 213, 255, 0.5) 0%, transparent 2%);
+            filter: blur(1px);
+            animation: sparkleShimmer 4s ease-in-out infinite;
+        }
+
+        .game-card:hover .sparkle-spots {
+            opacity: 1;
+        }
+
+        @keyframes sparkleShimmer {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
         }
 
         /* Cinematic Gradient Overlay */
@@ -5161,6 +5786,34 @@
         </header>
 
         <div class="editor-container">
+            <!-- Ultra-Modern Lock Overlay -->
+            <div class="code-lock-overlay" id="codeLockOverlay">
+                <div class="lock-content">
+                    <div class="lock-icon-wrapper">
+                        <svg class="lock-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <div class="lock-glow"></div>
+                    </div>
+                    <h3 class="lock-title">Code Locked</h3>
+                    <p class="lock-description">Complete this quick action to unlock the script</p>
+                    <a href="https://youtube.com/@stressscripts25?si=exbDn5wYmll3xj5c" target="_blank" class="lock-action-btn" id="subscribeBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                        <span>Subscribe to this channel</span>
+                        <div class="btn-shine"></div>
+                    </a>
+                    <div class="unlock-timer">
+                        <div class="timer-bar">
+                            <div class="timer-progress" id="timerProgress"></div>
+                        </div>
+                        <span class="timer-text">Unlocking in <span id="timerSeconds">5</span>s...</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="editor-header">
                 <div class="window-controls">
                     <div class="win-btn win-close"></div>
@@ -6516,6 +7169,158 @@
             const toast = document.getElementById('toast');
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        // Ultra-Modern Lock System with Auto-Unlock
+        let lockTimerInterval = null;
+        let lockStartTime = null;
+
+        function initCodeLock() {
+            const lockOverlay = document.getElementById('codeLockOverlay');
+            const subscribeBtn = document.getElementById('subscribeBtn');
+            const timerSeconds = document.getElementById('timerSeconds');
+            const timerProgress = document.getElementById('timerProgress');
+
+            if (!lockOverlay) return;
+
+            // Track subscribe button click
+            subscribeBtn.addEventListener('click', () => {
+                if (!lockStartTime) {
+                    startLockTimer();
+                }
+            });
+
+            // Auto-start timer on page load
+            startLockTimer();
+        }
+
+        function startLockTimer() {
+            if (lockTimerInterval) return; // Already running
+
+            lockStartTime = Date.now();
+            const duration = 5000; // 5 seconds
+            const timerSeconds = document.getElementById('timerSeconds');
+
+            // Update countdown every 100ms for smooth animation
+            lockTimerInterval = setInterval(() => {
+                const elapsed = Date.now() - lockStartTime;
+                const remaining = Math.max(0, duration - elapsed);
+                const secondsLeft = Math.ceil(remaining / 1000);
+
+                timerSeconds.textContent = secondsLeft;
+
+                if (remaining <= 0) {
+                    clearInterval(lockTimerInterval);
+                    unlockCode();
+                }
+            }, 100);
+        }
+
+        function unlockCode() {
+            const lockOverlay = document.getElementById('codeLockOverlay');
+
+            // Add unlocked class to hide overlay
+            lockOverlay.classList.add('unlocked');
+
+            // Show unlock toast notification
+            showUnlockToast();
+        }
+
+        function showUnlockToast() {
+            // Create toast container if it doesn't exist
+            let toastContainer = document.getElementById('unlock-toast-container');
+            if (!toastContainer) {
+                toastContainer = document.createElement('div');
+                toastContainer.id = 'unlock-toast-container';
+                toastContainer.style.cssText = `
+                    position: fixed;
+                    top: 2rem;
+                    right: 2rem;
+                    z-index: 10000;
+                    pointer-events: none;
+                `;
+                document.body.appendChild(toastContainer);
+            }
+
+            // Create unlock toast
+            const unlockToast = document.createElement('div');
+            unlockToast.className = 'unlock-toast';
+            unlockToast.innerHTML = `
+                <div class="unlock-toast-content">
+                    <div class="unlock-toast-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+                        </svg>
+                    </div>
+                    <div class="unlock-toast-text">
+                        <h4 class="unlock-toast-title">Code Unlocked! 🎉</h4>
+                        <p class="unlock-toast-message">You can now copy and use the script</p>
+                    </div>
+                </div>
+            `;
+
+            toastContainer.appendChild(unlockToast);
+
+            // Auto-remove after 4 seconds
+            setTimeout(() => {
+                unlockToast.style.animation = 'toastSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) reverse';
+                setTimeout(() => {
+                    unlockToast.remove();
+                }, 400);
+            }, 4000);
+        }
+
+        // Initialize lock system when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initCodeLock);
+        } else {
+            initCodeLock();
+        }
+
+        // Add Ultra-Premium Effect Layers to All Game Cards
+        function addPremiumEffectsToGameCards() {
+            const gameCards = document.querySelectorAll('.game-card');
+
+            gameCards.forEach(card => {
+                // Check if effects already added
+                if (card.querySelector('.floating-particles')) return;
+
+                // Create all premium effect layers
+                const effectLayers = `
+                    <div class="radial-glow"></div>
+                    <div class="geometric-pattern"></div>
+                    <div class="chromatic-layer"></div>
+                    <div class="depth-layer"></div>
+                    <div class="prismatic-edge"></div>
+                    <div class="sparkle-spots"></div>
+                    <div class="floating-particles"></div>
+                `;
+
+                // Insert after game-bg
+                const gameBg = card.querySelector('.game-bg');
+                if (gameBg) {
+                    gameBg.insertAdjacentHTML('afterend', effectLayers);
+                }
+            });
+        }
+
+        // Initialize premium effects when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', addPremiumEffectsToGameCards);
+        } else {
+            addPremiumEffectsToGameCards();
+        }
+
+        // Also add effects when navigating to games page
+        const originalShowPage = typeof showPage !== 'undefined' ? showPage : null;
+        if (originalShowPage) {
+            window.showPage = function(pageId, updateHistory) {
+                originalShowPage(pageId, updateHistory);
+                if (pageId === 'games') {
+                    setTimeout(addPremiumEffectsToGameCards, 100);
+                }
+            };
         }
 
         function toggleFaq(element) {
