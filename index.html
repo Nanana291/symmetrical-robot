@@ -5967,6 +5967,93 @@
             flex-shrink: 0;
         }
 
+        /* ========================================
+           SCRIPT RAW CODE PAGE
+           ======================================== */
+
+        .script-raw-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: calc(100vh - 11rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .script-raw-content {
+            width: 100%;
+            background: linear-gradient(135deg,
+                rgba(10, 10, 14, 0.98) 0%,
+                rgba(15, 15, 20, 0.99) 100%);
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e9d5ff;
+            box-shadow:
+                0 25px 80px rgba(0, 0, 0, 0.6),
+                0 0 60px rgba(139, 92, 246, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+        }
+
+        .script-raw-content::before {
+            content: '-- Imp Hub Script --';
+            display: block;
+            font-size: 0.85rem;
+            color: rgba(139, 92, 246, 0.8);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .script-raw-content code {
+            color: #c4b5fd;
+            text-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Syntax highlighting colors */
+        .script-raw-content {
+            background:
+                linear-gradient(135deg,
+                    rgba(10, 10, 14, 0.98) 0%,
+                    rgba(15, 15, 20, 0.99) 100%),
+                url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="scriptgrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(139,92,246,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23scriptgrid)"/></svg>');
+        }
+
+        @media (max-width: 768px) {
+            .script-raw-container {
+                padding: 1rem;
+            }
+
+            .script-raw-content {
+                padding: 1.5rem;
+                font-size: 0.95rem;
+                border-radius: 16px;
+            }
+
+            .script-raw-content::before {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .script-raw-content {
+                padding: 1.2rem;
+                font-size: 0.85rem;
+            }
+        }
+
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.4s; }
         .modal.active { opacity: 1; pointer-events: all; }
         
@@ -7660,6 +7747,14 @@
         </div>
     </div>
 
+    <!-- Script Raw Code Page -->
+    <div id="script" class="page">
+        <div class="script-raw-container">
+            <pre class="script-raw-content"><code>script_key = "";
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba5e5e39c7c2d6d7fdfe.lua"))()</code></pre>
+        </div>
+    </div>
+
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
@@ -7708,7 +7803,8 @@
             'games': '/SupportedGames',
             'status': '/Status',
             'getkey': '/GetKeyAccess',
-            'executors': '/Executors'
+            'executors': '/Executors',
+            'script': '/Script'
         };
 
         function showPage(pageId, updateHistory = true) {
@@ -7728,7 +7824,8 @@
                            pageId === 'games' ? 'Supported Games | Imp Hub' :
                            pageId === 'status' ? 'Status | Imp Hub' :
                            pageId === 'getkey' ? 'Get Access Key | Imp Hub' :
-                           pageId === 'executors' ? 'Executors | Imp Hub' : 'Imp Hub | X Version';
+                           pageId === 'executors' ? 'Executors | Imp Hub' :
+                           pageId === 'script' ? 'Script | Imp Hub' : 'Imp Hub | X Version';
         }
 
         function getPageFromPath(path) {
