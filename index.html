@@ -5971,87 +5971,21 @@
            SCRIPT RAW CODE PAGE
            ======================================== */
 
-        .script-raw-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-            min-height: calc(100vh - 11rem);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Raw script for loadstring compatibility */
+        #script {
+            padding: 0 !important;
         }
 
-        .script-raw-content {
-            width: 100%;
-            background: linear-gradient(135deg,
-                rgba(10, 10, 14, 0.98) 0%,
-                rgba(15, 15, 20, 0.99) 100%);
-            border: 2px solid rgba(139, 92, 246, 0.3);
-            border-radius: 20px;
-            padding: 3rem;
+        #rawScriptCode {
             margin: 0;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #e9d5ff;
-            box-shadow:
-                0 25px 80px rgba(0, 0, 0, 0.6),
-                0 0 60px rgba(139, 92, 246, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
-        }
-
-        .script-raw-content::before {
-            content: '-- Imp Hub Script --';
-            display: block;
-            font-size: 0.85rem;
-            color: rgba(139, 92, 246, 0.8);
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .script-raw-content code {
-            color: #c4b5fd;
-            text-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
-        }
-
-        /* Syntax highlighting colors */
-        .script-raw-content {
-            background:
-                linear-gradient(135deg,
-                    rgba(10, 10, 14, 0.98) 0%,
-                    rgba(15, 15, 20, 0.99) 100%),
-                url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="scriptgrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(139,92,246,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23scriptgrid)"/></svg>');
-        }
-
-        @media (max-width: 768px) {
-            .script-raw-container {
-                padding: 1rem;
-            }
-
-            .script-raw-content {
-                padding: 1.5rem;
-                font-size: 0.95rem;
-                border-radius: 16px;
-            }
-
-            .script-raw-content::before {
-                font-size: 0.75rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .script-raw-content {
-                padding: 1.2rem;
-                font-size: 0.85rem;
-            }
+            padding: 0;
+            background: transparent;
+            border: none;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #000;
+            white-space: pre;
         }
 
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.4s; }
@@ -7749,10 +7683,8 @@
 
     <!-- Script Raw Code Page -->
     <div id="script" class="page">
-        <div class="script-raw-container">
-            <pre class="script-raw-content"><code>script_key = "";
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba5e5e39c7c2d6d7fdfe.lua"))()</code></pre>
-        </div>
+        <pre id="rawScriptCode">script_key = "";
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba5e5e39c7c2d6d7fdfe.lua"))()</pre>
     </div>
 
     <!-- Toast Container -->
@@ -7836,10 +7768,12 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         }
 
         window.addEventListener('popstate', (event) => {
-            if (event.state && event.state.page) {
-                showPage(event.state.page, false);
+            const pageId = event.state && event.state.page ? event.state.page : getPageFromPath(window.location.pathname);
+
+            // If navigating to /Script, enable raw mode
+            if (pageId === 'script') {
+                enableRawScriptMode();
             } else {
-                const pageId = getPageFromPath(window.location.pathname);
                 showPage(pageId, false);
             }
         });
@@ -7847,12 +7781,84 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         window.addEventListener('DOMContentLoaded', () => {
             const currentPath = window.location.pathname;
             const pageId = getPageFromPath(currentPath);
+
+            // Check if we're on /Script route - display raw text only for loadstring
+            if (pageId === 'script') {
+                enableRawScriptMode();
+                return;
+            }
+
             if (pageId !== 'home') {
                 showPage(pageId, false);
             } else {
                 history.replaceState({ page: 'home' }, '', window.location.origin + '/');
             }
         });
+
+        // Enable raw script mode for loadstring compatibility
+        function enableRawScriptMode() {
+            // Hide all page elements except script
+            const header = document.querySelector('header');
+            const nav = document.querySelector('nav');
+            const sidebar = document.querySelector('.sidebar');
+            const allPages = document.querySelectorAll('.page');
+            const toastContainer = document.getElementById('toastContainer');
+
+            if (header) header.style.display = 'none';
+            if (nav) nav.style.display = 'none';
+            if (sidebar) sidebar.style.display = 'none';
+            if (toastContainer) toastContainer.style.display = 'none';
+
+            allPages.forEach(page => {
+                if (page.id !== 'script') {
+                    page.style.display = 'none';
+                }
+            });
+
+            // Get the raw script element
+            const rawScriptCode = document.getElementById('rawScriptCode');
+
+            if (rawScriptCode) {
+                // Reset body styles for plain text display
+                document.body.style.cssText = `
+                    margin: 0;
+                    padding: 0;
+                    background: transparent;
+                    font-family: monospace;
+                    color: #000;
+                    overflow: auto;
+                `;
+
+                // Reset html styles
+                document.documentElement.style.cssText = `
+                    margin: 0;
+                    padding: 0;
+                    background: transparent;
+                `;
+
+                // Style the pre element for plain text
+                rawScriptCode.style.cssText = `
+                    margin: 0;
+                    padding: 0;
+                    background: transparent;
+                    border: none;
+                    font-family: monospace;
+                    font-size: 14px;
+                    line-height: 1.5;
+                    color: #000;
+                    white-space: pre;
+                    overflow: visible;
+                `;
+
+                // Show only the script page
+                const scriptPage = document.getElementById('script');
+                if (scriptPage) {
+                    scriptPage.style.display = 'block';
+                    scriptPage.style.padding = '0';
+                    scriptPage.classList.add('active');
+                }
+            }
+        }
 
         function copyScript(e) {
             if(e) e.stopPropagation();
