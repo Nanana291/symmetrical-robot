@@ -5967,6 +5967,27 @@
             flex-shrink: 0;
         }
 
+        /* ========================================
+           SCRIPT RAW CODE PAGE
+           ======================================== */
+
+        /* Raw script for loadstring compatibility */
+        #script {
+            padding: 0 !important;
+        }
+
+        #rawScriptCode {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            border: none;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #000;
+            white-space: pre;
+        }
+
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.4s; }
         .modal.active { opacity: 1; pointer-events: all; }
         
@@ -7660,6 +7681,12 @@
         </div>
     </div>
 
+    <!-- Script Raw Code Page -->
+    <div id="script" class="page">
+        <pre id="rawScriptCode">script_key = "";
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba5e5e39c7c2d6d7fdfe.lua"))()</pre>
+    </div>
+
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
@@ -7708,7 +7735,8 @@
             'games': '/SupportedGames',
             'status': '/Status',
             'getkey': '/GetKeyAccess',
-            'executors': '/Executors'
+            'executors': '/Executors',
+            'script': '/Script'
         };
 
         function showPage(pageId, updateHistory = true) {
@@ -7728,7 +7756,8 @@
                            pageId === 'games' ? 'Supported Games | Imp Hub' :
                            pageId === 'status' ? 'Status | Imp Hub' :
                            pageId === 'getkey' ? 'Get Access Key | Imp Hub' :
-                           pageId === 'executors' ? 'Executors | Imp Hub' : 'Imp Hub | X Version';
+                           pageId === 'executors' ? 'Executors | Imp Hub' :
+                           pageId === 'script' ? 'Script | Imp Hub' : 'Imp Hub | X Version';
         }
 
         function getPageFromPath(path) {
@@ -7739,10 +7768,12 @@
         }
 
         window.addEventListener('popstate', (event) => {
-            if (event.state && event.state.page) {
-                showPage(event.state.page, false);
+            const pageId = event.state && event.state.page ? event.state.page : getPageFromPath(window.location.pathname);
+
+            // If navigating to /Script, enable raw mode
+            if (pageId === 'script') {
+                enableRawScriptMode();
             } else {
-                const pageId = getPageFromPath(window.location.pathname);
                 showPage(pageId, false);
             }
         });
@@ -7750,12 +7781,84 @@
         window.addEventListener('DOMContentLoaded', () => {
             const currentPath = window.location.pathname;
             const pageId = getPageFromPath(currentPath);
+
+            // Check if we're on /Script route - display raw text only for loadstring
+            if (pageId === 'script') {
+                enableRawScriptMode();
+                return;
+            }
+
             if (pageId !== 'home') {
                 showPage(pageId, false);
             } else {
                 history.replaceState({ page: 'home' }, '', window.location.origin + '/');
             }
         });
+
+        // Enable raw script mode for loadstring compatibility
+        function enableRawScriptMode() {
+            // Hide all page elements except script
+            const header = document.querySelector('header');
+            const nav = document.querySelector('nav');
+            const sidebar = document.querySelector('.sidebar');
+            const allPages = document.querySelectorAll('.page');
+            const toastContainer = document.getElementById('toastContainer');
+
+            if (header) header.style.display = 'none';
+            if (nav) nav.style.display = 'none';
+            if (sidebar) sidebar.style.display = 'none';
+            if (toastContainer) toastContainer.style.display = 'none';
+
+            allPages.forEach(page => {
+                if (page.id !== 'script') {
+                    page.style.display = 'none';
+                }
+            });
+
+            // Get the raw script element
+            const rawScriptCode = document.getElementById('rawScriptCode');
+
+            if (rawScriptCode) {
+                // Reset body styles for plain text display
+                document.body.style.cssText = `
+                    margin: 0;
+                    padding: 0;
+                    background: transparent;
+                    font-family: monospace;
+                    color: #000;
+                    overflow: auto;
+                `;
+
+                // Reset html styles
+                document.documentElement.style.cssText = `
+                    margin: 0;
+                    padding: 0;
+                    background: transparent;
+                `;
+
+                // Style the pre element for plain text
+                rawScriptCode.style.cssText = `
+                    margin: 0;
+                    padding: 0;
+                    background: transparent;
+                    border: none;
+                    font-family: monospace;
+                    font-size: 14px;
+                    line-height: 1.5;
+                    color: #000;
+                    white-space: pre;
+                    overflow: visible;
+                `;
+
+                // Show only the script page
+                const scriptPage = document.getElementById('script');
+                if (scriptPage) {
+                    scriptPage.style.display = 'block';
+                    scriptPage.style.padding = '0';
+                    scriptPage.classList.add('active');
+                }
+            }
+        }
 
         function copyScript(e) {
             if(e) e.stopPropagation();
