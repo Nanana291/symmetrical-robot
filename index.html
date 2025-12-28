@@ -1226,6 +1226,240 @@
             }
         }
 
+        /* ========================================
+           GLOBAL MOBILE IMPROVEMENTS
+           ======================================== */
+
+        @media (max-width: 768px) {
+            /* Header & Navigation */
+            header {
+                padding: 1.2rem 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            /* Hero Section */
+            .hero-title {
+                font-size: clamp(2.2rem, 8vw, 3.5rem);
+                line-height: 1.2;
+            }
+
+            .hero-subtitle {
+                font-size: clamp(1rem, 3.5vw, 1.2rem);
+                line-height: 1.6;
+                padding: 0 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                gap: 1rem;
+            }
+
+            .hero-btn {
+                width: 100%;
+                max-width: 100%;
+                justify-content: center;
+            }
+
+            /* Features Section */
+            .features-container {
+                padding: 3rem 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .feature-card {
+                padding: 2rem 1.5rem;
+            }
+
+            /* Games Grid */
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 0 1rem;
+            }
+
+            .game-card {
+                height: 450px;
+            }
+
+            /* Status Page */
+            .status-layout {
+                grid-template-columns: 1fr;
+                padding: 2rem 1rem;
+            }
+
+            /* Get Key Page */
+            .getkey-container {
+                padding: 2rem 1rem;
+            }
+
+            .gateway-cards {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            /* Typography */
+            h1 {
+                font-size: clamp(2rem, 7vw, 3rem);
+            }
+
+            h2 {
+                font-size: clamp(1.8rem, 6vw, 2.5rem);
+            }
+
+            h3 {
+                font-size: clamp(1.4rem, 5vw, 1.8rem);
+            }
+
+            /* Page Container */
+            .page {
+                padding-top: 5rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Header */
+            header {
+                padding: 1rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            /* Hero Section */
+            .hero-title {
+                font-size: clamp(1.8rem, 9vw, 2.8rem);
+                letter-spacing: -0.5px;
+            }
+
+            .hero-subtitle {
+                font-size: clamp(0.9rem, 4vw, 1.1rem);
+                padding: 0 0.5rem;
+            }
+
+            .hero-btn {
+                padding: 14px 24px;
+                font-size: 0.95rem;
+            }
+
+            /* Features */
+            .features-container {
+                padding: 2rem 1rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .feature-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .feature-title {
+                font-size: 1.3rem;
+            }
+
+            .feature-desc {
+                font-size: 0.9rem;
+            }
+
+            /* Games */
+            .game-card {
+                height: 400px;
+                border-radius: 28px;
+            }
+
+            .game-card:hover {
+                transform: translateY(-20px) scale(1.02);
+            }
+
+            .g-title {
+                font-size: 1.4rem;
+            }
+
+            .g-tag {
+                font-size: 0.75rem;
+                padding: 6px 12px;
+            }
+
+            .g-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+
+            /* Status Cards */
+            .status-card {
+                padding: 1.5rem;
+            }
+
+            /* Get Key */
+            .gateway-card {
+                padding: 2rem 1.5rem;
+            }
+
+            /* Page */
+            .page {
+                padding-top: 4.5rem;
+                padding-left: 0.8rem;
+                padding-right: 0.8rem;
+            }
+
+            /* Executors */
+            .executors-title {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .executors-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            /* Ultra-small screens */
+            .hero-title {
+                font-size: 1.6rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.85rem;
+            }
+
+            .hero-btn {
+                padding: 12px 20px;
+                font-size: 0.88rem;
+            }
+
+            .game-card {
+                height: 360px;
+                border-radius: 24px;
+            }
+
+            .g-title {
+                font-size: 1.2rem;
+            }
+
+            .feature-card {
+                padding: 1.2rem 1rem;
+            }
+
+            .page {
+                padding-left: 0.6rem;
+                padding-right: 0.6rem;
+            }
+        }
+
         .editor-header {
             background: linear-gradient(180deg,
                 rgba(18, 18, 24, 0.98) 0%,
@@ -7401,6 +7635,30 @@
                             <span class="g-tag">Auto Fight</span>
                         </div>
                         <a href="https://www.roblox.com/games/82047983563264/Anime-Fighting-Simulator-Endless" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card" data-status="working" data-name="My Fishing Brainrots" data-tags="fishing simulator casual" data-universe-id="8916375040">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">My Fishing Brainrots</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Fish</span>
+                            <span class="g-tag">Auto Sell</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/78859332012339/My-Fishing-Brainrots" target="_blank" class="g-btn">
                             Go Play
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
