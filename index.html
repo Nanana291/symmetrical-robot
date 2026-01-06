@@ -4989,7 +4989,6 @@
         }
         .ultra-card.linkvertise { border-color: rgba(255, 200, 0, 0.15); }
         .ultra-card.rinkupro { border-color: rgba(77, 159, 255, 0.15); }
-        .ultra-card.workink { border-color: rgba(94, 234, 212, 0.15); }
         .ultra-card.linkvertise:hover {
             border-color: rgba(255, 200, 0, 0.6);
             box-shadow:
@@ -5003,13 +5002,6 @@
                 0 0 60px rgba(77, 159, 255, 0.3),
                 0 35px 80px -20px rgba(0,0,0,1),
                 inset 0 1px 0 0 rgba(77, 159, 255, 0.2);
-        }
-        .ultra-card.workink:hover {
-            border-color: rgba(94, 234, 212, 0.6);
-            box-shadow:
-                0 0 60px rgba(94, 234, 212, 0.3),
-                0 35px 80px -20px rgba(0,0,0,1),
-                inset 0 1px 0 0 rgba(94, 234, 212, 0.2);
         }
         .u-header {
             display: flex;
@@ -5079,11 +5071,6 @@
             color: #4d9fff;
             border-color: rgba(77, 159, 255, 0.4);
         }
-        .ultra-card.workink .u-checkpoint-badge {
-            background: rgba(94, 234, 212, 0.15);
-            color: #5eead4;
-            border-color: rgba(94, 234, 212, 0.4);
-        }
         .u-duration-badge {
             padding: 10px 18px;
             border-radius: 25px;
@@ -5114,11 +5101,6 @@
             background: linear-gradient(135deg, rgba(77, 159, 255, 0.3), rgba(60, 140, 240, 0.2));
             color: #4d9fff;
             border: 1px solid rgba(77, 159, 255, 0.5);
-        }
-        .ultra-card.workink .u-duration-badge {
-            background: linear-gradient(135deg, rgba(94, 234, 212, 0.3), rgba(80, 220, 200, 0.2));
-            color: #5eead4;
-            border: 1px solid rgba(94, 234, 212, 0.5);
         }
         .u-duration-badge svg {
             width: 16px;
@@ -5171,9 +5153,6 @@
         }
         .ultra-card.rinkupro .u-glow {
             background: radial-gradient(circle, var(--rinkupro), rgba(77, 159, 255, 0.5));
-        }
-        .ultra-card.workink .u-glow {
-            background: radial-gradient(circle, rgba(94, 234, 212, 0.6), rgba(94, 234, 212, 0.5));
         }
         .ultra-card:hover .u-glow {
             opacity: 1;
@@ -5260,7 +5239,6 @@
         }
         .ultra-card.linkvertise .u-feature-item svg { color: #ffc800; }
         .ultra-card.rinkupro .u-feature-item svg { color: #4d9fff; }
-        .ultra-card.workink .u-feature-item svg { color: #5eead4; }
         .u-btn {
             width: 100%;
             padding: 22px;
@@ -5329,10 +5307,6 @@
             background: linear-gradient(135deg, #4d9fff, #3c8cf0);
             color: #fff;
         }
-        .ultra-card.workink .u-btn {
-            background: linear-gradient(135deg, #5eead4, #50dcc8);
-            color: #000;
-        }
         .ultra-card.linkvertise:hover .u-btn {
             box-shadow:
                 0 0 50px rgba(255, 200, 0, 0.7),
@@ -5344,13 +5318,6 @@
             box-shadow:
                 0 0 50px rgba(77, 159, 255, 0.7),
                 0 20px 50px -5px rgba(77, 159, 255, 0.5),
-                inset 0 2px 0 0 rgba(255, 255, 255, 0.3);
-            transform: translateY(-4px) scale(1.03);
-        }
-        .ultra-card.workink:hover .u-btn {
-            box-shadow:
-                0 0 50px rgba(94, 234, 212, 0.7),
-                0 20px 50px -5px rgba(94, 234, 212, 0.5),
                 inset 0 2px 0 0 rgba(255, 255, 255, 0.3);
             transform: translateY(-4px) scale(1.03);
         }
@@ -5500,24 +5467,6 @@
         }
         .ultra-card.rinkupro .copy-link-btn:hover .copy-icon {
             filter: drop-shadow(0 0 8px rgba(77, 159, 255, 0.6));
-        }
-        .ultra-card.workink .copy-link-btn {
-            border-color: rgba(94, 234, 212, 0.3);
-        }
-        .ultra-card.workink .copy-link-btn:hover {
-            border-color: rgba(94, 234, 212, 0.6);
-            box-shadow:
-                0 8px 20px rgba(94, 234, 212, 0.25),
-                0 4px 10px rgba(94, 234, 212, 0.15);
-        }
-        .ultra-card.workink .copy-link-text {
-            text-decoration-color: rgba(94, 234, 212, 0.4);
-        }
-        .ultra-card.workink .copy-link-btn:hover .copy-link-text {
-            text-decoration-color: rgba(94, 234, 212, 0.8);
-        }
-        .ultra-card.workink .copy-link-btn:hover .copy-icon {
-            filter: drop-shadow(0 0 8px rgba(94, 234, 212, 0.6));
         }
 
         .luarmor-footer { 
@@ -6773,7 +6722,7 @@
                     <div class="faq-answer-content">
                         <ol>
                             <li>Click the "Get Key" button in the navigation or home page</li>
-                            <li>Choose your preferred provider (Rinku Pro or Work Ink)</li>
+                            <li>Choose your preferred provider (Rinku Pro or Linkvertise)</li>
                             <li>Complete the Luarmor checkpoints as instructed</li>
                             <li>Click the blue button called "Get A New Key"</li>
                             <li>Copy your generated key and paste it in the script</li>
@@ -7816,7 +7765,7 @@
                         <ul class="cl-list">
                             <li>Migrated all scripts to unified web-based key system</li>
                             <li>Integrated Luarmor authentication gateway</li>
-                            <li>Added dual-provider key generation (Rinku Pro & Work Ink)</li>
+                            <li>Added dual-provider key generation (Rinku Pro & Linkvertise)</li>
                             <li>Improved key validation and security protocols</li>
                         </ul>
                     </div>
@@ -7915,7 +7864,7 @@
                     </div>
                 </div>
 
-                <div class="ultra-card workink" onclick="openGateway('workink')">
+                <div class="ultra-card linkvertise" onclick="openGateway('linkvertise')">
                     <div class="u-header">
                         <div class="u-badges-group">
                             <div class="u-checkpoint-badge">
@@ -7923,7 +7872,7 @@
                                     <path d="M9 11l3 3L22 4"></path>
                                     <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
                                 </svg>
-                                2 Checkpoints
+                                3 Checkpoints
                             </div>
                             <div class="u-duration-badge">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -7936,17 +7885,17 @@
                     </div>
                     <div class="u-icon-wrapper">
                         <div class="u-glow"></div>
-                        <div class="u-svg" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 2.8rem; font-weight: 900; color: #5eead4; filter: drop-shadow(0 8px 25px rgba(94, 234, 212, 0.5)); font-family: 'Outfit';">W</div>
+                        <svg class="u-svg" viewBox="0 0 122.88 122.88" fill="#ffc800"><path d="M59.3,27.06c-8.91,0-16.14,7.23-16.14,16.14s7.23,16.14,16.14,16.14s16.14-7.23,16.14-16.14 S68.21,27.06,59.3,27.06L59.3,27.06z M62.26,16.48h22.68c1.61,0,3.09,0.73,4.06,2.02l28.62,38.07c1.47,1.95,1.13,4.72-0.78,6.23 l-26.6,20.94c-1.39,1.1-3.32,1.21-4.83,0.29l-37.5-22.95c-1.12-0.69-1.8-1.9-1.8-3.21v-35.3C46.1,19.2,49.25,16.48,53,16.48 L62.26,16.48L62.26,16.48z M4.77,63.15L32.48,41.9c1.37-1.05,3.26-1.14,4.72-0.22l22.61,14.16c1.1,0.69,1.76,1.89,1.76,3.19 v20.21c0,2.15-1.74,3.89-3.89,3.89H35.31c-1.38,0-2.67-0.72-3.38-1.89l-28.52-47.1C2.3,52.3,2.94,49.82,4.86,48.65 C4.83,48.67,4.8,48.68,4.77,63.15L4.77,63.15z M96.94,83.13v20.21c0,2.15-1.74,3.89-3.89,3.89H71.18c-2.15,0-3.89-1.74-3.89-3.89V83.13 c0-2.15,1.74-3.89,3.89-3.89h21.87C95.2,79.24,96.94,80.98,96.94,83.13L96.94,83.13z"/></svg>
                     </div>
-                    <h2 class="u-title">Work Ink</h2>
-                    <p class="u-desc">Fast gateway requiring only 2 checkpoints. Reliable key generation with 12-hour access duration and worldwide availability.</p>
+                    <h2 class="u-title">Linkvertise</h2>
+                    <p class="u-desc">Standard gateway requiring 3 simple checkpoints. Reliable key generation with 12-hour access duration and worldwide availability.</p>
 
                     <div class="u-features">
                         <div class="u-feature-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
-                            Only 2 checkpoints
+                            3 Quick checkpoints
                         </div>
                         <div class="u-feature-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -7969,7 +7918,7 @@
 
                     <div class="copy-link-section">
                         <span class="copy-link-label">Having trouble redirecting?</span>
-                        <button class="copy-link-btn" onclick="event.stopPropagation(); copyGatewayLink('workink', this)" data-url="https://ads.luarmor.net/get_key?for=Work_Ink-fukihBAJysep">
+                        <button class="copy-link-btn" onclick="event.stopPropagation(); copyGatewayLink('linkvertise', this)" data-url="https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU">
                             <span class="copy-link-text">Copy link manually</span>
                             <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -8562,7 +8511,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
             // Format URL for display
             const displayUrl = url.length > 50 ? url.substring(0, 50) + '...' : url;
-            const providerName = type === 'linkvertise' ? 'Linkvertise' : (type === 'workink' ? 'Work Ink' : 'Rinku Pro');
+            const providerName = type === 'linkvertise' ? 'Linkvertise' : 'Rinku Pro';
 
             toast.innerHTML = `
                 <div class="toast-header">
@@ -8601,8 +8550,6 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                 targetUrl = 'https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU';
             } else if (type === 'rinkupro') {
                 targetUrl = 'https://ads.luarmor.net/get_key?for=Rinku_Pro-usjtvfvsONpS';
-            } else if (type === 'workink') {
-                targetUrl = 'https://ads.luarmor.net/get_key?for=Work_Ink-fukihBAJysep';
             }
 
             if(targetUrl) {
