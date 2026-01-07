@@ -467,7 +467,7 @@
                 radial-gradient(circle at top right, rgba(255, 80, 80, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at bottom left, rgba(255, 60, 60, 0.08) 0%, transparent 50%),
                 linear-gradient(135deg, rgba(12, 5, 8, 0.99) 0%, rgba(20, 8, 12, 1) 50%, rgba(15, 5, 10, 0.99) 100%);
-            backdrop-filter: blur(50px) saturate(1.4);
+            backdrop-filter: blur(20px) saturate(1.2);
             z-index: 100;
             display: flex;
             align-items: center;
@@ -505,21 +505,18 @@
                 #ff3333 315deg,
                 #ff0000 360deg);
             animation: lockBorderRotate 8s linear infinite;
-            filter: blur(30px) saturate(2.5) brightness(1.2);
+            filter: blur(15px) saturate(2) brightness(1.1);
             opacity: 1;
         }
         @keyframes lockBorderRotate {
             0% {
                 transform: rotate(0deg) scale(1);
-                filter: blur(30px) saturate(2.5) brightness(1.2);
             }
             50% {
-                transform: rotate(180deg) scale(1.08);
-                filter: blur(35px) saturate(3) brightness(1.4);
+                transform: rotate(180deg) scale(1.05);
             }
             100% {
                 transform: rotate(360deg) scale(1);
-                filter: blur(30px) saturate(2.5) brightness(1.2);
             }
         }
 
@@ -634,7 +631,7 @@
             position: absolute;
             inset: -30px;
             background: radial-gradient(circle, rgba(255, 0, 0, 0.5) 0%, rgba(255, 40, 40, 0.3) 40%, transparent 70%);
-            filter: blur(40px);
+            filter: blur(20px);
             animation: lockGlowPulse 2.5s ease-in-out infinite;
             z-index: 1;
         }
@@ -643,12 +640,10 @@
             0%, 100% {
                 opacity: 0.7;
                 transform: scale(1);
-                filter: blur(40px);
             }
             50% {
                 opacity: 1;
-                transform: scale(1.25);
-                filter: blur(50px);
+                transform: scale(1.15);
             }
         }
 
@@ -3592,6 +3587,7 @@
             height: 520px;
             border-radius: 40px;
             overflow: hidden;
+            will-change: transform;
             background:
                 linear-gradient(135deg,
                     rgba(5, 5, 8, 0.95) 0%,
@@ -3702,17 +3698,13 @@
             opacity: 1;
         }
         .game-card:hover {
-            transform: translateY(-40px) scale(1.08) rotateX(6deg) rotateY(-3deg);
+            transform: translateY(-30px) scale(1.05);
             border-color: rgba(139, 92, 246, 0.95);
             box-shadow:
-                0 70px 180px -20px rgba(0, 0, 0, 1),
-                0 40px 110px rgba(139, 92, 246, 0.6),
-                0 20px 60px rgba(167, 139, 250, 0.5),
-                0 0 0 3px rgba(139, 92, 246, 0.9) inset,
-                inset 0 6px 0 0 rgba(255, 255, 255, 0.25),
-                0 0 180px rgba(139, 92, 246, 0.5),
-                0 0 100px rgba(167, 139, 250, 0.4),
-                0 0 50px rgba(196, 181, 253, 0.3);
+                0 50px 100px -20px rgba(0, 0, 0, 0.8),
+                0 0 80px rgba(139, 92, 246, 0.5),
+                0 0 0 2px rgba(139, 92, 246, 0.8) inset;
+            will-change: transform;
         }
 
         /* Enhanced Card Magnetic Repulsion Effect */
@@ -7717,6 +7709,54 @@
                     </div>
                 </div>
             </div>
+
+            <div class="game-card" data-status="working" data-name="Rogue Piece" data-tags="rpg anime adventure" data-universe-id="8321616508">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Rogue Piece</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Farm</span>
+                            <span class="g-tag">Auto Quest</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/83216165088321616508/Rogue-Piece" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card" data-status="working" data-name="Murderers VS Sheriffs" data-tags="fps pvp action" data-universe-id="4348829796">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Murderers VS Sheriffs</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Kill</span>
+                            <span class="g-tag">ESP</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/43488297964348829796/Murderers-VS-Sheriffs" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -8288,20 +8328,14 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
             gameCards.forEach(card => {
                 // Check if effects already added
-                if (card.querySelector('.floating-particles')) return;
+                if (card.querySelector('.radial-glow')) return;
 
-                // Create all premium effect layers
+                // Reduced to 4 essential effect layers for better performance
                 const effectLayers = `
                     <div class="radial-glow"></div>
-                    <div class="geometric-pattern"></div>
                     <div class="energy-field"></div>
-                    <div class="chromatic-layer"></div>
-                    <div class="depth-layer"></div>
-                    <div class="prismatic-edge"></div>
-                    <div class="sparkle-spots"></div>
                     <div class="neon-streaks"></div>
                     <div class="corner-accents"></div>
-                    <div class="floating-particles"></div>
                 `;
 
                 // Insert after game-bg
