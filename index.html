@@ -126,7 +126,7 @@
                 inset 3px 0 0 rgba(139, 92, 246, 0.2);
             display: flex;
             flex-direction: column;
-            backdrop-filter: blur(40px);
+            backdrop-filter: blur(15px);
             overflow-y: auto;
         }
         .sidebar::before {
@@ -383,7 +383,7 @@
             overflow: hidden;
             position: relative;
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            backdrop-filter: blur(30px);
+            backdrop-filter: blur(10px);
             transform-style: preserve-3d;
             perspective: 1500px;
         }
@@ -1905,7 +1905,7 @@
             align-items: center;
             gap: 12px;
             letter-spacing: 1px;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(5px);
             box-shadow:
                 0 8px 25px rgba(0,0,0,0.3),
                 inset 0 1px 0 rgba(255,255,255,0.1);
@@ -3638,20 +3638,8 @@
                 #7c3aed 330deg,
                 #8b5cf6 360deg);
             opacity: 0;
-            filter: blur(35px) saturate(1.5);
-            transition: opacity 0.9s, filter 0.9s, transform 0.9s;
-            animation: holographicRotate 10s linear infinite;
-        }
-        @keyframes holographicRotate {
-            0% {
-                transform: rotate(0deg) scale(1);
-            }
-            50% {
-                transform: rotate(180deg) scale(1.05);
-            }
-            100% {
-                transform: rotate(360deg) scale(1);
-            }
+            filter: blur(10px);
+            transition: opacity 0.5s;
         }
 
         /* Iridescent Overlay */
@@ -3675,42 +3663,27 @@
                     rgba(167, 139, 250, 0.05) 60%,
                     transparent 100%);
             opacity: 0;
-            transition: opacity 0.7s;
+            transition: opacity 0.5s;
             pointer-events: none;
             z-index: 10;
-            animation: iridescent 8s ease-in-out infinite;
-        }
-        @keyframes iridescent {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
         }
 
         .game-card:hover::before {
-            opacity: 1;
-            filter: blur(45px) saturate(2);
-            transform: rotate(360deg) scale(1.1);
+            opacity: 0.8;
         }
         .game-card:hover::after {
-            opacity: 1;
+            opacity: 0.8;
         }
         .game-card:hover {
-            transform: translateY(-30px) scale(1.05);
+            transform: translateY(-20px);
             border-color: rgba(139, 92, 246, 0.95);
             box-shadow:
-                0 50px 100px -20px rgba(0, 0, 0, 0.8),
-                0 0 80px rgba(139, 92, 246, 0.5),
-                0 0 0 2px rgba(139, 92, 246, 0.8) inset;
+                0 30px 60px -15px rgba(0, 0, 0, 0.7),
+                0 0 40px rgba(139, 92, 246, 0.4);
             will-change: transform;
         }
 
-        /* Enhanced Card Magnetic Repulsion Effect */
-        .game-card:hover ~ .game-card {
-            transform: translateX(8px) scale(0.98);
-        }
+        /* Disabled magnetic repulsion for better performance */
 
         /* Neon Light Streaks on Hover */
         .game-card .neon-streaks {
@@ -7781,6 +7754,30 @@
                     </div>
                 </div>
             </div>
+
+            <div class="game-card" data-status="working" data-name="Fate Trigger" data-tags="fps action shooter" data-universe-id="9326439632">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Fate Trigger</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Aimbot</span>
+                            <span class="g-tag">ESP</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/93264396329326439632/Fate-Trigger" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -8354,12 +8351,10 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                 // Check if effects already added
                 if (card.querySelector('.radial-glow')) return;
 
-                // Reduced to 4 essential effect layers for better performance
+                // Reduced to 2 essential effect layers for maximum performance
                 const effectLayers = `
                     <div class="radial-glow"></div>
                     <div class="energy-field"></div>
-                    <div class="neon-streaks"></div>
-                    <div class="corner-accents"></div>
                 `;
 
                 // Insert after game-bg
