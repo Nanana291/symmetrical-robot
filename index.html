@@ -7757,6 +7757,30 @@
                     </div>
                 </div>
             </div>
+
+            <div class="game-card" data-status="working" data-name="A Universal Time" data-tags="rpg anime adventure" data-universe-id="1782832995">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">A Universal Time</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Farm</span>
+                            <span class="g-tag">Auto Quest</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/17828329951782832995/A-Universal-Time" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -8821,14 +8845,16 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
     const PROXY_URL = url => `https://corsproxy.io/?${encodeURIComponent(url)}`;
     const thumbnailCache = new Map();
-    
-    // 1. Función para buscar la imagen
+    let loadQueue = [];
+    let isLoadingBatch = false;
+
+    // 1. Función optimizada para buscar la imagen (usa 256x256 en vez de 512x512)
     async function fetchThumbnail(universeId) {
         if (thumbnailCache.has(universeId)) return thumbnailCache.get(universeId);
-        
-        // Usamos el proxy para evitar bloqueos de CORS
-        const url = PROXY_URL(`https://thumbnails.roblox.com/v1/games/icons?universeIds=${universeId}&size=512x512&format=Png&isCircular=false`);
-        
+
+        // Usamos tamaño 256x256 para reducir el peso de las imágenes
+        const url = PROXY_URL(`https://thumbnails.roblox.com/v1/games/icons?universeIds=${universeId}&size=256x256&format=Png&isCircular=false`);
+
         try {
             const response = await fetch(url);
             if (!response.ok) throw new Error('Err');
@@ -8841,36 +8867,56 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         } catch (e) { return null; }
     }
 
-    // 2. El Observador (detecta cuando la tarjeta es visible)
+    // Procesar la cola de carga en lotes
+    async function processBatch() {
+        if (isLoadingBatch || loadQueue.length === 0) return;
+        isLoadingBatch = true;
+
+        // Procesar máximo 3 imágenes a la vez
+        const batch = loadQueue.splice(0, 3);
+
+        await Promise.all(batch.map(async ({ card, bg, uid }) => {
+            const imgUrl = await fetchThumbnail(uid);
+            if (imgUrl) {
+                const i = new Image();
+                i.onload = () => {
+                    bg.style.backgroundImage = `url(${imgUrl})`;
+                    bg.classList.remove('loading');
+                    bg.style.opacity = '0';
+                    setTimeout(() => {
+                        bg.style.transition = 'opacity 0.4s ease';
+                        bg.style.opacity = '1';
+                    }, 30);
+                };
+                i.src = imgUrl;
+            }
+        }));
+
+        isLoadingBatch = false;
+
+        // Si hay más en la cola, procesarlas después de un delay
+        if (loadQueue.length > 0) {
+            setTimeout(processBatch, 100);
+        }
+    }
+
+    // 2. El Observador optimizado (solo 50px de margen)
     const thumbnailObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const card = entry.target;
                 const uid = card.dataset.universeId;
-                const bg = card.querySelector('.game-bg, .upcoming-bg'); // Busca en ambos tipos de tarjeta
+                const bg = card.querySelector('.game-bg, .upcoming-bg');
 
                 if (uid && bg && !bg.dataset.loaded) {
-                    bg.dataset.loaded = 'true'; // Marcar como procesado
-                    fetchThumbnail(uid).then(imgUrl => {
-                        if (imgUrl) {
-                            const i = new Image();
-                            i.onload = () => {
-                                bg.style.backgroundImage = `url(${imgUrl})`;
-                                bg.classList.remove('loading');
-                                bg.style.opacity = '0';
-                                setTimeout(() => {
-                                    bg.style.transition = 'opacity 0.6s ease';
-                                    bg.style.opacity = '1';
-                                }, 50);
-                            };
-                            i.src = imgUrl;
-                        }
-                    });
+                    bg.dataset.loaded = 'true';
+                    loadQueue.push({ card, bg, uid });
+                    processBatch();
                 }
                 thumbnailObserver.unobserve(card);
             }
         });
-    }, { rootMargin: '200px', threshold: 0.01 });
+    }, { rootMargin: '50px', threshold: 0.01 });
 
     // 3. Función Iniciadora
     function initThumbnailLoading() {
@@ -8884,8 +8930,8 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
     // 4. Ejecutar al inicio (Para que Home/Upcoming cargue sin clicks)
     document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(initThumbnailLoading, 100);
-        
+        setTimeout(initThumbnailLoading, 50);
+
         // Mantener tu lógica de historial
         const currentPath = window.location.pathname;
         const pageId = getPageFromPath(currentPath);
@@ -8900,17 +8946,17 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         pageElements.forEach(p => p.classList.remove('active'));
         navLinks.forEach(l => l.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
-        
+
         const activeLink = Array.from(navLinks).find(l => l.getAttribute('onclick')?.includes(pageId));
         if(activeLink) activeLink.classList.add('active');
-        
-        sidebar.classList.remove('active'); 
+
+        sidebar.classList.remove('active');
         navTrigger.classList.remove('active');
 
         if (updateHistory && pageRoutes[pageId]) {
             history.pushState({ page: pageId }, '', window.location.origin + pageRoutes[pageId]);
         }
-        
+
         // Títulos
         const titles = {
             'home': 'Imp Hub | X Version',
@@ -8921,8 +8967,8 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         };
         document.title = titles[pageId] || 'Imp Hub';
 
-        // LO IMPORTANTE: Volver a buscar imágenes nuevas
-        setTimeout(initThumbnailLoading, 100);
+        // LO IMPORTANTE: Volver a buscar imágenes nuevas (reducido delay)
+        setTimeout(initThumbnailLoading, 50);
     };
 
         const sliderNext = document.getElementById('sliderNext');
