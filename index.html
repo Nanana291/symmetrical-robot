@@ -272,7 +272,6 @@
             position: relative;
             text-transform: uppercase;
             letter-spacing: 8px;
-            animation: heroTitleFloat 4s ease-in-out infinite;
             text-shadow:
                 0 0 40px rgba(139, 92, 246, 0.5),
                 0 0 80px rgba(139, 92, 246, 0.3),
@@ -297,7 +296,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: heroGradientShift 6s ease-in-out infinite;
             position: relative;
             display: inline-block;
         }
@@ -335,8 +333,7 @@
             font-size: 1.1rem;
             font-weight: 700;
             position: relative;
-            animation: subtitlePulse 3s ease-in-out infinite;
-            text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+            text-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
         }
         @keyframes subtitlePulse {
             0%, 100% { opacity: 0.9; letter-spacing: 6px; }
@@ -357,7 +354,7 @@
                 rgba(139, 92, 246, 0.8),
                 transparent);
             box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
-            animation: subtitleLineGlow 2s ease-in-out infinite;
+            opacity: 0.7;
         }
         @keyframes subtitleLineGlow {
             0%, 100% { opacity: 0.6; width: 200px; }
@@ -382,10 +379,8 @@
                 inset 0 -1px 40px rgba(139, 92, 246, 0.08);
             overflow: hidden;
             position: relative;
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            backdrop-filter: blur(10px);
-            transform-style: preserve-3d;
-            perspective: 1500px;
+            transition: all 0.4s ease;
+            backdrop-filter: none;
         }
         [data-theme="light"] .editor-container {
             background:
@@ -410,9 +405,8 @@
                 rgba(196, 181, 253, 0.4) 180deg,
                 rgba(167, 139, 250, 0.5) 270deg,
                 rgba(139, 92, 246, 0.6) 360deg);
-            animation: editorBorderSpin 8s linear infinite;
-            filter: blur(12px);
-            opacity: 0.8;
+            filter: blur(8px);
+            opacity: 0.6;
         }
         @keyframes editorBorderSpin {
             0% { transform: rotate(0deg); }
@@ -444,14 +438,10 @@
             100% { left: 100%; }
         }
         .editor-container:hover {
-            transform: translateY(-10px) scale(1.02) rotateX(1deg);
+            transform: translateY(-5px);
             box-shadow:
-                0 50px 120px -20px rgba(0,0,0,1),
-                0 0 0 1px rgba(139, 92, 246, 0.5) inset,
-                0 0 120px rgba(139, 92, 246, 0.3),
-                0 30px 80px rgba(139, 92, 246, 0.2),
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
-                inset 0 -1px 60px rgba(139, 92, 246, 0.15);
+                0 20px 40px -15px rgba(0,0,0,0.6),
+                0 0 0 1px rgba(139, 92, 246, 0.4) inset;
         }
         .editor-container:hover::before {
             opacity: 1;
@@ -467,7 +457,7 @@
                 radial-gradient(circle at top right, rgba(255, 80, 80, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at bottom left, rgba(255, 60, 60, 0.08) 0%, transparent 50%),
                 linear-gradient(135deg, rgba(12, 5, 8, 0.99) 0%, rgba(20, 8, 12, 1) 50%, rgba(15, 5, 10, 0.99) 100%);
-            backdrop-filter: blur(20px) saturate(1.2);
+            backdrop-filter: blur(10px);
             z-index: 100;
             display: flex;
             align-items: center;
@@ -504,9 +494,8 @@
                 #ff6666 270deg,
                 #ff3333 315deg,
                 #ff0000 360deg);
-            animation: lockBorderRotate 8s linear infinite;
-            filter: blur(15px) saturate(2) brightness(1.1);
-            opacity: 1;
+            filter: blur(8px);
+            opacity: 0.8;
         }
         @keyframes lockBorderRotate {
             0% {
@@ -575,9 +564,8 @@
             border-radius: 50%;
             border: 2px solid rgba(255, 0, 0, 0.3);
             box-shadow:
-                0 0 40px rgba(255, 0, 0, 0.4),
-                inset 0 0 30px rgba(255, 0, 0, 0.2);
-            animation: iconWrapperPulse 2.5s ease-in-out infinite;
+                0 0 30px rgba(255, 0, 0, 0.3),
+                inset 0 0 20px rgba(255, 0, 0, 0.15);
         }
 
         @keyframes iconWrapperPulse {
@@ -597,10 +585,8 @@
         .lock-icon {
             color: #ff3333;
             filter:
-                drop-shadow(0 0 35px rgba(255, 0, 0, 0.9))
-                drop-shadow(0 0 70px rgba(255, 0, 0, 0.6))
-                drop-shadow(0 0 100px rgba(255, 40, 40, 0.4));
-            animation: lockIconFloat 3.5s ease-in-out infinite;
+                drop-shadow(0 0 25px rgba(255, 0, 0, 0.7))
+                drop-shadow(0 0 40px rgba(255, 0, 0, 0.4));
             position: relative;
             z-index: 2;
         }
@@ -630,9 +616,9 @@
         .lock-glow {
             position: absolute;
             inset: -30px;
-            background: radial-gradient(circle, rgba(255, 0, 0, 0.5) 0%, rgba(255, 40, 40, 0.3) 40%, transparent 70%);
-            filter: blur(20px);
-            animation: lockGlowPulse 2.5s ease-in-out infinite;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.4) 0%, rgba(255, 40, 40, 0.2) 40%, transparent 70%);
+            filter: blur(10px);
+            opacity: 0.8;
             z-index: 1;
         }
 
@@ -662,7 +648,6 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: lockTitleShimmer 5s ease-in-out infinite;
             letter-spacing: 3px;
             margin: 0;
             filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.6));
@@ -722,7 +707,6 @@
             font-family: 'Outfit', sans-serif;
             text-transform: uppercase;
             letter-spacing: 1px;
-            animation: btnBackgroundShift 3s ease-in-out infinite;
             width: 100%;
             max-width: 420px;
             min-height: 68px;
@@ -777,9 +761,9 @@
             height: 100%;
             background: linear-gradient(90deg,
                 transparent,
-                rgba(255, 255, 255, 0.4) 50%,
+                rgba(255, 255, 255, 0.3) 50%,
                 transparent);
-            animation: btnShine 4s ease-in-out infinite;
+            opacity: 0.6;
             z-index: 1;
         }
 
@@ -815,16 +799,6 @@
             z-index: -1;
             filter: blur(8px);
             opacity: 0.8;
-            animation: btnGlowRotate 3s linear infinite;
-        }
-
-        @keyframes btnGlowRotate {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 400% 50%;
-            }
         }
         .unlock-timer {
             display: flex;
@@ -934,7 +908,7 @@
             background:
                 linear-gradient(135deg, rgba(0, 20, 10, 0.98) 0%, rgba(0, 30, 15, 1) 100%),
                 url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="unlockgrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,255,157,0.08)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23unlockgrid)"/></svg>');
-            backdrop-filter: blur(40px);
+            backdrop-filter: blur(10px);
             border-radius: 24px;
             padding: 1.5rem 2rem;
             min-width: 400px;
@@ -1464,7 +1438,7 @@
             align-items: center;
             justify-content: space-between;
             border-bottom: 2px solid rgba(139, 92, 246, 0.25);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(8px);
             position: relative;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
@@ -1810,7 +1784,7 @@
             gap: 10px;
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             font-weight: 800;
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(8px);
             box-shadow:
                 0 6px 20px rgba(139, 92, 246, 0.3),
                 0 0 0 1px rgba(139, 92, 246, 0.2) inset,
@@ -2006,7 +1980,7 @@
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(8px);
             box-shadow:
                 0 10px 35px rgba(0,0,0,0.5),
                 inset 0 1px 0 rgba(255,255,255,0.08);
@@ -2183,7 +2157,7 @@
                 0 8px 25px rgba(0,0,0,0.4),
                 inset 0 1px 0 rgba(255,255,255,0.08);
             position: relative;
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(8px);
         }
         .faq-item::before {
             content: '';
@@ -2422,8 +2396,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gamesTitleFloat 4s ease-in-out infinite, gamesTitleGradient 8s ease-in-out infinite;
-            filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.5)) drop-shadow(0 5px 15px rgba(0, 0, 0, 0.6));
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.4));
         }
         .games-page-title svg {
             width: 48px;
@@ -2475,7 +2448,7 @@
         .search-input { 
             width: 100%; 
             background: linear-gradient(135deg, rgba(15, 15, 18, 0.8), rgba(20, 20, 25, 0.6));
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(8px);
             border: 1px solid rgba(139, 92, 246, 0.2); 
             padding: 16px 24px 16px 56px; 
             border-radius: 16px; 
@@ -2551,7 +2524,7 @@
             left: 0; 
             width: 100%; 
             background: linear-gradient(135deg, rgba(18, 18, 20, 0.98), rgba(15, 15, 18, 0.95));
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(8px);
             border: 1px solid rgba(139, 92, 246, 0.2); 
             border-radius: 16px; 
             z-index: 100; 
@@ -2664,7 +2637,7 @@
                 0 4px 15px rgba(0, 0, 0, 0.3),
                 0 2px 8px rgba(139, 92, 246, 0.1),
                 inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(8px);
             transform-style: preserve-3d;
             overflow: hidden;
         }
@@ -2682,8 +2655,7 @@
             opacity: 0;
             transition: opacity 0.4s;
             z-index: -1;
-            filter: blur(8px);
-            animation: filterBorderSpin 4s linear infinite;
+            filter: blur(5px);
         }
         .filter-dropdown-btn::after {
             content: '';
@@ -2775,7 +2747,7 @@
             visibility: hidden;
             transform: translateY(-15px) scale(0.95);
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            backdrop-filter: blur(40px);
+            backdrop-filter: blur(10px);
             overflow: hidden;
         }
         .filter-dropdown-menu::before {
@@ -2874,7 +2846,7 @@
                 0 4px 15px rgba(0, 0, 0, 0.3),
                 0 2px 8px rgba(139, 92, 246, 0.1),
                 inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(8px);
             transform-style: preserve-3d;
             overflow: hidden;
         }
@@ -2892,8 +2864,7 @@
             opacity: 0;
             transition: opacity 0.4s;
             z-index: -1;
-            filter: blur(8px);
-            animation: sortBorderSpin 4s linear infinite;
+            filter: blur(5px);
         }
         .sort-toggle-btn::after {
             content: '';
@@ -3375,7 +3346,7 @@
             display: flex;
             align-items: center;
             gap: 7px;
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(8px);
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             overflow: hidden;
@@ -3436,7 +3407,7 @@
             background: rgba(255, 255, 255, 0.1);
             color: var(--text-muted);
             border: 1.5px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(8px);
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             box-shadow:
                 0 6px 15px rgba(0, 0, 0, 0.3),
@@ -3550,7 +3521,7 @@
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             z-index: 10;
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(8px);
             box-shadow:
                 0 4px 15px rgba(0, 0, 0, 0.3),
                 0 0 20px rgba(139, 92, 246, 0.2);
@@ -3608,7 +3579,7 @@
                 inset 0 0 60px rgba(139, 92, 246, 0.05);
             transform-style: preserve-3d;
             perspective: 1500px;
-            backdrop-filter: blur(30px);
+            backdrop-filter: blur(8px);
         }
         [data-theme="light"] .game-card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(250, 250, 252, 1));
@@ -4260,7 +4231,7 @@
                 linear-gradient(135deg,
                     rgba(0, 0, 0, 0.85) 0%,
                     rgba(10, 8, 15, 0.9) 100%);
-            backdrop-filter: blur(30px);
+            backdrop-filter: blur(8px);
             border: 2px solid rgba(139, 92, 246, 0.3);
             border-radius: 40px;
             font-size: 0.75rem;
@@ -4884,7 +4855,7 @@
             background:
                 linear-gradient(135deg, rgba(12, 12, 16, 0.98) 0%, rgba(18, 18, 24, 1) 50%, rgba(10, 10, 15, 0.98) 100%),
                 url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="cardgrid" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M 25 0 L 0 0 0 25" fill="none" stroke="rgba(139,92,246,0.05)" stroke-width="0.8"/><circle cx="0" cy="0" r="1" fill="rgba(139,92,246,0.15)"/></pattern></defs><rect width="100" height="100" fill="url(%23cardgrid)"/></svg>');
-            backdrop-filter: blur(40px);
+            backdrop-filter: blur(10px);
             border-radius: 36px;
             padding: 4rem 3rem;
             position: relative;
@@ -4920,8 +4891,7 @@
                 rgba(139, 92, 246, 0.6) 360deg);
             opacity: 0;
             transition: opacity 0.7s;
-            filter: blur(12px);
-            animation: cardBorderSpin 6s linear infinite;
+            filter: blur(8px);
         }
         @keyframes cardBorderSpin {
             0% { transform: rotate(0deg); }
@@ -5613,7 +5583,7 @@
             background:
                 linear-gradient(135deg, rgba(12, 12, 16, 0.98) 0%, rgba(18, 18, 22, 1) 50%, rgba(10, 10, 14, 1) 100%),
                 url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="execGrid" width="35" height="35" patternUnits="userSpaceOnUse"><path d="M 35 0 L 0 0 0 35" fill="none" stroke="rgba(139,92,246,0.05)" stroke-width="0.7"/></pattern></defs><rect width="100" height="100" fill="url(%23execGrid)"/></svg>');
-            backdrop-filter: blur(40px);
+            backdrop-filter: blur(10px);
             border-radius: 32px;
             padding: 3rem;
             border: 2.5px solid rgba(139, 92, 246, 0.15);
@@ -5707,7 +5677,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(8px);
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             overflow: hidden;
@@ -6257,7 +6227,7 @@
             background:
                 linear-gradient(135deg, rgba(10, 10, 14, 0.98) 0%, rgba(18, 18, 24, 1) 100%),
                 url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="toastgrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(139,92,246,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23toastgrid)"/></svg>');
-            backdrop-filter: blur(40px);
+            backdrop-filter: blur(10px);
             border-radius: 24px;
             padding: 1.5rem 2rem;
             min-width: 400px;
@@ -7778,6 +7748,30 @@
                     </div>
                 </div>
             </div>
+
+            <div class="game-card" data-status="working" data-name="Entrenched WW1" data-tags="fps war strategy" data-universe-id="1281592938">
+                <div class="game-bg loading"></div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
+                    </div>
+                    <div class="game-footer">
+                        <h3 class="g-title">Entrenched WW1</h3>
+                        <div class="g-tags">
+                            <span class="g-tag">Auto Kill</span>
+                            <span class="g-tag">ESP</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/12815929381281592938/Entrenched-WW1" target="_blank" class="g-btn">
+                            Go Play
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -8345,24 +8339,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
         // Add Ultra-Premium Effect Layers to All Game Cards
         function addPremiumEffectsToGameCards() {
-            const gameCards = document.querySelectorAll('.game-card');
-
-            gameCards.forEach(card => {
-                // Check if effects already added
-                if (card.querySelector('.radial-glow')) return;
-
-                // Reduced to 2 essential effect layers for maximum performance
-                const effectLayers = `
-                    <div class="radial-glow"></div>
-                    <div class="energy-field"></div>
-                `;
-
-                // Insert after game-bg
-                const gameBg = card.querySelector('.game-bg');
-                if (gameBg) {
-                    gameBg.insertAdjacentHTML('afterend', effectLayers);
-                }
-            });
+            // Disabled for maximum performance - no effect layers added
         }
 
         // Initialize premium effects when DOM is ready
