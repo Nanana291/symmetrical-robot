@@ -8954,14 +8954,25 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         const cacheKey = `${type}_${id}`;
         if (thumbnailCache.has(cacheKey)) return thumbnailCache.get(cacheKey);
 
-        let apiUrl;
+        let targetUniverseId = id;
+
+        // Si es placeId, primero obtenemos el UniverseId correspondiente
         if (type === 'place') {
-            apiUrl = `https://thumbnails.roblox.com/v1/places/gameicons?placeIds=${id}&size=256x256&format=Png&isCircular=false`;
-        } else {
-            apiUrl = `https://thumbnails.roblox.com/v1/games/icons?universeIds=${id}&size=256x256&format=Png&isCircular=false`;
+            try {
+                const universeUrl = PROXY_URL(`https://apis.roblox.com/universes/v1/places/${id}/universe`);
+                const res = await fetch(universeUrl);
+                if (!res.ok) throw new Error('Err');
+                const data = await res.json();
+                if (data.universeId) {
+                    targetUniverseId = data.universeId;
+                } else {
+                    return null;
+                }
+            } catch (e) { return null; }
         }
 
-        // Usamos tamaño 256x256 para reducir el peso de las imágenes
+        // Usamos el endpoint de UniverseId que funciona mejor con el proxy
+        const apiUrl = `https://thumbnails.roblox.com/v1/games/icons?universeIds=${targetUniverseId}&size=256x256&format=Png&isCircular=false`;
         const url = PROXY_URL(apiUrl);
 
         try {
