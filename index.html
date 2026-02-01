@@ -22,6 +22,7 @@
             --status-offline: #ff4d4d;
             
             --linkvertise: #ffc800;
+            --lootlabs: #8b5cf6;
 
             --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
             --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -4731,7 +4732,7 @@
             grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
             gap: 3rem; 
             width: 100%; 
-            max-width: 480px;
+            max-width: 900px;
             margin-top: 2rem; 
             perspective: 1000px;
             position: relative;
@@ -4922,12 +4923,20 @@
                 inset 0 2px 0 0 rgba(255,255,255,0.2);
         }
         .ultra-card.linkvertise { border-color: rgba(255, 200, 0, 0.15); }
+        .ultra-card.lootlabs { border-color: rgba(139, 92, 246, 0.15); }
         .ultra-card.linkvertise:hover {
             border-color: rgba(255, 200, 0, 0.6);
             box-shadow:
                 0 0 60px rgba(255, 200, 0, 0.3),
                 0 35px 80px -20px rgba(0,0,0,1),
                 inset 0 1px 0 0 rgba(255, 200, 0, 0.2);
+        }
+        .ultra-card.lootlabs:hover {
+            border-color: rgba(139, 92, 246, 0.6);
+            box-shadow:
+                0 0 60px rgba(139, 92, 246, 0.3),
+                0 35px 80px -20px rgba(0,0,0,1),
+                inset 0 1px 0 0 rgba(139, 92, 246, 0.2);
         }
         .u-header {
             display: flex;
@@ -4992,6 +5001,11 @@
             color: #ffc800;
             border-color: rgba(255, 200, 0, 0.4);
         }
+        .ultra-card.lootlabs .u-checkpoint-badge {
+            background: rgba(139, 92, 246, 0.15);
+            color: #8b5cf6;
+            border-color: rgba(139, 92, 246, 0.4);
+        }
         .u-duration-badge {
             padding: 10px 18px;
             border-radius: 25px;
@@ -5017,6 +5031,11 @@
             background: linear-gradient(135deg, rgba(255, 200, 0, 0.3), rgba(255, 180, 0, 0.2));
             color: #ffc800;
             border: 1px solid rgba(255, 200, 0, 0.5);
+        }
+        .ultra-card.lootlabs .u-duration-badge {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(124, 58, 237, 0.2));
+            color: #8b5cf6;
+            border: 1px solid rgba(139, 92, 246, 0.5);
         }
         .u-duration-badge svg {
             width: 16px;
@@ -5066,6 +5085,9 @@
         }
         .ultra-card.linkvertise .u-glow {
             background: radial-gradient(circle, var(--linkvertise), rgba(255, 200, 0, 0.5));
+        }
+        .ultra-card.lootlabs .u-glow {
+            background: radial-gradient(circle, var(--lootlabs), rgba(139, 92, 246, 0.5));
         }
         .ultra-card:hover .u-glow {
             opacity: 1;
@@ -5151,6 +5173,7 @@
             transform: scale(1.2);
         }
         .ultra-card.linkvertise .u-feature-item svg { color: #ffc800; }
+        .ultra-card.lootlabs .u-feature-item svg { color: #8b5cf6; }
         .u-btn {
             width: 100%;
             padding: 22px;
@@ -5215,10 +5238,21 @@
             background: linear-gradient(135deg, #ffc800, #ffb000);
             color: #000;
         }
+        .ultra-card.lootlabs .u-btn {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: #fff;
+        }
         .ultra-card.linkvertise:hover .u-btn {
             box-shadow:
                 0 0 50px rgba(255, 200, 0, 0.7),
                 0 20px 50px -5px rgba(255, 200, 0, 0.5),
+                inset 0 2px 0 0 rgba(255, 255, 255, 0.3);
+            transform: translateY(-4px) scale(1.03);
+        }
+        .ultra-card.lootlabs:hover .u-btn {
+            box-shadow:
+                0 0 50px rgba(139, 92, 246, 0.7),
+                0 20px 50px -5px rgba(139, 92, 246, 0.5),
                 inset 0 2px 0 0 rgba(255, 255, 255, 0.3);
             transform: translateY(-4px) scale(1.03);
         }
@@ -5350,6 +5384,24 @@
         }
         .ultra-card.linkvertise .copy-link-btn:hover .copy-icon {
             filter: drop-shadow(0 0 8px rgba(255, 200, 0, 0.6));
+        }
+        .ultra-card.lootlabs .copy-link-btn {
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+        .ultra-card.lootlabs .copy-link-btn:hover {
+            border-color: rgba(139, 92, 246, 0.6);
+            box-shadow:
+                0 8px 20px rgba(139, 92, 246, 0.25),
+                0 4px 10px rgba(139, 92, 246, 0.15);
+        }
+        .ultra-card.lootlabs .copy-link-text {
+            text-decoration-color: rgba(139, 92, 246, 0.4);
+        }
+        .ultra-card.lootlabs .copy-link-btn:hover .copy-link-text {
+            text-decoration-color: rgba(139, 92, 246, 0.8);
+        }
+        .ultra-card.lootlabs .copy-link-btn:hover .copy-icon {
+            filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.6));
         }
 
         .luarmor-footer { 
@@ -6605,7 +6657,7 @@
                     <div class="faq-answer-content">
                         <ol>
                             <li>Click the "Get Key" button in the navigation or home page</li>
-                            <li>Complete the Linkvertise checkpoints</li>
+                            <li>Choose your preferred provider (Rinku Pro or Linkvertise)</li>
                             <li>Complete the Luarmor checkpoints as instructed</li>
                             <li>Click the blue button called "Get A New Key"</li>
                             <li>Copy your generated key and paste it in the script</li>
@@ -7917,6 +7969,85 @@
             </div>
             
             <div class="ultra-grid">
+                <div class="ultra-card lootlabs" onclick="openGateway('lootlabs')">
+                    <div class="recommended-overlay">
+                        RECOMMENDED
+                    </div>
+                    <div class="u-header">
+                        <div class="u-badges-group">
+                            <div class="u-checkpoint-badge">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 11l3 3L22 4"></path>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                </svg>
+                                2 Checkpoints
+                            </div>
+                            <div class="u-duration-badge">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                24H KEY
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-icon-wrapper">
+                        <div class="u-glow"></div>
+                        <div class="u-svg" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; filter: drop-shadow(0 8px 25px rgba(139, 92, 246, 0.5));">
+                                <path d="M50 10 L90 30 L50 50 L10 30 Z" fill="#fbbf24"/>
+                                <path d="M10 30 L50 50 V90 L10 70 Z" fill="#7c3aed"/>
+                                <path d="M50 50 L90 30 V70 L50 90 Z" fill="#6d28d9"/>
+                                <path d="M50 20 L75 32.5 L50 45 L25 32.5 Z" fill="#4c1d95"/>
+                                <path d="M10 30 L30 40 V60 L10 50 Z" fill="#fbbf24" opacity="0.9"/>
+                                <path d="M90 30 L70 40 V60 L90 50 Z" fill="#fbbf24" opacity="0.9"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h2 class="u-title">Lootlabs</h2>
+                    <p class="u-desc">Premium gateway with only 2 checkpoints for lightning-fast verification. Extended 24-hour key validity for seamless access.</p>
+
+                    <div class="u-features">
+                        <div class="u-feature-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Only 2 checkpoints
+                        </div>
+                        <div class="u-feature-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            24-hour validity period
+                        </div>
+                        <div class="u-feature-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Fastest verification
+                        </div>
+                    </div>
+
+                    <button class="u-btn">
+                        <span style="position: relative; z-index: 1;">Start Verification</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+
+                    <div class="copy-link-section">
+                        <span class="copy-link-label">Having trouble redirecting?</span>
+                        <button class="copy-link-btn" onclick="event.stopPropagation(); copyGatewayLink('lootlabs', this)" data-url="https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp">
+                            <span class="copy-link-text">Copy link manually</span>
+                            <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
                 <div class="ultra-card linkvertise" onclick="openGateway('linkvertise')">
                     <div class="u-header">
                         <div class="u-badges-group">
@@ -8539,7 +8670,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
             // Format URL for display
             const displayUrl = url.length > 50 ? url.substring(0, 50) + '...' : url;
-            const providerName = 'Linkvertise';
+            const providerName = type === 'linkvertise' ? 'Linkvertise' : 'Lootlabs';
 
             toast.innerHTML = `
                 <div class="toast-header">
@@ -8573,8 +8704,16 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         }
 
         function openGateway(type) {
-            const targetUrl = 'https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU';
-            showToast(targetUrl, type);
+            let targetUrl = '';
+            if(type === 'linkvertise') {
+                targetUrl = 'https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU';
+            } else if (type === 'lootlabs') {
+                targetUrl = 'https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp';
+            }
+
+            if(targetUrl) {
+                showToast(targetUrl, type);
+            }
         }
 
         function copyGatewayLink(type, buttonElement) {
