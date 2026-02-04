@@ -6466,23 +6466,36 @@
 
         /* Sponsor Banner */
         /* Enhanced Sponsor Banner - Ad Style */
+        /* Sponsor Banner */
+        /* Enhanced Sponsor Banner - Ad Style (Redesigned Red/Black) */
         .sponsor-banner {
             margin-top: 4rem;
             margin-bottom: 3rem;
             background:
-                radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.08), transparent 70%),
-                linear-gradient(135deg, #030303, #080808),
-                url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="spgrid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(139,92,246,0.03)" stroke-width="2"/></pattern></defs><rect width="60" height="60" fill="url(%23spgrid)"/></svg>');
-            border-top: 1px solid rgba(139, 92, 246, 0.3);
-            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
-            border-left: none;
-            border-right: none;
-            border-radius: 0;
+                linear-gradient(90deg,
+                    rgba(200, 0, 0, 0.9) 0%,
+                    rgba(150, 0, 0, 0.95) 15%,
+                    #050505 35%,
+                    #050505 65%,
+                    rgba(150, 0, 0, 0.95) 85%,
+                    rgba(200, 0, 0, 0.9) 100%),
+                url('data:image/svg+xml,<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M0 40 L40 0" stroke="rgba(255, 0, 0, 0.1)" stroke-width="2"/></svg>');
+            border: 2px solid rgba(255, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 0;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow:
-                0 0 100px rgba(0,0,0,0.8) inset;
+                0 20px 60px rgba(255, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 0, 0, 0.2) inset,
+                0 0 30px rgba(255, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            align-items: stretch;
+            height: 200px;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
             width: 100%;
             max-width: 100%;
             margin-left: 0;
@@ -6498,10 +6511,11 @@
             left: -150%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.02), transparent);
-            transform: skewX(-25deg);
-            animation: sponsorShine 4s infinite;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transform: skewX(-20deg);
             pointer-events: none;
+            animation: sponsorShine 4s infinite linear;
+            z-index: 1;
         }
 
         @keyframes sponsorShine {
@@ -6511,36 +6525,40 @@
 
         [data-theme="light"] .sponsor-banner {
             background:
-                linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(245, 245, 250, 0.98));
-            border-color: rgba(139, 92, 246, 0.2);
-            box-shadow: none;
+                linear-gradient(90deg,
+                    rgba(255, 50, 50, 0.15) 0%,
+                    #ffffff 30%,
+                    #ffffff 70%,
+                    rgba(255, 50, 50, 0.15) 100%);
+            border-color: rgba(255, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.1);
         }
 
         .sponsor-banner:hover {
-            background-color: #050505;
-            box-shadow: 0 0 150px rgba(139, 92, 246, 0.1) inset;
+            transform: translateY(-5px) scale(1.01);
+            border-color: rgba(255, 0, 0, 0.6);
+            box-shadow:
+                0 25px 70px rgba(255, 0, 0, 0.3),
+                0 0 50px rgba(255, 0, 0, 0.1) inset;
         }
 
         .sponsor-glow {
             position: absolute;
-            inset: -2px;
-            background: conic-gradient(
-                from 0deg at 50% 50%,
-                transparent 0deg,
-                rgba(139, 92, 246, 0.3) 90deg,
-                transparent 180deg,
-                rgba(139, 92, 246, 0.3) 270deg,
-                transparent 360deg);
+            inset: -50%;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.2) 0%, transparent 60%);
             opacity: 0;
             transition: opacity 0.5s;
-            animation: sponsorBorderSpin 8s linear infinite;
-        }
-        @keyframes sponsorBorderSpin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            pointer-events: none;
+            mix-blend-mode: screen;
+            z-index: 0;
         }
         .sponsor-banner:hover .sponsor-glow {
             opacity: 1;
+            animation: pulseGlow 2s infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
         }
 
         .sponsor-content {
@@ -6554,10 +6572,10 @@
         }
 
         .sponsor-logo {
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             flex-shrink: 0;
-            filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.6));
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
             transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             animation: logoFloat 4s ease-in-out infinite;
         }
@@ -6569,65 +6587,57 @@
 
         .sponsor-banner:hover .sponsor-logo {
             transform: scale(1.1) rotate(-5deg) translateY(-5px);
-            filter: drop-shadow(0 0 50px rgba(139, 92, 246, 0.9));
+            filter: drop-shadow(0 0 50px rgba(255, 255, 255, 0.5));
         }
 
         .sponsor-info {
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
+            gap: 0.5rem;
+            align-items: flex-start;
+            justify-content: center;
         }
 
         .sponsor-header-row {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .sponsor-title {
-            font-size: 4.5rem;
+            font-size: 6rem;
             font-weight: 900;
-            line-height: 0.9;
+            line-height: 0.85;
             margin: 0;
-            background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 20%, #d8b4fe 40%, #c4b5fd 60%, #a78bfa 80%, #ffffff 100%);
-            background-size: 300% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffffff;
             letter-spacing: -2px;
             text-transform: uppercase;
-            animation: sponsorTitleFlow 6s linear infinite;
-            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.3));
-        }
-
-        @keyframes sponsorTitleFlow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 300% center; }
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.8));
+            -webkit-text-stroke: 0px;
         }
 
         .sponsor-subtitle {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #fbbf24;
-            letter-spacing: 3px;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #00ff00;
+            letter-spacing: -1px;
             text-transform: uppercase;
-            margin-top: 0.5rem;
-            text-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
-            background: linear-gradient(90deg, #fbbf24, #f59e0b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-top: 0;
+            text-shadow:
+                0 2px 0 #000,
+                0 0 20px rgba(0, 255, 0, 0.6);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1;
         }
 
         .sponsor-verified {
-            color: #00ff9d;
-            filter: drop-shadow(0 0 10px rgba(0, 255, 157, 0.6));
-            width: 32px;
-            height: 32px;
+            display: none;
         }
+
         [data-theme="light"] .sponsor-title {
-            background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 25%, #7c3aed 50%, #8b5cf6 75%, #4c1d95 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffffff;
+            background: none;
+            -webkit-text-fill-color: initial;
         }
 
         .sponsor-tags {
@@ -8368,17 +8378,8 @@
                 <div class="sponsor-glow"></div>
                 <div class="sponsor-content">
                     <div class="sponsor-logo">
-                        <svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-label="Vega X Logo" role="img">
                             <defs>
-                                <linearGradient id="dragonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#f0abfc" />
-                                    <stop offset="50%" stop-color="#c084fc" />
-                                    <stop offset="100%" stop-color="#7c3aed" />
-                                </linearGradient>
-                                <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" stop-color="#1a103c" />
-                                    <stop offset="100%" stop-color="#000000" />
-                                </linearGradient>
                                 <filter id="glow">
                                     <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
                                     <feMerge>
@@ -8387,54 +8388,16 @@
                                     </feMerge>
                                 </filter>
                             </defs>
-                            <!-- Shield Base -->
-                            <path d="M50 5 L88 20 C88 20 88 55 50 95 C12 55 12 20 12 20 L50 5 Z" fill="url(#shieldGrad)" stroke="#7c3aed" stroke-width="2"/>
-
-                            <!-- Stylized Wyvern Head -->
-                            <path d="M 50 15
-                                     C 68 15, 78 25, 78 40
-                                     C 78 50, 72 55, 62 55
-                                     L 68 65
-                                     L 50 88
-                                     L 32 65
-                                     L 38 55
-                                     C 28 55, 22 50, 22 40
-                                     C 22 25, 32 15, 50 15 Z"
-                                  fill="none" stroke="url(#dragonGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
-
-                            <!-- Inner W Shape / Eyes -->
-                            <path d="M 32 40 L 41 52 L 50 40 L 59 52 L 68 40" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
-                            <circle cx="50" cy="25" r="4" fill="#fff" filter="url(#glow)"/>
+                            <circle cx="50" cy="50" r="42" stroke="white" stroke-width="8" fill="none" filter="url(#glow)" />
+                            <path d="M 35 38 L 50 72 L 65 38" stroke="white" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
                         </svg>
                     </div>
                     <div class="sponsor-info">
                         <div class="sponsor-header-row">
-                            <h2 class="sponsor-title">WYV.GG</h2>
-                            <svg class="sponsor-verified" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
-                            </svg>
+                            <h2 class="sponsor-title">VEGA X</h2>
                         </div>
-                        <div class="sponsor-subtitle">BEST EXECUTORS SELLER</div>
-                        <div class="sponsor-tags">
-                            <span class="sponsor-tag">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                                #1 TRUSTED RESELLER
-                            </span>
-                            <span class="sponsor-tag">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                                </svg>
-                                CHEAPEST KEYS
-                            </span>
-                            <span class="sponsor-tag">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                                </svg>
-                                INSTANT DELIVERY
-                            </span>
-                        </div>
+                        <div class="sponsor-subtitle">2X LONGER KEYS</div>
+                        <div class="sponsor-subtitle" style="color: #00ff00; font-size: 2.5rem; text-shadow: 0 0 30px rgba(0, 255, 0, 0.8);">NO LAG!</div>
                     </div>
                 </div>
                 <a href="https://wyv.gg/ref/AlanGmg/" target="_blank" class="sponsor-link"></a>
