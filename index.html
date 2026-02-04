@@ -6474,7 +6474,7 @@
                 linear-gradient(135deg, rgba(15, 10, 20, 0.98), rgba(25, 20, 30, 0.98)),
                 url('data:image/svg+xml,<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="spgrid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(139,92,246,0.05)" stroke-width="1"/></pattern></defs><rect width="40" height="40" fill="url(%23spgrid)"/></svg>');
             border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 32px;
+            border-radius: 20px;
             position: relative;
             overflow: hidden;
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -6606,6 +6606,19 @@
         @keyframes sponsorTitleFlow {
             0% { background-position: 0% 50%; }
             100% { background-position: 300% center; }
+        }
+
+        .sponsor-subtitle {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fbbf24;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            text-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .sponsor-verified {
@@ -8403,6 +8416,7 @@
                                 <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
                             </svg>
                         </div>
+                        <div class="sponsor-subtitle">BEST EXECUTORS SELLER</div>
                         <div class="sponsor-tags">
                             <span class="sponsor-tag">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
