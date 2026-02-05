@@ -22,7 +22,7 @@
             --status-offline: #ff4d4d;
             
             --linkvertise: #ffc800;
-            --lootlabs: #8b5cf6;
+            --shrtfly: #8b5cf6;
 
             --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
             --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -4923,7 +4923,7 @@
                 inset 0 2px 0 0 rgba(255,255,255,0.2);
         }
         .ultra-card.linkvertise { border-color: rgba(255, 200, 0, 0.15); }
-        .ultra-card.lootlabs { border-color: rgba(139, 92, 246, 0.15); }
+        .ultra-card.shrtfly { border-color: rgba(139, 92, 246, 0.15); }
         .ultra-card.linkvertise:hover {
             border-color: rgba(255, 200, 0, 0.6);
             box-shadow:
@@ -4931,7 +4931,7 @@
                 0 35px 80px -20px rgba(0,0,0,1),
                 inset 0 1px 0 0 rgba(255, 200, 0, 0.2);
         }
-        .ultra-card.lootlabs:hover {
+        .ultra-card.shrtfly:hover {
             border-color: rgba(139, 92, 246, 0.6);
             box-shadow:
                 0 0 60px rgba(139, 92, 246, 0.3),
@@ -5001,7 +5001,7 @@
             color: #ffc800;
             border-color: rgba(255, 200, 0, 0.4);
         }
-        .ultra-card.lootlabs .u-checkpoint-badge {
+        .ultra-card.shrtfly .u-checkpoint-badge {
             background: rgba(139, 92, 246, 0.15);
             color: #8b5cf6;
             border-color: rgba(139, 92, 246, 0.4);
@@ -5032,7 +5032,7 @@
             color: #ffc800;
             border: 1px solid rgba(255, 200, 0, 0.5);
         }
-        .ultra-card.lootlabs .u-duration-badge {
+        .ultra-card.shrtfly .u-duration-badge {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(124, 58, 237, 0.2));
             color: #8b5cf6;
             border: 1px solid rgba(139, 92, 246, 0.5);
@@ -5086,8 +5086,8 @@
         .ultra-card.linkvertise .u-glow {
             background: radial-gradient(circle, var(--linkvertise), rgba(255, 200, 0, 0.5));
         }
-        .ultra-card.lootlabs .u-glow {
-            background: radial-gradient(circle, var(--lootlabs), rgba(139, 92, 246, 0.5));
+        .ultra-card.shrtfly .u-glow {
+            background: radial-gradient(circle, var(--shrtfly), rgba(139, 92, 246, 0.5));
         }
         .ultra-card:hover .u-glow {
             opacity: 1;
@@ -5173,7 +5173,7 @@
             transform: scale(1.2);
         }
         .ultra-card.linkvertise .u-feature-item svg { color: #ffc800; }
-        .ultra-card.lootlabs .u-feature-item svg { color: #8b5cf6; }
+        .ultra-card.shrtfly .u-feature-item svg { color: #8b5cf6; }
         .u-btn {
             width: 100%;
             padding: 22px;
@@ -5238,7 +5238,7 @@
             background: linear-gradient(135deg, #ffc800, #ffb000);
             color: #000;
         }
-        .ultra-card.lootlabs .u-btn {
+        .ultra-card.shrtfly .u-btn {
             background: linear-gradient(135deg, #8b5cf6, #7c3aed);
             color: #fff;
         }
@@ -5249,7 +5249,7 @@
                 inset 0 2px 0 0 rgba(255, 255, 255, 0.3);
             transform: translateY(-4px) scale(1.03);
         }
-        .ultra-card.lootlabs:hover .u-btn {
+        .ultra-card.shrtfly:hover .u-btn {
             box-shadow:
                 0 0 50px rgba(139, 92, 246, 0.7),
                 0 20px 50px -5px rgba(139, 92, 246, 0.5),
@@ -5385,22 +5385,22 @@
         .ultra-card.linkvertise .copy-link-btn:hover .copy-icon {
             filter: drop-shadow(0 0 8px rgba(255, 200, 0, 0.6));
         }
-        .ultra-card.lootlabs .copy-link-btn {
+        .ultra-card.shrtfly .copy-link-btn {
             border-color: rgba(139, 92, 246, 0.3);
         }
-        .ultra-card.lootlabs .copy-link-btn:hover {
+        .ultra-card.shrtfly .copy-link-btn:hover {
             border-color: rgba(139, 92, 246, 0.6);
             box-shadow:
                 0 8px 20px rgba(139, 92, 246, 0.25),
                 0 4px 10px rgba(139, 92, 246, 0.15);
         }
-        .ultra-card.lootlabs .copy-link-text {
+        .ultra-card.shrtfly .copy-link-text {
             text-decoration-color: rgba(139, 92, 246, 0.4);
         }
-        .ultra-card.lootlabs .copy-link-btn:hover .copy-link-text {
+        .ultra-card.shrtfly .copy-link-btn:hover .copy-link-text {
             text-decoration-color: rgba(139, 92, 246, 0.8);
         }
-        .ultra-card.lootlabs .copy-link-btn:hover .copy-icon {
+        .ultra-card.shrtfly .copy-link-btn:hover .copy-icon {
             filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.6));
         }
 
@@ -8291,7 +8291,7 @@
                     </div>
                 </div>
 
-                <div class="ultra-card lootlabs" onclick="openGateway('lootlabs')">
+                <div class="ultra-card shrtfly" onclick="openGateway('shrtfly')">
                     <div class="u-header">
                         <div class="u-badges-group">
                             <div class="u-checkpoint-badge">
@@ -8313,17 +8313,15 @@
                     <div class="u-icon-wrapper">
                         <div class="u-glow"></div>
                         <div class="u-svg" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; filter: drop-shadow(0 8px 25px rgba(139, 92, 246, 0.5));">
-                                <path d="M50 10 L90 30 L50 50 L10 30 Z" fill="#fbbf24"/>
-                                <path d="M10 30 L50 50 V90 L10 70 Z" fill="#7c3aed"/>
-                                <path d="M50 50 L90 30 V70 L50 90 Z" fill="#6d28d9"/>
-                                <path d="M50 20 L75 32.5 L50 45 L25 32.5 Z" fill="#4c1d95"/>
-                                <path d="M10 30 L30 40 V60 L10 50 Z" fill="#fbbf24" opacity="0.9"/>
-                                <path d="M90 30 L70 40 V60 L90 50 Z" fill="#fbbf24" opacity="0.9"/>
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; filter: drop-shadow(0 8px 25px rgba(255, 107, 107, 0.5));">
+                                <path d="M25 45 C 15 35, 20 15, 40 30 C 35 40, 30 42, 25 45 Z" fill="#22d3ee" />
+                                <path d="M40 30 C 50 10, 75 20, 60 40 C 55 35, 45 32, 40 30 Z" fill="#f43f5e" />
+                                <path d="M35 45 C 55 45, 75 40, 85 50 C 75 60, 55 65, 45 70 C 40 65, 35 55, 35 45 Z" fill="#7c3aed" />
+                                <path d="M35 65 C 25 75, 35 85, 45 70 Z" fill="#f43f5e" />
                             </svg>
                         </div>
                     </div>
-                    <h2 class="u-title">Lootlabs</h2>
+                    <h2 class="u-title">Shrtfly</h2>
                     <p class="u-desc">Premium gateway with only 3 checkpoints for lightning-fast verification. Extended 24-hour key validity for seamless access.</p>
 
                     <div class="u-features">
@@ -8354,7 +8352,7 @@
 
                     <div class="copy-link-section">
                         <span class="copy-link-label">Having trouble redirecting?</span>
-                        <button class="copy-link-btn" onclick="event.stopPropagation(); copyGatewayLink('lootlabs', this)" data-url="https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp">
+                        <button class="copy-link-btn" onclick="event.stopPropagation(); copyGatewayLink('shrtfly', this)" data-url="https://ads.luarmor.net/get_key?for=Shrtfly-XLBrTSWSzaQg">
                             <span class="copy-link-text">Copy link manually</span>
                             <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -8366,39 +8364,6 @@
                         </button>
                     </div>
                 </div>
-            </div>
-
-            <div class="sponsor-banner">
-                <div class="premium-badge">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                    </svg>
-                    OFFICIAL PARTNER
-                </div>
-                <div class="sponsor-glow"></div>
-                <div class="sponsor-content">
-                    <div class="sponsor-logo">
-                        <svg viewBox="0 0 640 512" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-label="WYV.GG Logo" role="img" fill="white">
-                            <defs>
-                                <filter id="glow">
-                                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                                    <feMerge>
-                                        <feMergeNode in="coloredBlur"/>
-                                        <feMergeNode in="SourceGraphic"/>
-                                    </feMerge>
-                                </filter>
-                            </defs>
-                            <path d="M18.32 255.78L192 223.96l-91.28 68.69c-10.08 10.08-2.94 27.31 11.31 27.31h222.7c-9.44-26.4-14.73-54.47-14.73-83.38v-42.27l-119.73-87.6c-23.82-15.88-55.29-14.01-77.06 4.59L5.81 227.64c-12.38 10.33-3.45 30.42 12.51 28.14zm556.87 34.1l-100.66-50.31A47.992 47.992 0 0 1 448 196.65v-36.69h64l28.09 22.63c6 6 14.14 9.37 22.63 9.37h30.97a32 32 0 0 0 28.62-17.69l14.31-28.62a32.005 32.005 0 0 0-3.02-33.51l-74.53-99.38C553.02 4.7 543.54 0 533.47 0H296.02c-7.13 0-10.7 8.57-5.66 13.61L352 63.96 292.42 88.8c-5.9 2.95-5.9 11.36 0 14.31L352 127.96v108.62c0 72.08 36.03 139.39 96 179.38-195.59 6.81-344.56 41.01-434.1 60.91C5.78 478.67 0 485.88 0 494.2 0 504 7.95 512 17.76 512h499.08c63.29.01 119.61-47.56 122.99-110.76 2.52-47.28-22.73-90.4-64.64-111.36zM489.18 66.25l45.65 11.41c-2.75 10.91-12.47 18.89-24.13 18.26-12.96-.71-25.85-12.53-21.52-29.67z" filter="url(#glow)"/>
-                        </svg>
-                    </div>
-                    <div class="sponsor-info">
-                        <div class="sponsor-header-row">
-                            <h2 class="sponsor-title">WYV.GG</h2>
-                        </div>
-                        <div class="sponsor-subtitle">#1 TRUSTED EXECUTOR RESELLER</div>
-                    </div>
-                </div>
-                <a href="https://wyv.gg/ref/AlanGmg/" target="_blank" class="sponsor-link"></a>
             </div>
 
             <div class="luarmor-footer">
@@ -8955,7 +8920,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
             // Format URL for display
             const displayUrl = url.length > 50 ? url.substring(0, 50) + '...' : url;
-            const providerName = type === 'linkvertise' ? 'Linkvertise' : 'Lootlabs';
+            const providerName = type === 'linkvertise' ? 'Linkvertise' : 'Shrtfly';
 
             toast.innerHTML = `
                 <div class="toast-header">
@@ -8992,8 +8957,8 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
             let targetUrl = '';
             if(type === 'linkvertise') {
                 targetUrl = 'https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU';
-            } else if (type === 'lootlabs') {
-                targetUrl = 'https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp';
+            } else if (type === 'shrtfly') {
+                targetUrl = 'https://ads.luarmor.net/get_key?for=Shrtfly-XLBrTSWSzaQg';
             }
 
             if(targetUrl) {
