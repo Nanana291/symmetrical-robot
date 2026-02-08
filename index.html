@@ -7682,9 +7682,9 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                         </svg>
                     </div>
                     <div class="toast-content">
-                        <div class="toast-title">Redirecting to ${providerName}</div>
+                        <div class="toast-title">Opened ${providerName}</div>
                         <div class="toast-message">
-                            Opening gateway in 1 second...
+                            Gateway opened in a new tab.
                         </div>
                     </div>
                 </div>
@@ -7692,16 +7692,13 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
             container.appendChild(toast);
 
-            // Redirect after 1 second
+            // Hide toast after 3 seconds
             setTimeout(() => {
-                window.open(url, '_blank');
-
-                // Hide toast
                 toast.classList.add('hiding');
                 setTimeout(() => {
                     container.removeChild(toast);
                 }, 400);
-            }, 1000);
+            }, 3000);
         }
 
         function openGateway(type) {
@@ -8185,7 +8182,16 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                     .catch(console.error);
             }, []);
 
-            if (!data) return null;
+            if (!data) return (
+                <div className="discord-widget" style={{
+                    padding: '2rem',
+                    textAlign: 'center',
+                    color: '#8a8a9b',
+                    fontFamily: 'Outfit, sans-serif'
+                }}>
+                    Loading community stats...
+                </div>
+            );
 
             const style = {
                 container: {
@@ -8309,6 +8315,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
             const handleOpen = () => {
                 const targetUrl = url;
                 if(targetUrl) {
+                    window.open(targetUrl, '_blank');
                     showToast(targetUrl, type);
                 }
             };
