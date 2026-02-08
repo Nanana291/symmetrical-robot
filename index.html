@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imp Hub X Version</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <style>
         :root {
             --bg-deep: #020202;
@@ -448,752 +451,6 @@
             filter: blur(15px);
         }
 
-        /* Ultra-Modern Code Lock Overlay with Neon Red Borders - REDESIGNED */
-        .code-lock-overlay {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse at center, rgba(255, 0, 0, 0.12) 0%, rgba(255, 40, 40, 0.06) 30%, transparent 60%),
-                radial-gradient(circle at top right, rgba(255, 80, 80, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at bottom left, rgba(255, 60, 60, 0.08) 0%, transparent 50%),
-                linear-gradient(135deg, rgba(12, 5, 8, 0.99) 0%, rgba(20, 8, 12, 1) 50%, rgba(15, 5, 10, 0.99) 100%);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 32px;
-            opacity: 1;
-            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-            border: 4px solid transparent;
-            background-clip: padding-box;
-            overflow: hidden;
-            padding: 1rem;
-        }
-        .code-lock-overlay.unlocked {
-            opacity: 0;
-            pointer-events: none;
-            transform: scale(0.92);
-        }
-
-        /* Triple-Layer Animated Border System */
-        .code-lock-overlay::before {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            z-index: -1;
-            border-radius: 36px;
-            background: conic-gradient(
-                from 0deg at 50% 50%,
-                #ff0000 0deg,
-                #ff3333 45deg,
-                #ff6666 90deg,
-                #ff8888 135deg,
-                #ffaaaa 180deg,
-                #ff8888 225deg,
-                #ff6666 270deg,
-                #ff3333 315deg,
-                #ff0000 360deg);
-            filter: blur(8px);
-            opacity: 0.8;
-        }
-        @keyframes lockBorderRotate {
-            0% {
-                transform: rotate(0deg) scale(1);
-            }
-            50% {
-                transform: rotate(180deg) scale(1.05);
-            }
-            100% {
-                transform: rotate(360deg) scale(1);
-            }
-        }
-
-        /* Inner Border Layer */
-        .code-lock-overlay::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 32px;
-            box-shadow:
-                inset 0 0 100px rgba(255, 0, 0, 0.25),
-                inset 0 0 60px rgba(255, 40, 40, 0.2),
-                inset 0 0 30px rgba(255, 80, 80, 0.15),
-                0 0 120px rgba(255, 0, 0, 0.35),
-                0 0 60px rgba(255, 0, 0, 0.25),
-                0 0 30px rgba(255, 0, 0, 0.2);
-            pointer-events: none;
-            animation: lockInnerGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes lockInnerGlow {
-            0%, 100% {
-                box-shadow:
-                    inset 0 0 100px rgba(255, 0, 0, 0.25),
-                    inset 0 0 60px rgba(255, 40, 40, 0.2),
-                    0 0 120px rgba(255, 0, 0, 0.35);
-            }
-            50% {
-                box-shadow:
-                    inset 0 0 120px rgba(255, 0, 0, 0.35),
-                    inset 0 0 80px rgba(255, 40, 40, 0.3),
-                    0 0 150px rgba(255, 0, 0, 0.45);
-            }
-        }
-        .lock-content {
-            text-align: center;
-            padding: 2.5rem 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.8rem;
-            max-width: 600px;
-            width: 100%;
-            position: relative;
-            z-index: 1;
-        }
-
-        .lock-icon-wrapper {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle, rgba(255, 0, 0, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            border: 2px solid rgba(255, 0, 0, 0.3);
-            box-shadow:
-                0 0 30px rgba(255, 0, 0, 0.3),
-                inset 0 0 20px rgba(255, 0, 0, 0.15);
-        }
-
-        @keyframes iconWrapperPulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow:
-                    0 0 40px rgba(255, 0, 0, 0.4),
-                    inset 0 0 30px rgba(255, 0, 0, 0.2);
-            }
-            50% {
-                transform: scale(1.05);
-                box-shadow:
-                    0 0 60px rgba(255, 0, 0, 0.6),
-                    inset 0 0 40px rgba(255, 0, 0, 0.3);
-            }
-        }
-        .lock-icon {
-            color: #ff3333;
-            filter:
-                drop-shadow(0 0 25px rgba(255, 0, 0, 0.7))
-                drop-shadow(0 0 40px rgba(255, 0, 0, 0.4));
-            position: relative;
-            z-index: 2;
-        }
-
-        @keyframes lockIconFloat {
-            0%, 100% {
-                transform: translateY(0px) scale(1) rotate(0deg);
-                filter:
-                    drop-shadow(0 0 35px rgba(255, 0, 0, 0.9))
-                    drop-shadow(0 0 70px rgba(255, 0, 0, 0.6));
-            }
-            25% {
-                transform: translateY(-8px) scale(1.03) rotate(-2deg);
-            }
-            50% {
-                transform: translateY(-12px) scale(1.06) rotate(0deg);
-                filter:
-                    drop-shadow(0 0 45px rgba(255, 0, 0, 1))
-                    drop-shadow(0 0 90px rgba(255, 0, 0, 0.8))
-                    drop-shadow(0 0 120px rgba(255, 40, 40, 0.6));
-            }
-            75% {
-                transform: translateY(-8px) scale(1.03) rotate(2deg);
-            }
-        }
-
-        .lock-glow {
-            position: absolute;
-            inset: -30px;
-            background: radial-gradient(circle, rgba(255, 0, 0, 0.4) 0%, rgba(255, 40, 40, 0.2) 40%, transparent 70%);
-            filter: blur(10px);
-            opacity: 0.8;
-            z-index: 1;
-        }
-
-        @keyframes lockGlowPulse {
-            0%, 100% {
-                opacity: 0.7;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.15);
-            }
-        }
-
-        .lock-title {
-            font-size: clamp(1.8rem, 5vw, 2.8rem);
-            font-weight: 900;
-            background: linear-gradient(135deg,
-                #ffffff 0%,
-                #ffe0e0 15%,
-                #ffb3b3 30%,
-                #ff6666 50%,
-                #ff3333 70%,
-                #ff0000 85%,
-                #ff3333 100%);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 3px;
-            margin: 0;
-            filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.6));
-            text-transform: uppercase;
-            line-height: 1.2;
-        }
-
-        @keyframes lockTitleShimmer {
-            0%, 100% {
-                background-position: 0% 50%;
-                filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.6));
-            }
-            50% {
-                background-position: 100% 50%;
-                filter: drop-shadow(0 0 35px rgba(255, 0, 0, 0.8));
-            }
-        }
-
-        .lock-description {
-            font-size: clamp(0.95rem, 2.5vw, 1.15rem);
-            color: rgba(255, 255, 255, 0.85);
-            margin: 0;
-            font-weight: 500;
-            line-height: 1.6;
-            max-width: 90%;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-        }
-        .lock-action-btn {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            padding: 20px 40px;
-            background: linear-gradient(135deg,
-                #ff0000 0%,
-                #ff2222 25%,
-                #ff4444 50%,
-                #ff2222 75%,
-                #ff0000 100%);
-            background-size: 200% 200%;
-            border: 3px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            color: #ffffff;
-            font-size: clamp(1rem, 2.8vw, 1.15rem);
-            font-weight: 800;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-            overflow: hidden;
-            box-shadow:
-                0 15px 50px rgba(255, 0, 0, 0.5),
-                0 8px 25px rgba(255, 0, 0, 0.35),
-                0 0 0 1px rgba(255, 0, 0, 0.8),
-                inset 0 2px 0 0 rgba(255, 255, 255, 0.35),
-                inset 0 -2px 8px rgba(0, 0, 0, 0.3);
-            font-family: 'Outfit', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            width: 100%;
-            max-width: 420px;
-            min-height: 68px;
-        }
-
-        @keyframes btnBackgroundShift {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-        }
-
-        .lock-action-btn:hover {
-            transform: translateY(-6px) scale(1.03);
-            box-shadow:
-                0 25px 70px rgba(255, 0, 0, 0.7),
-                0 12px 40px rgba(255, 0, 0, 0.5),
-                0 0 0 2px rgba(255, 80, 80, 0.9),
-                inset 0 3px 0 0 rgba(255, 255, 255, 0.45),
-                inset 0 -3px 12px rgba(0, 0, 0, 0.4);
-            background: linear-gradient(135deg,
-                #ff1a1a 0%,
-                #ff3333 25%,
-                #ff5555 50%,
-                #ff3333 75%,
-                #ff1a1a 100%);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-
-        .lock-action-btn:active {
-            transform: translateY(-2px) scale(0.98);
-        }
-
-        .lock-action-btn svg {
-            filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.4));
-            flex-shrink: 0;
-        }
-
-        .lock-action-btn span {
-            position: relative;
-            z-index: 2;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn-shine {
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg,
-                transparent,
-                rgba(255, 255, 255, 0.3) 50%,
-                transparent);
-            opacity: 0.6;
-            z-index: 1;
-        }
-
-        @keyframes btnShine {
-            0%, 100% {
-                left: -100%;
-                opacity: 0;
-            }
-            10%, 90% {
-                opacity: 1;
-            }
-            50% {
-                left: 100%;
-                opacity: 1;
-            }
-        }
-
-        /* Button Glow Effect */
-        .lock-action-btn::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(45deg,
-                #ff0000,
-                #ff4444,
-                #ff6666,
-                #ff8888,
-                #ff6666,
-                #ff4444,
-                #ff0000);
-            background-size: 400% 400%;
-            border-radius: 22px;
-            z-index: -1;
-            filter: blur(8px);
-            opacity: 0.8;
-        }
-        .unlock-timer {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            width: 100%;
-            max-width: 450px;
-        }
-
-        .timer-bar {
-            width: 100%;
-            height: 12px;
-            background: linear-gradient(90deg,
-                rgba(255, 255, 255, 0.08) 0%,
-                rgba(255, 255, 255, 0.12) 50%,
-                rgba(255, 255, 255, 0.08) 100%);
-            border-radius: 14px;
-            overflow: hidden;
-            border: 2px solid rgba(255, 0, 0, 0.4);
-            box-shadow:
-                inset 0 3px 10px rgba(0, 0, 0, 0.6),
-                0 0 25px rgba(255, 0, 0, 0.3),
-                0 4px 15px rgba(0, 0, 0, 0.4);
-            position: relative;
-        }
-
-        .timer-bar::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg,
-                transparent 0%,
-                rgba(255, 255, 255, 0.1) 50%,
-                transparent 100%);
-            animation: timerBarShimmer 2s ease-in-out infinite;
-        }
-
-        @keyframes timerBarShimmer {
-            0%, 100% {
-                transform: translateX(-100%);
-            }
-            50% {
-                transform: translateX(100%);
-            }
-        }
-
-        .timer-progress {
-            height: 100%;
-            background: linear-gradient(90deg,
-                #ff0000 0%,
-                #ff3333 25%,
-                #ff6666 50%,
-                #ff8888 75%,
-                #ffaaaa 100%);
-            border-radius: 12px;
-            width: 0%;
-            animation: timerFill 5s linear forwards;
-            box-shadow:
-                0 0 25px rgba(255, 0, 0, 0.9),
-                0 0 40px rgba(255, 0, 0, 0.6),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            position: relative;
-        }
-
-        .timer-progress::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg,
-                transparent 0%,
-                rgba(255, 255, 255, 0.3) 50%,
-                transparent 100%);
-            animation: timerProgressShine 1.5s ease-in-out infinite;
-        }
-
-        @keyframes timerProgressShine {
-            0%, 100% {
-                transform: translateX(-100%);
-            }
-            50% {
-                transform: translateX(100%);
-            }
-        }
-
-        @keyframes timerFill {
-            0% {
-                width: 0%;
-                opacity: 0.8;
-            }
-            100% {
-                width: 100%;
-                opacity: 1;
-            }
-        }
-
-        /* Lock Overlay Unlocked State */
-        .code-lock-overlay.unlocked {
-            opacity: 0;
-            pointer-events: none;
-            transform: scale(0.95);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Unlock Toast Notification */
-        .unlock-toast {
-            background:
-                linear-gradient(135deg, rgba(0, 20, 10, 0.98) 0%, rgba(0, 30, 15, 1) 100%),
-                url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="unlockgrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,255,157,0.08)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23unlockgrid)"/></svg>');
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 1.5rem 2rem;
-            min-width: 400px;
-            max-width: 500px;
-            border: 2px solid rgba(0, 255, 157, 0.5);
-            box-shadow:
-                0 25px 80px rgba(0, 0, 0, 0.8),
-                0 0 60px rgba(0, 255, 157, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            pointer-events: all;
-            position: relative;
-            overflow: hidden;
-            transform: translateX(600px);
-            animation: toastSlideIn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-        }
-
-        .unlock-toast::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg,
-                transparent,
-                rgba(0, 255, 157, 0.15),
-                transparent);
-            animation: unlockShine 2s ease-in-out infinite;
-        }
-
-        @keyframes unlockShine {
-            0% { left: -100%; }
-            50%, 100% { left: 100%; }
-        }
-
-        .unlock-toast-content {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .unlock-toast-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, rgba(0, 255, 157, 0.2) 0%, rgba(0, 200, 125, 0.15) 100%);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1.5px solid rgba(0, 255, 157, 0.4);
-            box-shadow: 0 0 30px rgba(0, 255, 157, 0.3);
-            flex-shrink: 0;
-        }
-
-        .unlock-toast-icon svg {
-            width: 28px;
-            height: 28px;
-            color: #00ff9d;
-            filter: drop-shadow(0 0 8px rgba(0, 255, 157, 0.8));
-            animation: unlockIconPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        @keyframes unlockIconPop {
-            0% {
-                transform: scale(0) rotate(-180deg);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.2) rotate(10deg);
-            }
-            100% {
-                transform: scale(1) rotate(0deg);
-                opacity: 1;
-            }
-        }
-
-        .unlock-toast-text {
-            flex: 1;
-        }
-
-        .unlock-toast-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #00ff9d;
-            margin: 0 0 0.25rem 0;
-            text-shadow: 0 0 20px rgba(0, 255, 157, 0.5);
-        }
-
-        .unlock-toast-message {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin: 0;
-        }
-        .timer-text {
-            font-size: clamp(0.9rem, 2.2vw, 1rem);
-            color: rgba(255, 255, 255, 0.75);
-            font-weight: 600;
-            letter-spacing: 0.8px;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
-
-        #timerSeconds {
-            color: #ff3333;
-            font-weight: 900;
-            font-size: clamp(1.05rem, 2.8vw, 1.2rem);
-            filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.8));
-            display: inline-block;
-            animation: timerNumberPulse 1s ease-in-out infinite;
-        }
-
-        @keyframes timerNumberPulse {
-            0%, 100% {
-                transform: scale(1);
-                filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.8));
-            }
-            50% {
-                transform: scale(1.1);
-                filter: drop-shadow(0 0 20px rgba(255, 0, 0, 1));
-            }
-        }
-
-        /* ========================================
-           MOBILE RESPONSIVENESS - LOCK SYSTEM
-           ======================================== */
-
-        @media (max-width: 768px) {
-            .code-lock-overlay {
-                padding: 0.8rem;
-                border-radius: 24px;
-            }
-
-            .lock-content {
-                padding: 1.5rem 1rem;
-                gap: 1.3rem;
-            }
-
-            .lock-icon-wrapper {
-                width: 100px;
-                height: 100px;
-            }
-
-            .lock-icon {
-                width: 56px;
-                height: 56px;
-            }
-
-            .lock-title {
-                font-size: clamp(1.5rem, 6vw, 2rem);
-                letter-spacing: 1.5px;
-            }
-
-            .lock-description {
-                font-size: clamp(0.85rem, 3vw, 1rem);
-                max-width: 95%;
-            }
-
-            .lock-action-btn {
-                padding: 18px 32px;
-                min-height: 64px;
-                gap: 10px;
-                width: 100%;
-                max-width: 100%;
-            }
-
-            .unlock-timer {
-                max-width: 100%;
-                gap: 0.85rem;
-            }
-
-            .timer-bar {
-                height: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .code-lock-overlay {
-                padding: 0.6rem;
-                border-radius: 20px;
-                inset: 0;
-            }
-
-            .code-lock-overlay::before {
-                filter: blur(20px) saturate(2.5) brightness(1.2);
-            }
-
-            .lock-content {
-                padding: 1.2rem 0.8rem;
-                gap: 1.1rem;
-            }
-
-            .lock-icon-wrapper {
-                width: 85px;
-                height: 85px;
-            }
-
-            .lock-icon {
-                width: 48px;
-                height: 48px;
-            }
-
-            .lock-title {
-                font-size: clamp(1.3rem, 7vw, 1.7rem);
-                letter-spacing: 1px;
-            }
-
-            .lock-description {
-                font-size: clamp(0.8rem, 3.5vw, 0.95rem);
-                max-width: 98%;
-                line-height: 1.5;
-            }
-
-            .lock-action-btn {
-                padding: 16px 24px;
-                min-height: 60px;
-                gap: 8px;
-                font-size: clamp(0.9rem, 3.5vw, 1.05rem);
-                border-radius: 16px;
-            }
-
-            .lock-action-btn svg {
-                width: 18px;
-                height: 18px;
-            }
-
-            .unlock-timer {
-                gap: 0.7rem;
-            }
-
-            .timer-bar {
-                height: 8px;
-                border-radius: 10px;
-            }
-
-            .timer-text {
-                font-size: clamp(0.8rem, 3vw, 0.9rem);
-            }
-
-            #timerSeconds {
-                font-size: clamp(0.95rem, 3.5vw, 1.1rem);
-            }
-        }
-
-        @media (max-width: 360px) {
-            .lock-content {
-                padding: 1rem 0.6rem;
-                gap: 0.9rem;
-            }
-
-            .lock-icon-wrapper {
-                width: 75px;
-                height: 75px;
-            }
-
-            .lock-icon {
-                width: 42px;
-                height: 42px;
-            }
-
-            .lock-title {
-                font-size: 1.25rem;
-                letter-spacing: 0.5px;
-            }
-
-            .lock-description {
-                font-size: 0.78rem;
-            }
-
-            .lock-action-btn {
-                padding: 14px 20px;
-                min-height: 56px;
-                font-size: 0.88rem;
-            }
-
-            .lock-action-btn svg {
-                width: 16px;
-                height: 16px;
-            }
-
-            .timer-bar {
-                height: 7px;
-            }
-        }
 
         /* ========================================
            GLOBAL MOBILE IMPROVEMENTS
@@ -6466,236 +5723,6 @@
 
         /* Sponsor Banner */
         /* Enhanced Sponsor Banner - Ad Style */
-        /* Sponsor Banner */
-        /* Enhanced Sponsor Banner - Ad Style (Redesigned Purple/Black) */
-        .sponsor-banner {
-            margin-top: 4rem;
-            margin-bottom: 3rem;
-            background:
-                linear-gradient(90deg,
-                    rgba(169, 63, 171, 0.9) 0%,
-                    rgba(120, 40, 122, 0.95) 15%,
-                    #050505 35%,
-                    #050505 65%,
-                    rgba(120, 40, 122, 0.95) 85%,
-                    rgba(169, 63, 171, 0.9) 100%),
-                url('data:image/svg+xml,<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><path d="M0 40 L40 0" stroke="rgba(169, 63, 171, 0.1)" stroke-width="2"/></svg>');
-            border: 2px solid rgba(169, 63, 171, 0.3);
-            border-radius: 20px;
-            padding: 0;
-            position: relative;
-            overflow: hidden;
-            box-shadow:
-                0 20px 60px rgba(169, 63, 171, 0.2),
-                0 0 0 1px rgba(169, 63, 171, 0.2) inset,
-                0 0 30px rgba(169, 63, 171, 0.1);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            display: flex;
-            align-items: stretch;
-            height: 200px;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            width: 100%;
-            max-width: 100%;
-            margin-left: 0;
-            margin-right: 0;
-            backdrop-filter: blur(12px);
-            transform-style: flat;
-        }
-
-        .sponsor-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-            transform: skewX(-20deg);
-            pointer-events: none;
-            animation: sponsorShine 4s infinite linear;
-            z-index: 1;
-        }
-
-        @keyframes sponsorShine {
-            0%, 80% { left: -150%; }
-            100% { left: 150%; }
-        }
-
-        [data-theme="light"] .sponsor-banner {
-            background:
-                linear-gradient(90deg,
-                    rgba(169, 63, 171, 0.15) 0%,
-                    #ffffff 30%,
-                    #ffffff 70%,
-                    rgba(169, 63, 171, 0.15) 100%);
-            border-color: rgba(169, 63, 171, 0.2);
-            box-shadow: 0 10px 30px rgba(169, 63, 171, 0.1);
-        }
-
-        .sponsor-banner:hover {
-            transform: translateY(-5px) scale(1.01);
-            border-color: rgba(169, 63, 171, 0.6);
-            box-shadow:
-                0 25px 70px rgba(169, 63, 171, 0.3),
-                0 0 50px rgba(169, 63, 171, 0.1) inset;
-        }
-
-        .sponsor-glow {
-            position: absolute;
-            inset: -50%;
-            background: radial-gradient(circle, rgba(169, 63, 171, 0.2) 0%, transparent 60%);
-            opacity: 0;
-            transition: opacity 0.5s;
-            pointer-events: none;
-            mix-blend-mode: screen;
-            z-index: 0;
-        }
-        .sponsor-banner:hover .sponsor-glow {
-            opacity: 1;
-            animation: pulseGlow 2s infinite;
-        }
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.1); }
-        }
-
-        .sponsor-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4rem;
-            padding: 4rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .sponsor-logo {
-            width: 140px;
-            height: 140px;
-            flex-shrink: 0;
-            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            animation: logoFloat 4s ease-in-out infinite;
-        }
-
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .sponsor-banner:hover .sponsor-logo {
-            transform: scale(1.1) rotate(-5deg) translateY(-5px);
-            filter: drop-shadow(0 0 50px rgba(255, 255, 255, 0.5));
-        }
-
-        .sponsor-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            align-items: flex-start;
-            justify-content: center;
-        }
-
-        .sponsor-header-row {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .sponsor-title {
-            font-size: 6rem;
-            font-weight: 900;
-            line-height: 0.85;
-            margin: 0;
-            color: #ffffff;
-            letter-spacing: -2px;
-            text-transform: uppercase;
-            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.8));
-            -webkit-text-stroke: 0px;
-        }
-
-        .sponsor-subtitle {
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: #00ff00;
-            letter-spacing: -1px;
-            text-transform: uppercase;
-            margin-top: 0;
-            text-shadow:
-                0 2px 0 #000,
-                0 0 20px rgba(0, 255, 0, 0.6);
-            font-family: 'Outfit', sans-serif;
-            line-height: 1;
-        }
-
-        .sponsor-verified {
-            display: none;
-        }
-
-        [data-theme="light"] .sponsor-title {
-            color: #ffffff;
-            background: none;
-            -webkit-text-fill-color: initial;
-        }
-
-        .sponsor-tags {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .sponsor-tag {
-            padding: 8px 16px;
-            background: rgba(139, 92, 246, 0.05);
-            border: 1px solid rgba(139, 92, 246, 0.15);
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 800;
-            color: #c4b5fd;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-            letter-spacing: 0.5px;
-        }
-
-        .sponsor-tag svg {
-            color: var(--primary);
-        }
-
-        .sponsor-banner:hover .sponsor-tag {
-            background: rgba(139, 92, 246, 0.25);
-            border-color: rgba(139, 92, 246, 0.6);
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.2);
-        }
-
-        [data-theme="light"] .sponsor-tag {
-            color: #7c3aed;
-            border-color: rgba(139, 92, 246, 0.3);
-            background: rgba(139, 92, 246, 0.08);
-        }
-
-        .premium-badge {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: rgba(255, 215, 0, 0.15);
-            padding: 4px 12px;
-            border-bottom-left-radius: 12px;
-            color: #ffd700;
-            font-weight: 800;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            border-left: 1px solid rgba(255, 215, 0, 0.3);
-            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
-            z-index: 3;
-            display: flex;
-            align-items: center;
-            gap: 6px;
             text-transform: uppercase;
         }
 
@@ -6799,33 +5826,6 @@
         </header>
 
         <div class="editor-container">
-            <!-- Ultra-Modern Lock Overlay -->
-            <div class="code-lock-overlay" id="codeLockOverlay">
-                <div class="lock-content">
-                    <div class="lock-icon-wrapper">
-                        <svg class="lock-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                        </svg>
-                        <div class="lock-glow"></div>
-                    </div>
-                    <h3 class="lock-title">Code Locked</h3>
-                    <p class="lock-description">Complete this quick action to unlock the script</p>
-                    <a href="https://youtube.com/@stressscripts25?si=exbDn5wYmll3xj5c" target="_blank" class="lock-action-btn" id="subscribeBtn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                        </svg>
-                        <span>Subscribe to this channel</span>
-                        <div class="btn-shine"></div>
-                    </a>
-                    <div class="unlock-timer">
-                        <div class="timer-bar">
-                            <div class="timer-progress" id="timerProgress"></div>
-                        </div>
-                        <span class="timer-text">Unlocking in <span id="timerSeconds">5</span>s...</span>
-                    </div>
-                </div>
-            </div>
 
             <div class="editor-header">
                 <div class="window-controls">
@@ -6869,6 +5869,8 @@
                 JOIN DISCORD
             </button>
         </div>
+
+        <div id="discord-widget-root"></div>
 
         <div class="features-grid">
             <div class="feature-card">
@@ -8220,186 +7222,7 @@
                 <p class="key-page-subtitle">Secure Encrypted Connection</p>
             </div>
             
-            <div class="ultra-grid">
-                <div class="ultra-card linkvertise" onclick="openGateway('linkvertise')">
-                    <div class="recommended-overlay">
-                        RECOMMENDED
-                    </div>
-                    <div class="u-header">
-                        <div class="u-badges-group">
-                            <div class="u-checkpoint-badge">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M9 11l3 3L22 4"></path>
-                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                                </svg>
-                                3 Checkpoints
-                            </div>
-                            <div class="u-duration-badge">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
-                                12H KEY
-                            </div>
-                        </div>
-                    </div>
-                    <div class="u-icon-wrapper">
-                        <div class="u-glow"></div>
-                        <svg class="u-svg" viewBox="0 0 122.88 122.88" fill="#ffc800"><path d="M59.3,27.06c-8.91,0-16.14,7.23-16.14,16.14s7.23,16.14,16.14,16.14s16.14-7.23,16.14-16.14 S68.21,27.06,59.3,27.06L59.3,27.06z M62.26,16.48h22.68c1.61,0,3.09,0.73,4.06,2.02l28.62,38.07c1.47,1.95,1.13,4.72-0.78,6.23 l-26.6,20.94c-1.39,1.1-3.32,1.21-4.83,0.29l-37.5-22.95c-1.12-0.69-1.8-1.9-1.8-3.21v-35.3C46.1,19.2,49.25,16.48,53,16.48 L62.26,16.48L62.26,16.48z M4.77,63.15L32.48,41.9c1.37-1.05,3.26-1.14,4.72-0.22l22.61,14.16c1.1,0.69,1.76,1.89,1.76,3.19 v20.21c0,2.15-1.74,3.89-3.89,3.89H35.31c-1.38,0-2.67-0.72-3.38-1.89l-28.52-47.1C2.3,52.3,2.94,49.82,4.86,48.65 C4.83,48.67,4.8,48.68,4.77,63.15L4.77,63.15z M96.94,83.13v20.21c0,2.15-1.74,3.89-3.89,3.89H71.18c-2.15,0-3.89-1.74-3.89-3.89V83.13 c0-2.15,1.74-3.89,3.89-3.89h21.87C95.2,79.24,96.94,80.98,96.94,83.13L96.94,83.13z"/></svg>
-                    </div>
-                    <h2 class="u-title">Linkvertise</h2>
-                    <p class="u-desc">Standard gateway requiring 3 simple checkpoints. Reliable key generation with 12-hour access duration and worldwide availability.</p>
-
-                    <div class="u-features">
-                        <div class="u-feature-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            3 Quick checkpoints
-                        </div>
-                        <div class="u-feature-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            12-hour validity period
-                        </div>
-                        <div class="u-feature-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Worldwide availability
-                        </div>
-                    </div>
-
-                    <button class="u-btn">
-                        <span style="position: relative; z-index: 1;">Start Verification</span>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </button>
-
-                    <div class="copy-link-section">
-                        <span class="copy-link-label">Having trouble redirecting?</span>
-                        <button class="copy-link-btn" onclick="event.stopPropagation(); copyGatewayLink('linkvertise', this)" data-url="https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU">
-                            <span class="copy-link-text">Copy link manually</span>
-                            <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                            </svg>
-                            <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="ultra-card lootlabs" onclick="openGateway('lootlabs')">
-                    <div class="u-header">
-                        <div class="u-badges-group">
-                            <div class="u-checkpoint-badge">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M9 11l3 3L22 4"></path>
-                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                                </svg>
-                                3 Checkpoints
-                            </div>
-                            <div class="u-duration-badge">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
-                                24H KEY
-                            </div>
-                        </div>
-                    </div>
-                    <div class="u-icon-wrapper">
-                        <div class="u-glow"></div>
-                        <div class="u-svg" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
-                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; filter: drop-shadow(0 8px 25px rgba(139, 92, 246, 0.5));">
-                                <path d="M50 10 L90 30 L50 50 L10 30 Z" fill="#fbbf24"/>
-                                <path d="M10 30 L50 50 V90 L10 70 Z" fill="#7c3aed"/>
-                                <path d="M50 50 L90 30 V70 L50 90 Z" fill="#6d28d9"/>
-                                <path d="M50 20 L75 32.5 L50 45 L25 32.5 Z" fill="#4c1d95"/>
-                                <path d="M10 30 L30 40 V60 L10 50 Z" fill="#fbbf24" opacity="0.9"/>
-                                <path d="M90 30 L70 40 V60 L90 50 Z" fill="#fbbf24" opacity="0.9"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <h2 class="u-title">Lootlabs</h2>
-                    <p class="u-desc">Premium gateway with only 3 checkpoints for lightning-fast verification. Extended 24-hour key validity for seamless access.</p>
-
-                    <div class="u-features">
-                        <div class="u-feature-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Only 3 checkpoints
-                        </div>
-                        <div class="u-feature-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            24-hour validity period
-                        </div>
-                        <div class="u-feature-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Fastest verification
-                        </div>
-                    </div>
-
-                    <button class="u-btn">
-                        <span style="position: relative; z-index: 1;">Start Verification</span>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </button>
-
-                    <div class="copy-link-section">
-                        <span class="copy-link-label">Having trouble redirecting?</span>
-                        <button class="copy-link-btn" onclick="event.stopPropagation(); copyGatewayLink('lootlabs', this)" data-url="https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp">
-                            <span class="copy-link-text">Copy link manually</span>
-                            <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                            </svg>
-                            <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="sponsor-banner">
-                <div class="premium-badge">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                    </svg>
-                    OFFICIAL PARTNER
-                </div>
-                <div class="sponsor-glow"></div>
-                <div class="sponsor-content">
-                    <div class="sponsor-logo">
-                        <svg viewBox="0 0 640 512" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-label="WYV.GG Logo" role="img" fill="white">
-                            <defs>
-                                <filter id="glow">
-                                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                                    <feMerge>
-                                        <feMergeNode in="coloredBlur"/>
-                                        <feMergeNode in="SourceGraphic"/>
-                                    </feMerge>
-                                </filter>
-                            </defs>
-                            <path d="M18.32 255.78L192 223.96l-91.28 68.69c-10.08 10.08-2.94 27.31 11.31 27.31h222.7c-9.44-26.4-14.73-54.47-14.73-83.38v-42.27l-119.73-87.6c-23.82-15.88-55.29-14.01-77.06 4.59L5.81 227.64c-12.38 10.33-3.45 30.42 12.51 28.14zm556.87 34.1l-100.66-50.31A47.992 47.992 0 0 1 448 196.65v-36.69h64l28.09 22.63c6 6 14.14 9.37 22.63 9.37h30.97a32 32 0 0 0 28.62-17.69l14.31-28.62a32.005 32.005 0 0 0-3.02-33.51l-74.53-99.38C553.02 4.7 543.54 0 533.47 0H296.02c-7.13 0-10.7 8.57-5.66 13.61L352 63.96 292.42 88.8c-5.9 2.95-5.9 11.36 0 14.31L352 127.96v108.62c0 72.08 36.03 139.39 96 179.38-195.59 6.81-344.56 41.01-434.1 60.91C5.78 478.67 0 485.88 0 494.2 0 504 7.95 512 17.76 512h499.08c63.29.01 119.61-47.56 122.99-110.76 2.52-47.28-22.73-90.4-64.64-111.36zM489.18 66.25l45.65 11.41c-2.75 10.91-12.47 18.89-24.13 18.26-12.96-.71-25.85-12.53-21.52-29.67z" filter="url(#glow)"/>
-                        </svg>
-                    </div>
-                    <div class="sponsor-info">
-                        <div class="sponsor-header-row">
-                            <h2 class="sponsor-title">WYV.GG</h2>
-                        </div>
-                        <div class="sponsor-subtitle">#1 TRUSTED EXECUTOR RESELLER</div>
-                    </div>
-                </div>
-                <a href="https://wyv.gg/ref/AlanGmg/" target="_blank" class="sponsor-link"></a>
-            </div>
+            <div id="gateway-cards-root"></div>
 
             <div class="luarmor-footer">
                 <span class="luarmor-credit">Powered by luarmor.net</span>
@@ -8644,113 +7467,6 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
             setTimeout(() => toast.classList.remove('show'), 2000);
         }
 
-        // Ultra-Modern Lock System with Auto-Unlock
-        let lockTimerInterval = null;
-        let lockStartTime = null;
-
-        function initCodeLock() {
-            const lockOverlay = document.getElementById('codeLockOverlay');
-            const subscribeBtn = document.getElementById('subscribeBtn');
-            const timerSeconds = document.getElementById('timerSeconds');
-            const timerProgress = document.getElementById('timerProgress');
-
-            if (!lockOverlay) return;
-
-            // Track subscribe button click
-            subscribeBtn.addEventListener('click', () => {
-                if (!lockStartTime) {
-                    startLockTimer();
-                }
-            });
-
-            // Auto-start timer on page load
-            startLockTimer();
-        }
-
-        function startLockTimer() {
-            if (lockTimerInterval) return; // Already running
-
-            lockStartTime = Date.now();
-            const duration = 5000; // 5 seconds
-            const timerSeconds = document.getElementById('timerSeconds');
-
-            // Update countdown every 100ms for smooth animation
-            lockTimerInterval = setInterval(() => {
-                const elapsed = Date.now() - lockStartTime;
-                const remaining = Math.max(0, duration - elapsed);
-                const secondsLeft = Math.ceil(remaining / 1000);
-
-                timerSeconds.textContent = secondsLeft;
-
-                if (remaining <= 0) {
-                    clearInterval(lockTimerInterval);
-                    unlockCode();
-                }
-            }, 100);
-        }
-
-        function unlockCode() {
-            const lockOverlay = document.getElementById('codeLockOverlay');
-
-            // Add unlocked class to hide overlay
-            lockOverlay.classList.add('unlocked');
-
-            // Show unlock toast notification
-            showUnlockToast();
-        }
-
-        function showUnlockToast() {
-            // Create toast container if it doesn't exist
-            let toastContainer = document.getElementById('unlock-toast-container');
-            if (!toastContainer) {
-                toastContainer = document.createElement('div');
-                toastContainer.id = 'unlock-toast-container';
-                toastContainer.style.cssText = `
-                    position: fixed;
-                    top: 2rem;
-                    right: 2rem;
-                    z-index: 10000;
-                    pointer-events: none;
-                `;
-                document.body.appendChild(toastContainer);
-            }
-
-            // Create unlock toast
-            const unlockToast = document.createElement('div');
-            unlockToast.className = 'unlock-toast';
-            unlockToast.innerHTML = `
-                <div class="unlock-toast-content">
-                    <div class="unlock-toast-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                            <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
-                        </svg>
-                    </div>
-                    <div class="unlock-toast-text">
-                        <h4 class="unlock-toast-title">Code Unlocked! 🎉</h4>
-                        <p class="unlock-toast-message">You can now copy and use the script</p>
-                    </div>
-                </div>
-            `;
-
-            toastContainer.appendChild(unlockToast);
-
-            // Auto-remove after 4 seconds
-            setTimeout(() => {
-                unlockToast.style.animation = 'toastSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) reverse';
-                setTimeout(() => {
-                    unlockToast.remove();
-                }, 400);
-            }, 4000);
-        }
-
-        // Initialize lock system when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initCodeLock);
-        } else {
-            initCodeLock();
-        }
-
         // Add Ultra-Premium Effect Layers to All Game Cards
         function addPremiumEffectsToGameCards() {
             // Disabled for maximum performance - no effect layers added
@@ -8966,9 +7682,9 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                         </svg>
                     </div>
                     <div class="toast-content">
-                        <div class="toast-title">Redirecting to ${providerName}</div>
+                        <div class="toast-title">Opened ${providerName}</div>
                         <div class="toast-message">
-                            Opening gateway in 1 second...
+                            Gateway opened in a new tab.
                         </div>
                     </div>
                 </div>
@@ -8976,16 +7692,13 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
             container.appendChild(toast);
 
-            // Redirect after 1 second
+            // Hide toast after 3 seconds
             setTimeout(() => {
-                window.open(url, '_blank');
-
-                // Hide toast
                 toast.classList.add('hiding');
                 setTimeout(() => {
                     container.removeChild(toast);
                 }, 400);
-            }, 1000);
+            }, 3000);
         }
 
         function openGateway(type) {
@@ -9229,7 +7942,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         });
     }
 
-    const PROXY_URL = url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+    const PROXY_URL = url => `https://corsproxy.io/?${encodeURIComponent(url)}`;
     const thumbnailCache = new Map();
     let loadQueue = [];
     let isLoadingBatch = false;
@@ -9258,9 +7971,10 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
         // Usamos el endpoint de UniverseId que funciona mejor con el proxy
         const apiUrl = `https://thumbnails.roblox.com/v1/games/icons?universeIds=${targetUniverseId}&size=256x256&format=Png&isCircular=false`;
-        const url = PROXY_URL(apiUrl);
 
+        // Try primary proxy
         try {
+            const url = PROXY_URL(apiUrl);
             const response = await fetch(url);
             if (!response.ok) throw new Error('Err');
             const data = await response.json();
@@ -9269,7 +7983,23 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                 thumbnailCache.set(cacheKey, img);
                 return img;
             }
-        } catch (e) { return null; }
+        } catch (e) {
+            // Try fallback proxy if primary fails
+            try {
+                const fallbackUrl = `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(apiUrl)}`;
+                const response = await fetch(fallbackUrl);
+                if (!response.ok) throw new Error('Err');
+                const data = await response.json();
+                if (data?.data?.[0]?.imageUrl) {
+                    const img = data.data[0].imageUrl;
+                    thumbnailCache.set(cacheKey, img);
+                    return img;
+                }
+            } catch (e2) {
+                return null;
+            }
+        }
+        return null;
     }
 
     // Procesar la cola de carga en lotes
@@ -9434,6 +8164,289 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         window.addEventListener('resize', updateSlider);
         updateSlider();
 
+    </script>
+
+    <script type="text/babel">
+        function DiscordWidget() {
+            const [data, setData] = React.useState(null);
+
+            React.useEffect(() => {
+                fetch('https://api.allorigins.win/raw?url=https://discord.com/api/v9/invites/fe4x5yXCFB?with_counts=true')
+                    .then(res => res.json())
+                    .then(json => {
+                        setData({
+                            active: json.approximate_presence_count,
+                            total: json.approximate_member_count
+                        });
+                    })
+                    .catch(console.error);
+            }, []);
+
+            if (!data) return (
+                <div className="discord-widget" style={{
+                    padding: '2rem',
+                    textAlign: 'center',
+                    color: '#8a8a9b',
+                    fontFamily: 'Outfit, sans-serif'
+                }}>
+                    Loading community stats...
+                </div>
+            );
+
+            const style = {
+                container: {
+                    background: 'linear-gradient(135deg, rgba(10, 10, 14, 0.95) 0%, rgba(16, 16, 20, 0.98) 100%)',
+                    border: '2px solid rgba(139, 92, 246, 0.15)',
+                    borderRadius: '24px',
+                    padding: '2rem',
+                    maxWidth: '800px',
+                    margin: '4rem auto',
+                    textAlign: 'center',
+                    boxShadow: '0 10px 35px rgba(0,0,0,0.5)',
+                    position: 'relative',
+                    backdropFilter: 'blur(8px)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '1.5rem'
+                },
+                title: {
+                    fontSize: '2rem',
+                    fontWeight: '800',
+                    background: 'linear-gradient(135deg, #ffffff, rgba(139, 92, 246, 0.9))',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    marginBottom: '0.5rem',
+                    textTransform: 'uppercase',
+                    letterSpacing: '2px'
+                },
+                statsContainer: {
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: '3rem',
+                    width: '100%',
+                    flexWrap: 'wrap'
+                },
+                statItem: {
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '0.5rem'
+                },
+                statValue: {
+                    fontSize: '2.5rem',
+                    fontWeight: '700',
+                    color: '#ffffff',
+                    lineHeight: '1',
+                    textShadow: '0 0 20px rgba(139, 92, 246, 0.4)'
+                },
+                statLabel: {
+                    color: '#8a8a9b',
+                    fontSize: '0.9rem',
+                    fontWeight: '600',
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px'
+                },
+                button: {
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '16px 32px',
+                    background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(124, 58, 237, 0.15))',
+                    border: '1px solid rgba(139, 92, 246, 0.5)',
+                    borderRadius: '16px',
+                    color: '#fff',
+                    fontSize: '1rem',
+                    fontWeight: '700',
+                    textDecoration: 'none',
+                    transition: 'all 0.3s cubic-bezier(0.23, 1, 0.32, 1)',
+                    marginTop: '1rem',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 15px rgba(139, 92, 246, 0.2)'
+                }
+            };
+
+            return (
+                <div style={style.container} className="discord-widget">
+                    <h2 style={style.title}>Join Our Community</h2>
+
+                    <div style={style.statsContainer}>
+                        <div style={style.statItem}>
+                            <div style={{...style.statValue, color: '#00ff9d'}}>
+                                {data.active.toLocaleString()}
+                            </div>
+                            <div style={style.statLabel}>Active Members</div>
+                        </div>
+                        <div style={style.statItem}>
+                            <div style={style.statValue}>
+                                {data.total.toLocaleString()}
+                            </div>
+                            <div style={style.statLabel}>Total Members</div>
+                        </div>
+                    </div>
+
+                    <a href="https://discord.gg/fe4x5yXCFB" target="_blank" style={style.button}
+                       onMouseEnter={e => {
+                           e.currentTarget.style.transform = 'translateY(-3px)';
+                           e.currentTarget.style.boxShadow = '0 8px 25px rgba(139, 92, 246, 0.4)';
+                           e.currentTarget.style.background = 'linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(124, 58, 237, 0.3))';
+                       }}
+                       onMouseLeave={e => {
+                           e.currentTarget.style.transform = 'translateY(0)';
+                           e.currentTarget.style.boxShadow = '0 4px 15px rgba(139, 92, 246, 0.2)';
+                           e.currentTarget.style.background = 'linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(124, 58, 237, 0.15))';
+                       }}
+                    >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                             <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                        </svg>
+                        Join Server
+                    </a>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('discord-widget-root'));
+        root.render(<DiscordWidget />);
+
+        function GatewayCard({ type, title, desc, features, url, isRecommended, checkpoints, duration, icon }) {
+            const [copied, setCopied] = React.useState(false);
+
+            const handleOpen = () => {
+                const targetUrl = url;
+                if(targetUrl) {
+                    window.open(targetUrl, '_blank');
+                    showToast(targetUrl, type);
+                }
+            };
+
+            const handleCopy = (e) => {
+                e.stopPropagation();
+                navigator.clipboard.writeText(url).then(() => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                }).catch(err => {
+                    console.error('Failed to copy:', err);
+                    alert('Copy this link:\n\n' + url);
+                });
+            };
+
+            return (
+                <div className={`ultra-card ${type}`} onClick={handleOpen}>
+                    {isRecommended && (
+                        <div className="recommended-overlay">
+                            RECOMMENDED
+                        </div>
+                    )}
+                    <div className="u-header">
+                        <div className="u-badges-group">
+                            <div className="u-checkpoint-badge">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M9 11l3 3L22 4"></path>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                </svg>
+                                {checkpoints}
+                            </div>
+                            <div className="u-duration-badge">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                {duration}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="u-icon-wrapper">
+                        <div className="u-glow"></div>
+                        {icon}
+                    </div>
+                    <h2 className="u-title">{title}</h2>
+                    <p className="u-desc">{desc}</p>
+
+                    <div className="u-features">
+                        {features.map((feature, index) => (
+                            <div key={index} className="u-feature-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                {feature}
+                            </div>
+                        ))}
+                    </div>
+
+                    <button className="u-btn">
+                        <span style={{position: 'relative', zIndex: 1}}>Start Verification</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+
+                    <div className="copy-link-section">
+                        <span className="copy-link-label">Having trouble redirecting?</span>
+                        <button
+                            className={`copy-link-btn ${copied ? 'copied' : ''}`}
+                            onClick={handleCopy}
+                        >
+                            <span className="copy-link-text">{copied ? 'Link copied!' : 'Copy link manually'}</span>
+                            <svg className="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            <svg className="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        function GatewayCards() {
+            const lootlabsIcon = (
+                <div className="u-svg" style={{width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{width: '100%', height: '100%', filter: 'drop-shadow(0 8px 25px rgba(139, 92, 246, 0.5))'}}>
+                        <path d="M50 10 L90 30 L50 50 L10 30 Z" fill="#fbbf24"/>
+                        <path d="M10 30 L50 50 V90 L10 70 Z" fill="#7c3aed"/>
+                        <path d="M50 50 L90 30 V70 L50 90 Z" fill="#6d28d9"/>
+                        <path d="M50 20 L75 32.5 L50 45 L25 32.5 Z" fill="#4c1d95"/>
+                        <path d="M10 30 L30 40 V60 L10 50 Z" fill="#fbbf24" opacity="0.9"/>
+                        <path d="M90 30 L70 40 V60 L90 50 Z" fill="#fbbf24" opacity="0.9"/>
+                    </svg>
+                </div>
+            );
+
+            const linkvertiseIcon = (
+                <svg className="u-svg" viewBox="0 0 122.88 122.88" fill="#ffc800"><path d="M59.3,27.06c-8.91,0-16.14,7.23-16.14,16.14s7.23,16.14,16.14,16.14s16.14-7.23,16.14-16.14 S68.21,27.06,59.3,27.06L59.3,27.06z M62.26,16.48h22.68c1.61,0,3.09,0.73,4.06,2.02l28.62,38.07c1.47,1.95,1.13,4.72-0.78,6.23 l-26.6,20.94c-1.39,1.1-3.32,1.21-4.83,0.29l-37.5-22.95c-1.12-0.69-1.8-1.9-1.8-3.21v-35.3C46.1,19.2,49.25,16.48,53,16.48 L62.26,16.48L62.26,16.48z M4.77,63.15L32.48,41.9c1.37-1.05,3.26-1.14,4.72-0.22l22.61,14.16c1.1,0.69,1.76,1.89,1.76,3.19 v20.21c0,2.15-1.74,3.89-3.89,3.89H35.31c-1.38,0-2.67-0.72-3.38-1.89l-28.52-47.1C2.3,52.3,2.94,49.82,4.86,48.65 C4.83,48.67,4.8,48.68,4.77,63.15L4.77,63.15z M96.94,83.13v20.21c0,2.15-1.74,3.89-3.89,3.89H71.18c-2.15,0-3.89-1.74-3.89-3.89V83.13 c0-2.15,1.74-3.89,3.89-3.89h21.87C95.2,79.24,96.94,80.98,96.94,83.13L96.94,83.13z"/></svg>
+            );
+
+            return (
+                <div className="ultra-grid">
+                    <GatewayCard
+                        type="linkvertise"
+                        title="Linkvertise"
+                        desc="Standard gateway requiring 3 simple checkpoints. Reliable key generation with 12-hour access duration and worldwide availability."
+                        checkpoints="3 Checkpoints"
+                        duration="12H KEY"
+                        features={["3 Quick checkpoints", "12-hour validity period", "Worldwide availability"]}
+                        url="https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU"
+                        isRecommended={true}
+                        icon={linkvertiseIcon}
+                    />
+                    <GatewayCard
+                        type="lootlabs"
+                        title="Lootlabs"
+                        desc="Premium gateway with only 3 checkpoints for lightning-fast verification. Extended 24-hour key validity for seamless access."
+                        checkpoints="3 Checkpoints"
+                        duration="24H KEY"
+                        features={["Only 3 checkpoints", "24-hour validity period", "Fastest verification"]}
+                        url="https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp"
+                        isRecommended={false}
+                        icon={lootlabsIcon}
+                    />
+                </div>
+            );
+        }
+
+        const gatewayRoot = ReactDOM.createRoot(document.getElementById('gateway-cards-root'));
+        gatewayRoot.render(<GatewayCards />);
     </script>
 </body>
 </html>
