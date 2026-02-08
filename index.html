@@ -9088,7 +9088,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         });
     }
 
-    const PROXY_URL = url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+    const PROXY_URL = url => `https://corsproxy.io/?${encodeURIComponent(url)}`;
     const thumbnailCache = new Map();
     let loadQueue = [];
     let isLoadingBatch = false;
@@ -9117,9 +9117,10 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
         // Usamos el endpoint de UniverseId que funciona mejor con el proxy
         const apiUrl = `https://thumbnails.roblox.com/v1/games/icons?universeIds=${targetUniverseId}&size=256x256&format=Png&isCircular=false`;
-        const url = PROXY_URL(apiUrl);
 
+        // Try primary proxy
         try {
+            const url = PROXY_URL(apiUrl);
             const response = await fetch(url);
             if (!response.ok) throw new Error('Err');
             const data = await response.json();
@@ -9128,7 +9129,23 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                 thumbnailCache.set(cacheKey, img);
                 return img;
             }
-        } catch (e) { return null; }
+        } catch (e) {
+            // Try fallback proxy if primary fails
+            try {
+                const fallbackUrl = `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(apiUrl)}`;
+                const response = await fetch(fallbackUrl);
+                if (!response.ok) throw new Error('Err');
+                const data = await response.json();
+                if (data?.data?.[0]?.imageUrl) {
+                    const img = data.data[0].imageUrl;
+                    thumbnailCache.set(cacheKey, img);
+                    return img;
+                }
+            } catch (e2) {
+                return null;
+            }
+        }
+        return null;
     }
 
     // Procesar la cola de carga en lotes
