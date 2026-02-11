@@ -4,10 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imp Hub X Version</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            corePlugins: {
+                preflight: false,
+            },
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8b5cf6',
+                        'primary-dark': '#7c3aed',
+                        background: '#020202',
+                        ring: 'rgba(139, 92, 246, 0.5)',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(-50%)' },
+                            '50%': { transform: 'translateY(-55%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         :root {
             --bg-deep: #020202;
@@ -5820,1333 +5853,21 @@
     </nav>
 
     <div id="home" class="page active">
-        <header>
-            <h1><span data-text="IMP">IMP</span> HUB</h1>
-            <p class="subtitle">PREMIUM SCRIPTING SOLUTION</p>
-        </header>
-
-        <div class="editor-container">
-
-            <div class="editor-header">
-                <div class="window-controls">
-                    <div class="win-btn win-close"></div>
-                    <div class="win-btn win-min"></div>
-                    <div class="win-btn win-max"></div>
-                </div>
-                <div class="editor-title">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    loader.lua
-                </div>
-                <button class="copy-icon-btn" onclick="copyScript(event)">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    Copy
-                </button>
-            </div>
-            <div class="editor-content" onclick="copyScript(event)">
-                <div class="code-block">
-                    <div class="line-nums">1<br>2</div>
-                    <div class="code-text">
-                        <div><span class="s-var">script_key</span> = <span class="s-str">""</span>;</div>
-                        <div><span class="s-func">loadstring</span>(<span class="s-key">game</span>:<span class="s-func">HttpGet</span>(<span class="s-str">"https://api.luarmor.net/files/v3/loaders/34824c86db1eba5e5e39c7c2d6d7fdfe.lua"</span>))()</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="btn-group">
-            <button class="cyber-btn" onclick="copyScript(event)">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                COPY SCRIPT
-            </button>
-            
-            <button class="cyber-btn primary" onclick="showPage('getkey')">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
-                GET KEY
-            </button>
-
-            <button class="cyber-btn" onclick="window.open('https://dsc.gg/imphub')">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                JOIN DISCORD
-            </button>
-        </div>
+        <div id="home-hero-root"></div>
 
         <div id="discord-widget-root"></div>
 
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
-                <h3>Undetected & Safe</h3>
-                <p style="color:var(--text-muted);">Our advanced obfuscation technology ensures your account remains safe from anti-cheat systems.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
-                <h3>Optimized Performance</h3>
-                <p style="color:var(--text-muted);">Engineered for speed. Experience zero FPS drops while executing complex auto-farm logic.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></div>
-                <h3>Constant Updates</h3>
-                <p style="color:var(--text-muted);">We update our scripts within hours of game patches to ensure 99% uptime reliability.</p>
-            </div>
-        </div>
+        <div id="features-root"></div>
 
-        <div class="faq-section">
-            <h2 class="faq-title">Frequently Asked Questions</h2>
-            
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <div class="faq-q-left">
-                        <div class="faq-icon-circle">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
-                            </svg>
-                        </div>
-                        <span class="faq-q-text">How to get a key?</span>
-                    </div>
-                    <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        <ol>
-                            <li>Click the "Get Key" button in the navigation or home page</li>
-                            <li>Choose your preferred provider (Rinku Pro or Linkvertise)</li>
-                            <li>Complete the Luarmor checkpoints as instructed</li>
-                            <li>Click the blue button called "Get A New Key"</li>
-                            <li>Copy your generated key and paste it in the script</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
+        <div id="upcoming-root"></div>
 
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <div class="faq-q-left">
-                        <div class="faq-icon-circle">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                        </div>
-                        <span class="faq-q-text">How long does a key last?</span>
-                    </div>
-                    <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        Each key is valid for 24 hours from the moment of generation. After expiration, you'll need to obtain a new key following the same process. This system helps us maintain security and manage server resources effectively.
-                    </div>
-                </div>
-            </div>
+        <div id="faq-root"></div>
 
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <div class="faq-q-left">
-                        <div class="faq-icon-circle">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                            </svg>
-                        </div>
-                        <span class="faq-q-text">Is Imp Hub safe to use?</span>
-                    </div>
-                    <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        Yes! Imp Hub uses advanced obfuscation and anti-detection methods to keep your account secure. We continuously update our scripts to stay ahead of anti-cheat systems. However, always use scripts responsibly and at your own risk.
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <div class="faq-q-left">
-                        <div class="faq-icon-circle">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                                <line x1="8" y1="21" x2="16" y2="21"></line>
-                                <line x1="12" y1="17" x2="12" y2="21"></line>
-                            </svg>
-                        </div>
-                        <span class="faq-q-text">Which executors are supported?</span>
-                    </div>
-                    <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        Imp Hub works with most modern executors including Solara, Wave, Electron, Fluxus, and more. We recommend using executors with full Luau support for the best experience. Some features may require specific executor capabilities.
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <div class="faq-q-left">
-                        <div class="faq-icon-circle">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
-                            </svg>
-                        </div>
-                        <span class="faq-q-text">What if a game script is outdated?</span>
-                    </div>
-                    <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        We typically update scripts within 24-48 hours after a game update. Check our Discord server or the Status page for real-time update notifications. You can also report issues directly to our support team for faster resolution.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="upcoming-section">
-            <div class="upcoming-header">
-                <h2 class="upcoming-title">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polyline points="12 6 12 12 16 14"></polyline>
-                    </svg>
-                    Upcoming Games
-                </h2>
-                <p class="upcoming-subtitle">Next supported games in development</p>
-            </div>
-
-            <div class="upcoming-slider-container">
-                <button class="slider-nav slider-prev" id="sliderPrev">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
-
-                <div class="upcoming-slider" id="upcomingSlider">
-                    <div class="upcoming-card added" data-universe-id="4568630521">
-                        <div class="upcoming-bg loading"></div>
-                        <div class="upcoming-overlay"></div>
-                        <div class="upcoming-content">
-                            <div class="upcoming-badges">
-                                <span class="upcoming-status added">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                    ADDED
-                                </span>
-                                <span class="upcoming-date">Now Live</span>
-                            </div>
-                            <h3 class="upcoming-game-title">Heroes Battlegrounds</h3>
-                            <p class="upcoming-game-desc">Full script support now available</p>
-                        </div>
-                    </div>
-
-                    <div class="upcoming-card added" data-universe-id="6161049307">
-                        <div class="upcoming-bg loading"></div>
-                        <div class="upcoming-overlay"></div>
-                        <div class="upcoming-content">
-                            <div class="upcoming-badges">
-                                <span class="upcoming-status added">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                    ADDED
-                                </span>
-                                <span class="upcoming-date">Available Now</span>
-                            </div>
-                            <h3 class="upcoming-game-title">Pixel Blade</h3>
-                            <p class="upcoming-game-desc">Full script support now available</p>
-                        </div>
-                    </div>
-
-                    <div class="upcoming-card added" data-universe-id="5682590751">
-                        <div class="upcoming-bg loading"></div>
-                        <div class="upcoming-overlay"></div>
-                        <div class="upcoming-content">
-                            <div class="upcoming-badges">
-                                <span class="upcoming-status added">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                    ADDED
-                                </span>
-                                <span class="upcoming-date">Available Now</span>
-                            </div>
-                            <h3 class="upcoming-game-title">Lootify</h3>
-                            <p class="upcoming-game-desc">Full script support now available</p>
-                        </div>
-                    </div>
-
-                    <div class="upcoming-card added" data-universe-id="6331902150">
-                        <div class="upcoming-bg loading"></div>
-                        <div class="upcoming-overlay"></div>
-                        <div class="upcoming-content">
-                            <div class="upcoming-badges">
-                                <span class="upcoming-status added">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                    ADDED
-                                </span>
-                                <span class="upcoming-date">Available Now</span>
-                            </div>
-                            <h3 class="upcoming-game-title">Forsaken</h3>
-                            <p class="upcoming-game-desc">Full script support now available</p>
-                        </div>
-                    </div>
-
-                    <div class="upcoming-card mystery">
-                        <div class="upcoming-bg mystery-bg"></div>
-                        <div class="mystery-icon">?</div>
-                        <div class="upcoming-content">
-                            <h3 class="upcoming-game-title">Unknown</h3>
-                            <p class="upcoming-game-desc">Coming Soon</p>
-                        </div>
-                    </div>
-
-                    <div class="upcoming-card mystery">
-                        <div class="upcoming-bg mystery-bg"></div>
-                        <div class="mystery-icon">?</div>
-                        <div class="upcoming-content">
-                            <h3 class="upcoming-game-title">Unknown</h3>
-                            <p class="upcoming-game-desc">Coming Soon</p>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="slider-nav slider-next" id="sliderNext">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                </button>
-            </div>
         </div>
     </div>
 
     <div id="games" class="page">
-        <div class="games-page-header">
-            <h1 class="games-page-title">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="2" y="6" width="20" height="12" rx="2"></rect>
-                    <path d="M6 12h4"></path>
-                    <path d="M14 12h4"></path>
-                </svg>
-                SUPPORTED GAMES
-            </h1>
-            <p class="games-page-subtitle">Full script support with auto-updates</p>
-        </div>
-        
-        <div class="filter-container">
-            <div class="search-wrapper">
-                <input type="text" class="search-input" id="gameSearch" placeholder="Search for a game..." autocomplete="off">
-                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <div id="autocomplete-list" class="autocomplete-box"></div>
-            </div>
-            <div class="filter-pills">
-                <button class="sort-toggle-btn" id="sortToggleBtn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="4" y1="6" x2="20" y2="6"></line>
-                        <line x1="4" y1="12" x2="20" y2="12"></line>
-                        <line x1="4" y1="18" x2="16" y2="18"></line>
-                    </svg>
-                    A-Z Sort
-                </button>
-                
-                <button class="filter-dropdown-btn" id="filterDropdownBtn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-                    </svg>
-                    Filters
-                    <span class="filter-badge" id="filterBadge" style="display: none;">0</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </button>
-                
-                <div class="filter-dropdown-menu" id="filterDropdownMenu">
-                    <div class="filter-section">
-                        <div class="filter-section-title">Status</div>
-                        <div class="filter-option" data-category="status" data-value="working">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">Working</span>
-                        </div>
-                        <div class="filter-option" data-category="status" data-value="outdated">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">Outdated</span>
-                        </div>
-                    </div>
-                    
-                    <div class="filter-section">
-                        <div class="filter-section-title">Categories</div>
-                        <div class="filter-option" data-category="tags" data-value="rpg">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">RPG</span>
-                        </div>
-                        <div class="filter-option" data-category="tags" data-value="pvp">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">PvP</span>
-                        </div>
-                        <div class="filter-option" data-category="tags" data-value="farming">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">Farming</span>
-                        </div>
-                        <div class="filter-option" data-category="tags" data-value="simulator">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">Simulator</span>
-                        </div>
-                        <div class="filter-option" data-category="tags" data-value="anime">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">Anime</span>
-                        </div>
-                        <div class="filter-option" data-category="tags" data-value="parkour">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">Parkour</span>
-                        </div>
-                        <div class="filter-option" data-category="tags" data-value="afk">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">AFK Friendly</span>
-                        </div>
-                    </div>
-                    
-                    <div class="filter-actions">
-                        <button class="filter-clear" id="filterClearBtn">Clear All</button>
-                        <button class="filter-apply" id="filterApplyBtn">Apply</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="games-grid" id="gamesGrid">
-            <div class="game-card" data-status="working" data-name="Escape Tsunami For Brainrots" data-tags="survival obby" data-place-id="9363735110">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Escape Tsunami For Brainrots</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Survival</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/9363735110/Escape-Tsunami-For-Brainrots" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Jujutsu Shenanigans" data-tags="fighting anime" data-place-id="3508322461">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Jujutsu Shenanigans</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Combat</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/3508322461/Jujutsu-Shenanigans" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Solo Hunters" data-tags="rpg adventure" data-place-id="7394964165">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Solo Hunters</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/7394964165/Solo-Hunters" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Break A Lucky Block" data-tags="simulator lucky-block" data-place-id="9344307274">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Break A Lucky Block</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Break</span>
-                            <span class="g-tag">Lucky Block</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/9344307274/Break-A-Lucky-Block" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Anime Eternal" data-tags="rpg anime farming" data-universe-id="7882829745">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Anime Eternal</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/90462358603255/Anime-Eternal" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Anime Last Stand" data-tags="tower defense anime strategy" data-universe-id="4509896324">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Anime Last Stand</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Place</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/12886143095/QOL-Godly-EXB-Anime-Last-Stand" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Arise Crossover" data-tags="rpg anime farming" data-universe-id="7074860883">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Arise Crossover</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/87039211657390/ONLINE-Arise-Crossover" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Dragon Adventures" data-tags="rpg simulator pets" data-universe-id="1235188606">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Dragon Adventures</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Teleport</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/3475397644/Dragon-Adventures" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Dragon Ball Rage" data-tags="pvp anime fighting" data-universe-id="98929893">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Dragon Ball Rage</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Train</span>
-                            <span class="g-tag">ESP</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/71315343/EGO-Dragon-Ball-Rage" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Dragon Soul" data-tags="rpg farming anime" data-universe-id="3164075108">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Dragon Soul</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">ESP</span>
-                            <span class="g-tag">Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/8246874626/Dragon-Soul-Anime-MMO" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Fruit Battlegrounds" data-tags="pvp fighting anime" data-universe-id="3457700596">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Fruit Battlegrounds</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">ESP</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/9224601490/FLAME-V2-Fruit-Battlegrounds" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-<div class="game-card" data-status="working" data-name="Slasher Blade Loot" data-tags="simulator rpg anime" data-universe-id="9126204352">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Slasher Blade Loot</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Spin</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/79940517734440/Slasher-Blade-Loot-W8" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Sonic Speed Simulator" data-tags="racing simulator afk" data-universe-id="3405618667">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Sonic Speed Simulator</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Speed</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/6602390314/Sonic-Speed-Simulator" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Spongebob TD" data-tags="tower defense casual" data-universe-id="6594435384">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Spongebob TD</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Place</span>
-                            <span class="g-tag">Auto Farm</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/123662243100680/SpongeBob-Tower-Defense" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Tower Of Zombies" data-tags="parkour adventure" data-universe-id="8238863102">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Tower Of Zombies</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Parkour</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/99122501338948/Tower-of-Zombies" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Heroes Battlegrounds" data-tags="pvp fighting anime" data-universe-id="4568630521">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Heroes Battlegrounds</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Combat</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/17351132640/Heroes-Battlegrounds" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Pixel Blade" data-tags="rpg anime" data-universe-id="6161049307">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Pixel Blade</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/16550815768/Pixel-Blade" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Forsaken" data-tags="rpg adventure" data-universe-id="6331902150">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Forsaken</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Combat</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/17316019067/Forsaken" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Lootify" data-tags="rpg farming" data-universe-id="5682590751">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Lootify</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/13655746648/Lootify" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Muscle Legends" data-tags="simulator fitness" data-universe-id="1268927906">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Muscle Legends</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Train</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/3624649426/Muscle-Legends" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Creatures Of Sonaria" data-tags="rpg survival" data-universe-id="1831550657">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Creatures Of Sonaria</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Survival</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/5233782396/Creatures-of-Sonaria" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Shindo Life" data-tags="rpg anime" data-universe-id="1511883870">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Shindo Life</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/4616652839/Shindo-Life" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Blue Lock Rivals" data-tags="sports anime pvp" data-universe-id="6325068386">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Blue Lock Rivals</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Play</span>
-                            <span class="g-tag">Soccer</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/16367540086/Blue-Lock-Rivals" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Evade" data-tags="parkour survival" data-universe-id="3647333358">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Evade</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Parkour</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/9872472334/Evade" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Strongest Battlegrounds" data-tags="pvp fighting anime" data-universe-id="3808081382">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Strongest Battlegrounds</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Combat</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/10449761463/The-Strongest-Battlegrounds" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Eat The World" data-tags="simulator casual" data-universe-id="5677613211">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Eat The World</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Eat</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/14239622652/Eat-The-World" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Dungeon Hunters" data-tags="rpg dungeon adventure" data-universe-id="8937254139">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Dungeon Hunters</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Dungeon</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/79050775908503/Dungeon-Hunters" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Anime Fighting Simulator Endless" data-tags="fighting anime simulator" data-universe-id="9266873836">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Anime Fighting Simulator Endless</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Train</span>
-                            <span class="g-tag">Auto Fight</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/82047983563264/Anime-Fighting-Simulator-Endless" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="My Fishing Brainrots" data-tags="fishing simulator casual" data-universe-id="8916375040">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">My Fishing Brainrots</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Fish</span>
-                            <span class="g-tag">Auto Sell</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/78859332012339/My-Fishing-Brainrots" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Arise Ragnarok Crossover" data-tags="rpg anime crossover" data-universe-id="8974769492">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Arise Ragnarok Crossover</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/79382669698801/Arise-Ragnarok-Crossover" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Garden Tower Defense" data-tags="tower defense strategy" data-universe-id="7703614594">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Garden Tower Defense</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Build</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/77036145947703614594/Garden-Tower-Defense" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Rogue Piece" data-tags="rpg anime adventure" data-universe-id="8321616508">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Rogue Piece</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/83216165088321616508/Rogue-Piece" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Murderers VS Sheriffs" data-tags="fps pvp action" data-universe-id="4348829796">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Murderers VS Sheriffs</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Kill</span>
-                            <span class="g-tag">ESP</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/43488297964348829796/Murderers-VS-Sheriffs" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="A Universal Time" data-tags="rpg anime adventure" data-universe-id="1782832995">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">A Universal Time</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/17828329951782832995/A-Universal-Time" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Fate Trigger" data-tags="fps action shooter" data-universe-id="9326439632">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Fate Trigger</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Aimbot</span>
-                            <span class="g-tag">ESP</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/93264396329326439632/Fate-Trigger" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Entrenched WW1" data-tags="fps war strategy" data-universe-id="1281592938">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Entrenched WW1</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Kill</span>
-                            <span class="g-tag">ESP</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/12815929381281592938/Entrenched-WW1" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Tower Defense Simulator" data-tags="strategy tower-defense" data-universe-id="1176784616">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Tower Defense Simulator</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Place</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/11767846161176784616/Tower-Defense-Simulator" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="games-root"></div>
     </div>
 
     <div id="status" class="page">
@@ -7279,9 +6000,49 @@
         </div>
     </div>
 
-    <!-- Script Raw Code Page -->
+    <!-- Script Page with Premium Editor -->
     <div id="script" class="page">
-        <pre id="rawScriptCode">script_key = "";
+        <div class="editor-container" style="margin-top: 4rem;">
+            <div class="editor-header">
+                <div class="window-controls">
+                    <div class="win-btn win-close"></div>
+                    <div class="win-btn win-min"></div>
+                    <div class="win-btn win-max"></div>
+                </div>
+                <div class="editor-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    main.lua
+                </div>
+            </div>
+            <div class="editor-content">
+                <div class="editor-actions">
+                    <button class="copy-icon-btn" onclick="copyScript(event)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy Script
+                    </button>
+                </div>
+                <div class="code-block">
+                    <div class="line-nums">
+                        <span>1</span><span>2</span>
+                    </div>
+                    <div class="code-text">
+                        <div><span class="s-var">script_key</span> <span class="s-key">=</span> <span class="s-str">""</span><span class="s-key">;</span></div>
+                        <div><span class="s-func">loadstring</span><span class="s-key">(</span><span class="s-key">game</span><span class="s-key">:</span><span class="s-func">HttpGet</span><span class="s-key">(</span><span class="s-str">"https://api.luarmor.net/files/v3/loaders/34824c86db1eba5e5e39c7c2d6d7fdfe.lua"</span><span class="s-key">)</span><span class="s-key">)</span><span class="s-key">()</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Keep raw for loadstring compatibility -->
+        <pre id="rawScriptCode" style="display: none;">script_key = "";
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba5e5e39c7c2d6d7fdfe.lua"))()</pre>
     </div>
 
@@ -7474,9 +6235,11 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
         // Initialize premium effects when DOM is ready
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', addPremiumEffectsToGameCards);
+            document.addEventListener('DOMContentLoaded', () => {
+                if (typeof addPremiumEffectsToGameCards === 'function') addPremiumEffectsToGameCards();
+            });
         } else {
-            addPremiumEffectsToGameCards();
+            if (typeof addPremiumEffectsToGameCards === 'function') addPremiumEffectsToGameCards();
         }
 
         // Also add effects when navigating to games page
@@ -7484,23 +6247,10 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         if (originalShowPage) {
             window.showPage = function(pageId, updateHistory) {
                 originalShowPage(pageId, updateHistory);
-                if (pageId === 'games') {
+                if (pageId === 'games' && typeof addPremiumEffectsToGameCards === 'function') {
                     setTimeout(addPremiumEffectsToGameCards, 100);
                 }
             };
-        }
-
-        function toggleFaq(element) {
-            const faqItem = element.parentElement;
-            const wasActive = faqItem.classList.contains('active');
-            
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            if (!wasActive) {
-                faqItem.classList.add('active');
-            }
         }
 
         let activeFilters = { status: [], tags: [] };
@@ -7515,144 +6265,147 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         const filterApplyBtn = document.getElementById('filterApplyBtn');
         const sortToggleBtn = document.getElementById('sortToggleBtn');
         
-        sortToggleBtn.addEventListener('click', () => {
-            isAlphabeticalSort = !isAlphabeticalSort;
-            sortToggleBtn.classList.toggle('active');
-            applyFilters();
-        });
-
-        filterDropdownBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            filterDropdownBtn.classList.toggle('active');
-            filterDropdownMenu.classList.toggle('active');
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!filterDropdownMenu.contains(e.target) && !filterDropdownBtn.contains(e.target)) {
-                filterDropdownBtn.classList.remove('active');
-                filterDropdownMenu.classList.remove('active');
-            }
-        });
-
-        filterOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                option.classList.toggle('active');
-                updateFilterBadge();
+        if (searchInput && filterDropdownBtn && sortToggleBtn && autocompleteList) {
+            sortToggleBtn.addEventListener('click', () => {
+                isAlphabeticalSort = !isAlphabeticalSort;
+                sortToggleBtn.classList.toggle('active');
+                applyFilters();
             });
-        });
 
-        filterClearBtn.addEventListener('click', () => {
-            filterOptions.forEach(opt => opt.classList.remove('active'));
-            activeFilters = { status: [], tags: [] };
-            updateFilterBadge();
-            applyFilters();
-        });
+            filterDropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                filterDropdownBtn.classList.toggle('active');
+                filterDropdownMenu.classList.toggle('active');
+            });
 
-        filterApplyBtn.addEventListener('click', () => {
-            activeFilters = { status: [], tags: [] };
-            filterOptions.forEach(opt => {
-                if (opt.classList.contains('active')) {
-                    const category = opt.dataset.category;
-                    const value = opt.dataset.value;
-                    activeFilters[category].push(value);
+            document.addEventListener('click', (e) => {
+                if (!filterDropdownMenu.contains(e.target) && !filterDropdownBtn.contains(e.target)) {
+                    filterDropdownBtn.classList.remove('active');
+                    filterDropdownMenu.classList.remove('active');
                 }
             });
-            applyFilters();
-            filterDropdownBtn.classList.remove('active');
-            filterDropdownMenu.classList.remove('active');
-        });
 
-        function updateFilterBadge() {
-            const count = document.querySelectorAll('.filter-option.active').length;
-            if (count > 0) {
-                filterBadge.textContent = count;
-                filterBadge.style.display = 'block';
-            } else {
-                filterBadge.style.display = 'none';
+            filterOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    option.classList.toggle('active');
+                    updateFilterBadge();
+                });
+            });
+
+            filterClearBtn.addEventListener('click', () => {
+                filterOptions.forEach(opt => opt.classList.remove('active'));
+                activeFilters = { status: [], tags: [] };
+                updateFilterBadge();
+                applyFilters();
+            });
+
+            filterApplyBtn.addEventListener('click', () => {
+                activeFilters = { status: [], tags: [] };
+                filterOptions.forEach(opt => {
+                    if (opt.classList.contains('active')) {
+                        const category = opt.dataset.category;
+                        const value = opt.dataset.value;
+                        activeFilters[category].push(value);
+                    }
+                });
+                applyFilters();
+                filterDropdownBtn.classList.remove('active');
+                filterDropdownMenu.classList.remove('active');
+            });
+
+            function updateFilterBadge() {
+                const count = document.querySelectorAll('.filter-option.active').length;
+                if (count > 0) {
+                    filterBadge.textContent = count;
+                    filterBadge.style.display = 'block';
+                } else {
+                    filterBadge.style.display = 'none';
+                }
             }
-        }
-        
-        function getAvailableGamesData() { 
-            return Array.from(document.querySelectorAll('.game-card')).map(card => ({
-                name: card.dataset.name,
-                element: card
-            })); 
-        }
-        
-        searchInput.addEventListener('input', function() {
-            const val = this.value;
-            const gamesData = getAvailableGamesData();
-            applyFilters(); 
-            if (!val) { autocompleteList.classList.remove('active'); return; }
 
-            const matches = gamesData.filter(g => g.name.toLowerCase().includes(val.toLowerCase()));
-            autocompleteList.innerHTML = '';
-            if (matches.length > 0) {
-                autocompleteList.classList.add('active');
-                matches.forEach(match => {
-                    const item = document.createElement('div'); item.className = 'ac-item';
-                    const regex = new RegExp(`(${val})`, 'gi');
-                    const highlighted = match.name.replace(regex, '<span class="match-highlight">$1</span>');
-                    item.innerHTML = `
-                        <div class="ac-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
-                                <path d="M6 12h4"></path>
-                                <path d="M14 12h4"></path>
-                            </svg>
-                        </div>
-                        <div class="ac-text">${highlighted}</div>
-                    `;
-                    item.addEventListener('click', (e) => {
-                        e.stopPropagation(); searchInput.value = match.name;
-                        autocompleteList.classList.remove('active'); applyFilters();
+            function getAvailableGamesData() {
+                return Array.from(document.querySelectorAll('.game-card')).map(card => ({
+                    name: card.dataset.name,
+                    element: card
+                }));
+            }
+
+            searchInput.addEventListener('input', function() {
+                const val = this.value;
+                const gamesData = getAvailableGamesData();
+                applyFilters();
+                if (!val) { autocompleteList.classList.remove('active'); return; }
+
+                const matches = gamesData.filter(g => g.name.toLowerCase().includes(val.toLowerCase()));
+                autocompleteList.innerHTML = '';
+                if (matches.length > 0) {
+                    autocompleteList.classList.add('active');
+                    matches.forEach(match => {
+                        const item = document.createElement('div'); item.className = 'ac-item';
+                        const regex = new RegExp(`(${val})`, 'gi');
+                        const highlighted = match.name.replace(regex, '<span class="match-highlight">$1</span>');
+                        item.innerHTML = `
+                            <div class="ac-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                                    <path d="M6 12h4"></path>
+                                    <path d="M14 12h4"></path>
+                                </svg>
+                            </div>
+                            <div class="ac-text">${highlighted}</div>
+                        `;
+                        item.addEventListener('click', (e) => {
+                            e.stopPropagation(); searchInput.value = match.name;
+                            autocompleteList.classList.remove('active'); applyFilters();
+                        });
+                        autocompleteList.appendChild(item);
                     });
-                    autocompleteList.appendChild(item);
-                });
-            } else { autocompleteList.classList.remove('active'); }
-        });
+                } else { autocompleteList.classList.remove('active'); }
+            });
 
-        document.addEventListener('click', function(e) {
-            if (e.target !== searchInput && !autocompleteList.contains(e.target)) {
-                autocompleteList.classList.remove('active');
-            }
-        });
+            document.addEventListener('click', function(e) {
+                if (e.target !== searchInput && !autocompleteList.contains(e.target)) {
+                    autocompleteList.classList.remove('active');
+                }
+            });
 
-        function applyFilters() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const gamesGrid = document.getElementById('gamesGrid');
-            const cards = Array.from(document.querySelectorAll('.game-card'));
-            
-            const filteredCards = cards.filter(card => {
-                const name = card.dataset.name.toLowerCase();
-                const status = card.dataset.status;
-                const tags = card.dataset.tags.toLowerCase().split(' ');
-                const matchesSearch = name.includes(searchTerm);
-                const matchesStatus = activeFilters.status.length === 0 || activeFilters.status.includes(status);
-                const matchesTags = activeFilters.tags.length === 0 || activeFilters.tags.some(filterTag => {
-                    return tags.some(cardTag => cardTag.includes(filterTag.toLowerCase()) || filterTag.toLowerCase().includes(cardTag));
+            function applyFilters() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const gamesGrid = document.getElementById('gamesGrid');
+                if (!gamesGrid) return;
+                const cards = Array.from(document.querySelectorAll('.game-card'));
+
+                const filteredCards = cards.filter(card => {
+                    const name = card.dataset.name.toLowerCase();
+                    const status = card.dataset.status;
+                    const tags = card.dataset.tags.toLowerCase().split(' ');
+                    const matchesSearch = name.includes(searchTerm);
+                    const matchesStatus = activeFilters.status.length === 0 || activeFilters.status.includes(status);
+                    const matchesTags = activeFilters.tags.length === 0 || activeFilters.tags.some(filterTag => {
+                        return tags.some(cardTag => cardTag.includes(filterTag.toLowerCase()) || filterTag.toLowerCase().includes(cardTag));
+                    });
+
+                    return matchesSearch && matchesStatus && matchesTags;
                 });
+
+                if (isAlphabeticalSort) {
+                    filteredCards.sort((a, b) => {
+                        const nameA = a.dataset.name.toLowerCase();
+                        const nameB = b.dataset.name.toLowerCase();
+                        return nameA.localeCompare(nameB);
+                    });
+                }
+
+                cards.forEach(card => card.style.display = 'none');
                 
-                return matchesSearch && matchesStatus && matchesTags;
-            });
-
-            if (isAlphabeticalSort) {
-                filteredCards.sort((a, b) => {
-                    const nameA = a.dataset.name.toLowerCase();
-                    const nameB = b.dataset.name.toLowerCase();
-                    return nameA.localeCompare(nameB);
+                gamesGrid.innerHTML = '';
+                filteredCards.forEach(card => {
+                    card.style.display = 'block';
+                    gamesGrid.appendChild(card);
                 });
+
+                setTimeout(() => { if (typeof initThumbnailLoading === 'function') initThumbnailLoading(); }, 100);
             }
-
-            cards.forEach(card => card.style.display = 'none');
-            
-            gamesGrid.innerHTML = '';
-            filteredCards.forEach(card => {
-                card.style.display = 'block';
-                gamesGrid.appendChild(card);
-            });
-
-            setTimeout(() => initThumbnailLoading(), 100);
         }
 
         const leaveModal = document.getElementById('leaveModal');
@@ -8107,68 +6860,207 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         setTimeout(initThumbnailLoading, 50);
     };
 
-        const sliderNext = document.getElementById('sliderNext');
-        const upcomingSlider = document.getElementById('upcomingSlider');
-
-        function updateSlider() {
-            const cards = upcomingSlider.querySelectorAll('.upcoming-card');
-            const isMobile = window.innerWidth <= 768;
-            const isTablet = window.innerWidth <= 1024 && window.innerWidth > 768;
-            
-            let cardsPerView = 3;
-            if (isMobile) cardsPerView = 1;
-            else if (isTablet) cardsPerView = 2;
-
-            const maxSlide = Math.max(0, cards.length - cardsPerView);
-            currentSlide = Math.min(currentSlide, maxSlide);
-
-            const cardWidth = cards[0] ? cards[0].offsetWidth : 0;
-            const gap = 32;
-            const offset = currentSlide * (cardWidth + gap);
-
-            cards.forEach((card, index) => {
-                card.style.transition = 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
-                card.style.transform = `translateX(-${offset}px)`;
-            });
-
-            sliderPrev.style.opacity = currentSlide === 0 ? '0.3' : '1';
-            sliderPrev.style.pointerEvents = currentSlide === 0 ? 'none' : 'all';
-            sliderNext.style.opacity = currentSlide >= maxSlide ? '0.3' : '1';
-            sliderNext.style.pointerEvents = currentSlide >= maxSlide ? 'none' : 'all';
-        }
-
-        sliderPrev.addEventListener('click', () => {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlider();
-            }
-        });
-
-        sliderNext.addEventListener('click', () => {
-            const cards = upcomingSlider.querySelectorAll('.upcoming-card');
-            const isMobile = window.innerWidth <= 768;
-            const isTablet = window.innerWidth <= 1024 && window.innerWidth > 768;
-            
-            let cardsPerView = 3;
-            if (isMobile) cardsPerView = 1;
-            else if (isTablet) cardsPerView = 2;
-
-            const maxSlide = Math.max(0, cards.length - cardsPerView);
-            
-            if (currentSlide < maxSlide) {
-                currentSlide++;
-                updateSlider();
-            }
-        });
-
-        window.addEventListener('resize', updateSlider);
-        updateSlider();
 
     </script>
 
     <script type="text/babel">
+        // --- Shadcn/Next.js Style Utilities ---
+        const Icons = {
+            ArrowRight: (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>,
+            ChevronRight: (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="m9 18 6-6-6-6"/></svg>,
+            Discord: (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" {...props}><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.419-2.1568 2.419zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.419-2.1568 2.419z"/></svg>,
+            Check: (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><polyline points="20 6 9 17 4 12"/></svg>,
+            ShieldCheck: (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>,
+            Zap: (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+            Users: (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+            Calendar: (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        };
+
+        function cn(...classes) {
+            return classes.filter(Boolean).join(' ');
+        }
+
+        const buttonVariants = {
+            default: "bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/25",
+            secondary: "bg-white/10 text-white hover:bg-white/20 border border-white/10 backdrop-blur-sm",
+            outline: "border border-white/20 bg-transparent hover:bg-white/10 text-white",
+            ghost: "hover:bg-white/10 text-white",
+            link: "text-primary underline-offset-4 hover:underline",
+        };
+
+        const Button = ({ className, variant = "default", size = "default", children, ...props }) => {
+            const sizeClasses = {
+                default: "h-10 px-4 py-2",
+                sm: "h-9 rounded-md px-3",
+                lg: "h-12 rounded-lg px-8 text-base",
+                icon: "h-10 w-10",
+            };
+
+            return (
+                <button
+                    className={cn(
+                        "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]",
+                        buttonVariants[variant],
+                        sizeClasses[size],
+                        className
+                    )}
+                    {...props}
+                >
+                    {children}
+                </button>
+            );
+        };
+
+        function HomeHero() {
+            return (
+                <div className="min-h-[85vh] flex flex-col justify-center relative overflow-hidden font-['Inter']">
+                    {/* Background Effects - Matches Image 1's dark purple gradient feel */}
+                    <div className="absolute inset-0 bg-[#0a0a0f]">
+                         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_top,rgba(139,92,246,0.15),transparent_50%)] pointer-events-none" />
+                    </div>
+
+                    <div className="max-w-[1400px] mx-auto w-full px-4 md:px-6 relative z-10">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                            <div className="flex flex-col items-start space-y-8 animate-fade-in-up text-center lg:text-left">
+                                {/* Badge */}
+                                <div className="inline-flex items-center self-center lg:self-start rounded-full border border-purple-500/30 bg-purple-500/10 px-4 py-1.5 text-sm text-purple-200 backdrop-blur-xl transition-all hover:bg-purple-500/20 hover:border-purple-500/50 cursor-default">
+                                    <span className="flex h-2 w-2 rounded-full bg-purple-400 mr-2 animate-pulse shadow-[0_0_10px_rgba(168,85,247,0.5)]"></span>
+                                    <span className="font-medium tracking-wide">V2 Release Now Available</span>
+                                    <Icons.ChevronRight className="ml-1 h-3.5 w-3.5 text-purple-300" />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-[1.1]">
+                                        <span className="text-white drop-shadow-lg">High Quality</span>
+                                        <br />
+                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-purple-500 to-indigo-500 drop-shadow-[0_0_30px_rgba(168,85,247,0.3)]">Imp Hub</span>
+                                    </h1>
+                                    <p className="max-w-[600px] text-gray-400 text-lg md:text-xl leading-relaxed mx-auto lg:mx-0 font-light">
+                                        Stop using low-quality scripts. Experience the next generation of script execution with enhanced stability, performance, and a human touch.
+                                    </p>
+                                </div>
+
+                                <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center lg:justify-start">
+                                    <button onClick={() => showPage('getkey')} className="group relative px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(139,92,246,0.4)] ring-1 ring-purple-400/20">
+                                        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                                        <span className="relative flex items-center gap-2">
+                                            View Script <Icons.ArrowRight className="h-5 w-5" />
+                                        </span>
+                                    </button>
+
+                                    <a href="https://discord.gg/fe4x5yXCFB" target="_blank" rel="noopener noreferrer" className="group px-8 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition-all hover:scale-105 flex items-center gap-2 hover:border-purple-500/30">
+                                        <Icons.Discord className="h-5 w-5 text-gray-400 group-hover:text-white transition-colors" /> Join Community
+                                    </a>
+                                </div>
+
+                                <div className="flex flex-wrap justify-center lg:justify-start gap-6 text-sm text-gray-400 pt-4 border-t border-white/5 w-full">
+                                    <div className="flex items-center gap-2">
+                                        <div className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400 ring-1 ring-purple-500/20"><Icons.Zap className="h-4 w-4" /></div>
+                                        <span className="font-medium">Instant Execution</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <div className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400 ring-1 ring-purple-500/20"><Icons.ShieldCheck className="h-4 w-4" /></div>
+                                        <span className="font-medium">Safe & Secure</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <div className="p-1.5 rounded-lg bg-purple-500/10 text-purple-400 ring-1 ring-purple-500/20"><Icons.Check className="h-4 w-4" /></div>
+                                        <span className="font-medium">Regular Updates</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* 3D Showcase - Right Side */}
+                            <div className="relative perspective-[2000px] group lg:ml-10 hidden lg:block">
+                                <div className="relative transform-style-3d transition-all duration-700 ease-out group-hover:rotate-y-[-5deg] group-hover:rotate-x-[5deg]" style={{transform: 'rotateY(-12deg) rotateX(6deg)'}}>
+
+                                    {/* Decorative Glows */}
+                                    <div className="absolute -top-32 -right-32 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen animate-pulse-slow"></div>
+                                    <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
+
+                                    {/* Main Card Element - Mimicking Image 2 "Upcoming Games" UI style */}
+                                    <div className="relative w-full max-w-md mx-auto bg-[#0f0f11] border border-white/10 rounded-3xl overflow-hidden shadow-2xl shadow-purple-900/30 ring-1 ring-white/5">
+
+                                        {/* Header */}
+                                        <div className="p-6 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center border border-purple-500/20">
+                                                    <Icons.Zap className="w-5 h-5 text-purple-400" />
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-bold text-white text-lg">Imp Hub Premium</h3>
+                                                    <p className="text-xs text-purple-400 font-medium tracking-wide">V2.4.0 STABLE</p>
+                                                </div>
+                                            </div>
+                                            <div className="px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-bold tracking-wider flex items-center gap-2">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                                                ACTIVE
+                                            </div>
+                                        </div>
+
+                                        {/* Mock List Items (Like Image 2 Cards) */}
+                                        <div className="p-6 space-y-4">
+                                            {[
+                                                { title: "Universal Script", status: "UPDATED", color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+                                                { title: "Blox Fruits", status: "HOT", color: "text-orange-400", bg: "bg-orange-500/10", border: "border-orange-500/20" },
+                                                { title: "Da Hood", status: "NEW", color: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" }
+                                            ].map((item, i) => (
+                                                <div key={i} className="group/item flex items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] hover:border-purple-500/20 transition-all duration-300">
+                                                    <div className="flex items-center gap-4">
+                                                        <div className={`w-2 h-2 rounded-full ${item.color.replace('text-', 'bg-')}`} />
+                                                        <span className="font-medium text-gray-200">{item.title}</span>
+                                                    </div>
+                                                    <span className={`text-[10px] font-bold px-2 py-1 rounded-md ${item.bg} ${item.color} ${item.border} border`}>
+                                                        {item.status}
+                                                    </span>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        {/* Footer / Code Snippet */}
+                                        <div className="bg-black/40 p-5 border-t border-white/5 font-mono text-xs overflow-hidden relative">
+                                            <div className="absolute top-0 left-0 w-1 h-full bg-purple-500/50" />
+                                            <p className="text-gray-500">
+                                                <span className="text-purple-400">loadstring</span>(game:<span className="text-blue-400">HttpGet</span>(<span className="text-green-400">"..."</span>))()
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Floating Element 1 */}
+                                    <div className="absolute -right-6 top-20 transform translate-z-20 bg-[#0f0f11]/90 border border-white/10 p-4 rounded-2xl shadow-xl flex items-center gap-3 backdrop-blur-md animate-float" style={{animationDelay: '1s'}}>
+                                        <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400">
+                                            <Icons.ShieldCheck className="w-4 h-4" />
+                                        </div>
+                                        <div>
+                                            <div className="text-[10px] text-gray-400 uppercase tracking-wider font-bold">Security</div>
+                                            <div className="text-white font-bold text-xs">Undetected</div>
+                                        </div>
+                                    </div>
+
+                                    {/* Floating Element 2 */}
+                                    <div className="absolute -left-6 bottom-32 transform translate-z-30 bg-[#0f0f11]/90 border border-white/10 p-4 rounded-2xl shadow-xl flex items-center gap-3 backdrop-blur-md animate-float" style={{animationDelay: '0s'}}>
+                                        <div className="w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center text-green-400">
+                                            <Icons.Zap className="w-4 h-4" />
+                                        </div>
+                                        <div>
+                                            <div className="text-[10px] text-gray-400 uppercase tracking-wider font-bold">Execution</div>
+                                            <div className="text-white font-bold text-xs">0.01ms Ping</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const heroRoot = ReactDOM.createRoot(document.getElementById('home-hero-root'));
+        heroRoot.render(<HomeHero />);
+
         function DiscordWidget() {
             const [data, setData] = React.useState(null);
+            const [loading, setLoading] = React.useState(true);
 
             React.useEffect(() => {
                 fetch('https://api.allorigins.win/raw?url=https://discord.com/api/v9/invites/fe4x5yXCFB?with_counts=true')
@@ -8178,20 +7070,13 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                             active: json.approximate_presence_count,
                             total: json.approximate_member_count
                         });
+                        setLoading(false);
                     })
-                    .catch(console.error);
+                    .catch(err => {
+                        console.error(err);
+                        setLoading(false);
+                    });
             }, []);
-
-            if (!data) return (
-                <div className="discord-widget" style={{
-                    padding: '2rem',
-                    textAlign: 'center',
-                    color: '#8a8a9b',
-                    fontFamily: 'Outfit, sans-serif'
-                }}>
-                    Loading community stats...
-                </div>
-            );
 
             const style = {
                 container: {
@@ -8238,7 +7123,8 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                     fontWeight: '700',
                     color: '#ffffff',
                     lineHeight: '1',
-                    textShadow: '0 0 20px rgba(139, 92, 246, 0.4)'
+                    textShadow: '0 0 20px rgba(139, 92, 246, 0.4)',
+                    minWidth: '150px'
                 },
                 statLabel: {
                     color: '#8a8a9b',
@@ -8263,6 +7149,13 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                     marginTop: '1rem',
                     cursor: 'pointer',
                     boxShadow: '0 4px 15px rgba(139, 92, 246, 0.2)'
+                },
+                skeleton: {
+                    height: '40px',
+                    width: '120px',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    borderRadius: '8px',
+                    animation: 'pulse 1.5s infinite ease-in-out'
                 }
             };
 
@@ -8273,13 +7166,21 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                     <div style={style.statsContainer}>
                         <div style={style.statItem}>
                             <div style={{...style.statValue, color: '#00ff9d'}}>
-                                {data.active.toLocaleString()}
+                                {loading ? (
+                                    <div style={style.skeleton}></div>
+                                ) : (
+                                    data?.active?.toLocaleString() || '---'
+                                )}
                             </div>
                             <div style={style.statLabel}>Active Members</div>
                         </div>
                         <div style={style.statItem}>
                             <div style={style.statValue}>
-                                {data.total.toLocaleString()}
+                                {loading ? (
+                                    <div style={style.skeleton}></div>
+                                ) : (
+                                    data?.total?.toLocaleString() || '---'
+                                )}
                             </div>
                             <div style={style.statLabel}>Total Members</div>
                         </div>
@@ -8302,6 +7203,14 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                         </svg>
                         Join Server
                     </a>
+
+                    <style>{`
+                        @keyframes pulse {
+                            0% { opacity: 0.4; }
+                            50% { opacity: 0.8; }
+                            100% { opacity: 0.4; }
+                        }
+                    `}</style>
                 </div>
             );
         }
@@ -8447,6 +7356,350 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
         const gatewayRoot = ReactDOM.createRoot(document.getElementById('gateway-cards-root'));
         gatewayRoot.render(<GatewayCards />);
+
+        function FeatureCard({ icon: Icon, title, description }) {
+            return (
+                <div className="group relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/10">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300" />
+                    <div className="relative z-10">
+                        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <Icon className="w-6 h-6 text-primary" />
+                        </div>
+                        <h3 className="text-xl font-bold mb-2 text-white group-hover:text-primary transition-colors">{title}</h3>
+                        <p className="text-gray-400 group-hover:text-gray-300 transition-colors">{description}</p>
+                    </div>
+                </div>
+            );
+        }
+
+        function Features() {
+            const features = [
+                {
+                    icon: Icons.Zap,
+                    title: "Instant Execution",
+                    description: "Experience zero-latency script execution with our optimized injection engine."
+                },
+                {
+                    icon: Icons.ShieldCheck,
+                    title: "Safe & Secure",
+                    description: "Advanced anti-detection systems keep your account safe while you play."
+                },
+                {
+                    icon: Icons.Check,
+                    title: "Regular Updates",
+                    description: "Our team pushes daily updates to ensure compatibility with the latest game patches."
+                }
+            ];
+
+            return (
+                <div className="py-24 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto px-4 relative z-10">
+                    {features.map((feature, index) => (
+                        <FeatureCard key={index} {...feature} />
+                    ))}
+                </div>
+            );
+        }
+
+        const featuresRoot = ReactDOM.createRoot(document.getElementById('features-root'));
+        featuresRoot.render(<Features />);
+
+        const gamesData = [
+            { name: "Escape Tsunami For Brainrots", tags: ["survival", "obby"], status: "working", placeId: "9363735110" },
+            { name: "Jujutsu Shenanigans", tags: ["fighting", "anime"], status: "working", placeId: "3508322461" },
+            { name: "Solo Hunters", tags: ["rpg", "adventure"], status: "working", placeId: "7394964165" },
+            { name: "Break A Lucky Block", tags: ["simulator", "lucky-block"], status: "working", placeId: "9344307274" },
+            { name: "Anime Eternal", tags: ["rpg", "anime", "farming"], status: "working", universeId: "7882829745" },
+            { name: "Anime Last Stand", tags: ["tower defense", "anime", "strategy"], status: "working", universeId: "4509896324" },
+            { name: "Arise Crossover", tags: ["rpg", "anime", "farming"], status: "working", universeId: "7074860883" },
+            { name: "Dragon Adventures", tags: ["rpg", "simulator", "pets"], status: "working", universeId: "1235188606" },
+            { name: "Dragon Ball Rage", tags: ["pvp", "anime", "fighting"], status: "working", universeId: "98929893" },
+            { name: "Dragon Soul", tags: ["rpg", "farming", "anime"], status: "working", universeId: "3164075108" },
+            { name: "Fruit Battlegrounds", tags: ["pvp", "fighting", "anime"], status: "working", universeId: "3457700596" },
+            { name: "Slasher Blade Loot", tags: ["simulator", "rpg", "anime"], status: "working", universeId: "9126204352" },
+            { name: "Sonic Speed Simulator", tags: ["racing", "simulator", "afk"], status: "working", universeId: "3405618667" },
+            { name: "Spongebob TD", tags: ["tower defense", "casual"], status: "working", universeId: "6594435384" },
+            { name: "Tower Of Zombies", tags: ["parkour", "adventure"], status: "working", universeId: "8238863102" },
+            { name: "Heroes Battlegrounds", tags: ["pvp", "fighting", "anime"], status: "working", universeId: "4568630521" },
+            { name: "Pixel Blade", tags: ["rpg", "anime"], status: "working", universeId: "6161049307" },
+            { name: "Forsaken", tags: ["rpg", "adventure"], status: "working", universeId: "6331902150" },
+            { name: "Lootify", tags: ["rpg", "farming"], status: "working", universeId: "5682590751" },
+            { name: "Muscle Legends", tags: ["simulator", "fitness"], status: "working", universeId: "1268927906" },
+            { name: "Creatures Of Sonaria", tags: ["rpg", "survival"], status: "working", universeId: "1831550657" },
+            { name: "Shindo Life", tags: ["rpg", "anime"], status: "working", universeId: "1511883870" },
+            { name: "Blue Lock Rivals", tags: ["sports", "anime", "pvp"], status: "working", universeId: "6325068386" },
+            { name: "Evade", tags: ["parkour", "survival"], status: "working", universeId: "3647333358" },
+            { name: "Strongest Battlegrounds", tags: ["pvp", "fighting", "anime"], status: "working", universeId: "3808081382" },
+            { name: "Eat The World", tags: ["simulator", "casual"], status: "working", universeId: "5677613211" },
+            { name: "Dungeon Hunters", tags: ["rpg", "dungeon", "adventure"], status: "working", universeId: "8937254139" },
+            { name: "Anime Fighting Simulator Endless", tags: ["fighting", "anime", "simulator"], status: "working", universeId: "9266873836" },
+            { name: "My Fishing Brainrots", tags: ["fishing", "simulator", "casual"], status: "working", universeId: "8916375040" },
+            { name: "Arise Ragnarok Crossover", tags: ["rpg", "anime", "crossover"], status: "working", universeId: "8974769492" },
+            { name: "Garden Tower Defense", tags: ["tower defense", "strategy"], status: "working", universeId: "7703614594" },
+            { name: "Rogue Piece", tags: ["rpg", "anime", "adventure"], status: "working", universeId: "8321616508" },
+            { name: "Murderers VS Sheriffs", tags: ["fps", "pvp", "action"], status: "working", universeId: "4348829796" },
+            { name: "A Universal Time", tags: ["rpg", "anime", "adventure"], status: "working", universeId: "1782832995" },
+            { name: "Fate Trigger", tags: ["fps", "action", "shooter"], status: "working", universeId: "9326439632" },
+            { name: "Entrenched WW1", tags: ["fps", "war", "strategy"], status: "working", universeId: "1281592938" },
+            { name: "Tower Defense Simulator", tags: ["strategy", "tower-defense"], status: "working", universeId: "1176784616" }
+        ];
+
+        function GameCard({ name, tags, status, placeId, universeId, isUpcoming, date }) {
+            const [imageUrl, setImageUrl] = React.useState(null);
+            const [isLoading, setIsLoading] = React.useState(true);
+            const [hasError, setHasError] = React.useState(false);
+
+            React.useEffect(() => {
+                let isMounted = true;
+
+                if (universeId || placeId) {
+                    const fetchImage = async () => {
+                        try {
+                            let targetId = universeId;
+
+                            // If we only have a placeId, we need to resolve it to a universeId first
+                            if (!targetId && placeId) {
+                                try {
+                                    // Resolve Place ID to Universe ID using proxy
+                                    const resolveUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://apis.roblox.com/universes/v1/places/${placeId}/universe`)}`;
+                                    const resolveRes = await fetch(resolveUrl);
+                                    if (resolveRes.ok) {
+                                        const resolveData = await resolveRes.json();
+                                        if (resolveData && resolveData.universeId) {
+                                            targetId = resolveData.universeId;
+                                        }
+                                    }
+                                } catch (e) {
+                                    console.warn("Failed to resolve universe ID from place ID", e);
+                                }
+                            }
+
+                            if (!targetId) {
+                                // If we still don't have a universe ID, we can't fetch the thumbnail
+                                // But as a fallback for the fetch, we might try using placeId if the API supports it (it usually doesn't for this endpoint)
+                                targetId = placeId;
+                            }
+
+                            // Using api.allorigins.win for the thumbnail request
+                            const apiUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://thumbnails.roblox.com/v1/games/icons?universeIds=${targetId}&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false`)}`;
+
+                            const response = await fetch(apiUrl);
+                            if (!response.ok) throw new Error('Network response was not ok');
+
+                            const data = await response.json();
+                            if (isMounted && data.data && data.data.length > 0 && data.data[0].imageUrl) {
+                                setImageUrl(data.data[0].imageUrl);
+                            } else {
+                                setHasError(true);
+                            }
+                        } catch (error) {
+                            // console.error("Error fetching game icon:", error);
+                            if (isMounted) setHasError(true);
+                        } finally {
+                            if (isMounted) setIsLoading(false);
+                        }
+                    };
+                    fetchImage();
+                } else {
+                    setIsLoading(false);
+                    setHasError(true);
+                }
+                return () => { isMounted = false; };
+            }, [universeId, placeId]);
+
+            const fallbackGradient = `linear-gradient(135deg, ${
+                isUpcoming ? '#8b5cf6' : '#3b82f6'
+            }20, #0a0a0f)`;
+
+            return (
+                <div className={`group relative ${isUpcoming ? 'h-[400px]' : 'h-[450px]'} rounded-[32px] overflow-hidden border border-white/10 bg-[#0a0a0f] hover:-translate-y-4 hover:shadow-2xl hover:border-purple-500/30 transition-all duration-500 cursor-pointer`}>
+                    {/* Image or Fallback */}
+                    <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                         style={{
+                             backgroundImage: imageUrl ? `url(${imageUrl})` : fallbackGradient,
+                             opacity: 1
+                         }}
+                    >
+                         {!imageUrl && (
+                            <div className="absolute inset-0 flex items-center justify-center text-white/5 opacity-20">
+                                <Icons.Zap className="w-32 h-32" />
+                            </div>
+                         )}
+                         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/60 to-transparent" />
+                    </div>
+
+                    <div className="absolute inset-0 p-8 flex flex-col justify-between z-10">
+                        <div className="flex justify-end">
+                            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-xs font-bold tracking-widest text-white group-hover:bg-[#0a0a0f] group-hover:border-purple-500/50 transition-colors">
+                                <span className={`w-2 h-2 rounded-full ${isUpcoming ? 'bg-purple-400' : (status === 'working' ? 'bg-green-400 shadow-[0_0_10px_#4ade80]' : 'bg-red-400')}`}></span>
+                                {isUpcoming ? 'ADDED' : status.toUpperCase()}
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 className="text-3xl font-black text-white mb-4 leading-tight drop-shadow-lg group-hover:text-purple-400 transition-colors">{name}</h3>
+                            <div className="flex flex-wrap gap-2 mb-6">
+                                {isUpcoming ? (
+                                    <span className="px-3 py-1 rounded-lg bg-white/10 backdrop-blur-md text-xs font-medium text-gray-300 border border-white/5 uppercase tracking-wide">
+                                        {date}
+                                    </span>
+                                ) : (
+                                    tags.slice(0, 3).map(tag => (
+                                        <span key={tag} className="px-3 py-1 rounded-lg bg-white/10 backdrop-blur-md text-xs font-medium text-gray-300 border border-white/5 uppercase tracking-wide">
+                                            {tag}
+                                        </span>
+                                    ))
+                                )}
+                            </div>
+                            {!isUpcoming && (
+                                <button onClick={() => window.open(`https://www.roblox.com/games/${placeId || universeId}`, '_blank')} className="w-full py-4 rounded-xl bg-white/10 hover:bg-purple-600 hover:text-white backdrop-blur-md border border-white/10 text-white font-bold tracking-wide transition-all flex items-center justify-center gap-2 group/btn">
+                                    Go Play
+                                    <Icons.ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function UpcomingGames() {
+            const games = [
+                { name: "Heroes Battlegrounds", date: "Now Live", universeId: "4568630521" },
+                { name: "Pixel Blade", date: "Available Now", universeId: "6161049307" },
+                { name: "Lootify", date: "Available Now", universeId: "5682590751" },
+                { name: "Forsaken", date: "Available Now", universeId: "6331902150" }
+            ];
+
+            return (
+                <div className="py-24 relative z-10">
+                    <div className="text-center mb-16 space-y-4">
+                         <h2 className="text-4xl md:text-5xl font-black tracking-tight text-white">Upcoming Games</h2>
+                         <p className="text-gray-400">Coming soon to Imp Hub</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1400px] mx-auto px-4">
+                        {games.map((game, index) => (
+                            <GameCard key={index} {...game} isUpcoming={true} status="added" tags={[]} />
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        const upcomingRoot = ReactDOM.createRoot(document.getElementById('upcoming-root'));
+        upcomingRoot.render(<UpcomingGames />);
+
+        function SupportedGames() {
+            const [searchTerm, setSearchTerm] = React.useState("");
+
+            const filteredGames = gamesData.filter(game =>
+                game.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                game.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+            ).sort((a, b) => a.name.localeCompare(b.name));
+
+            return (
+                <div className="max-w-[1600px] mx-auto px-4 py-20">
+                    <div className="text-center mb-16 space-y-4">
+                        <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/50">
+                            SUPPORTED GAMES
+                        </h2>
+                        <p className="text-xl text-gray-400">Full script support with auto-updates</p>
+                    </div>
+
+                    <div className="max-w-2xl mx-auto mb-12 relative">
+                        <input
+                            type="text"
+                            placeholder="Search games..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="w-full px-8 py-5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all text-lg"
+                        />
+                        <div className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-500">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                        {filteredGames.map((game, index) => (
+                            <GameCard key={index} {...game} />
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        const gamesRoot = ReactDOM.createRoot(document.getElementById('games-root'));
+        gamesRoot.render(<SupportedGames />);
+
+        function FAQItem({ question, answer }) {
+            const [isOpen, setIsOpen] = React.useState(false);
+            const contentRef = React.useRef(null);
+
+            return (
+                <div className={`mb-4 rounded-2xl border transition-all duration-300 ${isOpen ? 'bg-white/5 border-purple-500/30' : 'bg-transparent border-white/5 hover:bg-white/[0.02]'}`}>
+                    <button
+                        className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
+                        onClick={() => setIsOpen(!isOpen)}
+                    >
+                        <span className={`text-lg font-medium transition-colors ${isOpen ? 'text-purple-400' : 'text-gray-200'}`}>
+                            {question}
+                        </span>
+                        <div className={`p-2 rounded-lg transition-all duration-300 ${isOpen ? 'bg-purple-500/20 text-purple-400 rotate-180' : 'bg-white/5 text-gray-400 rotate-0'}`}>
+                            <Icons.ChevronRight className="w-5 h-5" />
+                        </div>
+                    </button>
+                    <div
+                        className="overflow-hidden transition-all duration-300 ease-in-out"
+                        style={{ maxHeight: isOpen ? contentRef.current?.scrollHeight + 'px' : '0px', opacity: isOpen ? 1 : 0 }}
+                        ref={contentRef}
+                    >
+                        <div className="px-6 pb-6 text-gray-400 leading-relaxed text-base border-t border-white/5 pt-4 mt-1">
+                            {answer}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function FAQ() {
+            const faqs = [
+                {
+                    question: "Is Imp Hub safe to use?",
+                    answer: "Yes, Imp Hub uses advanced encryption and injection methods to ensure your account security."
+                },
+                {
+                    question: "How do I get a key?",
+                    answer: "You can get a key by clicking the 'Get Key' button. We use Linkvertise and Lootlabs for key generation."
+                },
+                {
+                    question: "Does it work on mobile?",
+                    answer: "Currently, Imp Hub is optimized for PC executors. Mobile support is in development."
+                },
+                {
+                    question: "How often is it updated?",
+                    answer: "We push updates immediately after game patches to ensure minimal downtime."
+                }
+            ];
+
+            return (
+                <div className="py-24 relative z-10">
+                    <div className="max-w-3xl mx-auto px-4">
+                        <div className="text-center mb-16 space-y-4">
+                            <h2 className="text-4xl font-black text-white tracking-tight">Frequently Asked Questions</h2>
+                            <p className="text-gray-400">Everything you need to know about Imp Hub</p>
+                        </div>
+
+                        <div className="space-y-4">
+                            {faqs.map((faq, index) => (
+                                <FAQItem key={index} {...faq} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const faqRoot = ReactDOM.createRoot(document.getElementById('faq-root'));
+        faqRoot.render(<FAQ />);
     </script>
 </body>
 </html>
