@@ -6619,8 +6619,14 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
             <div className={cn("shrink-0 bg-zinc-800 h-[1px] w-full", className)} {...props} />
         );
 
-        function GatewayCard({ title, desc, features, url, isRecommended, checkpoints, duration, icon, primaryColor }) {
+        function GatewayCard({ title, desc, features, url, isRecommended, badgeText, checkpoints, duration, icon, primaryColor }) {
+            // Safelist for dynamic classes:
+            // hover:shadow-green-500/10 hover:border-green-500/50 bg-green-500/10 text-green-500 shadow-green-500/20 from-green-500 bg-green-500/20 to-green-600
+            // hover:shadow-amber-400/10 hover:border-amber-400/50 bg-amber-400/10 text-amber-400 shadow-amber-400/20 from-amber-400 bg-amber-400/20 to-amber-600
+            // hover:shadow-purple-500/10 hover:border-purple-500/50 bg-purple-500/10 text-purple-500 shadow-purple-500/20 from-purple-500 bg-purple-500/20 to-purple-600
+
             const [copied, setCopied] = React.useState(false);
+            const baseColor = primaryColor.split('-')[0];
 
             const handleOpen = () => {
                 if(url) {
@@ -6643,10 +6649,10 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
             return (
                 <Card className={`relative flex flex-col transition-all duration-300 hover:shadow-lg hover:shadow-${primaryColor}/10 hover:border-${primaryColor}/50 w-full max-w-[400px] overflow-hidden group`}>
-                     {isRecommended && (
+                     {(isRecommended || badgeText) && (
                         <div className="absolute top-0 right-0">
                             <div className="bg-purple-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg shadow-lg">
-                                RECOMMENDED
+                                {badgeText || "RECOMMENDED"}
                             </div>
                         </div>
                     )}
@@ -6688,8 +6694,11 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
                     <CardFooter className="pt-4 pb-6 flex flex-col gap-3 relative z-10">
                         <Button
-                            className={`w-full h-11 text-base font-semibold shadow-lg shadow-${primaryColor}/20 bg-gradient-to-r from-${primaryColor} to-${primaryColor}-600 hover:opacity-90 transition-all`}
-                            style={{ backgroundColor: title === 'Linkvertise' ? '#ffc800' : '#8b5cf6', color: title === 'Linkvertise' ? 'black' : 'white' }}
+                            className={`w-full h-11 text-base font-semibold shadow-lg shadow-${primaryColor}/20 bg-gradient-to-r from-${primaryColor} to-${baseColor}-600 hover:opacity-90 transition-all`}
+                            style={{
+                                backgroundColor: title === 'Linkvertise' ? '#ffc800' : (title === 'Ad Mint' ? '#22c55e' : '#8b5cf6'),
+                                color: title === 'Linkvertise' ? 'black' : 'white'
+                            }}
                             onClick={handleOpen}
                         >
                             Start Verification
@@ -6718,7 +6727,10 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
                     {/* Background glow effect */}
                     <div className={`absolute -top-[100px] -right-[100px] w-[200px] h-[200px] bg-${primaryColor}/20 blur-[100px] pointer-events-none`}
-                         style={{ backgroundColor: title === 'Linkvertise' ? '#ffc800' : '#8b5cf6', opacity: 0.15 }}></div>
+                         style={{
+                            backgroundColor: title === 'Linkvertise' ? '#ffc800' : (title === 'Ad Mint' ? '#22c55e' : '#8b5cf6'),
+                            opacity: 0.15
+                        }}></div>
                 </Card>
             );
         }
@@ -6747,8 +6759,8 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                         <p className="text-zinc-400 text-lg max-w-md mx-auto">Choose your preferred verification method below to generate your access key.</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl justify-items-center">
-                        <GatewayCard
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl justify-items-center">
+                         <GatewayCard
                             primaryColor="amber-400"
                             title="Linkvertise"
                             desc="Standard gateway requiring 3 simple checkpoints. Reliable key generation with 12-hour access."
@@ -6756,8 +6768,20 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                             duration="12H KEY"
                             features={["3 Quick checkpoints", "12-hour validity period", "Worldwide availability"]}
                             url="https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU"
-                            isRecommended={true}
+                            isRecommended={false}
                             icon={linkvertiseIcon}
+                        />
+                         <GatewayCard
+                            primaryColor="green-500"
+                            title="Ad Mint"
+                            desc="Fastest verification with minimal steps. Get your key instantly with Ad Mint."
+                            checkpoints="1 Checkpoint"
+                            duration="24H KEY"
+                            features={["Instant verification", "24-hour validity period", "Minimal ads"]}
+                            url="https://ads.luarmor.net/get_key?for=Ad_Mint-hAyOXJpyrixD"
+                            isRecommended={false}
+                            badgeText="FASTER"
+                            icon={<img src="assets/admint_logo.jpg" alt="Ad Mint" className="w-8 h-8 rounded-md object-contain" />}
                         />
                         <GatewayCard
                             primaryColor="purple-500"
@@ -6767,7 +6791,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                             duration="24H KEY"
                             features={["Only 3 checkpoints", "24-hour validity period", "Fastest verification"]}
                             url="https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp"
-                            isRecommended={false}
+                            isRecommended={true}
                             icon={lootlabsIcon}
                         />
                     </div>
