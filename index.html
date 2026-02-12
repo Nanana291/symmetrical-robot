@@ -6776,12 +6776,20 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                             title="Ad Mint"
                             desc="Fastest verification with minimal steps. Get your key instantly with Ad Mint."
                             checkpoints="1 Checkpoint"
-                            duration="24H KEY"
-                            features={["Instant verification", "24-hour validity period", "Minimal ads"]}
+                            duration="12H KEY"
+                            features={["Instant verification", "12-hour validity period", "Minimal ads"]}
                             url="https://ads.luarmor.net/get_key?for=Ad_Mint-hAyOXJpyrixD"
                             isRecommended={false}
                             badgeText="FASTER"
-                            icon={<img src="assets/admint_logo.jpg" alt="Ad Mint" className="w-8 h-8 rounded-md object-contain" />}
+                            icon={(
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 21C7 21 3 17 3 12C3 7 7 3 12 3C17 3 21 7 21 12C21 17 17 21 12 21Z" fill="#22c55e" opacity="0.2"/>
+                                    <path d="M12 2L12 22" stroke="#22c55e" strokeWidth="2" strokeLinecap="round"/>
+                                    <path d="M12 22C6 22 2 16 2 12C2 8 6 2 12 2C18 2 22 8 22 12C22 16 18 22 12 22Z" stroke="#22c55e" strokeWidth="2"/>
+                                    <path d="M12 7C14 7 16 9 16 12C16 15 14 17 12 17" stroke="#22c55e" strokeWidth="2" strokeLinecap="round"/>
+                                    <path d="M12 17C10 17 8 15 8 12C8 9 10 7 12 7" stroke="#22c55e" strokeWidth="2" strokeLinecap="round"/>
+                                </svg>
+                            )}
                         />
                         <GatewayCard
                             primaryColor="purple-500"
@@ -6821,7 +6829,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                         <div className="flex-1 text-center lg:text-left pt-10">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6 animate-fade-in-up">
                                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                                <span className="text-xs font-mono text-gray-300 tracking-wider">IMP HUB X ABYSS</span>
+                                <span className="text-xs font-mono text-gray-300 tracking-wider">IMP HUB</span>
                             </div>
 
                             <h1 className="text-5xl lg:text-7xl font-black mb-6 leading-[1.1] animate-fade-in-up delay-100 font-['Outfit']">
