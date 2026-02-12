@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -5936,52 +5937,7 @@
     </div>
 
     <div id="executors" class="page">
-        <div class="executors-container">
-            <div class="executors-header">
-                <h1 class="executors-title">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-                    </svg>
-                    ROBLOX EXECUTORS
-                </h1>
-                <p class="executors-subtitle">Popular Roblox script executors with real-time status</p>
-            </div>
-
-            <div class="executors-grid" id="executorsGrid">
-                <div class="executor-card-skeleton">
-                    <div class="skeleton-header"></div>
-                    <div class="skeleton-icon"></div>
-                    <div class="skeleton-title"></div>
-                    <div class="skeleton-desc"></div>
-                    <div class="skeleton-btn"></div>
-                </div>
-                <div class="executor-card-skeleton">
-                    <div class="skeleton-header"></div>
-                    <div class="skeleton-icon"></div>
-                    <div class="skeleton-title"></div>
-                    <div class="skeleton-desc"></div>
-                    <div class="skeleton-btn"></div>
-                </div>
-                <div class="executor-card-skeleton">
-                    <div class="skeleton-header"></div>
-                    <div class="skeleton-icon"></div>
-                    <div class="skeleton-title"></div>
-                    <div class="skeleton-desc"></div>
-                    <div class="skeleton-btn"></div>
-                </div>
-            </div>
-
-            <div class="executors-footer">
-                <p class="executors-disclaimer">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="8" x2="12" y2="12"></line>
-                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                    </svg>
-                    Executors data provided by WeAreDevs API. Click any executor to visit its download page.
-                </p>
-            </div>
-        </div>
+        <div id="executors-root" class="w-full"></div>
     </div>
 
     <!-- Script Raw Code Page -->
@@ -6340,208 +6296,6 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         return null;
     };
 
-    // === EXECUTORS FUNCTIONALITY ===
-    let executorsLoaded = false; // Flag to prevent duplicate loading
-
-    const executorsData = [
-        {
-            name: "Delta",
-            status: "updated",
-            description: "The ultimate premium executor with lightning-fast performance, advanced features, and unmatched stability. Industry-leading script execution.",
-            url: "https://wearedevs.net/d/Delta",
-            special: "ultra",
-            icon: "https://i.imgur.com/delta-icon.png",
-            iconFallback: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='deltaGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FFD700'/%3E%3Cstop offset='100%25' style='stop-color:%23FFA500'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon points='50,10 90,85 10,85' fill='url(%23deltaGrad)' stroke='%23FFD700' stroke-width='3'/%3E%3Ctext x='50' y='68' font-family='Arial' font-size='32' font-weight='bold' fill='%23000' text-anchor='middle'%3EΔ%3C/text%3E%3C/svg%3E",
-            color: "#FFD700"
-        },
-        {
-            name: "Solara",
-            status: "updated",
-            description: "A powerful and modern Roblox executor with premium features and regular updates.",
-            url: "https://wearedevs.net/d/Solara",
-            icon: "https://solaraexecutor.com/favicon.png",
-            color: "#00D4FF"
-        },
-        {
-            name: "Wave",
-            status: "updated",
-            description: "Fast and reliable executor with excellent script compatibility and performance.",
-            url: "https://wearedevs.net/d/Wave",
-            icon: "https://raw.githubusercontent.com/Wave-Executor/getwave.dev/main/assets/logo.png",
-            color: "#6366F1"
-        },
-        {
-            name: "Fluxus",
-            status: "updated",
-            description: "Feature-rich executor with advanced scripting capabilities and clean interface.",
-            url: "https://wearedevs.net/d/Fluxus",
-            icon: "https://fluxteam.net/favicon.ico",
-            color: "#F59E0B"
-        },
-        {
-            name: "Arceus X",
-            status: "updated",
-            description: "Mobile-friendly executor with cross-platform support and regular maintenance.",
-            url: "https://wearedevs.net/d/Arceus%20X%20Neo",
-            icon: "https://arceusx.com/favicon.ico",
-            color: "#10B981"
-        },
-        {
-            name: "Codex",
-            status: "updated",
-            description: "Advanced executor with powerful debugging tools and script optimization.",
-            url: "https://wearedevs.net/d/Codex",
-            icon: "https://codex-executor.com/favicon.ico",
-            color: "#8B5CF6"
-        },
-        {
-            name: "Trigon",
-            status: "updated",
-            description: "High-performance executor with exceptional script execution speed.",
-            url: "https://wearedevs.net/d/Trigon",
-            icon: "https://trigonevo.com/favicon.ico",
-            color: "#EF4444"
-        },
-        {
-            name: "Zorara",
-            status: "updated",
-            description: "User-friendly executor with intuitive interface and extensive documentation.",
-            url: "https://wearedevs.net/d/Zorara",
-            icon: "https://zorara.site/favicon.ico",
-            color: "#EC4899"
-        },
-        {
-            name: "Synapse Z",
-            status: "updated",
-            description: "Premium executor with cutting-edge features and professional support.",
-            url: "https://wearedevs.net/d/Synapse%20Z",
-            icon: "https://synapsez.net/favicon.ico",
-            color: "#06B6D4"
-        },
-        {
-            name: "Hydrogen",
-            status: "outdated",
-            description: "Classic executor that needs updates. May have compatibility issues with recent Roblox updates.",
-            url: "https://wearedevs.net/d/Hydrogen",
-            icon: "https://hydrogenexecutor.com/favicon.ico",
-            color: "#64748B"
-        },
-        {
-            name: "KRNL",
-            status: "discontinued",
-            description: "Legacy executor that is no longer maintained. Not recommended for current use.",
-            url: "https://wearedevs.net/d/KRNL",
-            icon: "https://krnl.place/favicon.ico",
-            color: "#94A3B8"
-        },
-        {
-            name: "Oxygen U",
-            status: "outdated",
-            description: "Previously popular executor that hasn't received recent updates. Limited functionality.",
-            url: "https://wearedevs.net/d/Oxygen%20U",
-            icon: "https://oxygenu.xyz/favicon.ico",
-            color: "#71717A"
-        }
-    ];
-
-    function loadExecutors() {
-        // Prevent duplicate loading
-        if (executorsLoaded) return;
-        executorsLoaded = true;
-
-        const grid = document.getElementById('executorsGrid');
-        if (!grid) return;
-
-        // Clear skeleton loaders
-        grid.innerHTML = '';
-
-        // Create executor cards
-        executorsData.forEach((executor, index) => {
-            setTimeout(() => {
-                const card = document.createElement('div');
-                card.className = 'executor-card';
-
-                // Add special class for Delta
-                if (executor.special === 'ultra') {
-                    card.classList.add('executor-ultra');
-                }
-
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.cursor = 'pointer';
-
-                // Make entire card clickable
-                card.onclick = () => window.open(executor.url, '_blank');
-
-                const statusClass = executor.status;
-                const statusText = executor.status === 'updated' ? 'Updated' :
-                                  executor.status === 'outdated' ? 'Outdated' : 'Discontinued';
-
-                const firstLetter = executor.name.charAt(0).toUpperCase();
-
-                // Add recommended label for Delta
-                const recommendedBadge = executor.special === 'ultra' ? `
-                    <div class="executor-recommended-label">
-                        RECOMMENDED
-                    </div>
-                ` : '';
-
-                const iconSrc = executor.iconFallback || executor.icon;
-                const iconOnError = executor.iconFallback
-                    ? `this.style.display='flex';`
-                    : `this.style.display='none'; this.nextElementSibling.style.display='flex';`;
-
-                card.innerHTML = `
-                    ${recommendedBadge}
-                    <div class="executor-header">
-                        <div></div>
-                        <div class="executor-status ${statusClass}">
-                            <div class="status-dot"></div>
-                            ${statusText}
-                        </div>
-                    </div>
-                    <div class="executor-icon-wrapper">
-                        <div class="executor-icon-glow" style="background: radial-gradient(circle, ${executor.color}40 0%, transparent 70%);"></div>
-                        <img src="${iconSrc}"
-                             alt="${executor.name}"
-                             class="executor-icon-img"
-                             onerror="${iconOnError}"
-                        />
-                        ${!executor.iconFallback ? `<div class="executor-icon-fallback" style="display: none; color: ${executor.color};">${firstLetter}</div>` : ''}
-                    </div>
-                    <h3 class="executor-name">${executor.name}</h3>
-                    <p class="executor-desc">${executor.description}</p>
-                `;
-
-                grid.appendChild(card);
-
-                // Fade in animation
-                setTimeout(() => {
-                    card.style.transition = 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 50);
-            }, index * 100);
-        });
-    }
-
-    // Load executors when the page is shown
-    const executorsObserver = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.target.id === 'executors' && mutation.target.classList.contains('active')) {
-                loadExecutors();
-                executorsObserver.disconnect();
-            }
-        });
-    });
-
-    // Start observing when DOM is ready
-    if (document.getElementById('executors')) {
-        executorsObserver.observe(document.getElementById('executors'), {
-            attributes: true,
-            attributeFilter: ['class']
-        });
-    }
 
 
 
@@ -7584,6 +7338,220 @@ const GamesPage = () => {
         </div>
     );
 };
+
+// Executors Data
+const executorsData = [
+    {
+        name: "Delta",
+        status: "updated",
+        description: "The ultimate premium executor with lightning-fast performance, advanced features, and unmatched stability.",
+        url: "https://deltaexploits.gg/",
+        tags: ["Mobile", "Android"],
+        isRecommended: true,
+        logo: "https://deltaexploits.gg/assets/images/logo.png",
+        theme: "yellow"
+    },
+    {
+        name: "Arceus X",
+        status: "updated",
+        description: "Mobile-friendly executor with cross-platform support and regular maintenance.",
+        url: "https://spdmteam.com/",
+        tags: ["Mobile", "Android", "iOS"],
+        logo: "https://spdmteam.com/favicon.ico",
+        theme: "green"
+    },
+    {
+        name: "Codex",
+        status: "updated",
+        description: "Advanced executor with powerful debugging tools and script optimization.",
+        url: "https://www.codex.lol/",
+        tags: ["Mobile", "Android", "iOS", "PC"],
+        logo: "https://www.codex.lol/favicon.ico",
+        theme: "purple"
+    },
+    {
+        name: "Volcano",
+        status: "updated",
+        description: "A free Roblox script executor that allows players to run custom scripts with high sUNC rate.",
+        url: "https://volcanoexecutor.com/",
+        tags: ["PC", "Windows"],
+        logo: "https://volcanoexecutor.com/wp-content/uploads/2025/05/volcano.png",
+        theme: "red"
+    },
+    {
+        name: "Xeno",
+        status: "updated",
+        description: "Modern executor with unique features and sleek interface.",
+        url: "https://xeno.now/",
+        tags: ["Mobile", "Android"],
+        logo: "https://xeno.now/favicon.ico",
+        theme: "emerald"
+    }
+];
+
+const ExecutorCard = ({ executor }) => {
+    const [hovered, setHovered] = React.useState(false);
+    const MotionDiv = window.Motion.motion.div;
+
+    return (
+        <MotionDiv
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            whileHover={{ y: -8 }}
+            onHoverStart={() => setHovered(true)}
+            onHoverEnd={() => setHovered(false)}
+        >
+            <Card className={`group relative overflow-hidden bg-[#0A0A0E] border-zinc-800/50 hover:border-${executor.theme}-500/50 transition-all duration-500 h-full flex flex-col hover:shadow-[0_0_40px_-10px_rgba(var(--${executor.theme}-color),0.3)]`}>
+                {executor.isRecommended && (
+                    <div className="absolute top-0 right-0 z-20">
+                        <div className="bg-gradient-to-r from-yellow-500 to-amber-600 text-black text-[10px] font-black px-3 py-1 rounded-bl-xl shadow-lg flex items-center gap-1">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            RECOMMENDED
+                        </div>
+                    </div>
+                )}
+
+                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                <CardHeader className="relative z-10 pb-2">
+                    <div className="flex justify-between items-start mb-4">
+                        <div className="w-16 h-16 rounded-2xl bg-zinc-900 border border-zinc-800 p-3 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-xl relative overflow-hidden">
+                            <div className={`absolute inset-0 bg-${executor.theme}-500/10 opacity-0 group-hover:opacity-100 transition-opacity`} />
+                            <img
+                                src={executor.logo}
+                                alt={executor.name}
+                                className="w-full h-full object-contain relative z-10"
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.style.display = 'none';
+                                    e.target.nextSibling.style.display = 'flex';
+                                }}
+                            />
+                            <div className="hidden w-full h-full items-center justify-center font-bold text-2xl text-zinc-600">
+                                {executor.name[0]}
+                            </div>
+                        </div>
+                        <Badge variant="outline" className={`bg-zinc-950/50 backdrop-blur border-${executor.theme}-500/30 text-${executor.theme}-400`}>
+                            <span className="w-1.5 h-1.5 rounded-full bg-current mr-2 animate-pulse" />
+                            {executor.status.toUpperCase()}
+                        </Badge>
+                    </div>
+                    <CardTitle className="text-2xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all font-['Outfit']">
+                        {executor.name}
+                    </CardTitle>
+                    <div className="flex flex-wrap gap-2 mt-3">
+                        {executor.tags.map(tag => (
+                            <Badge key={tag} variant="secondary" className="text-[10px] bg-white/5 hover:bg-white/10 text-zinc-400 border-none">
+                                {tag}
+                            </Badge>
+                        ))}
+                    </div>
+                </CardHeader>
+
+                <CardContent className="relative z-10 flex-1">
+                    <p className="text-zinc-400 text-sm leading-relaxed">
+                        {executor.description}
+                    </p>
+                </CardContent>
+
+                <CardFooter className="relative z-10 pt-0">
+                    <a
+                        href={executor.url}
+                        target="_blank"
+                        className="w-full"
+                        rel="noopener noreferrer"
+                    >
+                        <Button className={`w-full bg-zinc-100 hover:bg-white text-black font-bold border-0 shadow-lg hover:shadow-${executor.theme}-500/20 group/btn overflow-hidden relative`}>
+                            <span className="relative z-10 flex items-center justify-center gap-2">
+                                Visit Website
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover/btn:translate-x-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </span>
+                        </Button>
+                    </a>
+                </CardFooter>
+            </Card>
+        </MotionDiv>
+    );
+};
+
+const ExecutorsPage = () => {
+    const [searchTerm, setSearchTerm] = React.useState("");
+    const [selectedTag, setSelectedTag] = React.useState("All");
+
+    const allTags = ["All", ...new Set(executorsData.flatMap(e => e.tags))];
+
+    const filteredExecutors = executorsData.filter(executor => {
+        const matchesSearch = executor.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesTag = selectedTag === "All" || executor.tags.includes(selectedTag);
+        return matchesSearch && matchesTag;
+    });
+
+    return (
+        <div className="min-h-screen pt-24 pb-20 px-4 container mx-auto">
+            {/* Header */}
+            <div className="text-center mb-16 relative">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-blue-600/10 blur-[100px] rounded-full pointer-events-none" />
+                <h1 className="text-5xl md:text-6xl font-black text-white tracking-tight relative z-10 font-['Outfit'] mb-4">
+                    Top <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Executors</span>
+                </h1>
+                <p className="text-zinc-400 text-lg max-w-2xl mx-auto relative z-10">
+                    Trusted and verified Roblox script executors. Download directly from official sources.
+                </p>
+            </div>
+
+            {/* Controls */}
+            <div className="max-w-6xl mx-auto mb-12 space-y-6">
+                <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-[#0A0A0E] p-4 rounded-2xl border border-zinc-800/50 backdrop-blur-sm shadow-2xl">
+                    <div className="relative w-full md:w-96">
+                        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                        <Input
+                            placeholder="Search executors..."
+                            className="pl-10 bg-zinc-900/50 border-zinc-800 text-white placeholder:text-zinc-600 focus:border-blue-500"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </div>
+
+                    <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto no-scrollbar mask-gradient">
+                        {allTags.map(tag => (
+                            <button
+                                key={tag}
+                                onClick={() => setSelectedTag(tag)}
+                                className={`px-4 py-2 rounded-lg text-sm font-bold whitespace-nowrap transition-all border ${
+                                    selectedTag === tag
+                                    ? "bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-900/50"
+                                    : "bg-zinc-900/50 border-zinc-800 text-zinc-400 hover:bg-zinc-800 hover:text-white"
+                                }`}
+                            >
+                                {tag}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                {filteredExecutors.map((executor, index) => (
+                    <ExecutorCard key={index} executor={executor} />
+                ))}
+            </div>
+
+            {/* Footer / Disclaimer */}
+            <div className="mt-20 text-center max-w-2xl mx-auto">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900/50 border border-zinc-800 text-zinc-500 text-sm">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span>For educational purposes only. We do not promote exploiting.</span>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// Mount Executors
+const executorsRoot = ReactDOM.createRoot(document.getElementById('executors-root'));
+executorsRoot.render(<ExecutorsPage />);
 
 // Mount
 const gamesRoot = ReactDOM.createRoot(document.getElementById('games-root'));
