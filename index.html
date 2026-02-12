@@ -5862,1024 +5862,7 @@
     </div>
 
     <div id="games" class="page">
-        <div class="games-page-header">
-            <h1 class="games-page-title">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="2" y="6" width="20" height="12" rx="2"></rect>
-                    <path d="M6 12h4"></path>
-                    <path d="M14 12h4"></path>
-                </svg>
-                SUPPORTED GAMES
-            </h1>
-            <p class="games-page-subtitle">Full script support with auto-updates</p>
-        </div>
-        
-        <div class="filter-container">
-            <div class="search-wrapper">
-                <input type="text" class="search-input" id="gameSearch" placeholder="Search for a game..." autocomplete="off">
-                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <div id="autocomplete-list" class="autocomplete-box"></div>
-            </div>
-            <div class="filter-pills">
-                <button class="sort-toggle-btn" id="sortToggleBtn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="4" y1="6" x2="20" y2="6"></line>
-                        <line x1="4" y1="12" x2="20" y2="12"></line>
-                        <line x1="4" y1="18" x2="16" y2="18"></line>
-                    </svg>
-                    A-Z Sort
-                </button>
-                
-                <button class="filter-dropdown-btn" id="filterDropdownBtn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-                    </svg>
-                    Filters
-                    <span class="filter-badge" id="filterBadge" style="display: none;">0</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </button>
-                
-                <div class="filter-dropdown-menu" id="filterDropdownMenu">
-                    <div class="filter-section">
-                        <div class="filter-section-title">Status</div>
-                        <div class="filter-option" data-category="status" data-value="working">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">Working</span>
-                        </div>
-                        <div class="filter-option" data-category="status" data-value="outdated">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">Outdated</span>
-                        </div>
-                    </div>
-                    
-                    <div class="filter-section">
-                        <div class="filter-section-title">Categories</div>
-                        <div class="filter-option" data-category="tags" data-value="rpg">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">RPG</span>
-                        </div>
-                        <div class="filter-option" data-category="tags" data-value="pvp">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">PvP</span>
-                        </div>
-                        <div class="filter-option" data-category="tags" data-value="farming">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">Farming</span>
-                        </div>
-                        <div class="filter-option" data-category="tags" data-value="simulator">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">Simulator</span>
-                        </div>
-                        <div class="filter-option" data-category="tags" data-value="anime">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">Anime</span>
-                        </div>
-                        <div class="filter-option" data-category="tags" data-value="parkour">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">Parkour</span>
-                        </div>
-                        <div class="filter-option" data-category="tags" data-value="afk">
-                            <div class="filter-checkbox">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="filter-label">AFK Friendly</span>
-                        </div>
-                    </div>
-                    
-                    <div class="filter-actions">
-                        <button class="filter-clear" id="filterClearBtn">Clear All</button>
-                        <button class="filter-apply" id="filterApplyBtn">Apply</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="games-grid" id="gamesGrid">
-            <div class="game-card" data-status="working" data-name="Escape Tsunami For Brainrots" data-tags="survival obby" data-place-id="9363735110">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Escape Tsunami For Brainrots</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Survival</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/9363735110/Escape-Tsunami-For-Brainrots" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Jujutsu Shenanigans" data-tags="fighting anime" data-place-id="3508322461">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Jujutsu Shenanigans</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Combat</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/3508322461/Jujutsu-Shenanigans" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Solo Hunters" data-tags="rpg adventure" data-place-id="7394964165">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Solo Hunters</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/7394964165/Solo-Hunters" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Break A Lucky Block" data-tags="simulator lucky-block" data-place-id="9344307274">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Break A Lucky Block</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Break</span>
-                            <span class="g-tag">Lucky Block</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/9344307274/Break-A-Lucky-Block" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Anime Eternal" data-tags="rpg anime farming" data-universe-id="7882829745">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Anime Eternal</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/90462358603255/Anime-Eternal" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Anime Last Stand" data-tags="tower defense anime strategy" data-universe-id="4509896324">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Anime Last Stand</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Place</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/12886143095/QOL-Godly-EXB-Anime-Last-Stand" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Arise Crossover" data-tags="rpg anime farming" data-universe-id="7074860883">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Arise Crossover</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/87039211657390/ONLINE-Arise-Crossover" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Dragon Adventures" data-tags="rpg simulator pets" data-universe-id="1235188606">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Dragon Adventures</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Teleport</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/3475397644/Dragon-Adventures" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Dragon Ball Rage" data-tags="pvp anime fighting" data-universe-id="98929893">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Dragon Ball Rage</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Train</span>
-                            <span class="g-tag">ESP</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/71315343/EGO-Dragon-Ball-Rage" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Dragon Soul" data-tags="rpg farming anime" data-universe-id="3164075108">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Dragon Soul</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">ESP</span>
-                            <span class="g-tag">Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/8246874626/Dragon-Soul-Anime-MMO" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Fruit Battlegrounds" data-tags="pvp fighting anime" data-universe-id="3457700596">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Fruit Battlegrounds</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">ESP</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/9224601490/FLAME-V2-Fruit-Battlegrounds" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-<div class="game-card" data-status="working" data-name="Slasher Blade Loot" data-tags="simulator rpg anime" data-universe-id="9126204352">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Slasher Blade Loot</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Spin</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/79940517734440/Slasher-Blade-Loot-W8" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Sonic Speed Simulator" data-tags="racing simulator afk" data-universe-id="3405618667">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Sonic Speed Simulator</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Speed</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/6602390314/Sonic-Speed-Simulator" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Spongebob TD" data-tags="tower defense casual" data-universe-id="6594435384">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Spongebob TD</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Place</span>
-                            <span class="g-tag">Auto Farm</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/123662243100680/SpongeBob-Tower-Defense" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Tower Of Zombies" data-tags="parkour adventure" data-universe-id="8238863102">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Tower Of Zombies</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Parkour</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/99122501338948/Tower-of-Zombies" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Heroes Battlegrounds" data-tags="pvp fighting anime" data-universe-id="4568630521">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Heroes Battlegrounds</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Combat</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/17351132640/Heroes-Battlegrounds" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Pixel Blade" data-tags="rpg anime" data-universe-id="6161049307">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Pixel Blade</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/16550815768/Pixel-Blade" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Forsaken" data-tags="rpg adventure" data-universe-id="6331902150">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Forsaken</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Combat</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/17316019067/Forsaken" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Lootify" data-tags="rpg farming" data-universe-id="5682590751">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Lootify</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/13655746648/Lootify" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Muscle Legends" data-tags="simulator fitness" data-universe-id="1268927906">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Muscle Legends</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Train</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/3624649426/Muscle-Legends" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Creatures Of Sonaria" data-tags="rpg survival" data-universe-id="1831550657">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Creatures Of Sonaria</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Survival</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/5233782396/Creatures-of-Sonaria" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Shindo Life" data-tags="rpg anime" data-universe-id="1511883870">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Shindo Life</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/4616652839/Shindo-Life" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Blue Lock Rivals" data-tags="sports anime pvp" data-universe-id="6325068386">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Blue Lock Rivals</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Play</span>
-                            <span class="g-tag">Soccer</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/16367540086/Blue-Lock-Rivals" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Evade" data-tags="parkour survival" data-universe-id="3647333358">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Evade</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Parkour</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/9872472334/Evade" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Strongest Battlegrounds" data-tags="pvp fighting anime" data-universe-id="3808081382">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Strongest Battlegrounds</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Combat</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/10449761463/The-Strongest-Battlegrounds" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Eat The World" data-tags="simulator casual" data-universe-id="5677613211">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Eat The World</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Eat</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/14239622652/Eat-The-World" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Dungeon Hunters" data-tags="rpg dungeon adventure" data-universe-id="8937254139">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Dungeon Hunters</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Dungeon</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/79050775908503/Dungeon-Hunters" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Anime Fighting Simulator Endless" data-tags="fighting anime simulator" data-universe-id="9266873836">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Anime Fighting Simulator Endless</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Train</span>
-                            <span class="g-tag">Auto Fight</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/82047983563264/Anime-Fighting-Simulator-Endless" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="My Fishing Brainrots" data-tags="fishing simulator casual" data-universe-id="8916375040">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">My Fishing Brainrots</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Fish</span>
-                            <span class="g-tag">Auto Sell</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/78859332012339/My-Fishing-Brainrots" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Arise Ragnarok Crossover" data-tags="rpg anime crossover" data-universe-id="8974769492">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Arise Ragnarok Crossover</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/79382669698801/Arise-Ragnarok-Crossover" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Garden Tower Defense" data-tags="tower defense strategy" data-universe-id="7703614594">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Garden Tower Defense</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Build</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/77036145947703614594/Garden-Tower-Defense" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Rogue Piece" data-tags="rpg anime adventure" data-universe-id="8321616508">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Rogue Piece</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/83216165088321616508/Rogue-Piece" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Murderers VS Sheriffs" data-tags="fps pvp action" data-universe-id="4348829796">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Murderers VS Sheriffs</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Kill</span>
-                            <span class="g-tag">ESP</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/43488297964348829796/Murderers-VS-Sheriffs" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="A Universal Time" data-tags="rpg anime adventure" data-universe-id="1782832995">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">A Universal Time</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Quest</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/17828329951782832995/A-Universal-Time" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Fate Trigger" data-tags="fps action shooter" data-universe-id="9326439632">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Fate Trigger</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Aimbot</span>
-                            <span class="g-tag">ESP</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/93264396329326439632/Fate-Trigger" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Entrenched WW1" data-tags="fps war strategy" data-universe-id="1281592938">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Entrenched WW1</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Kill</span>
-                            <span class="g-tag">ESP</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/12815929381281592938/Entrenched-WW1" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="game-card" data-status="working" data-name="Tower Defense Simulator" data-tags="strategy tower-defense" data-universe-id="1176784616">
-                <div class="game-bg loading"></div>
-                <div class="game-content">
-                    <div class="game-header">
-                        <div class="status-badge"><div class="s-dot"></div> WORKING</div>
-                    </div>
-                    <div class="game-footer">
-                        <h3 class="g-title">Tower Defense Simulator</h3>
-                        <div class="g-tags">
-                            <span class="g-tag">Auto Farm</span>
-                            <span class="g-tag">Auto Place</span>
-                        </div>
-                        <a href="https://www.roblox.com/games/11767846161176784616/Tower-Defense-Simulator" target="_blank" class="g-btn">
-                            Go Play
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="games-root" class="w-full"></div>
     </div>
 
     <div id="status" class="page">
@@ -8370,6 +7353,493 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
         const homeRoot = ReactDOM.createRoot(document.getElementById('home-root'));
         homeRoot.render(<HomePage />);
+    </script>
+
+    <script type="text/babel">
+// Games Data
+const gamesData = [
+  {
+    "name": "Escape Tsunami For Brainrots",
+    "status": "working",
+    "tags": ["survival", "obby"],
+    "placeId": "9363735110",
+    "link": "https://www.roblox.com/games/9363735110/Escape-Tsunami-For-Brainrots"
+  },
+  {
+    "name": "Jujutsu Shenanigans",
+    "status": "working",
+    "tags": ["fighting", "anime"],
+    "placeId": "3508322461",
+    "link": "https://www.roblox.com/games/3508322461/Jujutsu-Shenanigans"
+  },
+  {
+    "name": "Solo Hunters",
+    "status": "working",
+    "tags": ["rpg", "adventure"],
+    "placeId": "7394964165",
+    "link": "https://www.roblox.com/games/7394964165/Solo-Hunters"
+  },
+  {
+    "name": "Break A Lucky Block",
+    "status": "working",
+    "tags": ["simulator", "lucky-block"],
+    "placeId": "9344307274",
+    "link": "https://www.roblox.com/games/9344307274/Break-A-Lucky-Block"
+  },
+  {
+    "name": "Anime Eternal",
+    "status": "working",
+    "tags": ["rpg", "anime", "farming"],
+    "universeId": "7882829745",
+    "link": "https://www.roblox.com/games/90462358603255/Anime-Eternal"
+  },
+  {
+    "name": "Anime Last Stand",
+    "status": "working",
+    "tags": ["tower defense", "anime", "strategy"],
+    "universeId": "4509896324",
+    "link": "https://www.roblox.com/games/12886143095/QOL-Godly-EXB-Anime-Last-Stand"
+  },
+  {
+    "name": "Arise Crossover",
+    "status": "working",
+    "tags": ["rpg", "anime", "farming"],
+    "universeId": "7074860883",
+    "link": "https://www.roblox.com/games/87039211657390/ONLINE-Arise-Crossover"
+  },
+  {
+    "name": "Dragon Adventures",
+    "status": "working",
+    "tags": ["rpg", "simulator", "pets"],
+    "universeId": "1235188606",
+    "link": "https://www.roblox.com/games/3475397644/Dragon-Adventures"
+  },
+  {
+    "name": "Dragon Ball Rage",
+    "status": "working",
+    "tags": ["pvp", "anime", "fighting"],
+    "universeId": "98929893",
+    "link": "https://www.roblox.com/games/71315343/EGO-Dragon-Ball-Rage"
+  },
+  {
+    "name": "Dragon Soul",
+    "status": "working",
+    "tags": ["rpg", "farming", "anime"],
+    "universeId": "3164075108",
+    "link": "https://www.roblox.com/games/8246874626/Dragon-Soul-Anime-MMO"
+  },
+  {
+    "name": "Fruit Battlegrounds",
+    "status": "working",
+    "tags": ["pvp", "fighting", "anime"],
+    "universeId": "3457700596",
+    "link": "https://www.roblox.com/games/9224601490/FLAME-V2-Fruit-Battlegrounds"
+  },
+  {
+    "name": "Slasher Blade Loot",
+    "status": "working",
+    "tags": ["simulator", "rpg", "anime"],
+    "universeId": "9126204352",
+    "link": "https://www.roblox.com/games/79940517734440/Slasher-Blade-Loot-W8"
+  },
+  {
+    "name": "Sonic Speed Simulator",
+    "status": "working",
+    "tags": ["racing", "simulator", "afk"],
+    "universeId": "3405618667",
+    "link": "https://www.roblox.com/games/6602390314/Sonic-Speed-Simulator"
+  },
+  {
+    "name": "Spongebob TD",
+    "status": "working",
+    "tags": ["tower defense", "casual"],
+    "universeId": "6594435384",
+    "link": "https://www.roblox.com/games/123662243100680/SpongeBob-Tower-Defense"
+  },
+  {
+    "name": "Tower Of Zombies",
+    "status": "working",
+    "tags": ["parkour", "adventure"],
+    "universeId": "8238863102",
+    "link": "https://www.roblox.com/games/99122501338948/Tower-of-Zombies"
+  },
+  {
+    "name": "Heroes Battlegrounds",
+    "status": "working",
+    "tags": ["pvp", "fighting", "anime"],
+    "universeId": "4568630521",
+    "link": "https://www.roblox.com/games/17351132640/Heroes-Battlegrounds"
+  },
+  {
+    "name": "Pixel Blade",
+    "status": "working",
+    "tags": ["rpg", "anime"],
+    "universeId": "6161049307",
+    "link": "https://www.roblox.com/games/16550815768/Pixel-Blade"
+  },
+  {
+    "name": "Forsaken",
+    "status": "working",
+    "tags": ["rpg", "adventure"],
+    "universeId": "6331902150",
+    "link": "https://www.roblox.com/games/17316019067/Forsaken"
+  },
+  {
+    "name": "Lootify",
+    "status": "working",
+    "tags": ["rpg", "farming"],
+    "universeId": "5682590751",
+    "link": "https://www.roblox.com/games/13655746648/Lootify"
+  },
+  {
+    "name": "Muscle Legends",
+    "status": "working",
+    "tags": ["simulator", "fitness"],
+    "universeId": "1268927906",
+    "link": "https://www.roblox.com/games/3624649426/Muscle-Legends"
+  },
+  {
+    "name": "Creatures Of Sonaria",
+    "status": "working",
+    "tags": ["rpg", "survival"],
+    "universeId": "1831550657",
+    "link": "https://www.roblox.com/games/5233782396/Creatures-of-Sonaria"
+  },
+  {
+    "name": "Shindo Life",
+    "status": "working",
+    "tags": ["rpg", "anime"],
+    "universeId": "1511883870",
+    "link": "https://www.roblox.com/games/4616652839/Shindo-Life"
+  },
+  {
+    "name": "Blue Lock Rivals",
+    "status": "working",
+    "tags": ["sports", "anime", "pvp"],
+    "universeId": "6325068386",
+    "link": "https://www.roblox.com/games/16367540086/Blue-Lock-Rivals"
+  },
+  {
+    "name": "Evade",
+    "status": "working",
+    "tags": ["parkour", "survival"],
+    "universeId": "3647333358",
+    "link": "https://www.roblox.com/games/9872472334/Evade"
+  },
+  {
+    "name": "Strongest Battlegrounds",
+    "status": "working",
+    "tags": ["pvp", "fighting", "anime"],
+    "universeId": "3808081382",
+    "link": "https://www.roblox.com/games/10449761463/The-Strongest-Battlegrounds"
+  },
+  {
+    "name": "Eat The World",
+    "status": "working",
+    "tags": ["simulator", "casual"],
+    "universeId": "5677613211",
+    "link": "https://www.roblox.com/games/14239622652/Eat-The-World"
+  },
+  {
+    "name": "Dungeon Hunters",
+    "status": "working",
+    "tags": ["rpg", "dungeon", "adventure"],
+    "universeId": "8937254139",
+    "link": "https://www.roblox.com/games/79050775908503/Dungeon-Hunters"
+  },
+  {
+    "name": "Anime Fighting Simulator Endless",
+    "status": "working",
+    "tags": ["fighting", "anime", "simulator"],
+    "universeId": "9266873836",
+    "link": "https://www.roblox.com/games/82047983563264/Anime-Fighting-Simulator-Endless"
+  },
+  {
+    "name": "My Fishing Brainrots",
+    "status": "working",
+    "tags": ["fishing", "simulator", "casual"],
+    "universeId": "8916375040",
+    "link": "https://www.roblox.com/games/78859332012339/My-Fishing-Brainrots"
+  },
+  {
+    "name": "Arise Ragnarok Crossover",
+    "status": "working",
+    "tags": ["rpg", "anime", "crossover"],
+    "universeId": "8974769492",
+    "link": "https://www.roblox.com/games/79382669698801/Arise-Ragnarok-Crossover"
+  },
+  {
+    "name": "Garden Tower Defense",
+    "status": "working",
+    "tags": ["tower defense", "strategy"],
+    "universeId": "7703614594",
+    "link": "https://www.roblox.com/games/77036145947703614594/Garden-Tower-Defense"
+  },
+  {
+    "name": "Rogue Piece",
+    "status": "working",
+    "tags": ["rpg", "anime", "adventure"],
+    "universeId": "8321616508",
+    "link": "https://www.roblox.com/games/83216165088321616508/Rogue-Piece"
+  },
+  {
+    "name": "Murderers VS Sheriffs",
+    "status": "working",
+    "tags": ["fps", "pvp", "action"],
+    "universeId": "4348829796",
+    "link": "https://www.roblox.com/games/43488297964348829796/Murderers-VS-Sheriffs"
+  },
+  {
+    "name": "A Universal Time",
+    "status": "working",
+    "tags": ["rpg", "anime", "adventure"],
+    "universeId": "1782832995",
+    "link": "https://www.roblox.com/games/17828329951782832995/A-Universal-Time"
+  },
+  {
+    "name": "Fate Trigger",
+    "status": "working",
+    "tags": ["fps", "action", "shooter"],
+    "universeId": "9326439632",
+    "link": "https://www.roblox.com/games/93264396329326439632/Fate-Trigger"
+  },
+  {
+    "name": "Entrenched WW1",
+    "status": "working",
+    "tags": ["fps", "war", "strategy"],
+    "universeId": "1281592938",
+    "link": "https://www.roblox.com/games/12815929381281592938/Entrenched-WW1"
+  },
+  {
+    "name": "Tower Defense Simulator",
+    "status": "working",
+    "tags": ["strategy", "tower-defense"],
+    "universeId": "1176784616",
+    "link": "https://www.roblox.com/games/11767846161176784616/Tower-Defense-Simulator"
+  }
+];
+
+// Reusing Shadcn components defined in global scope or redefining them for safety
+// In a real module system we would import them. Here we assume they exist or we make simple versions.
+
+const Input = React.forwardRef(({ className, type, ...props }, ref) => {
+  return (
+    <input
+      type={type}
+      className={cn(
+        "flex h-12 w-full rounded-xl border border-zinc-800 bg-zinc-950/50 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all",
+        className
+      )}
+      ref={ref}
+      {...props}
+    />
+  )
+})
+Input.displayName = "Input"
+
+// Helper for thumbnail fetching
+const fetchGameThumbnail = async (id, type) => {
+    // Check global cache if available
+    const cacheKey = `${type}_${id}`;
+    // We'll use a local simple cache for this component instance if global isn't there
+    // But relying on the function defined in index.html is risky if scope is isolated.
+    // Let's reimplement a simple version.
+
+    const PROXY_URL = url => `https://corsproxy.io/?${encodeURIComponent(url)}`;
+    let targetUniverseId = id;
+
+    if (type === 'place') {
+        try {
+            const universeUrl = PROXY_URL(`https://apis.roblox.com/universes/v1/places/${id}/universe`);
+            const res = await fetch(universeUrl);
+            const data = await res.json();
+            if (data.universeId) targetUniverseId = data.universeId;
+            else return null;
+        } catch (e) { return null; }
+    }
+
+    const apiUrl = `https://thumbnails.roblox.com/v1/games/icons?universeIds=${targetUniverseId}&size=256x256&format=Png&isCircular=false`;
+
+    try {
+        const url = PROXY_URL(apiUrl);
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data?.data?.[0]?.imageUrl) return data.data[0].imageUrl;
+    } catch (e) {
+        // Fallback
+         try {
+            const fallbackUrl = `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(apiUrl)}`;
+            const response = await fetch(fallbackUrl);
+            const data = await response.json();
+            if (data?.data?.[0]?.imageUrl) return data.data[0].imageUrl;
+        } catch (e2) { return null; }
+    }
+    return null;
+};
+
+const GameCard = ({ game }) => {
+    const [thumbnail, setThumbnail] = React.useState(null);
+    const [loading, setLoading] = React.useState(true);
+
+    React.useEffect(() => {
+        let mounted = true;
+        const load = async () => {
+            const id = game.universeId || game.placeId;
+            const type = game.universeId ? 'universe' : 'place';
+
+            // Artificial delay for stagger effect
+            // await new Promise(r => setTimeout(r, Math.random() * 500));
+
+            const url = await fetchGameThumbnail(id, type);
+            if (mounted && url) {
+                setThumbnail(url);
+                setLoading(false);
+            } else if (mounted) {
+                setLoading(false); // Failed but stop loading
+            }
+        };
+        load();
+        return () => { mounted = false; };
+    }, [game]);
+
+    return (
+        <Card className="group relative overflow-hidden border-zinc-800/50 bg-[#0A0A0E] hover:border-purple-500/50 transition-all duration-500 hover:shadow-[0_0_40px_-10px_rgba(139,92,246,0.3)] hover:-translate-y-2 h-[420px] flex flex-col">
+            {/* Background Image Layer */}
+            <div className="absolute inset-0 z-0">
+                <div
+                    className={`w-full h-full bg-cover bg-center transition-all duration-700 ${loading ? 'opacity-0 scale-110' : 'opacity-100 scale-100 group-hover:scale-110'}`}
+                    style={{
+                        backgroundImage: thumbnail ? `url(${thumbnail})` : 'none',
+                        backgroundColor: '#121216'
+                    }}
+                />
+                <div className={`absolute inset-0 bg-zinc-900/20 backdrop-blur-md transition-opacity duration-500 ${loading ? 'opacity-100' : 'opacity-0'}`} />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0E] via-[#0A0A0E]/80 to-transparent z-10" />
+            </div>
+
+            {/* Content */}
+            <div className="relative z-20 flex flex-col h-full p-6">
+                <div className="flex justify-between items-start">
+                    <Badge variant="outline" className={`bg-black/50 backdrop-blur border-green-500/30 text-green-400 shadow-[0_0_10px_rgba(34,197,94,0.2)] ${game.status !== 'working' ? 'border-red-500/30 text-red-400' : ''}`}>
+                         <span className={`w-1.5 h-1.5 rounded-full mr-2 ${game.status === 'working' ? 'bg-green-400 animate-pulse' : 'bg-red-400'}`} />
+                         {game.status.toUpperCase()}
+                    </Badge>
+                </div>
+
+                <div className="mt-auto space-y-4">
+                    <div>
+                        <h3 className="text-2xl font-black text-white mb-2 leading-tight group-hover:text-purple-400 transition-colors font-['Outfit'] drop-shadow-lg">
+                            {game.name}
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                            {game.tags.slice(0, 3).map(tag => (
+                                <span key={tag} className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 bg-white/5 px-2 py-1 rounded-md border border-white/5">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    <a
+                        href={game.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center justify-center w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-purple-900/20 group-hover:shadow-purple-600/40"
+                    >
+                        Execute Script
+                        <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+            </div>
+        </Card>
+    );
+};
+
+const GamesPage = () => {
+    const [searchTerm, setSearchTerm] = React.useState("");
+    const [selectedTag, setSelectedTag] = React.useState("All");
+
+    // Extract unique tags
+    const allTags = ["All", ...new Set(gamesData.flatMap(g => g.tags))].sort();
+
+    const filteredGames = gamesData.filter(game => {
+        const matchesSearch = game.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesTag = selectedTag === "All" || game.tags.includes(selectedTag);
+        return matchesSearch && matchesTag;
+    });
+
+    return (
+        <div className="min-h-screen pb-20 pt-24 px-4 container mx-auto">
+            {/* Header */}
+            <div className="text-center mb-16 space-y-4 relative">
+                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-purple-600/10 blur-[100px] rounded-full pointer-events-none" />
+                <h1 className="text-5xl md:text-6xl font-black text-white tracking-tight relative z-10 font-['Outfit']">
+                    Supported <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Games</span>
+                </h1>
+                <p className="text-zinc-400 text-lg max-w-2xl mx-auto relative z-10">
+                    Browse our extensive collection of supported games. All scripts are optimized for performance and safety.
+                </p>
+            </div>
+
+            {/* Filters */}
+            <div className="max-w-7xl mx-auto mb-12 space-y-6">
+                <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-[#0A0A0E] p-4 rounded-2xl border border-zinc-800/50 backdrop-blur-sm sticky top-24 z-30 shadow-2xl">
+                    <div className="relative w-full md:w-96">
+                        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                        <Input
+                            placeholder="Search games..."
+                            className="pl-10 bg-zinc-900/50 border-zinc-800 text-white placeholder:text-zinc-600 focus:border-purple-500"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </div>
+
+                    <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto no-scrollbar mask-gradient">
+                        {allTags.map(tag => (
+                            <button
+                                key={tag}
+                                onClick={() => setSelectedTag(tag)}
+                                className={`px-4 py-2 rounded-lg text-sm font-bold whitespace-nowrap transition-all border ${
+                                    selectedTag === tag
+                                    ? "bg-purple-600 border-purple-500 text-white shadow-lg shadow-purple-900/50"
+                                    : "bg-zinc-900/50 border-zinc-800 text-zinc-400 hover:bg-zinc-800 hover:text-white"
+                                }`}
+                            >
+                                {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Results Count */}
+                <div className="flex items-center gap-2 text-zinc-500 text-sm font-bold uppercase tracking-wider px-2">
+                    <span className="w-2 h-2 rounded-full bg-purple-500" />
+                    {filteredGames.length} Games Found
+                </div>
+            </div>
+
+            {/* Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                {filteredGames.map((game, index) => (
+                    <GameCard key={index} game={game} />
+                ))}
+            </div>
+
+             {filteredGames.length === 0 && (
+                <div className="text-center py-20">
+                    <div className="text-6xl mb-4">🔍</div>
+                    <h3 className="text-2xl font-bold text-white mb-2">No games found</h3>
+                    <p className="text-zinc-500">Try adjusting your search or filters</p>
+                </div>
+            )}
+        </div>
+    );
+};
+
+// Mount
+const gamesRoot = ReactDOM.createRoot(document.getElementById('games-root'));
+gamesRoot.render(<GamesPage />);
+
     </script>
 </body>
 </html>
