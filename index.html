@@ -6640,7 +6640,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                         <Button
                             className={`w-full h-11 text-base font-semibold shadow-lg shadow-${primaryColor}/20 bg-gradient-to-r from-${primaryColor} to-${baseColor}-600 hover:opacity-90 transition-all`}
                             style={{
-                                backgroundColor: title === 'Linkvertise' ? '#ffc800' : (title === 'Ad Mint' ? '#22c55e' : '#8b5cf6'),
+                                backgroundColor: title === 'Linkvertise' ? '#ffc800' : (title === 'Work Ink' ? '#22c55e' : '#8b5cf6'),
                                 color: title === 'Linkvertise' ? 'black' : 'white'
                             }}
                             onClick={handleOpen}
@@ -6672,7 +6672,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                     {/* Background glow effect */}
                     <div className={`absolute -top-[100px] -right-[100px] w-[200px] h-[200px] bg-${primaryColor}/20 blur-[100px] pointer-events-none`}
                          style={{
-                            backgroundColor: title === 'Linkvertise' ? '#ffc800' : (title === 'Ad Mint' ? '#22c55e' : '#8b5cf6'),
+                            backgroundColor: title === 'Linkvertise' ? '#ffc800' : (title === 'Work Ink' ? '#22c55e' : '#8b5cf6'),
                             opacity: 0.15
                         }}></div>
                 </Card>
@@ -6717,21 +6717,18 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                         />
                          <GatewayCard
                             primaryColor="green-500"
-                            title="Ad Mint"
-                            desc="Fastest verification with minimal steps. Get your key instantly with Ad Mint."
-                            checkpoints="1 Checkpoint"
-                            duration="12H KEY"
-                            features={["Instant verification", "12-hour validity period", "Minimal ads"]}
-                            url="https://ads.luarmor.net/get_key?for=Ad_Mint-hAyOXJpyrixD"
+                            title="Work Ink"
+                            desc="The best method for verification. Requires 2 checkpoints for a 24-hour key."
+                            checkpoints="2 Checkpoints"
+                            duration="24H KEY"
+                            features={["Best method", "24-hour validity period", "2 Checkpoints"]}
+                            url="https://ads.luarmor.net/get_key?for=Work_ink-lYGxbbgyfXlV"
                             isRecommended={false}
-                            badgeText="FASTER"
+                            badgeText="BEST METHOD"
                             icon={(
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 21C7 21 3 17 3 12C3 7 7 3 12 3C17 3 21 7 21 12C21 17 17 21 12 21Z" fill="#22c55e" opacity="0.2"/>
-                                    <path d="M12 2L12 22" stroke="#22c55e" strokeWidth="2" strokeLinecap="round"/>
-                                    <path d="M12 22C6 22 2 16 2 12C2 8 6 2 12 2C18 2 22 8 22 12C22 16 18 22 12 22Z" stroke="#22c55e" strokeWidth="2"/>
-                                    <path d="M12 7C14 7 16 9 16 12C16 15 14 17 12 17" stroke="#22c55e" strokeWidth="2" strokeLinecap="round"/>
-                                    <path d="M12 17C10 17 8 15 8 12C8 9 10 7 12 7" stroke="#22c55e" strokeWidth="2" strokeLinecap="round"/>
+                                    <circle cx="12" cy="12" r="12" fill="#22c55e"/>
+                                    <path d="M7 9L9.5 16L12 10L14.5 16L17 9" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
                             )}
                         />
