@@ -4874,486 +4874,139 @@
         }
 
         /* Executor Cards */
+        /* === MODERN EXECUTOR GRID STYLES === */
         .executor-card {
-            background:
-                linear-gradient(135deg, rgba(12, 12, 16, 0.98) 0%, rgba(18, 18, 22, 1) 50%, rgba(10, 10, 14, 1) 100%),
-                url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="execGrid" width="35" height="35" patternUnits="userSpaceOnUse"><path d="M 35 0 L 0 0 0 35" fill="none" stroke="rgba(139,92,246,0.05)" stroke-width="0.7"/></pattern></defs><rect width="100" height="100" fill="url(%23execGrid)"/></svg>');
-            backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, rgba(12, 12, 16, 0.95), rgba(18, 18, 24, 0.98));
+            border: 1px solid rgba(139, 92, 246, 0.15);
             border-radius: 32px;
-            padding: 3rem;
-            border: 2.5px solid rgba(139, 92, 246, 0.15);
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-            cursor: pointer;
+            padding: 3rem 2rem;
             position: relative;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             overflow: hidden;
-            box-shadow:
-                0 25px 80px -20px rgba(0,0,0,0.95),
-                0 0 0 1px rgba(139, 92, 246, 0.12) inset,
-                inset 0 2px 0 0 rgba(255,255,255,0.08);
-            transform-style: preserve-3d;
-            perspective: 1500px;
-        }
-        [data-theme="light"] .executor-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(250, 250, 252, 1));
-            border-color: rgba(139, 92, 246, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
         }
         .executor-card::before {
             content: '';
             position: absolute;
-            inset: -3px;
-            border-radius: 32px;
-            background: conic-gradient(
-                from 0deg at 50% 50%,
-                rgba(139, 92, 246, 0.5) 0deg,
-                rgba(167, 139, 250, 0.3) 120deg,
-                rgba(196, 181, 253, 0.2) 240deg,
-                rgba(139, 92, 246, 0.5) 360deg);
-            opacity: 0;
-            transition: opacity 0.8s;
-            z-index: -1;
-            filter: blur(25px);
-            animation: executorBorderSpin 10s linear infinite;
-        }
-        @keyframes executorBorderSpin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .executor-card::after {
-            content: '';
-            position: absolute;
             inset: 0;
-            border-radius: 32px;
-            background: radial-gradient(
-                circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                rgba(139, 92, 246, 0.2) 0%,
-                rgba(167, 139, 250, 0.12) 30%,
-                transparent 60%);
-            opacity: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.1), transparent 70%);
+            opacity: 0.5;
             transition: opacity 0.6s;
-            pointer-events: none;
-            z-index: 0;
-            mix-blend-mode: screen;
+        }
+        .executor-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow:
+                0 20px 60px -10px rgba(0,0,0,0.7),
+                0 0 50px rgba(139, 92, 246, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         .executor-card:hover::before {
             opacity: 1;
         }
-        .executor-card:hover::after {
-            opacity: 1;
-        }
-        .executor-card:hover {
-            transform: translateY(-18px) scale(1.04) rotateX(3deg);
-            border-color: rgba(139, 92, 246, 0.6);
-            box-shadow:
-                0 45px 110px -20px rgba(0,0,0,1),
-                0 0 90px rgba(139, 92, 246, 0.4),
-                0 0 0 1px rgba(139, 92, 246, 0.5) inset,
-                inset 0 2px 0 0 rgba(255,255,255,0.15);
-        }
-        .executor-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2.5rem;
-            position: relative;
-            z-index: 1;
-            transform: translateY(0);
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .executor-card:hover .executor-header {
-            transform: translateY(-5px);
-        }
-        .executor-status {
-            padding: 10px 18px;
-            border-radius: 24px;
-            font-size: 0.72rem;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            backdrop-filter: blur(8px);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        .executor-status::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-            transition: left 0.7s;
-        }
-        .executor-status:hover::before {
-            left: 100%;
-        }
-        .executor-status.updated {
-            background: rgba(0, 255, 157, 0.2);
-            color: #00ff9d;
-            border: 1.5px solid rgba(0, 255, 157, 0.4);
-            box-shadow:
-                0 0 30px rgba(0, 255, 157, 0.3),
-                0 6px 18px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 0 rgba(0, 255, 157, 0.3);
-        }
-        .executor-status.outdated {
-            background: rgba(255, 184, 77, 0.2);
-            color: #ffb84d;
-            border: 1.5px solid rgba(255, 184, 77, 0.4);
-            box-shadow:
-                0 0 30px rgba(255, 184, 77, 0.3),
-                0 6px 18px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 0 rgba(255, 184, 77, 0.3);
-        }
-        .executor-status.discontinued {
-            background: rgba(255, 77, 77, 0.2);
-            color: #ff4d4d;
-            border: 1.5px solid rgba(255, 77, 77, 0.4);
-            box-shadow:
-                0 0 30px rgba(255, 77, 77, 0.3),
-                0 6px 18px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 0 rgba(255, 77, 77, 0.3);
-        }
-        .status-dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            animation: statusPulse 2.5s infinite;
-        }
-        @keyframes statusPulse {
-            0%, 100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.6;
-                transform: scale(1.3);
-            }
-        }
-        .executor-status.updated .status-dot {
-            background: #00ff9d;
-            box-shadow:
-                0 0 15px #00ff9d,
-                0 0 30px rgba(0, 255, 157, 0.4);
-        }
-        .executor-status.outdated .status-dot {
-            background: #ffb84d;
-            box-shadow:
-                0 0 15px #ffb84d,
-                0 0 30px rgba(255, 184, 77, 0.4);
-        }
-        .executor-status.discontinued .status-dot {
-            background: #ff4d4d;
-            box-shadow:
-                0 0 15px #ff4d4d,
-                0 0 30px rgba(255, 77, 77, 0.4);
-        }
-        .executor-icon-wrapper {
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 2rem;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1;
-        }
-        .executor-icon-glow {
-            position: absolute;
-            inset: -30px;
-            border-radius: 50%;
-            filter: blur(50px);
-            opacity: 0.5;
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-            animation: iconGlowPulse 6s ease-in-out infinite;
-        }
-        @keyframes iconGlowPulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 0.5;
-            }
-            50% {
-                transform: scale(1.3);
-                opacity: 0.8;
-            }
-        }
-        .executor-card:hover .executor-icon-glow {
-            filter: blur(60px);
-            opacity: 1;
-            transform: scale(1.5);
-        }
-        .executor-icon-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 24px;
-            object-fit: contain;
-            padding: 15px;
-            background: linear-gradient(135deg,
-                rgba(139, 92, 246, 0.15) 0%,
-                rgba(167, 139, 250, 0.08) 100%);
-            border: 2px solid rgba(139, 92, 246, 0.25);
-            box-shadow:
-                0 15px 45px rgba(0,0,0,0.6),
-                0 0 60px rgba(139, 92, 246, 0.2),
-                inset 0 2px 0 0 rgba(255, 255, 255, 0.1);
-            transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-            position: relative;
-            z-index: 2;
-        }
-        .executor-icon-fallback {
-            width: 100px;
-            height: 100px;
+
+        .executor-icon-box {
+            width: 80px;
+            height: 80px;
             border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            font-weight: 900;
-            background: linear-gradient(135deg,
-                rgba(139, 92, 246, 0.2) 0%,
-                rgba(167, 139, 250, 0.1) 100%);
-            border: 2px solid rgba(139, 92, 246, 0.25);
-            box-shadow:
-                0 15px 45px rgba(0,0,0,0.6),
-                0 0 60px rgba(139, 92, 246, 0.2);
-            transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+            margin-bottom: 2rem;
             position: relative;
             z-index: 2;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .executor-card:hover .executor-icon-img,
-        .executor-card:hover .executor-icon-fallback {
-            transform: scale(1.15) rotate(8deg) translateY(-5px);
-            border-color: rgba(139, 92, 246, 0.6);
-            box-shadow:
-                0 20px 60px rgba(0,0,0,0.8),
-                0 0 90px rgba(139, 92, 246, 0.4),
-                inset 0 2px 0 0 rgba(255, 255, 255, 0.15);
+        .executor-card:hover .executor-icon-box {
+            transform: scale(1.1) rotate(3deg);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border-color: rgba(255,255,255,0.3);
         }
-        .executor-name {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--text-main);
-            text-align: center;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-            letter-spacing: -0.5px;
-            text-shadow:
-                0 2px 15px rgba(0,0,0,0.5),
-                0 0 40px rgba(139, 92, 246, 0.2);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .executor-card:hover .executor-name {
-            text-shadow:
-                0 2px 20px rgba(0,0,0,0.7),
-                0 0 60px rgba(139, 92, 246, 0.4);
-            transform: translateY(-3px);
-        }
-        .executor-desc {
-            color: var(--text-muted);
-            font-size: 0.96rem;
-            text-align: center;
-            line-height: 1.7;
-            position: relative;
-            z-index: 1;
-            font-weight: 400;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .executor-card:hover .executor-desc {
-            color: var(--text-main);
-            transform: translateY(-2px);
+        .executor-icon-box svg {
+            width: 40px;
+            height: 40px;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
         }
 
-        /* Recommended Label for Delta - Modern Design */
-        .executor-recommended-label {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #000;
-            padding: 8px 24px;
-            font-size: 0.65rem;
+        .executor-name {
+            font-size: 1.75rem;
             font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            z-index: 10;
-            border-radius: 20px;
-            box-shadow:
-                0 4px 16px rgba(255, 215, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            animation: recommendedFloat 3s ease-in-out infinite;
+            color: white;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 2;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.5px;
+        }
+        .executor-desc {
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #94a3b8;
+            position: relative;
+            z-index: 2;
+            max-width: 90%;
+            transition: color 0.3s;
+        }
+        .executor-card:hover .executor-desc {
+            color: #cbd5e1;
+        }
+
+        /* Status Badge */
+        .status-pill {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
             display: flex;
             align-items: center;
             gap: 6px;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.1);
         }
-        .executor-recommended-label::before {
-            content: '★';
-            font-size: 0.85rem;
-            animation: starSpin 4s linear infinite;
-            display: inline-block;
+        .status-pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #34d399;
+            box-shadow: 0 0 10px #34d399;
+            animation: pulseGreen 2s infinite;
         }
-        @keyframes recommendedFloat {
-            0%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            50% {
-                transform: translateX(-50%) translateY(-3px);
-            }
-        }
-        @keyframes starSpin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes pulseGreen {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
         }
 
-        /* Ultra Clean Design for Delta - Complete Redesign */
-        .executor-ultra {
-            background:
-                linear-gradient(145deg,
-                    rgba(20, 15, 25, 0.98) 0%,
-                    rgba(15, 12, 20, 1) 100%);
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            box-shadow:
-                0 8px 32px rgba(0,0,0,0.6),
-                inset 0 0 0 2px rgba(255, 215, 0, 0.15);
-            position: relative;
-            overflow: visible;
-        }
-        [data-theme="light"] .executor-ultra {
-            background: linear-gradient(145deg, rgba(255, 252, 245, 1), rgba(255, 250, 240, 1));
-        }
-        .executor-ultra::before {
-            content: '';
+        /* Recommended Badge */
+        .rec-badge {
             position: absolute;
-            inset: -2px;
-            border-radius: 32px;
-            padding: 2px;
-            background: linear-gradient(
-                135deg,
-                rgba(255, 215, 0, 0.6),
-                rgba(255, 193, 7, 0.4),
-                rgba(255, 235, 59, 0.6),
-                rgba(255, 215, 0, 0.6));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: -1;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
         }
-        .executor-ultra:hover::before {
-            opacity: 1;
-        }
-        .executor-ultra::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(
-                from 0deg,
-                transparent 0deg 340deg,
-                rgba(255, 215, 0, 0.4) 340deg 360deg);
-            animation: deltaRotate 4s linear infinite;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: -1;
-        }
-        @keyframes deltaRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .executor-ultra:hover::after {
-            opacity: 1;
-        }
-        .executor-ultra:hover {
-            box-shadow:
-                0 16px 48px rgba(0,0,0,0.8),
-                0 0 60px rgba(255, 215, 0, 0.3),
-                inset 0 0 0 2px rgba(255, 215, 0, 0.3);
-            transform: translateY(-16px) scale(1.03);
-        }
-        .executor-ultra .executor-icon-glow {
-            background: radial-gradient(
-                circle,
-                rgba(255, 215, 0, 0.4) 0%,
-                rgba(255, 215, 0, 0.2) 50%,
-                transparent 80%) !important;
-            animation: deltaGlowBreath 3s ease-in-out infinite;
-        }
-        @keyframes deltaGlowBreath {
-            0%, 100% {
-                opacity: 0.4;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.7;
-                transform: scale(1.2);
-            }
-        }
-        .executor-ultra .executor-icon-img,
-        .executor-ultra .executor-icon-fallback {
-            background: linear-gradient(145deg,
-                rgba(255, 215, 0, 0.12) 0%,
-                rgba(255, 193, 7, 0.08) 100%);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            box-shadow:
-                0 8px 24px rgba(255, 215, 0, 0.25),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            animation: none;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .executor-ultra:hover .executor-icon-img,
-        .executor-ultra:hover .executor-icon-fallback {
-            border-color: rgba(255, 215, 0, 0.6);
-            box-shadow:
-                0 12px 36px rgba(255, 215, 0, 0.4),
-                0 0 48px rgba(255, 215, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transform: scale(1.1) translateY(-4px);
-        }
-        .executor-ultra .executor-name {
-            background: linear-gradient(
-                90deg,
-                #FFD700 0%,
-                #FFED4E 50%,
-                #FFD700 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 2.1rem;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-            animation: deltaNameSlide 3s linear infinite;
-            filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.3));
-        }
-        @keyframes deltaNameSlide {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
-        }
-        .executor-ultra .executor-desc {
-            color: rgba(255, 235, 150, 0.9);
-            font-weight: 400;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-        }
-        [data-theme="light"] .executor-ultra .executor-desc {
-            color: rgba(180, 140, 0, 0.9);
-        }
-        .executor-ultra .executor-header {
-            animation: deltaHeaderFloat 2.5s ease-in-out infinite;
-        }
-        @keyframes deltaHeaderFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
-        }
-
-        /* Skeleton Loading */
+        .rec-badge svg { width: 12px; height: 12px; fill: currentColor; }        /* Skeleton Loading */
         .executor-card-skeleton {
             background: linear-gradient(135deg, rgba(15, 15, 20, 0.95), rgba(10, 10, 15, 0.98));
             border-radius: 28px;
@@ -6349,119 +6002,98 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
             status: "updated",
             description: "The ultimate premium executor with lightning-fast injection.",
             url: "https://deltaexploits.gg/",
-            special: "ultra",
-            icon: "https://www.google.com/s2/favicons?domain=deltaexploits.gg&sz=128",
-            iconFallback: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='deltaGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FFD700'/%3E%3Cstop offset='100%25' style='stop-color:%23FFA500'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon points='50,10 90,85 10,85' fill='url(%23deltaGrad)' stroke='%23FFD700' stroke-width='3'/%3E%3Ctext x='50' y='68' font-family='Arial' font-size='32' font-weight='bold' fill='%23000' text-anchor='middle'%3EΔ%3C/text%3E%3C/svg%3E",
-            color: "#FFD700"
+            isRecommended: true,
+            bgGradient: "linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(217, 119, 6, 0.1))",
+            iconColor: "#fbbf24",
+            iconSVG: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>`
         },
         {
             name: "Arceus X",
             status: "updated",
             description: "Mobile-friendly executor with cross-platform support.",
             url: "https://spdmteam.com/",
-            icon: "https://www.google.com/s2/favicons?domain=spdmteam.com&sz=128",
-            color: "#10B981"
+            isRecommended: false,
+            bgGradient: "linear-gradient(135deg, rgba(248, 113, 113, 0.15), rgba(220, 38, 38, 0.1))",
+            iconColor: "#f87171",
+            iconSVG: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>`
         },
         {
             name: "Codex",
             status: "updated",
             description: "Advanced executor with powerful debugging tools.",
             url: "https://www.codex.lol/",
-            icon: "https://www.google.com/s2/favicons?domain=codex.lol&sz=128",
-            color: "#8B5CF6"
+            isRecommended: false,
+            bgGradient: "linear-gradient(135deg, rgba(245, 245, 245, 0.15), rgba(163, 163, 163, 0.1))",
+            iconColor: "#e5e5e5",
+            iconSVG: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.2-1.1.7l-1.2 4 6 3.2-2 2-4 1.5L1 19l7.4-1.6c.7-.1 1.4-.1 2.1.2L19 21l2-2-2.6-1.4c-.7-.3-1.4-.4-2-.2Z"/></svg>`
         },
         {
             name: "Volcano",
             status: "updated",
             description: "Powerful executor for serious scripters.",
             url: "https://volcanoexecutor.com/",
-            icon: "https://www.google.com/s2/favicons?domain=volcanoexecutor.com&sz=128",
-            color: "#EF4444"
+            isRecommended: false,
+            bgGradient: "linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(194, 65, 12, 0.1))",
+            iconColor: "#f97316",
+            iconSVG: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 19-2 3"/><path d="m16 19 2 3"/><path d="M12 4v2"/><path d="M7 6 5 4"/><path d="M17 6l2-2"/><path d="m4 10 2 1 2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1 2-1"/></svg>`
         },
         {
             name: "Xeno",
             status: "updated",
             description: "A powerful Windows executor with high script compatibility.",
             url: "https://xeno.now/",
-            icon: "https://www.google.com/s2/favicons?domain=xeno.now&sz=128",
-            color: "#06B6D4"
+            isRecommended: false,
+            bgGradient: "linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(8, 145, 178, 0.1))",
+            iconColor: "#22d3ee",
+            iconSVG: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20.3a24 24 0 0 0 15.6-10.8"/><path d="M12 2a10 10 0 0 0-9.6 13.7"/><path d="M11 11.5 13 14l2-2.5"/><circle cx="16" cy="7" r="2"/></svg>`
         }
     ];
 
     function loadExecutors() {
-        // Prevent duplicate loading
         if (executorsLoaded) return;
         executorsLoaded = true;
 
         const grid = document.getElementById('executorsGrid');
         if (!grid) return;
 
-        // Clear skeleton loaders
         grid.innerHTML = '';
 
-        // Create executor cards
         executorsData.forEach((executor, index) => {
             setTimeout(() => {
                 const card = document.createElement('div');
                 card.className = 'executor-card';
-
-                // Add special class for Delta
-                if (executor.special === 'ultra') {
-                    card.classList.add('executor-ultra');
-                }
-
+                card.onclick = () => window.open(executor.url, '_blank');
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
                 card.style.cursor = 'pointer';
 
-                // Make entire card clickable
-                card.onclick = () => window.open(executor.url, '_blank');
-
-                const statusClass = executor.status;
-                const statusText = executor.status === 'updated' ? 'Updated' :
-                                  executor.status === 'outdated' ? 'Outdated' : 'Discontinued';
-
-                const firstLetter = executor.name.charAt(0).toUpperCase();
-
-                // Add recommended label for Delta
-                const recommendedBadge = executor.special === 'ultra' ? `
-                    <div class="executor-recommended-label">
+                const recommendedBadge = executor.isRecommended ? `
+                    <div class="rec-badge">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                         RECOMMENDED
                     </div>
                 ` : '';
 
-                const iconSrc = executor.iconFallback || executor.icon;
-                const iconOnError = executor.iconFallback
-                    ? `this.style.display='flex';`
-                    : `this.style.display='none'; this.nextElementSibling.style.display='flex';`;
-
                 card.innerHTML = `
                     ${recommendedBadge}
-                    <div class="executor-header">
-                        <div></div>
-                        <div class="executor-status ${statusClass}">
-                            <div class="status-dot"></div>
-                            ${statusText}
-                        </div>
+
+                    <div class="status-pill">
+                        <div class="status-pill-dot"></div>
+                        UPDATED
                     </div>
-                    <div class="executor-icon-wrapper">
-                        <div class="executor-icon-glow" style="background: radial-gradient(circle, ${executor.color}40 0%, transparent 70%);"></div>
-                        <img src="${iconSrc}"
-                             alt="${executor.name}"
-                             class="executor-icon-img"
-                             onerror="${iconOnError}"
-                        />
-                        ${!executor.iconFallback ? `<div class="executor-icon-fallback" style="display: none; color: ${executor.color};">${firstLetter}</div>` : ''}
+
+                    <div class="executor-icon-box" style="background: ${executor.bgGradient}; color: ${executor.iconColor}; border-color: ${executor.iconColor}40;">
+                        ${executor.iconSVG}
                     </div>
-                    <h3 class="executor-name">${executor.name}</h3>
+
+                    <div class="executor-name">${executor.name}</div>
                     <p class="executor-desc">${executor.description}</p>
                 `;
 
                 grid.appendChild(card);
 
-                // Fade in animation
                 setTimeout(() => {
-                    card.style.transition = 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+                    card.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
                 }, 50);
