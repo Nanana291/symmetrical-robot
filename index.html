@@ -5563,7 +5563,7 @@
                         <ul class="cl-list">
                             <li>Migrated all scripts to unified web-based key system</li>
                             <li>Integrated Luarmor authentication gateway</li>
-                            <li>Added dual-provider key generation (Rinku Pro & Linkvertise)</li>
+                            <li>Added dual-provider key generation (Lootlabs & Linkvertise)</li>
                             <li>Improved key validation and security protocols</li>
                         </ul>
                     </div>
@@ -5862,7 +5862,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
             // Format URL for display
             const displayUrl = url.length > 50 ? url.substring(0, 50) + '...' : url;
-            const providerName = type === 'linkvertise' ? 'Linkvertise' : 'Lootlabs';
+            const providerName = type === 'lootlabs' ? 'Lootlabs' : 'Linkvertise';
 
             toast.innerHTML = `
                 <div class="toast-header">
@@ -5894,10 +5894,10 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
         function openGateway(type) {
             let targetUrl = '';
-            if(type === 'linkvertise') {
-                targetUrl = 'https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU';
-            } else if (type === 'lootlabs') {
+            if (type === 'lootlabs') {
                 targetUrl = 'https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp';
+            } else if(type === 'linkvertise') {
+                targetUrl = 'https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU';
             }
 
             if(targetUrl) {
@@ -6568,7 +6568,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
         const FAQ = () => {
              const items = [
-                { q: "How to get a key?", a: "Click the 'Get Key' button, choose a provider (Linkvertise/Lootlabs), complete checkpoints, and copy the generated key." },
+                { q: "How to get a key?", a: "Click the 'Get Key' button, choose a provider (Lootlabs/Linkvertise), complete checkpoints, and copy the generated key." },
                 { q: "How long does a key last?", a: "Each key is valid for 24 hours from generation. After expiration, simply generate a new one." },
                 { q: "Is Imp Hub safe?", a: "Yes! We use advanced obfuscation and anti-detection methods. However, always script responsibly." },
                 { q: "Which executors are supported?", a: "Imp Hub works with Solara, Wave, Electron, Fluxus, and most modern executors with Luau support." },
