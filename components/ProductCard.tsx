@@ -23,8 +23,8 @@ export default function ProductCard() {
 
                     {/* Mock 3D Box Design */}
                     <div className="relative w-40 h-56 perspective-1000">
-                         <div className="absolute inset-0 bg-gradient-to-br from-[#4d6b2c] to-[#2d4019] rounded shadow-2xl transform rotate-y-12 rotate-x-6 scale-95 origin-left preserve-3d">
-                             <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-b from-[#3a5221] to-[#1c2810] transform -translate-x-full rotate-y-[-90deg] origin-right flex items-center justify-center">
+                         <div className="absolute inset-0 bg-gradient-to-br from-[#7c3aed] to-[#4c1d95] rounded shadow-2xl transform rotate-y-12 rotate-x-6 scale-95 origin-left preserve-3d">
+                             <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-b from-[#5b21b6] to-[#2e1065] transform -translate-x-full rotate-y-[-90deg] origin-right flex items-center justify-center">
                                  <span className="text-white/80 font-bold text-[8px] transform -rotate-90 tracking-widest whitespace-nowrap">IMP HUB SCRIPT</span>
                              </div>
 
