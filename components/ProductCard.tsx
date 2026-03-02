@@ -25,14 +25,14 @@ export default function ProductCard() {
                     <div className="relative w-40 h-56 perspective-1000">
                          <div className="absolute inset-0 bg-gradient-to-br from-[#4d6b2c] to-[#2d4019] rounded shadow-2xl transform rotate-y-12 rotate-x-6 scale-95 origin-left preserve-3d">
                              <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-b from-[#3a5221] to-[#1c2810] transform -translate-x-full rotate-y-[-90deg] origin-right flex items-center justify-center">
-                                 <span className="text-white/80 font-bold text-[8px] transform -rotate-90 tracking-widest whitespace-nowrap">SELIWARE EXECUTOR</span>
+                                 <span className="text-white/80 font-bold text-[8px] transform -rotate-90 tracking-widest whitespace-nowrap">IMP HUB SCRIPT</span>
                              </div>
 
                              <div className="absolute inset-0 p-4 flex flex-col items-center justify-center text-white">
                                  <div className="text-[10px] font-black tracking-widest mb-2 opacity-80">R<span className="opacity-100 text-white">O</span>BLOX</div>
                                  <div className="text-7xl font-black mb-2 opacity-90 drop-shadow-md">S</div>
-                                 <div className="text-[12px] font-bold tracking-wider">SELIWARE</div>
-                                 <div className="text-[7px] font-semibold tracking-widest opacity-70 mb-4">EXECUTOR</div>
+                                 <div className="text-[12px] font-bold tracking-wider">IMP HUB</div>
+                                 <div className="text-[7px] font-semibold tracking-widest opacity-70 mb-4">SCRIPT</div>
 
                                  <div className="mt-auto flex gap-2 text-[6px] opacity-70">
                                      <span>intel</span>
