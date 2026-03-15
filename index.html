@@ -54,7 +54,7 @@
             --status-offline: #ff4d4d;
             
             --linkvertise: #ffc800;
-            --lootlabs: #8b5cf6;
+            --rinku: #3b82f6;
 
             --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
             --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -5563,7 +5563,7 @@
                         <ul class="cl-list">
                             <li>Migrated all scripts to unified web-based key system</li>
                             <li>Integrated Luarmor authentication gateway</li>
-                            <li>Added dual-provider key generation (Lootlabs & Linkvertise)</li>
+                            <li>Added dual-provider key generation (Rinku Pro & Linkvertise)</li>
                             <li>Improved key validation and security protocols</li>
                         </ul>
                     </div>
@@ -5862,7 +5862,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
             // Format URL for display
             const displayUrl = url.length > 50 ? url.substring(0, 50) + '...' : url;
-            const providerName = type === 'lootlabs' ? 'Lootlabs' : 'Linkvertise';
+            const providerName = type === 'rinku' ? 'Rinku Pro' : 'Linkvertise';
 
             toast.innerHTML = `
                 <div class="toast-header">
@@ -5894,8 +5894,8 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
         function openGateway(type) {
             let targetUrl = '';
-            if (type === 'lootlabs') {
-                targetUrl = 'https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp';
+            if (type === 'rinku') {
+                targetUrl = 'https://ads.luarmor.net/get_key?for=Rinku_Pro-usjtvfvsONpS';
             } else if(type === 'linkvertise') {
                 targetUrl = 'https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU';
             }
@@ -6200,6 +6200,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
             // hover:shadow-green-500/10 hover:border-green-500/50 bg-green-500/10 text-green-500 shadow-green-500/20 from-green-500 bg-green-500/20 to-green-600
             // hover:shadow-amber-400/10 hover:border-amber-400/50 bg-amber-400/10 text-amber-400 shadow-amber-400/20 from-amber-400 bg-amber-400/20 to-amber-600
             // hover:shadow-purple-500/10 hover:border-purple-500/50 bg-purple-500/10 text-purple-500 shadow-purple-500/20 from-purple-500 bg-purple-500/20 to-purple-600
+            // hover:shadow-blue-500/10 hover:border-blue-500/50 bg-blue-500/10 text-blue-500 shadow-blue-500/20 from-blue-500 bg-blue-500/20 to-blue-600
 
             const [copied, setCopied] = React.useState(false);
             const baseColor = primaryColor.split('-')[0];
@@ -6272,7 +6273,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                         <Button
                             className={`w-full h-14 text-lg font-bold shadow-lg shadow-${primaryColor}/20 bg-gradient-to-r from-${primaryColor} to-${baseColor}-600 hover:opacity-90 hover:-translate-y-[4px] active:scale-[0.97] transition-all duration-300 ease-out rounded-xl`}
                             style={{
-                                backgroundColor: title === 'Linkvertise' ? '#ffc800' : '#8b5cf6',
+                                backgroundColor: title === 'Linkvertise' ? '#ffc800' : '#3b82f6',
                                 color: title === 'Linkvertise' ? 'black' : 'white'
                             }}
                             onClick={handleOpen}
@@ -6304,7 +6305,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                     {/* Background glow effect */}
                     <div className={`absolute -top-[150px] -right-[150px] w-[300px] h-[300px] bg-${primaryColor}/20 blur-[120px] pointer-events-none transition-opacity duration-500 group-hover:opacity-100`}
                          style={{
-                            backgroundColor: title === 'Linkvertise' ? '#ffc800' : '#8b5cf6',
+                            backgroundColor: title === 'Linkvertise' ? '#ffc800' : '#3b82f6',
                             opacity: 0.15
                         }}></div>
                 </Card>
@@ -6381,11 +6382,10 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                 <svg width="32" height="32" viewBox="0 0 122.88 122.88" fill="#ffc800"><path d="M59.3,27.06c-8.91,0-16.14,7.23-16.14,16.14s7.23,16.14,16.14,16.14s16.14-7.23,16.14-16.14 S68.21,27.06,59.3,27.06L59.3,27.06z M62.26,16.48h22.68c1.61,0,3.09,0.73,4.06,2.02l28.62,38.07c1.47,1.95,1.13,4.72-0.78,6.23 l-26.6,20.94c-1.39,1.1-3.32,1.21-4.83,0.29l-37.5-22.95c-1.12-0.69-1.8-1.9-1.8-3.21v-35.3C46.1,19.2,49.25,16.48,53,16.48 L62.26,16.48L62.26,16.48z M4.77,63.15L32.48,41.9c1.37-1.05,3.26-1.14,4.72-0.22l22.61,14.16c1.1,0.69,1.76,1.89,1.76,3.19 v20.21c0,2.15-1.74,3.89-3.89,3.89H35.31c-1.38,0-2.67-0.72-3.38-1.89l-28.52-47.1C2.3,52.3,2.94,49.82,4.86,48.65 C4.83,48.67,4.8,48.68,4.77,63.15L4.77,63.15z M96.94,83.13v20.21c0,2.15-1.74,3.89-3.89,3.89H71.18c-2.15,0-3.89-1.74-3.89-3.89V83.13 c0-2.15,1.74-3.89,3.89-3.89h21.87C95.2,79.24,96.94,80.98,96.94,83.13L96.94,83.13z"/></svg>
             );
 
-            const lootlabsIcon = (
+            const rinkuIcon = (
                 <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 10 L90 30 L50 50 L10 30 Z" fill="#fbbf24"/>
-                    <path d="M10 30 L50 50 V90 L10 70 Z" fill="#7c3aed"/>
-                    <path d="M50 50 L90 30 V70 L50 90 Z" fill="#6d28d9"/>
+                    <path d="M25 20 H55 C70 20 75 30 75 40 C75 50 70 55 60 55 H40 V80 H25 Z M40 35 V45 H55 C60 45 60 35 55 35 Z" fill="#3b82f6"/>
+                    <path d="M45 55 L70 80 H85 L55 50 Z" fill="#2563eb"/>
                 </svg>
             );
 
@@ -6402,16 +6402,16 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 w-full max-w-5xl justify-items-center px-4">
                         <GatewayCard
-                            primaryColor="purple-500"
-                            title="Lootlabs"
+                            primaryColor="blue-500"
+                            title="Rinku Pro"
                             desc="Premium gateway with only 3 checkpoints for lightning-fast verification. Extended 16-hour key."
                             checkpoints="3 Checkpoints"
                             duration="16H KEY"
                             features={["Only 3 checkpoints", "16-hour validity period", "Fastest verification"]}
-                            url="https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp"
+                            url="https://ads.luarmor.net/get_key?for=Rinku_Pro-usjtvfvsONpS"
                             isRecommended={true}
                             badgeText="RECOMMENDED"
-                            icon={lootlabsIcon}
+                            icon={rinkuIcon}
                         />
                         <GatewayCard
                             primaryColor="amber-400"
@@ -6568,7 +6568,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
         const FAQ = () => {
              const items = [
-                { q: "How to get a key?", a: "Click the 'Get Key' button, choose a provider (Lootlabs/Linkvertise), complete checkpoints, and copy the generated key." },
+                { q: "How to get a key?", a: "Click the 'Get Key' button, choose a provider (Rinku Pro/Linkvertise), complete checkpoints, and copy the generated key." },
                 { q: "How long does a key last?", a: "Each key is valid for 24 hours from generation. After expiration, simply generate a new one." },
                 { q: "Is Imp Hub safe?", a: "Yes! We use advanced obfuscation and anti-detection methods. However, always script responsibly." },
                 { q: "Which executors are supported?", a: "Imp Hub works with Solara, Wave, Electron, Fluxus, and most modern executors with Luau support." },
