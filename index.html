@@ -6378,6 +6378,25 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         }
 
         function GatewayPage() {
+            const [isUS, setIsUS] = React.useState(false);
+
+            React.useEffect(() => {
+                const fetchLocation = async () => {
+                    try {
+                        const response = await fetch('https://get.geojs.io/v1/ip/geo.json');
+                        if (response.ok) {
+                            const data = await response.json();
+                            if (data.country_code === 'US') {
+                                setIsUS(true);
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Failed to fetch location:', error);
+                    }
+                };
+                fetchLocation();
+            }, []);
+
             const linkvertiseIcon = (
                 <svg width="32" height="32" viewBox="0 0 122.88 122.88" fill="#ffc800"><path d="M59.3,27.06c-8.91,0-16.14,7.23-16.14,16.14s7.23,16.14,16.14,16.14s16.14-7.23,16.14-16.14 S68.21,27.06,59.3,27.06L59.3,27.06z M62.26,16.48h22.68c1.61,0,3.09,0.73,4.06,2.02l28.62,38.07c1.47,1.95,1.13,4.72-0.78,6.23 l-26.6,20.94c-1.39,1.1-3.32,1.21-4.83,0.29l-37.5-22.95c-1.12-0.69-1.8-1.9-1.8-3.21v-35.3C46.1,19.2,49.25,16.48,53,16.48 L62.26,16.48L62.26,16.48z M4.77,63.15L32.48,41.9c1.37-1.05,3.26-1.14,4.72-0.22l22.61,14.16c1.1,0.69,1.76,1.89,1.76,3.19 v20.21c0,2.15-1.74,3.89-3.89,3.89H35.31c-1.38,0-2.67-0.72-3.38-1.89l-28.52-47.1C2.3,52.3,2.94,49.82,4.86,48.65 C4.83,48.67,4.8,48.68,4.77,63.15L4.77,63.15z M96.94,83.13v20.21c0,2.15-1.74,3.89-3.89,3.89H71.18c-2.15,0-3.89-1.74-3.89-3.89V83.13 c0-2.15,1.74-3.89,3.89-3.89h21.87C95.2,79.24,96.94,80.98,96.94,83.13L96.94,83.13z"/></svg>
             );
@@ -6400,7 +6419,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                         <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">Choose your preferred verification method below to generate your access key. Both methods are secure and verified.</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 w-full max-w-5xl justify-items-center px-4">
+                    <div className={`grid grid-cols-1 ${isUS ? '' : 'md:grid-cols-2 lg:grid-cols-2'} gap-12 w-full max-w-5xl justify-items-center px-4`}>
                         <GatewayCard
                             primaryColor="blue-500"
                             title="Rinku Pro"
@@ -6413,17 +6432,19 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                             badgeText="RECOMMENDED"
                             icon={rinkuIcon}
                         />
-                        <GatewayCard
-                            primaryColor="amber-400"
-                            title="Linkvertise"
-                            desc="Standard gateway requiring 3 simple checkpoints. Reliable key generation with 12-hour access."
-                            checkpoints="3 Checkpoints"
-                            duration="12H KEY"
-                            features={["3 Quick checkpoints", "12-hour validity period", "Worldwide availability"]}
-                            url="https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU"
-                            isRecommended={false}
-                            icon={linkvertiseIcon}
-                        />
+                        {!isUS && (
+                            <GatewayCard
+                                primaryColor="amber-400"
+                                title="Linkvertise"
+                                desc="Standard gateway requiring 3 simple checkpoints. Reliable key generation with 12-hour access."
+                                checkpoints="3 Checkpoints"
+                                duration="12H KEY"
+                                features={["3 Quick checkpoints", "12-hour validity period", "Worldwide availability"]}
+                                url="https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU"
+                                isRecommended={false}
+                                icon={linkvertiseIcon}
+                            />
+                        )}
                     </div>
 
                     <BuyExecutorSection />
