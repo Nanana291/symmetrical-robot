@@ -6377,6 +6377,19 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         }
 
         function GatewayPage() {
+            const [countryCode, setCountryCode] = React.useState(null);
+            const [geoLoading, setGeoLoading] = React.useState(true);
+
+            React.useEffect(() => {
+                fetch('https://get.geojs.io/v1/ip/geo.json')
+                    .then(r => r.json())
+                    .then(data => setCountryCode((data.country_code || '').toUpperCase()))
+                    .catch(() => setCountryCode(''))
+                    .finally(() => setGeoLoading(false));
+            }, []);
+
+            const isUSA = countryCode === 'US';
+
             const rinkuproIcon = (
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
@@ -6416,34 +6429,49 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                             <span className="text-xs font-mono text-zinc-400 font-bold tracking-widest">KEY SYSTEM</span>
                         </div>
                         <h1 className="text-5xl md:text-6xl font-black text-white tracking-tighter">AUTHENTICATION</h1>
-                        <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">Choose your preferred verification method below to generate your access key. Both methods are secure and verified.</p>
+                        <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                            {geoLoading
+                                ? "Detecting your region..."
+                                : isUSA
+                                    ? "Complete verification below to generate your access key. Fast and secure."
+                                    : "Choose your preferred verification method below to generate your access key. Both methods are secure and verified."}
+                        </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 w-full max-w-5xl justify-items-center px-4">
-                        <GatewayCard
-                            primaryColor="blue-500"
-                            title="Rinku Pro"
-                            desc="Premium blue gateway with only 3 checkpoints for lightning-fast verification. Extended 16-hour key."
-                            checkpoints="3 Checkpoints"
-                            duration="16H KEY"
-                            features={["Only 3 checkpoints", "16-hour validity period", "Fastest verification"]}
-                            url="https://ads.luarmor.net/get_key?for=Rinku_Pro-usjtvfvsONpS"
-                            isRecommended={true}
-                            badgeText="RECOMMENDED"
-                            icon={rinkuproIcon}
-                        />
-                        <GatewayCard
-                            primaryColor="purple-500"
-                            title="Lootlabs"
-                            desc="Standard gateway requiring 3 simple checkpoints. Reliable key generation with 16-hour access."
-                            checkpoints="3 Checkpoints"
-                            duration="16H KEY"
-                            features={["Only 3 checkpoints", "16-hour validity period", "Worldwide availability"]}
-                            url="https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp"
-                            isRecommended={false}
-                            icon={lootlabsIcon}
-                        />
-                    </div>
+                    {geoLoading ? (
+                        <div className="flex flex-col items-center justify-center py-20 gap-4">
+                            <svg className="animate-spin" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                            <p className="text-zinc-500 text-sm font-mono tracking-widest">DETECTING REGION...</p>
+                        </div>
+                    ) : (
+                        <div className={`grid grid-cols-1 ${isUSA ? '' : 'md:grid-cols-2 lg:grid-cols-2'} gap-12 w-full max-w-5xl justify-items-center px-4`}>
+                            <GatewayCard
+                                primaryColor="blue-500"
+                                title="Rinku Pro"
+                                desc="Premium blue gateway with only 3 checkpoints for lightning-fast verification. Extended 16-hour key."
+                                checkpoints="3 Checkpoints"
+                                duration="16H KEY"
+                                features={["Only 3 checkpoints", "16-hour validity period", "Fastest verification"]}
+                                url="https://ads.luarmor.net/get_key?for=Rinku_Pro-usjtvfvsONpS"
+                                isRecommended={true}
+                                badgeText="RECOMMENDED"
+                                icon={rinkuproIcon}
+                            />
+                            {!isUSA && (
+                                <GatewayCard
+                                    primaryColor="purple-500"
+                                    title="Lootlabs"
+                                    desc="Standard gateway requiring 3 simple checkpoints. Reliable key generation with 16-hour access."
+                                    checkpoints="3 Checkpoints"
+                                    duration="16H KEY"
+                                    features={["Only 3 checkpoints", "16-hour validity period", "Worldwide availability"]}
+                                    url="https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp"
+                                    isRecommended={false}
+                                    icon={lootlabsIcon}
+                                />
+                            )}
+                        </div>
+                    )}
 
                     <BuyExecutorSection />
 
