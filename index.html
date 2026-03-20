@@ -6326,7 +6326,8 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                     .finally(() => setGeoLoading(false));
             }, []);
 
-            const isUSA = countryCode === 'US';
+            const RINKU_PRO_ONLY_COUNTRIES = ['US','AU','CA','JP','KR','DE','GB','ZA','ES'];
+            const isUSA = RINKU_PRO_ONLY_COUNTRIES.includes(countryCode);
 
             const rinkuproIcon = (
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
