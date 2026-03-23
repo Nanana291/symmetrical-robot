@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imp Hub X Version</title>
+    <!-- Apply saved theme before first paint to prevent flash -->
+    <script>(function(){var t=localStorage.getItem('theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');})()</script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
@@ -53,7 +55,7 @@
             --status-outdated: #ffb84d;
             --status-offline: #ff4d4d;
             
-            --linkvertise: #ffc800;
+            --rinkupro: #3b82f6;
             --lootlabs: #8b5cf6;
 
             --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -4217,14 +4219,14 @@
                 0 0 0 1px rgba(139, 92, 246, 0.5) inset,
                 inset 0 2px 0 0 rgba(255,255,255,0.2);
         }
-        .ultra-card.linkvertise { border-color: rgba(255, 200, 0, 0.15); }
+        .ultra-card.rinkupro { border-color: rgba(59, 130, 246, 0.15); }
         .ultra-card.lootlabs { border-color: rgba(139, 92, 246, 0.15); }
-        .ultra-card.linkvertise:hover {
-            border-color: rgba(255, 200, 0, 0.6);
+        .ultra-card.rinkupro:hover {
+            border-color: rgba(59, 130, 246, 0.6);
             box-shadow:
-                0 0 60px rgba(255, 200, 0, 0.3),
+                0 0 60px rgba(59, 130, 246, 0.3),
                 0 35px 80px -20px rgba(0,0,0,1),
-                inset 0 1px 0 0 rgba(255, 200, 0, 0.2);
+                inset 0 1px 0 0 rgba(59, 130, 246, 0.2);
         }
         .ultra-card.lootlabs:hover {
             border-color: rgba(139, 92, 246, 0.6);
@@ -4291,10 +4293,10 @@
                 0 6px 20px rgba(0,0,0,0.3),
                 inset 0 1px 0 0 rgba(139, 92, 246, 0.3);
         }
-        .ultra-card.linkvertise .u-checkpoint-badge {
-            background: rgba(255, 200, 0, 0.15);
-            color: #ffc800;
-            border-color: rgba(255, 200, 0, 0.4);
+        .ultra-card.rinkupro .u-checkpoint-badge {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+            border-color: rgba(59, 130, 246, 0.4);
         }
         .ultra-card.lootlabs .u-checkpoint-badge {
             background: rgba(139, 92, 246, 0.15);
@@ -4322,10 +4324,10 @@
                 0 6px 20px rgba(0,0,0,0.4),
                 inset 0 1px 0 0 rgba(255, 255, 255, 0.25);
         }
-        .ultra-card.linkvertise .u-duration-badge {
-            background: linear-gradient(135deg, rgba(255, 200, 0, 0.3), rgba(255, 180, 0, 0.2));
-            color: #ffc800;
-            border: 1px solid rgba(255, 200, 0, 0.5);
+        .ultra-card.rinkupro .u-duration-badge {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(37, 99, 235, 0.2));
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.5);
         }
         .ultra-card.lootlabs .u-duration-badge {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(124, 58, 237, 0.2));
@@ -4378,8 +4380,8 @@
                 filter: blur(55px);
             }
         }
-        .ultra-card.linkvertise .u-glow {
-            background: radial-gradient(circle, var(--linkvertise), rgba(255, 200, 0, 0.5));
+        .ultra-card.rinkupro .u-glow {
+            background: radial-gradient(circle, var(--rinkupro), rgba(59, 130, 246, 0.5));
         }
         .ultra-card.lootlabs .u-glow {
             background: radial-gradient(circle, var(--lootlabs), rgba(139, 92, 246, 0.5));
@@ -4467,7 +4469,7 @@
         .u-feature-item:hover svg {
             transform: scale(1.2);
         }
-        .ultra-card.linkvertise .u-feature-item svg { color: #ffc800; }
+        .ultra-card.rinkupro .u-feature-item svg { color: #3b82f6; }
         .ultra-card.lootlabs .u-feature-item svg { color: #8b5cf6; }
         .u-btn {
             width: 100%;
@@ -4529,18 +4531,18 @@
         .u-btn:hover svg {
             transform: translateX(8px);
         }
-        .ultra-card.linkvertise .u-btn {
-            background: linear-gradient(135deg, #ffc800, #ffb000);
-            color: #000;
+        .ultra-card.rinkupro .u-btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: #fff;
         }
         .ultra-card.lootlabs .u-btn {
             background: linear-gradient(135deg, #8b5cf6, #7c3aed);
             color: #fff;
         }
-        .ultra-card.linkvertise:hover .u-btn {
+        .ultra-card.rinkupro:hover .u-btn {
             box-shadow:
-                0 0 50px rgba(255, 200, 0, 0.7),
-                0 20px 50px -5px rgba(255, 200, 0, 0.5),
+                0 0 50px rgba(59, 130, 246, 0.7),
+                0 20px 50px -5px rgba(59, 130, 246, 0.5),
                 inset 0 2px 0 0 rgba(255, 255, 255, 0.3);
             transform: translateY(-4px) scale(1.03);
         }
@@ -4662,23 +4664,23 @@
             filter: drop-shadow(0 0 8px rgba(0, 255, 157, 0.8));
             color: #00ff9d;
         }
-        .ultra-card.linkvertise .copy-link-btn {
-            border-color: rgba(255, 200, 0, 0.3);
+        .ultra-card.rinkupro .copy-link-btn {
+            border-color: rgba(59, 130, 246, 0.3);
         }
-        .ultra-card.linkvertise .copy-link-btn:hover {
-            border-color: rgba(255, 200, 0, 0.6);
+        .ultra-card.rinkupro .copy-link-btn:hover {
+            border-color: rgba(59, 130, 246, 0.6);
             box-shadow:
-                0 8px 20px rgba(255, 200, 0, 0.25),
-                0 4px 10px rgba(255, 200, 0, 0.15);
+                0 8px 20px rgba(59, 130, 246, 0.25),
+                0 4px 10px rgba(59, 130, 246, 0.15);
         }
-        .ultra-card.linkvertise .copy-link-text {
-            text-decoration-color: rgba(255, 200, 0, 0.4);
+        .ultra-card.rinkupro .copy-link-text {
+            text-decoration-color: rgba(59, 130, 246, 0.4);
         }
-        .ultra-card.linkvertise .copy-link-btn:hover .copy-link-text {
-            text-decoration-color: rgba(255, 200, 0, 0.8);
+        .ultra-card.rinkupro .copy-link-btn:hover .copy-link-text {
+            text-decoration-color: rgba(59, 130, 246, 0.8);
         }
-        .ultra-card.linkvertise .copy-link-btn:hover .copy-icon {
-            filter: drop-shadow(0 0 8px rgba(255, 200, 0, 0.6));
+        .ultra-card.rinkupro .copy-link-btn:hover .copy-icon {
+            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
         }
         .ultra-card.lootlabs .copy-link-btn {
             border-color: rgba(139, 92, 246, 0.3);
@@ -5563,7 +5565,7 @@
                         <ul class="cl-list">
                             <li>Migrated all scripts to unified web-based key system</li>
                             <li>Integrated Luarmor authentication gateway</li>
-                            <li>Added dual-provider key generation (Lootlabs & Linkvertise)</li>
+                            <li>Added dual-provider key generation (Rinku Pro & Lootlabs)</li>
                             <li>Improved key validation and security protocols</li>
                         </ul>
                     </div>
@@ -5589,52 +5591,7 @@
     </div>
 
     <div id="executors" class="page">
-        <div class="executors-container">
-            <div class="executors-header">
-                <h1 class="executors-title">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-                    </svg>
-                    ROBLOX SCRIPTS
-                </h1>
-                <p class="executors-subtitle">Popular Roblox script executors with real-time status</p>
-            </div>
-
-            <div class="executors-grid" id="executorsGrid">
-                <div class="executor-card-skeleton">
-                    <div class="skeleton-header"></div>
-                    <div class="skeleton-icon"></div>
-                    <div class="skeleton-title"></div>
-                    <div class="skeleton-desc"></div>
-                    <div class="skeleton-btn"></div>
-                </div>
-                <div class="executor-card-skeleton">
-                    <div class="skeleton-header"></div>
-                    <div class="skeleton-icon"></div>
-                    <div class="skeleton-title"></div>
-                    <div class="skeleton-desc"></div>
-                    <div class="skeleton-btn"></div>
-                </div>
-                <div class="executor-card-skeleton">
-                    <div class="skeleton-header"></div>
-                    <div class="skeleton-icon"></div>
-                    <div class="skeleton-title"></div>
-                    <div class="skeleton-desc"></div>
-                    <div class="skeleton-btn"></div>
-                </div>
-            </div>
-
-            <div class="executors-footer">
-                <p class="executors-disclaimer">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="8" x2="12" y2="12"></line>
-                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                    </svg>
-                    Executors data provided by WeAreDevs API. Click any executor to visit its download page.
-                </p>
-            </div>
-        </div>
+        <div id="executors-react-root"></div>
     </div>
 
     <!-- Script Raw Code Page -->
@@ -5862,7 +5819,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
             // Format URL for display
             const displayUrl = url.length > 50 ? url.substring(0, 50) + '...' : url;
-            const providerName = type === 'lootlabs' ? 'Lootlabs' : 'Linkvertise';
+            const providerName = type === 'lootlabs' ? 'Lootlabs' : type === 'rinkupro' ? 'Rinku Pro' : type;
 
             toast.innerHTML = `
                 <div class="toast-header">
@@ -5894,10 +5851,10 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
         function openGateway(type) {
             let targetUrl = '';
-            if (type === 'lootlabs') {
+            if (type === 'rinkupro') {
+                targetUrl = 'https://ads.luarmor.net/get_key?for=Rinku_Pro-usjtvfvsONpS';
+            } else if (type === 'lootlabs') {
                 targetUrl = 'https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp';
-            } else if(type === 'linkvertise') {
-                targetUrl = 'https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU';
             }
 
             if(targetUrl) {
@@ -5993,131 +5950,6 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         return null;
     };
 
-    // === SCRIPTS FUNCTIONALITY ===
-    let executorsLoaded = false; // Flag to prevent duplicate loading
-
-    const executorsData = [
-        {
-            name: "Delta",
-            status: "updated",
-            description: "The ultimate premium executor with lightning-fast injection.",
-            url: "https://deltaexploits.gg/",
-            isRecommended: true,
-            bgGradient: "linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(217, 119, 6, 0.1))",
-            iconColor: "#fbbf24",
-            iconSVG: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>`
-        },
-        {
-            name: "Arceus X",
-            status: "updated",
-            description: "Mobile-friendly executor with cross-platform support.",
-            url: "https://spdmteam.com/",
-            isRecommended: false,
-            bgGradient: "linear-gradient(135deg, rgba(248, 113, 113, 0.15), rgba(220, 38, 38, 0.1))",
-            iconColor: "#f87171",
-            iconSVG: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>`
-        },
-        {
-            name: "Codex",
-            status: "updated",
-            description: "Advanced executor with powerful debugging tools.",
-            url: "https://www.codex.lol/",
-            isRecommended: false,
-            bgGradient: "linear-gradient(135deg, rgba(245, 245, 245, 0.15), rgba(163, 163, 163, 0.1))",
-            iconColor: "#e5e5e5",
-            iconSVG: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.2-1.1.7l-1.2 4 6 3.2-2 2-4 1.5L1 19l7.4-1.6c.7-.1 1.4-.1 2.1.2L19 21l2-2-2.6-1.4c-.7-.3-1.4-.4-2-.2Z"/></svg>`
-        },
-        {
-            name: "Volcano",
-            status: "updated",
-            description: "Powerful executor for serious scripters.",
-            url: "https://volcanoexecutor.com/",
-            isRecommended: false,
-            bgGradient: "linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(194, 65, 12, 0.1))",
-            iconColor: "#f97316",
-            iconSVG: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 19-2 3"/><path d="m16 19 2 3"/><path d="M12 4v2"/><path d="M7 6 5 4"/><path d="M17 6l2-2"/><path d="m4 10 2 1 2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1 2-1"/></svg>`
-        },
-        {
-            name: "Xeno",
-            status: "updated",
-            description: "A powerful Windows executor with high script compatibility.",
-            url: "https://xeno.now/",
-            isRecommended: false,
-            bgGradient: "linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(8, 145, 178, 0.1))",
-            iconColor: "#22d3ee",
-            iconSVG: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20.3a24 24 0 0 0 15.6-10.8"/><path d="M12 2a10 10 0 0 0-9.6 13.7"/><path d="M11 11.5 13 14l2-2.5"/><circle cx="16" cy="7" r="2"/></svg>`
-        }
-    ];
-
-    function loadExecutors() {
-        if (executorsLoaded) return;
-        executorsLoaded = true;
-
-        const grid = document.getElementById('executorsGrid');
-        if (!grid) return;
-
-        grid.innerHTML = '';
-
-        executorsData.forEach((executor, index) => {
-            setTimeout(() => {
-                const card = document.createElement('div');
-                card.className = 'executor-card';
-                card.onclick = () => window.open(executor.url, '_blank');
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.cursor = 'pointer';
-
-                const recommendedBadge = executor.isRecommended ? `
-                    <div class="rec-badge">
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        RECOMMENDED
-                    </div>
-                ` : '';
-
-                card.innerHTML = `
-                    ${recommendedBadge}
-
-                    <div class="status-pill">
-                        <div class="status-pill-dot"></div>
-                        UPDATED
-                    </div>
-
-                    <div class="executor-icon-box" style="background: ${executor.bgGradient}; color: ${executor.iconColor}; border-color: ${executor.iconColor}40;">
-                        ${executor.iconSVG}
-                    </div>
-
-                    <div class="executor-name">${executor.name}</div>
-                    <p class="executor-desc">${executor.description}</p>
-                `;
-
-                grid.appendChild(card);
-
-                setTimeout(() => {
-                    card.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 50);
-            }, index * 100);
-        });
-    }
-
-    // Load executors when the page is shown
-    const executorsObserver = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.target.id === 'executors' && mutation.target.classList.contains('active')) {
-                loadExecutors();
-                executorsObserver.disconnect();
-            }
-        });
-    });
-
-    // Start observing when DOM is ready
-    if (document.getElementById('executors')) {
-        executorsObserver.observe(document.getElementById('executors'), {
-            attributes: true,
-            attributeFilter: ['class']
-        });
-    }
 
 
 
@@ -6272,8 +6104,8 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                         <Button
                             className={`w-full h-14 text-lg font-bold shadow-lg shadow-${primaryColor}/20 bg-gradient-to-r from-${primaryColor} to-${baseColor}-600 hover:opacity-90 hover:-translate-y-[4px] active:scale-[0.97] transition-all duration-300 ease-out rounded-xl`}
                             style={{
-                                backgroundColor: title === 'Linkvertise' ? '#ffc800' : '#8b5cf6',
-                                color: title === 'Linkvertise' ? 'black' : 'white'
+                                backgroundColor: title === 'Rinku Pro' ? '#3b82f6' : '#8b5cf6',
+                                color: 'white'
                             }}
                             onClick={handleOpen}
                         >
@@ -6304,7 +6136,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                     {/* Background glow effect */}
                     <div className={`absolute -top-[150px] -right-[150px] w-[300px] h-[300px] bg-${primaryColor}/20 blur-[120px] pointer-events-none transition-opacity duration-500 group-hover:opacity-100`}
                          style={{
-                            backgroundColor: title === 'Linkvertise' ? '#ffc800' : '#8b5cf6',
+                            backgroundColor: title === 'Rinku Pro' ? '#3b82f6' : '#8b5cf6',
                             opacity: 0.15
                         }}></div>
                 </Card>
@@ -6313,63 +6145,169 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
         function BuyExecutorSection() {
             const features = [
-                "Best Prices",
-                "Instant Delivery",
-                "Premium Support",
-                "Secure Payment"
+                { label: "Best Prices", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> },
+                { label: "Instant Delivery", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> },
+                { label: "Premium Support", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> },
+                { label: "Secure Payment", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> },
             ];
 
             return (
                 <div className="w-full max-w-5xl mt-32 mb-16 px-4 animate-fade-in-up delay-200">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                        <div className="text-left space-y-8">
-                            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#8b5cf6]/10 border border-[#8b5cf6]/20 shadow-[0_0_10px_rgba(139,92,246,0.2)]">
-                                <span className="w-2 h-2 rounded-full bg-[#8b5cf6] animate-pulse"></span>
-                                <span className="text-xs font-bold text-[#a78bfa] tracking-wider">#1 STORE</span>
-                            </div>
+                    {/* Section divider */}
+                    <div className="flex items-center gap-4 mb-16">
+                        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent"></div>
+                        <span className="text-xs font-mono text-zinc-600 tracking-widest uppercase">Featured Store</span>
+                        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent"></div>
+                    </div>
 
-                            <div className="space-y-4">
-                                <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight font-['Outfit']">
-                                    BUY SCRIPT
-                                </h2>
-                                <p className="text-zinc-400 text-lg leading-relaxed max-w-md">
-                                    Buy the best executors such as Wave, Volt & Matcha External at the best prices.
-                                    Secure purchase, instant delivery, and premium support.
+                    <div className="relative rounded-3xl overflow-hidden border border-white/5 bg-gradient-to-br from-[#0c0c12] via-[#0a0a10] to-[#0c0c14] shadow-2xl shadow-black/60">
+                        {/* Ambient glow */}
+                        <div className="absolute -top-32 -right-32 w-[420px] h-[420px] bg-[#8b5cf6]/10 rounded-full blur-[100px] pointer-events-none"></div>
+                        <div className="absolute -bottom-24 -left-24 w-[300px] h-[300px] bg-[#7c3aed]/8 rounded-full blur-[80px] pointer-events-none"></div>
+
+                        {/* Top accent bar */}
+                        <div className="h-px w-full bg-gradient-to-r from-transparent via-[#8b5cf6]/60 to-transparent"></div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
+                            {/* Left — copy */}
+                            <div className="relative z-10 p-10 md:p-14 flex flex-col justify-center gap-8 md:border-r border-white/5">
+                                <div className="space-y-2">
+                                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8b5cf6]/10 border border-[#8b5cf6]/20">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-[#a78bfa] animate-pulse"></span>
+                                        <span className="text-[10px] font-bold text-[#a78bfa] tracking-[0.2em] uppercase">#1 Executor Store</span>
+                                    </div>
+
+                                    <h2 className="text-5xl md:text-6xl font-black text-white tracking-tighter leading-none font-['Outfit'] mt-4">
+                                        BUY
+                                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#a78bfa] via-[#8b5cf6] to-[#7c3aed]">
+                                            EXECUTOR
+                                        </span>
+                                    </h2>
+                                </div>
+
+                                <p className="text-zinc-400 text-base leading-relaxed max-w-sm">
+                                    Get the best Roblox executors — Wave, Volt & Matcha External — at unbeatable prices. Instant delivery, always.
                                 </p>
+
+                                <a
+                                    href="https://angxlzz.store/?ref=AlanGmg"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group relative inline-flex items-center justify-center gap-3 self-start px-8 py-4 rounded-2xl font-bold text-white text-base overflow-hidden transition-all duration-300 hover:-translate-y-1 active:scale-95"
+                                    style={{background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)'}}
+                                >
+                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 pointer-events-none"></div>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                    Shop Now
+                                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </a>
                             </div>
 
-                            <a
-                                href="https://angxlzz.store/?ref=AlanGmg"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center px-10 h-14 text-lg font-bold text-white bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] hover:from-[#7c3aed] hover:to-[#6d28d9] rounded-xl transition-all duration-300 shadow-lg shadow-[#8b5cf6]/20 hover:shadow-[#8b5cf6]/40 hover:-translate-y-1 active:scale-95 group"
-                            >
-                                BUY NOW
-                                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                            </a>
+                            {/* Right — feature grid */}
+                            <div className="relative z-10 p-10 md:p-14 flex flex-col justify-center">
+                                <p className="text-[10px] font-mono text-zinc-600 tracking-widest uppercase mb-6">What you get</p>
+                                <div className="grid grid-cols-1 gap-4">
+                                    {features.map((f, i) => (
+                                        <div key={i} className="group/f flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-[#8b5cf6]/5 hover:border-[#8b5cf6]/20 transition-all duration-300 cursor-default">
+                                            <div className="w-9 h-9 rounded-lg bg-[#8b5cf6]/10 border border-[#8b5cf6]/20 flex items-center justify-center text-[#a78bfa] group-hover/f:bg-[#8b5cf6]/20 group-hover/f:shadow-[0_0_12px_rgba(139,92,246,0.25)] transition-all duration-300 shrink-0">
+                                                {f.icon}
+                                            </div>
+                                            <span className="font-semibold text-zinc-300 group-hover/f:text-white transition-colors text-sm">{f.label}</span>
+                                            <svg className="w-4 h-4 text-[#8b5cf6] ml-auto opacity-0 group-hover/f:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
 
-                        <div className="relative group">
-                            <div className="absolute inset-0 bg-[#8b5cf6]/20 blur-[80px] rounded-full pointer-events-none opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
+                        {/* Bottom accent bar */}
+                        <div className="h-px w-full bg-gradient-to-r from-transparent via-[#8b5cf6]/30 to-transparent"></div>
+                    </div>
+                </div>
+            );
+        }
 
-                            <Card className="relative bg-[#0A0A0E]/60 backdrop-blur-xl border-white/10 hover:border-[#8b5cf6]/30 transition-all duration-500 overflow-hidden rounded-2xl">
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#8b5cf6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"/>
+        function StepsIndicator({ isUSA }) {
+            const steps = [
+                {
+                    title: "Start Verification",
+                    desc: isUSA ? "Click Start Verification on Rinku Pro" : "Click Start Verification on Rinku Pro or Lootlabs",
+                    icon: (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    ),
+                },
+                {
+                    title: "Complete Luarmor Checkpoints",
+                    desc: "Follow all the steps shown on the Luarmor verification page",
+                    icon: (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    ),
+                },
+                {
+                    title: "Click 'Get Key'",
+                    desc: "Press the Get Key button once checkpoints are done to receive your key",
+                    icon: (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+                        </svg>
+                    ),
+                },
+                {
+                    title: "Execute & Paste Key",
+                    desc: "Open your executor, inject the script, then paste your key when prompted",
+                    icon: (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                    ),
+                },
+            ];
 
-                                <CardContent className="p-10 relative z-10">
-                                    <div className="space-y-6">
-                                        {features.map((feature, i) => (
-                                            <div key={i} className="flex items-center gap-5 group/item">
-                                                <div className="w-12 h-12 rounded-xl bg-[#0A0A0E] flex items-center justify-center border border-white/5 group-hover/item:border-[#8b5cf6]/40 group-hover/item:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all duration-300 shrink-0">
-                                                    <svg width="24" height="24" className="text-[#8b5cf6] opacity-80 group-hover/item:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                                    </svg>
-                                                </div>
-                                                <span className="text-xl font-bold text-zinc-300 group-hover/item:text-white transition-colors">{feature}</span>
-                                            </div>
-                                        ))}
+            return (
+                <div className="w-full max-w-5xl px-4 mb-14">
+                    {/* Header label */}
+                    <div className="flex items-center gap-3 mb-8">
+                        <div className="flex-1 h-px bg-gradient-to-r from-transparent to-zinc-800"></div>
+                        <span className="text-[10px] font-mono font-bold text-zinc-500 tracking-[0.25em] uppercase">How it works</span>
+                        <div className="flex-1 h-px bg-gradient-to-l from-transparent to-zinc-800"></div>
+                    </div>
+
+                    {/* Steps — horizontal on md+, vertical on mobile */}
+                    <div className="relative">
+                        {/* Connecting line (desktop) */}
+                        <div className="hidden md:block absolute top-[28px] left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent z-0 mx-[calc(12.5%+16px)]"></div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 relative z-10">
+                            {steps.map((step, i) => (
+                                <div key={i} className="group flex md:flex-col items-start md:items-center gap-4 md:gap-0 md:text-center">
+                                    {/* Step circle */}
+                                    <div className="relative shrink-0">
+                                        <div className="w-14 h-14 rounded-2xl bg-zinc-900 border border-zinc-700/60 group-hover:border-[#8b5cf6]/50 group-hover:bg-[#8b5cf6]/5 flex items-center justify-center transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.2)]">
+                                            <span className="text-zinc-400 group-hover:text-[#a78bfa] transition-colors duration-300">
+                                                {step.icon}
+                                            </span>
+                                        </div>
+                                        {/* Step number badge */}
+                                        <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-[#8b5cf6] flex items-center justify-center shadow-[0_0_8px_rgba(139,92,246,0.6)]">
+                                            <span className="text-[10px] font-black text-white">{i + 1}</span>
+                                        </div>
+                                        {/* Vertical connector (mobile only) */}
+                                        {i < steps.length - 1 && (
+                                            <div className="md:hidden absolute left-1/2 top-full -translate-x-1/2 w-px h-4 bg-gradient-to-b from-zinc-700 to-transparent mt-1"></div>
+                                        )}
                                     </div>
-                                </CardContent>
-                            </Card>
+
+                                    {/* Text */}
+                                    <div className="md:mt-4 flex flex-col gap-1 md:px-2">
+                                        <span className="text-sm font-bold text-zinc-200 group-hover:text-white transition-colors leading-tight">{step.title}</span>
+                                        <span className="text-xs text-zinc-500 group-hover:text-zinc-400 transition-colors leading-relaxed">{step.desc}</span>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -6377,8 +6315,41 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         }
 
         function GatewayPage() {
-            const linkvertiseIcon = (
-                <svg width="32" height="32" viewBox="0 0 122.88 122.88" fill="#ffc800"><path d="M59.3,27.06c-8.91,0-16.14,7.23-16.14,16.14s7.23,16.14,16.14,16.14s16.14-7.23,16.14-16.14 S68.21,27.06,59.3,27.06L59.3,27.06z M62.26,16.48h22.68c1.61,0,3.09,0.73,4.06,2.02l28.62,38.07c1.47,1.95,1.13,4.72-0.78,6.23 l-26.6,20.94c-1.39,1.1-3.32,1.21-4.83,0.29l-37.5-22.95c-1.12-0.69-1.8-1.9-1.8-3.21v-35.3C46.1,19.2,49.25,16.48,53,16.48 L62.26,16.48L62.26,16.48z M4.77,63.15L32.48,41.9c1.37-1.05,3.26-1.14,4.72-0.22l22.61,14.16c1.1,0.69,1.76,1.89,1.76,3.19 v20.21c0,2.15-1.74,3.89-3.89,3.89H35.31c-1.38,0-2.67-0.72-3.38-1.89l-28.52-47.1C2.3,52.3,2.94,49.82,4.86,48.65 C4.83,48.67,4.8,48.68,4.77,63.15L4.77,63.15z M96.94,83.13v20.21c0,2.15-1.74,3.89-3.89,3.89H71.18c-2.15,0-3.89-1.74-3.89-3.89V83.13 c0-2.15,1.74-3.89,3.89-3.89h21.87C95.2,79.24,96.94,80.98,96.94,83.13L96.94,83.13z"/></svg>
+            const [countryCode, setCountryCode] = React.useState(null);
+            const [geoLoading, setGeoLoading] = React.useState(true);
+
+            React.useEffect(() => {
+                fetch('https://get.geojs.io/v1/ip/geo.json')
+                    .then(r => r.json())
+                    .then(data => setCountryCode((data.country_code || '').toUpperCase()))
+                    .catch(() => setCountryCode(''))
+                    .finally(() => setGeoLoading(false));
+            }, []);
+
+            const RINKU_PRO_ONLY_COUNTRIES = ['US','AU','CA','JP','KR','DE','GB','ZA','ES'];
+            const isUSA = RINKU_PRO_ONLY_COUNTRIES.includes(countryCode);
+
+            const rinkuproIcon = (
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="rp-grad" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stopColor="#60a5fa"/>
+                            <stop offset="100%" stopColor="#2563eb"/>
+                        </linearGradient>
+                        <filter id="rp-glow">
+                            <feGaussianBlur stdDeviation="0.8" result="blur"/>
+                            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                    </defs>
+                    {/* Background rounded rect */}
+                    <rect width="32" height="32" rx="9" fill="url(#rp-grad)" fillOpacity="0.18"/>
+                    {/* CSS-drawn R letter */}
+                    <path
+                        d="M9 5 L9 27 L12.5 27 L12.5 18.5 L17.5 18.5 L21.5 27 L25.5 27 L21 17.8 C23.8 16.6 25.5 14.2 25.5 11.2 C25.5 7.6 22.8 5 18.5 5 Z M12.5 8.2 L18.5 8.2 C21 8.2 22 9.6 22 11.2 C22 12.8 21 14.2 18.5 14.2 L12.5 14.2 Z"
+                        fill="url(#rp-grad)"
+                        filter="url(#rp-glow)"
+                    />
+                </svg>
             );
 
             const lootlabsIcon = (
@@ -6397,34 +6368,51 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                             <span className="text-xs font-mono text-zinc-400 font-bold tracking-widest">KEY SYSTEM</span>
                         </div>
                         <h1 className="text-5xl md:text-6xl font-black text-white tracking-tighter">AUTHENTICATION</h1>
-                        <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">Choose your preferred verification method below to generate your access key. Both methods are secure and verified.</p>
+                        <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                            {geoLoading
+                                ? "Detecting your region..."
+                                : isUSA
+                                    ? "Complete verification below to generate your access key. Fast and secure."
+                                    : "Choose your preferred verification method below to generate your access key. Both methods are secure and verified."}
+                        </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 w-full max-w-5xl justify-items-center px-4">
-                        <GatewayCard
-                            primaryColor="purple-500"
-                            title="Lootlabs"
-                            desc="Premium gateway with only 3 checkpoints for lightning-fast verification. Extended 16-hour key."
-                            checkpoints="3 Checkpoints"
-                            duration="16H KEY"
-                            features={["Only 3 checkpoints", "16-hour validity period", "Fastest verification"]}
-                            url="https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp"
-                            isRecommended={true}
-                            badgeText="RECOMMENDED"
-                            icon={lootlabsIcon}
-                        />
-                        <GatewayCard
-                            primaryColor="amber-400"
-                            title="Linkvertise"
-                            desc="Standard gateway requiring 3 simple checkpoints. Reliable key generation with 12-hour access."
-                            checkpoints="3 Checkpoints"
-                            duration="12H KEY"
-                            features={["3 Quick checkpoints", "12-hour validity period", "Worldwide availability"]}
-                            url="https://ads.luarmor.net/get_key?for=Linkvertise-sIZolnelAlpU"
-                            isRecommended={false}
-                            icon={linkvertiseIcon}
-                        />
-                    </div>
+                    <StepsIndicator isUSA={isUSA} />
+
+                    {geoLoading ? (
+                        <div className="flex flex-col items-center justify-center py-20 gap-4">
+                            <svg className="animate-spin" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                            <p className="text-zinc-500 text-sm font-mono tracking-widest">DETECTING REGION...</p>
+                        </div>
+                    ) : (
+                        <div className={`grid grid-cols-1 ${isUSA ? '' : 'md:grid-cols-2 lg:grid-cols-2'} gap-12 w-full max-w-5xl justify-items-center px-4`}>
+                            <GatewayCard
+                                primaryColor="blue-500"
+                                title="Rinku Pro"
+                                desc="Premium blue gateway with only 2 checkpoints for lightning-fast verification. Extended 24-hour key."
+                                checkpoints="2 Checkpoints"
+                                duration="24H KEY"
+                                features={["Only 2 checkpoints", "24-hour validity period", "Fastest verification"]}
+                                url="https://ads.luarmor.net/get_key?for=Rinku_Pro-usjtvfvsONpS"
+                                isRecommended={true}
+                                badgeText="RECOMMENDED"
+                                icon={rinkuproIcon}
+                            />
+                            {!isUSA && (
+                                <GatewayCard
+                                    primaryColor="purple-500"
+                                    title="Lootlabs"
+                                    desc="Standard gateway requiring 3 simple checkpoints. Reliable key generation with 16-hour access."
+                                    checkpoints="3 Checkpoints"
+                                    duration="16H KEY"
+                                    features={["Only 3 checkpoints", "16-hour validity period", "Worldwide availability"]}
+                                    url="https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp"
+                                    isRecommended={false}
+                                    icon={lootlabsIcon}
+                                />
+                            )}
+                        </div>
+                    )}
 
                     <BuyExecutorSection />
 
@@ -6568,7 +6556,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
         const FAQ = () => {
              const items = [
-                { q: "How to get a key?", a: "Click the 'Get Key' button, choose a provider (Lootlabs/Linkvertise), complete checkpoints, and copy the generated key." },
+                { q: "How to get a key?", a: "Click the 'Get Key' button, choose a provider (Rinku Pro/Lootlabs), complete checkpoints, and copy the generated key." },
                 { q: "How long does a key last?", a: "Each key is valid for 24 hours from generation. After expiration, simply generate a new one." },
                 { q: "Is Imp Hub safe?", a: "Yes! We use advanced obfuscation and anti-detection methods. However, always script responsibly." },
                 { q: "Which executors are supported?", a: "Imp Hub works with Solara, Wave, Electron, Fluxus, and most modern executors with Luau support." },
@@ -7471,6 +7459,343 @@ const GamesPage = () => {
 const gamesRoot = ReactDOM.createRoot(document.getElementById('games-root'));
 gamesRoot.render(<GamesPage />);
 
+    </script>
+
+    <script type="text/babel">
+    // ═══════════════════════════════════════════
+    //  EXECUTORS PAGE — React Redesign
+    // ═══════════════════════════════════════════
+    const executorsPageData = [
+        {
+            name: "Delta",
+            platform: "windows",
+            tags: ["Fast Injection", "UNC Support", "Free"],
+            status: "updated",
+            description: "The ultimate premium executor with lightning-fast injection and full UNC support. The go-to choice for serious scripters.",
+            url: "https://deltaexploits.gg/",
+            isRecommended: true,
+            bgGradient: "linear-gradient(135deg, rgba(251,191,36,0.18), rgba(217,119,6,0.10))",
+            iconColor: "#fbbf24",
+            iconSVG: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>`,
+        },
+        {
+            name: "Arceus X",
+            platform: "mobile",
+            tags: ["Android", "iOS", "Free"],
+            status: "updated",
+            description: "The leading mobile executor with cross-platform support for Android and iOS. Execute scripts directly from your phone.",
+            url: "https://spdmteam.com/",
+            isRecommended: false,
+            bgGradient: "linear-gradient(135deg, rgba(248,113,113,0.18), rgba(220,38,38,0.10))",
+            iconColor: "#f87171",
+            iconSVG: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`,
+        },
+        {
+            name: "Codex",
+            platform: "windows",
+            tags: ["Debug Tools", "Script Hub", "Free"],
+            status: "updated",
+            description: "Advanced executor packed with powerful debugging tools and a built-in script hub. Perfect for developers and power users.",
+            url: "https://www.codex.lol/",
+            isRecommended: false,
+            bgGradient: "linear-gradient(135deg, rgba(226,232,240,0.12), rgba(148,163,184,0.08))",
+            iconColor: "#e2e8f0",
+            iconSVG: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+        },
+        {
+            name: "Volcano",
+            platform: "windows",
+            tags: ["High Compat", "Stable", "Free"],
+            status: "updated",
+            description: "Powerful and rock-solid executor built for serious scripters who demand high compatibility across all game types.",
+            url: "https://volcanoexecutor.com/",
+            isRecommended: false,
+            bgGradient: "linear-gradient(135deg, rgba(249,115,22,0.18), rgba(194,65,12,0.10))",
+            iconColor: "#f97316",
+            iconSVG: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6 2 2 7 2 12s4 10 10 10 10-5 10-10S18 2 12 2z"/><path d="M12 8v4l3 3"/></svg>`,
+        },
+        {
+            name: "Xeno",
+            platform: "windows",
+            tags: ["Lightweight", "High Compat", "Free"],
+            status: "updated",
+            description: "A sleek, lightweight Windows executor with exceptional script compatibility. Minimal footprint, maximum performance.",
+            url: "https://xeno.now/",
+            isRecommended: false,
+            bgGradient: "linear-gradient(135deg, rgba(34,211,238,0.18), rgba(8,145,178,0.10))",
+            iconColor: "#22d3ee",
+            iconSVG: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+        },
+    ];
+
+    const FILTERS = [
+        { id: 'all',         label: 'All' },
+        { id: 'windows',     label: 'Windows' },
+        { id: 'mobile',      label: 'Mobile' },
+        { id: 'recommended', label: 'Recommended' },
+    ];
+
+    function PlatformIcon({ platform }) {
+        if (platform === 'mobile') return (
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
+            </svg>
+        );
+        return (
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+        );
+    }
+
+    function ExecutorCard({ executor, index }) {
+        const [hovered, setHovered] = React.useState(false);
+
+        return (
+            <div
+                className="group relative flex gap-5 p-5 md:p-6 rounded-2xl border border-zinc-800/70 bg-[#09090d]/90 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:border-[#8b5cf6]/40 hover:-translate-y-1 hover:shadow-[0_8px_40px_rgba(0,0,0,0.5),0_0_30px_rgba(139,92,246,0.08)]"
+                style={{ animationDelay: `${index * 60}ms` }}
+                onClick={() => window.open(executor.url, '_blank')}
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
+            >
+                {/* Subtle inner glow on hover */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#8b5cf6]/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"/>
+
+                {/* Icon */}
+                <div
+                    className="shrink-0 w-[60px] h-[60px] md:w-[68px] md:h-[68px] rounded-2xl flex items-center justify-center border transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
+                    style={{
+                        background: executor.bgGradient,
+                        borderColor: executor.iconColor + '35',
+                        color: executor.iconColor,
+                        boxShadow: hovered ? `0 8px 24px ${executor.iconColor}20` : 'none',
+                    }}
+                    dangerouslySetInnerHTML={{ __html: executor.iconSVG }}
+                />
+
+                {/* Body */}
+                <div className="flex-1 min-w-0 flex flex-col gap-2 relative z-10">
+                    {/* Name row */}
+                    <div className="flex items-center gap-2.5 flex-wrap">
+                        <h3 className="text-base md:text-lg font-bold text-white tracking-tight group-hover:text-[#e9d5ff] transition-colors">
+                            {executor.name}
+                        </h3>
+                        {/* Updated pill */}
+                        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block"/>
+                            UPDATED
+                        </span>
+                        {/* Recommended badge */}
+                        {executor.isRecommended && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/10 border border-amber-500/20 text-amber-400">
+                                <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                RECOMMENDED
+                            </span>
+                        )}
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-sm text-zinc-500 group-hover:text-zinc-400 transition-colors leading-relaxed line-clamp-2">
+                        {executor.description}
+                    </p>
+
+                    {/* Tags row */}
+                    <div className="flex items-center gap-2 flex-wrap mt-1">
+                        {/* Platform */}
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-zinc-800/80 border border-zinc-700/50 text-zinc-300">
+                            <PlatformIcon platform={executor.platform}/>
+                            {executor.platform === 'mobile' ? 'Mobile' : 'Windows'}
+                        </span>
+                        {executor.tags.map(tag => (
+                            <span key={tag} className="inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-zinc-800/50 border border-zinc-700/40 text-zinc-400">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+
+                {/* CTA */}
+                <div className="shrink-0 flex items-center self-center relative z-10 pl-2">
+                    <div
+                        className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold border transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.25)]"
+                        style={{
+                            background: hovered ? 'rgba(139,92,246,0.18)' : 'rgba(139,92,246,0.08)',
+                            borderColor: hovered ? 'rgba(139,92,246,0.45)' : 'rgba(139,92,246,0.20)',
+                            color: '#a78bfa',
+                        }}
+                    >
+                        Visit
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="group-hover:translate-x-0.5 transition-transform"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    function ExecutorsSkeleton() {
+        return (
+            <div className="flex flex-col gap-4">
+                {[1,2,3].map(i => (
+                    <div key={i} className="flex gap-5 p-6 rounded-2xl border border-zinc-800/50 bg-[#09090d]/90 animate-pulse">
+                        <div className="w-[68px] h-[68px] rounded-2xl bg-zinc-800/60 shrink-0"/>
+                        <div className="flex-1 flex flex-col gap-3 justify-center">
+                            <div className="flex gap-2">
+                                <div className="h-4 w-24 rounded-lg bg-zinc-800/60"/>
+                                <div className="h-4 w-16 rounded-full bg-zinc-800/40"/>
+                            </div>
+                            <div className="h-3 w-3/4 rounded-lg bg-zinc-800/40"/>
+                            <div className="h-3 w-1/2 rounded-lg bg-zinc-800/30"/>
+                            <div className="flex gap-2 mt-1">
+                                <div className="h-6 w-20 rounded-lg bg-zinc-800/40"/>
+                                <div className="h-6 w-16 rounded-lg bg-zinc-800/30"/>
+                            </div>
+                        </div>
+                        <div className="shrink-0 self-center w-16 h-8 rounded-xl bg-zinc-800/40"/>
+                    </div>
+                ))}
+            </div>
+        );
+    }
+
+    function ExecutorsPage() {
+        const [search, setSearch] = React.useState('');
+        const [activeFilter, setActiveFilter] = React.useState('all');
+        const [ready, setReady] = React.useState(false);
+
+        React.useEffect(() => {
+            const t = setTimeout(() => setReady(true), 300);
+            return () => clearTimeout(t);
+        }, []);
+
+        const stats = React.useMemo(() => ({
+            total: executorsPageData.length,
+            windows: executorsPageData.filter(e => e.platform === 'windows').length,
+            mobile: executorsPageData.filter(e => e.platform === 'mobile').length,
+            recommended: executorsPageData.filter(e => e.isRecommended).length,
+        }), []);
+
+        const filtered = React.useMemo(() => {
+            const q = search.toLowerCase();
+            return executorsPageData.filter(ex => {
+                const matchSearch = !q || ex.name.toLowerCase().includes(q) || ex.description.toLowerCase().includes(q) || ex.tags.some(t => t.toLowerCase().includes(q));
+                const matchFilter =
+                    activeFilter === 'all' ||
+                    activeFilter === ex.platform ||
+                    (activeFilter === 'recommended' && ex.isRecommended);
+                return matchSearch && matchFilter;
+            });
+        }, [search, activeFilter]);
+
+        return (
+            <div className="min-h-[80vh] max-w-4xl mx-auto px-4 py-10 md:py-14 animate-fade-in-up">
+
+                {/* ── Header ── */}
+                <div className="mb-10 space-y-5">
+                    <div className="flex items-center gap-3">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 shadow-lg shadow-black/40">
+                            <span className="w-2 h-2 rounded-full bg-[#8b5cf6] animate-pulse"/>
+                            <span className="text-[10px] font-mono font-bold text-zinc-400 tracking-[0.2em] uppercase">Executors</span>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                        <div>
+                            <h1 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-none font-['Outfit']">
+                                SUPPORTED
+                                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#a78bfa] via-[#8b5cf6] to-[#7c3aed]">
+                                    EXECUTORS
+                                </span>
+                            </h1>
+                            <p className="text-zinc-500 text-sm md:text-base mt-3 max-w-md leading-relaxed">
+                                All listed executors are compatible with Imp Hub. Click any card to visit its official download page.
+                            </p>
+                        </div>
+
+                        {/* Stats chips */}
+                        <div className="flex items-center gap-2 flex-wrap">
+                            {[
+                                { label: `${stats.total} Total`,     color: '#a78bfa' },
+                                { label: `${stats.windows} Windows`, color: '#60a5fa' },
+                                { label: `${stats.mobile} Mobile`,   color: '#34d399' },
+                            ].map(s => (
+                                <span key={s.label} className="px-3 py-1.5 rounded-full text-[11px] font-bold border" style={{ color: s.color, background: s.color + '12', borderColor: s.color + '30' }}>
+                                    {s.label}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* ── Search + Filters ── */}
+                <div className="flex flex-col sm:flex-row gap-3 mb-6">
+                    {/* Search */}
+                    <div className="relative flex-1">
+                        <svg className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600 pointer-events-none" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                        <input
+                            type="text"
+                            placeholder="Search executors..."
+                            value={search}
+                            onChange={e => setSearch(e.target.value)}
+                            className="w-full h-10 pl-10 pr-4 rounded-xl bg-zinc-900/80 border border-zinc-800 text-sm text-zinc-300 placeholder-zinc-600 focus:outline-none focus:border-[#8b5cf6]/50 focus:ring-1 focus:ring-[#8b5cf6]/30 transition-all"
+                        />
+                    </div>
+
+                    {/* Filter tabs */}
+                    <div className="flex items-center gap-1 p-1 rounded-xl bg-zinc-900/80 border border-zinc-800 shrink-0">
+                        {FILTERS.map(f => (
+                            <button
+                                key={f.id}
+                                onClick={() => setActiveFilter(f.id)}
+                                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 ${
+                                    activeFilter === f.id
+                                        ? 'bg-[#8b5cf6] text-white shadow-[0_0_12px_rgba(139,92,246,0.4)]'
+                                        : 'text-zinc-500 hover:text-zinc-300'
+                                }`}
+                            >
+                                {f.label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* ── Results count ── */}
+                {search && (
+                    <p className="text-xs text-zinc-600 font-mono mb-4">
+                        {filtered.length} result{filtered.length !== 1 ? 's' : ''} for "{search}"
+                    </p>
+                )}
+
+                {/* ── Cards ── */}
+                {!ready ? (
+                    <ExecutorsSkeleton />
+                ) : filtered.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
+                        <div className="w-16 h-16 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-700">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                        </div>
+                        <p className="text-zinc-500 text-sm">No executors match <span className="text-zinc-300 font-semibold">"{search || activeFilter}"</span></p>
+                        <button onClick={() => { setSearch(''); setActiveFilter('all'); }} className="text-xs text-[#a78bfa] hover:underline mt-1">Clear filters</button>
+                    </div>
+                ) : (
+                    <div className="flex flex-col gap-3">
+                        {filtered.map((ex, i) => (
+                            <ExecutorCard key={ex.name} executor={ex} index={i} />
+                        ))}
+                    </div>
+                )}
+
+                {/* ── Footer ── */}
+                <div className="mt-12 flex items-center gap-3 px-4 py-3.5 rounded-xl bg-zinc-900/50 border border-zinc-800/60 text-zinc-600 text-xs">
+                    <svg className="shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    All executor links redirect to their official pages. Imp Hub is not affiliated with any listed executor.
+                </div>
+            </div>
+        );
+    }
+
+    const executorsReactRoot = ReactDOM.createRoot(document.getElementById('executors-react-root'));
+    executorsReactRoot.render(<ExecutorsPage />);
     </script>
 </body>
 </html>
