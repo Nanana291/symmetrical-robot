@@ -6315,6 +6315,19 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
         }
 
         function GatewayPage() {
+            const [seaOnly, setSeaOnly] = React.useState(false);
+
+            React.useEffect(() => {
+                fetch('https://get.geojs.io/v1/ip/geo.json')
+                    .then(r => r.json())
+                    .then(data => {
+                        const code = (data.country_code || '').toUpperCase();
+                        if (code === 'TH' || code === 'PH' || code === 'VN') {
+                            setSeaOnly(true);
+                        }
+                    })
+                    .catch(() => {});
+            }, []);
 
             const rinkuproIcon = (
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -6362,19 +6375,21 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
 
                     <StepsIndicator />
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 w-full max-w-5xl justify-items-center px-4">
-                        <GatewayCard
-                            primaryColor="blue-500"
-                            title="Rinku Pro"
-                            desc="Premium blue gateway with only 2 checkpoints for lightning-fast verification. Extended 24-hour key."
-                            checkpoints="2 Checkpoints"
-                            duration="24H KEY"
-                            features={["Only 2 checkpoints", "24-hour validity period", "Fastest verification"]}
-                            url="https://ads.luarmor.net/get_key?for=Rinku_Pro-usjtvfvsONpS"
-                            isRecommended={true}
-                            badgeText="RECOMMENDED"
-                            icon={rinkuproIcon}
-                        />
+                    <div className={`grid grid-cols-1 ${seaOnly ? '' : 'md:grid-cols-2 lg:grid-cols-2'} gap-12 w-full max-w-5xl justify-items-center px-4`}>
+                        {!seaOnly && (
+                            <GatewayCard
+                                primaryColor="blue-500"
+                                title="Rinku Pro"
+                                desc="Premium blue gateway with only 2 checkpoints for lightning-fast verification. Extended 24-hour key."
+                                checkpoints="2 Checkpoints"
+                                duration="24H KEY"
+                                features={["Only 2 checkpoints", "24-hour validity period", "Fastest verification"]}
+                                url="https://ads.luarmor.net/get_key?for=Rinku_Pro-usjtvfvsONpS"
+                                isRecommended={true}
+                                badgeText="RECOMMENDED"
+                                icon={rinkuproIcon}
+                            />
+                        )}
                         <GatewayCard
                             primaryColor="purple-500"
                             title="Lootlabs"
@@ -6383,7 +6398,8 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
                             duration="16H KEY"
                             features={["Only 3 checkpoints", "16-hour validity period", "Worldwide availability"]}
                             url="https://ads.luarmor.net/get_key?for=Lootlabs-kgPMvomurPJp"
-                            isRecommended={false}
+                            isRecommended={seaOnly}
+                            badgeText={seaOnly ? "RECOMMENDED" : undefined}
                             icon={lootlabsIcon}
                         />
                     </div>
