@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imp Hub X Version</title>
-    <script data-cfasync="false" src="//d318g7p3azvr44.cloudfront.net/?zapgd=1302532"></script>
-    <!-- Apply saved theme before first paint to prevent flash -->
+        <!-- Apply saved theme before first paint to prevent flash -->
     <script>(function(){var t=localStorage.getItem('theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');})()</script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
@@ -5514,11 +5513,20 @@
     </nav>
 
     <div id="home" class="page active">
-        <div id="home-root"></div>
+        <div id="home-root">
+            <div style="min-height:60vh;display:flex;align-items:center;justify-content:center;padding:3rem 1rem;text-align:center;color:#fff;">
+                <div style="max-width:720px;">
+                    <div style="display:inline-block;padding:.45rem .9rem;border:1px solid rgba(139,92,246,.25);border-radius:999px;background:rgba(139,92,246,.08);color:#a78bfa;font:700 11px monospace;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem;">Imp Hub</div>
+                    <h1 style="font:900 clamp(2.5rem,8vw,5rem)/1.05 Outfit,system-ui,sans-serif;margin:0 0 1rem;letter-spacing:.05em;">High Quality <span style="color:#8b5cf6;display:block;">Scripting Solution</span></h1>
+                    <p style="color:#a1a1aa;font:500 1rem/1.7 Outfit,system-ui,sans-serif;margin:0 auto 1.5rem;max-width:52rem;">Experience the pinnacle of Roblox execution technology. Featuring advanced automation, undetectable security, and an ultra-modern interface.</p>
+                    <a href="#getkey" onclick="showPage('getkey'); return false;" style="display:inline-flex;align-items:center;gap:.6rem;padding:1rem 1.4rem;border-radius:1rem;background:#8b5cf6;color:#fff;text-decoration:none;font:800 .95rem Outfit,system-ui,sans-serif;box-shadow:0 0 30px rgba(139,92,246,.25);">Get Key</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="games" class="page">
-        <div id="games-root" class="w-full"></div>
+        <div id="games-root" class="w-full"><div class="page-fallback" style="padding:2rem;color:#fff;text-align:center">Games content failed to load. Refresh the page.</div></div>
     </div>
 
     <div id="status" class="page">
@@ -5588,11 +5596,11 @@
     </div>
 
     <div id="getkey" class="page">
-        <div id="gateway-cards-root" class="w-full"></div>
+        <div id="gateway-cards-root" class="w-full"><div class="page-fallback" style="padding:2rem;color:#fff;text-align:center">Access key content failed to load. Refresh the page.</div></div>
     </div>
 
     <div id="executors" class="page">
-        <div id="executors-react-root"></div>
+        <div id="executors-react-root"><div class="page-fallback" style="padding:2rem;color:#fff;text-align:center">Executors content failed to load. Refresh the page.</div></div>
     </div>
 
     <!-- Script Raw Code Page -->
@@ -5604,8 +5612,20 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/34824c86db1eba
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <script>
+    <script type="text/babel">
         const themeToggle = document.getElementById('themeToggle');
+
+        window.addEventListener('error', function(e) {
+            try {
+                var el = document.getElementById('toastContainer');
+                if (el) {
+                    var div = document.createElement('div');
+                    div.style.cssText = 'position:fixed;left:12px;right:12px;bottom:12px;z-index:99999;background:#1a0f0f;color:#fff;padding:12px 14px;border:1px solid #f87171;border-radius:12px;font:12px monospace;white-space:pre-wrap;';
+                    div.textContent = 'JS error: ' + (e.message || 'unknown') + ' @ ' + (e.filename || '') + ':' + (e.lineno || 0);
+                    document.body.appendChild(div);
+                }
+            } catch (_) {}
+        });
         const sunIcon = document.getElementById('sunIcon');
         const moonIcon = document.getElementById('moonIcon');
         const html = document.documentElement;
